@@ -7,7 +7,7 @@ body{font-size:14px}
 .header{top:0;height:60px;background:#426374;color:#fff;line-height:60px;font-size:20px;}
 .login-container {box-sizing: border-box; width:100%;text-align:center;}
 .login-container h1{font-size:40px;color:#fff; font-weight:700;}
-.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../bg/loginbg.png) no-repeat center;position: fixed;
+.loginWraper{ position:absolute;width:100%; left:0; top:0; bottom:0; right:0; z-index:1; background:#3283AC url(../bg/new/login_bg.png) no-repeat center;position: fixed;
     height: 100%;
     width: 100%;background-size: cover;}
 /*.loginWraper .h1{margin: 168px auto;	text-align: center; background:url(../bg/admin-loginform-bg.png) no-repeat;}*/
