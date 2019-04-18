@@ -32,7 +32,6 @@ button,input[type="button"], input[type="submit"] {line-height:normal !important
 /*img*/
 img{border:0;vertical-align:middle}
 a img,img{-ms-interpolation-mode:bicubic}
-
 /*IE下a:hover 背景闪烁*/
 *html{overflow:-moz-scrollbars-vertical;zoom:expression(function(ele){ele.style.zoom = "1";document.execCommand("BackgroundImageCache",false,true)}(this))}
 
@@ -205,6 +204,9 @@ input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit
 .col-xs-offset-2 {margin-left: 16.66666667%}
 .col-xs-offset-1 {margin-left: 8.33333333%}
 .col-xs-offset-0 {margin-left: 0}
+.breadcrumb{
+	display: none;
+}
 @media (max-width:767px){
 	.responsive [class^="col-"],.responsive [class*=" col-"]{float:none!important;width:auto!important}
 	.responsive [class^="col-offset-"],.responsive [class*=" col-offset-"]{ margin-left:0!important}
@@ -3350,28 +3352,28 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 	.modal-dialog {position: relative;margin:10px}
 		.modal-content{position: relative;background-color: #fff;border: 1px solid #999;border: 1px solid rgba(0,0,0,.2);outline: 0;
     		-webkit-background-clip: padding-box;
-					background-clip: padding-box;					
+					background-clip: padding-box;
 			-webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
 					box-shadow: 0 3px 9px rgba(0,0,0,.5)}
-		
+
 			.modal-header {min-height: 16.42857143px;padding: 15px;border-bottom: 1px solid #eee; position:relative}
 			.modal-header .close{position:absolute; right:15px; top:15px}
 			.modal-close{position:absolute; right:15px; top:15px;font-size:24px; z-index: 9}
 			a.modal-close:hover{ text-decoration: none}
 			.modal-header h3,.modal-header .modal-title{margin:0; padding:10px 0; font-size:16px}
-			
+
 			.modal-body {position:relative;padding:15px;overflow-y:visible;word-break:break-all}
 				.modal-form {margin-bottom: 0}
-				
+
 			.modal-footer {padding:15px;margin-bottom: 0;text-align: right;background-color: #f5f5f5;border-top: 1px solid #eee;*zoom: 1}
-			
+
 			.modal-footer:before,.modal-footer:after {display: table;content: ""}
 			.modal-footer:after {clear: both}
 			.modal-footer .btn + .btn {margin-left: 5px;margin-bottom: 0}
 			.modal-footer .btn-group .btn + .btn {margin-left: -1px}
 			.modal-footer .btn-block + .btn-block {margin-left: 0}
 		.modal-scrollbar-measure {position: absolute;top: -9999px;width: 50px;height: 50px;overflow: scroll}
-		
+
 		.radius .modal-content{ border-radius:6px}
 		.radius .modal-footer{ border-bottom-left-radius:6px; border-bottom-right-radius:6px}
 /*上下居中*/
@@ -3400,10 +3402,10 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 }
 
 
-	
+
 .modal-alert{position:fixed; right:auto; bottom:auto; width:300px; left:50%;margin-left:-150px; top:50%;margin-top:-30px; z-index:9999;background-color: #fff;border: 1px solid #999;border: 1px solid rgba(0,0,0,.2);outline: 0;
 -webkit-background-clip: padding-box;
-		background-clip: padding-box;					
+		background-clip: padding-box;
 -webkit-box-shadow: 0 3px 9px rgba(0,0,0,.5);
 		box-shadow: 0 3px 9px rgba(0,0,0,.5)}
 
@@ -3420,7 +3422,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 .modal-open .dropdown.open {*z-index: 2050}
 .modal-open .popover {z-index: 2060}
 .modal-open .tooltip {z-index: 2070}
-		
+
 
 
 /*.easyDialog_wrapper{width:320px; color:#444; border:3px solid rgba(0,0,0,0);border-radius:5px;box-shadow:0 0 10px rgba(0,0,0,0.4); display:none}
@@ -3491,13 +3493,13 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 	.bdsharebuttonbox.Hui-share a.bds_douban{ display:inline-block; background:none;padding-left:0; text-decoration:none; margin:0; margin-right:6px; height:auto; line-height:auto}
 	.bdsharebuttonbox.Hui-share a:hover{ text-decoration:none}
 	.bdsharebuttonbox.Hui-share .share-text{ display:inline-block; margin-right:6px; color:#999; cursor:default;float:left}
-	
+
 	.bdsharebuttonbox.bdshare-button-style0-16.Hui-share a,
 	.bdsharebuttonbox.bdshare-button-style0-16.Hui-share .share-text,
 	.bdsharebuttonbox.bdshare-button-style0-16.Hui-share .Hui-iconfont{line-height:16px}
 	.bdsharebuttonbox.bdshare-button-style0-16.Hui-share .share-text,
 	.bdsharebuttonbox.bdshare-button-style0-16.Hui-share .Hui-iconfont{font-size:16px}
-	
+
 	.bdsharebuttonbox.bdshare-button-style0-24.Hui-share a,
 	.bdsharebuttonbox.bdshare-button-style0-24.Hui-share .share-text,
 	.bdsharebuttonbox.bdshare-button-style0-24.Hui-share .Hui-iconfont{line-height:24px}
@@ -3618,17 +3620,17 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 	.Huitags-wraper{border:solid 1px #dedede; padding:0 10px}
 		.Hui-tags-editor,
 		.Huitags-editor{position:relative; padding:10px 0 10px 24px;min-height:20px}
-		
+
 		.Hui-tags-editor .Hui-tags-icon,
 		.Huitags-editor .Huitags-icon{position:absolute; left:0; top:11px; font-size:14px; color:#666}
-		
+
 			.Hui-tags-token,
 			.Huitags-token{color:#aaa; float:left; font-size:12px; height:20px; line-height:20px; margin-right:8px; padding:0 1px; white-space:nowrap; cursor:pointer}
 			.Hui-tags-token:before,
 			.Huitags-token:before{content:"#"}
 			.Hui-tags-token:hover,
 			.Huitags-token:hover{text-decoration:line-through}
-			
+
 			.Hui-tags-iptwrap{position:relative; float:left}
 			.Huitags-input-wraper{}
 				.Hui-tags-input
@@ -3636,20 +3638,20 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 				.Huitags-input{}
 				.Hui-tags-label,
 				.Huitags-label{position:absolute; top:0; left:2px; width:240px; height:20px; line-height:20px; font-size:14px; overflow:hidden; z-index:1; color:#ccc}
-				
+
 			.Hui-tags-list,
 			.Huitags-list{padding:0 0 10px 0;}
-			
+
 		.Hui-notag,
 		.Huitags-notag{font-size:12px}
-		
+
 		.Hui-tags-has span,
 		.Huitags-has span{cursor:pointer; font-size:12px; white-space:nowrap; margin-right:10px}
-	
+
 	/*4.19.2 标签混排效果
 		Name:			mod_tags
 		Sample:			<div class="pd-10 tags"><a href="http://www.h-ui.net/">H-ui前端框架</a>……</div>
-	
+
 	*/
 	.tags a{height:26px; line-height:26px;padding-right:6px}
 		.tags0{}
@@ -3663,7 +3665,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 		.tags8{color:#F06; font-weight:bold}
 		.tags9{color:#C00; font-weight:bold;font-size:16px}
 	.tags a:hover{color:#F00; text-decoration:underline}
-	
+
 	/*4.19.3 tag云标签*/
 	#tagyun {position:relative}
 	#tagyun a {position:absolute;top:0px;left:0px;font-weight:bold;text-decoration:none;padding:3px 6px}
@@ -4026,7 +4028,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus{color: #fff;text-deco
 		<dl>
 			<dt class="dt">选择区域：</dt>
 			<dd class="dd">
-				<a href="#" title="北京市">北京市</a>  
+				<a href="#" title="北京市">北京市</a>
             </dd>
 		</dl>
 	</div>

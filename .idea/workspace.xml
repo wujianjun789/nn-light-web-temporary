@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="823cac2c-57c1-44f1-b21f-7ad6c618029b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/nnlightctl/Wisdom.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nnlightctl/bg/new/gis_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/nnlightctl/bg/new/logo.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nnlightctl/Engery-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Engery-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/Gisservice-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Gisservice-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/Gisservice/Project.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Gisservice/Project.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/Login.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/Project-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Project-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/Roadlighting-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Roadlighting-index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/nnlightctl/User-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/User-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nnlightctl/Welcome.html" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/Welcome.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nnlightctl/css/welcome.css" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/css/welcome.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/css/admin.css" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/css/admin.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/css/base.css" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/css/base.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/css/common.css" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/css/common.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/css/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/css/login.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nnlightctl/js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/nnlightctl/js/login.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,55 +27,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/Welcome.html">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/Project-index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+            <state relative-caret-position="760">
+              <caret line="43" column="10" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="43" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/Gisservice-index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="779">
+              <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/css/welcome.css">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/css/common.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="46" column="14" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/js/api/requestRoot.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="56" selection-start-column="19" selection-end-column="56" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/Index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="893">
-              <caret line="119" column="10" lean-forward="true" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/Wisdom.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/js/admin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1273">
-              <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+            <state relative-caret-position="-456">
+              <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -74,8 +59,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nnlightctl/User-index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
+            <state relative-caret-position="665">
+              <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/js/admin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-5298">
+              <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
             </state>
           </provider>
         </entry>
@@ -83,8 +77,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nnlightctl/Roadlighting-index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+            <state relative-caret-position="418">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/nnlightctl.csproj">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/css/base.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="457">
+              <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/nnlightctl/css/admin.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="167" column="18" selection-start-line="167" selection-start-column="18" selection-end-line="167" selection-end-column="18" />
             </state>
           </provider>
         </entry>
@@ -92,17 +109,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/nnlightctl/Engery-index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/nnlightctl/Login.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+            <state relative-caret-position="247">
+              <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,20 +142,23 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/nnlightctl/css/login.css" />
         <option value="$PROJECT_DIR$/nnlightctl/js/api/requestRoot.js" />
-        <option value="$PROJECT_DIR$/nnlightctl/js/login.js" />
         <option value="$PROJECT_DIR$/nnlightctl/Index.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/css/admin.css" />
-        <option value="$PROJECT_DIR$/nnlightctl/Login.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/Gisservice-index.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/Project-index.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/Roadlighting-index.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/Engery-index.html" />
-        <option value="$PROJECT_DIR$/nnlightctl/User-index.html" />
         <option value="$PROJECT_DIR$/nnlightctl/css/welcome.css" />
         <option value="$PROJECT_DIR$/nnlightctl/Wisdom.html" />
         <option value="$PROJECT_DIR$/nnlightctl/Welcome.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/Login.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/css/login.css" />
+        <option value="$PROJECT_DIR$/nnlightctl/js/login.js" />
+        <option value="$PROJECT_DIR$/nnlightctl/css/base.css" />
+        <option value="$PROJECT_DIR$/nnlightctl/Gisservice/Project.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/css/common.css" />
+        <option value="$PROJECT_DIR$/nnlightctl/Project-index.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/css/admin.css" />
+        <option value="$PROJECT_DIR$/nnlightctl/User-index.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/Roadlighting-index.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/Engery-index.html" />
+        <option value="$PROJECT_DIR$/nnlightctl/Gisservice-index.html" />
       </list>
     </option>
   </component>
@@ -176,13 +190,19 @@
               <item name="nn-light-web-temporary" type="b2602c69:ProjectViewProjectNode" />
               <item name="nn-light-web-temporary" type="462c0819:PsiDirectoryNode" />
               <item name="nnlightctl" type="462c0819:PsiDirectoryNode" />
-              <item name="bg" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="nn-light-web-temporary" type="b2602c69:ProjectViewProjectNode" />
               <item name="nn-light-web-temporary" type="462c0819:PsiDirectoryNode" />
               <item name="nnlightctl" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
+              <item name="Gisservice" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="nn-light-web-temporary" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nn-light-web-temporary" type="462c0819:PsiDirectoryNode" />
+              <item name="nnlightctl" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -197,6 +217,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\program\nn-light-web-temporary\nnlightctl\bg\new" />
       <recent name="G:\program\nn-light-web-temporary\nnlightctl" />
       <recent name="G:\program\nnlightctlweb-temporary\nnlightctl" />
     </key>
@@ -225,16 +246,36 @@
       <updated>1555468999856</updated>
       <workItem from="1555469000934" duration="274000" />
       <workItem from="1555469343253" duration="15494000" />
-      <workItem from="1555550796786" duration="3891000" />
+      <workItem from="1555550796786" duration="17071000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19659000" />
+    <option name="totallyTimeSpent" value="32839000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18440464" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.24403471" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18440464" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -252,7 +293,7 @@
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -306,37 +347,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/js/login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/css/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="28" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/css/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-913" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/css/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4104" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/css/admin.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nnlightctl/User/Institution.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -348,55 +358,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Project-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/nnlightctl/Project/Index.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Gisservice-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="27" column="10" selection-start-line="27" selection-start-column="10" selection-end-line="27" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/js/admin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1273">
-          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Roadlighting-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="26" column="53" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Engery-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="98" lean-forward="true" selection-start-line="98" selection-end-line="98" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/User-index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="25" lean-forward="true" selection-start-line="17" selection-start-column="25" selection-end-line="17" selection-end-column="25" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nnlightctl/js/api/requestRoot.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="56" selection-start-column="19" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Wisdom.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -407,31 +389,113 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/js/login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10" column="19" lean-forward="true" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nnlightctl/Index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="893">
-          <caret line="119" column="10" lean-forward="true" selection-start-line="119" selection-start-column="10" selection-end-line="119" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Wisdom.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="26" column="35" lean-forward="true" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nnlightctl/Welcome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="28" column="42" selection-start-line="28" selection-start-column="42" selection-end-line="28" selection-end-column="42" />
+        <state relative-caret-position="196">
+          <caret line="96" column="17" lean-forward="true" selection-start-line="96" selection-start-column="17" selection-end-line="96" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/nnlightctl/Login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="20" column="6" lean-forward="true" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        <state relative-caret-position="248">
+          <caret line="53" column="22" lean-forward="true" selection-start-line="53" selection-start-column="22" selection-end-line="53" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/css/login.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="123" column="4" lean-forward="true" selection-start-line="123" selection-start-column="4" selection-end-line="123" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Gisservice/Project.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="137" column="48" lean-forward="true" selection-start-line="137" selection-start-column="48" selection-end-line="137" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/nnlightctl.csproj">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/css/base.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/js/admin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5298">
+          <caret line="67" column="8" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/css/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-456">
+          <caret line="33" column="41" selection-start-line="33" selection-start-column="41" selection-end-line="33" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/css/admin.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="167" column="18" selection-start-line="167" selection-start-column="18" selection-end-line="167" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/User-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="665">
+          <caret line="38" column="14" lean-forward="true" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Roadlighting-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Engery-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="23" column="9" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Project-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="760">
+          <caret line="43" column="10" lean-forward="true" selection-start-line="31" selection-start-column="4" selection-end-line="43" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nnlightctl/Gisservice-index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="779">
+          <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
