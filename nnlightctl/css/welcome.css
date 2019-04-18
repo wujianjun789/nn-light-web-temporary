@@ -1,6 +1,6 @@
 ﻿.welcome{ height:auto; width:100%; left:0; top:0; bottom:0; right:0; z-index:1;
   background:#3283AC url(../bg/index/bg.png) no-repeat center;
-   height: 100%; width: 100%;background-size: cover;}
+   height: 100%; width: 100%;background-size: cover; position: fixed;}
 *{
   margin: 0;
   padding: 0;
