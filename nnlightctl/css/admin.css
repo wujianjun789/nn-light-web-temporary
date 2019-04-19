@@ -149,15 +149,18 @@
 .projectview div span.bigfont{font-size:40px;}
 
 /*地图操作按钮*/
-.leftmaptab{position:absolute;left:20px;top:80px;z-index:999;}
-.leftmaptab li{width:60px;height:60px;text-align:center;display:block;margin-top:10px;overflow:hidden;border-radius:5px;}
-.leftmaptab li a{width:60px;height:60px;display:block;font-size:16px;}
+.leftmaptab{position:absolute;left:15px;top:15px;z-index:999;}
+.leftmaptab li{width:84px;height:96px;text-align:center;display:block;margin-top:10px;overflow:hidden;}
+.leftmaptab li a{width:84px;height:96px;display:block;font-size:14px;padding-top: 62px;box-sizing: border-box;line-height: 33px;
+    color: #252738;
+    letter-spacing: 0.27px;}
+.leftmaptab li a:hover{color: #252738;text-decoration: none;}
 .leftmaptab li a span{width:32px;display:inline-block;}
-.leftmaptab li.tab1{border:2px solid #39dcba;background:rgba(57,220,186,.6);}
+.leftmaptab li.tab1{background: url("../bg/new/light-group.png") no-repeat}
 .leftmaptab li.tab1 span{padding-top:5px;}
-.leftmaptab li.tab2{border:2px solid #ff5372;background:rgba(255,83,114,.6);}
+.leftmaptab li.tab2{background: url("../bg/new/switch.png") no-repeat}
 .leftmaptab li.tab2 span{padding-top:5px;}
-.leftmaptab li.tab3{border:2px solid #00ceff;background:rgba(0,206,255,.6);}
+.leftmaptab li.tab3{background: url("../bg/new/sence.png") no-repeat}
 .leftmaptab li.tab3 span{padding-top:15px;}
 .leftmaptab li.tab4{border:2px solid #b19eff;background:rgba(177,158,255,.6);}
 .leftmaptab li.tab4 span{padding-top:15px;}
@@ -167,7 +170,42 @@
 .Hui-tabNav{
     display: none;
 }
-.topmaptab{position:absolute;right:20px;top:100px;z-index:999;}
+#light-set p span{
+    color: #0D1022;
+    font-family: PingFangSC-Regular;
+}
+#light-set p span:nth-of-type(1){
+    width: 90px;
+    display: inline-block;
+    font-size: 15px;
+}
+#light-set p span:nth-of-type(2),#light-set p span:nth-of-type(3){
+    color: #555;
+    margin-right: 10px;
+}
+.topmaptab{position:absolute;right:30px;top:65px;z-index:999;}
+.topmaptab a{
+    display: inline-block;
+    width: 77px;height: 77px;
+    border-radius: 50%;
+    margin-right: 20px;
+    border: none;
+    padding-top: 10px;
+    box-sizing: border-box;
+}
+.topmaptab a span{
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    color: #FFFFFF;
+    letter-spacing: 0.23px;
+}
+.topmaptab a:nth-child(1){
+    background: #4776E6;
+}
+.topmaptab a:nth-child(2){
+    background: #FEB916;
+}
 .searchmaptab{position:absolute;left:20px;top:55px;z-index:999;}
 
 /*用电量*/
@@ -196,8 +234,68 @@
 .linghtbox{width:600px;position:relative;}
 .linghtbox .imgbox{width:260px;height:260px;border:1px solid #dedede;}
 #powerange{position:absolute;right:0px;top:20px;height:240px;width:320px;}
+#light-set .btn-danger{
+    background: #fff;
+    border: 1px solid #FFB300 ;
+    color:#666;
+}
+#light-set{
+    padding-top: 10px;
+}
+.BMap_bubble_title {
+    text-align:left;
+    padding:10px 20px;
+    color: #fff;
+    border-bottom:1px solid gray;
+    background: #0D1022;
+    font-family: PingFangSC-Regular;
+}
+.BMap_bubble_title span{
+    color: #fff;
+}
+/* 消息内容 */
+.BMap_bubble_content {
+    background-color:white;
+    padding-left:5px;
+    padding-top:5px;
+    padding-bottom:10px;
+}
+/* 内容 */
+.BMap_pop div:nth-child(9) {
+    top:35px !important;
+    border-radius:7px;
+}
+/* 左上角删除按键 */
+.BMap_pop img {
+    top:49px !important;
+    left:585px !important;
+    width: 20px !important;
+    height: 20px !important;;
+}
+.linghtbox .imgbox{
+    width: 260px !important;
+    height: 260px !important;
+}
+.BMap_top {
+    display:none;
+}
+.BMap_bottom {
+    display:none;
+}
+.BMap_center {
+    display:none;
+}
+/* 隐藏边角 */
+.BMap_pop div:nth-child(1) div {
+    display:none;
+}
+.BMap_pop div:nth-child(3) {
+    display:none;
+}
+.BMap_pop div:nth-child(7) {
+    display: none;
 
-
+}
 /* toggle switch css start */
 .switch-btn {position: relative; display: block; vertical-align: top; width:74px; height:22px; border-radius: 18px; cursor: pointer;}
 .checked-switch {position: absolute; top: 0; left: 0; opacity: 0;}
