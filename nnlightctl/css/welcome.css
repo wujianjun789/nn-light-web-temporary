@@ -17,6 +17,7 @@
 .nav a{
   color: #fff;
   text-decoration: none;
+  margin-left: 20px;
 }
 .nav span{
   margin-left: 10px;
@@ -26,13 +27,13 @@
   text-align: center;
   font-size: 36px;
   font-family: "Microsoft Yahei";
-  padding-top: 15px;
+  padding-top: 10px;
 }
 .welbox{
   width: 1205px;
   margin: 0 auto;
   position: relative;
-  margin-top: 50px;
+  margin-top: 35px;
 
 }
 .welbox a{
@@ -85,27 +86,29 @@
 }
 .lamp{
   background: url("../bg/index/lampbg.png");
-  width: 256px;
+  width: 254px;
   height: 408px;
   position: absolute;
   left: 457px;
   top: 303px;
 }
 .road{
-  background: url("../bg/index/roadbg.png");
-  width: 481px;
+  background: url("../bg/index/roadbg.png") no-repeat;
+  background-size: cover;
+  width: 484px;
   height: 199px;
   position: absolute;
   top: 303px;
-  left: 723px;
+  left: 721px;
 }
 .project{
-  background: url("../bg/index/productbg.png");
-  width: 481px;
+  background: url("../bg/index/productbg.png") no-repeat;
+  background-size: cover;
+  width: 484px;
   height: 199px;
   position: absolute;
   top: 512px;
-  left: 723px;
+  left: 721px;
 }
 .gis img,.set img,.user img{
   margin: 60px auto 0;
