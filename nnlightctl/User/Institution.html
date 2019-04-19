@@ -14,9 +14,9 @@
 
 </head>
 <body>
-<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 
-    首页 <span class="c-gray en">&gt;</span> 用户中心 
-    <span class="c-gray en">&gt;</span> 机构管理 
+<nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i>
+    首页 <span class="c-gray en">&gt;</span> 用户中心
+    <span class="c-gray en">&gt;</span> 机构管理
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
     <i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
@@ -27,11 +27,11 @@
         <span class="pl-20">机构地址：</span>
 		<input type="text" name="searchInstitutionAddr" id="searchInstitutionAddr" placeholder="机构地址" style="width:250px" class="input-text">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<button id="btnSearch" class="btn btn-success f-r" type="button"><i class="Hui-iconfont">&#xe665;</i> 搜机构</button>
+		<button id="btnSearch" class="btn btn-success" type="button"><i class="Hui-iconfont">&#xe665;</i> 搜机构</button>
 	</div>
 	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-        <a href="javascript:void(0);" onclick="Institution_del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> 
-        <a class="btn btn-primary radius" data-title="添加机构" onclick="Institution_add('添加机构', 'Institution-add.html', '600', '400')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加机构</a></span> 
+        <a href="javascript:void(0);" onclick="Institution_del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
+        <a class="btn btn-primary radius" data-title="添加机构" onclick="Institution_add('添加机构', 'Institution-add.html', '600', '400')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加机构</a></span>
     </div>
 	<div class="mt-20">
 		<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
@@ -72,7 +72,7 @@
     <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
     <!--请在下方写此页面业务相关的脚本-->
     <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
-    <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
 
@@ -89,7 +89,7 @@
         $('.table-sort').DataTable().destroy();
         searchInstitution(param);
     });
-    
+
     function searchInstitution(param) {
         $('.table-sort').dataTable({
             "bStateSave": true,
@@ -120,7 +120,7 @@
                     render: function (data, type,row) {
                         return '<a style="text-decoration:none" class="ml-10" onclick="Institution_edit(\'机构编辑\', \'Institution-add.html\', \'' + row.id + '\', \'800\', \'500\')" href="javascript:void(0);" title="机构编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                             '<a style="text-decoration:none" class="ml-10" onClick="Institution_del(this,\'' + row.id + '\')" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>';
-                    }                       
+                    }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
@@ -185,6 +185,6 @@
         });
     }
 
-</script> 
+</script>
 </body>
 </html>
