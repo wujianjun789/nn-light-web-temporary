@@ -149,7 +149,7 @@
 .projectview div span.bigfont{font-size:40px;}
 
 /*地图操作按钮*/
-.leftmaptab{position:absolute;left:15px;top:15px;z-index:999;}
+.leftmaptab{position:absolute;left:5px;top:15px;z-index:999;}
 .leftmaptab li{width:84px;height:96px;text-align:center;display:block;margin-top:10px;overflow:hidden;}
 .leftmaptab li a{width:84px;height:96px;display:block;font-size:14px;padding-top: 62px;box-sizing: border-box;line-height: 33px;
     color: #252738;
@@ -241,6 +241,33 @@
 }
 #light-set{
     padding-top: 10px;
+}
+.search-map{
+    width: 373px;
+    height: 56px;
+    padding:18px 20px;
+    box-sizing: border-box;
+    background: rgba(13,16,34,0.65);
+    border-radius: 6px;
+    position: absolute;
+    top:40px;
+    left:150px;
+}
+.search-map input{
+    background: none;
+    outline: none;
+    border: none;
+    color: #fff;
+    width: 200px;
+    font-size: 16px;
+}
+.search-map button{
+    float: right;
+    width: 24px;
+    height: 24px;
+    background: url("../bg/new/search.png") no-repeat center;
+    outline: none;
+    border: none;
 }
 .BMap_bubble_title {
     text-align:left;

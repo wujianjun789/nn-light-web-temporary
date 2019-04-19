@@ -33,7 +33,6 @@
                         <option value="0">请选择项目</option>
                     </select>
                 </span>
-
             <button name="" id="Button1" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索
             </button>
         </div>
@@ -65,7 +64,16 @@
             window.location.href = ("Lamp.html?id=" + project.id);
         });
 
-        var label = new BMap.Label(project.projectName,{offset:new BMap.Size(20,-10)});
+        var label = new BMap.Label(project.projectName,{offset:new BMap.Size(25,-15)});
+        label.setStyle({
+          color : "#fff",
+          fontSize : "14px",
+          backgroundColor :'rgba(0,0,0,0.8)',
+          border :"0",
+          height:'20px',
+          padding:'3px 5px',
+          borderRadius:'3px'
+        });
         marker.setLabel(label);
 
         var myIcon = new BMap.Icon('../bg/project.png', new BMap.Size(60,60));
