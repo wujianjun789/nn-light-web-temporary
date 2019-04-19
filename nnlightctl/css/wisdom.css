@@ -62,10 +62,11 @@
 }
 .weather{
   background: url("../bg/wisdom/weatherbg.png");
-  width: 395px;
+  width: 396px;
   height: 350px;
   position: absolute;
-  left: 406px;
+  left: 402px;
+  top:-2px;
 }
 .ai{
   background: url("../bg/wisdom/aibg.png");
@@ -73,6 +74,7 @@
   height: 350px;
   position: absolute;
   left: 811px;
+  top:-1px;
 }
 .wifi{
   background: url("../bg/wisdom/wifibg.png");
