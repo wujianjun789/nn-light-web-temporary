@@ -25,12 +25,12 @@
 .welcome .title{
   color: #fff;
   text-align: center;
-  font-size: 36px;
+  font-size: 1.6em;
   font-family: "Microsoft Yahei";
   padding-top: 10px;
 }
 .welbox{
-  width: 1205px;
+  width: 62.4vw;
   margin: 0 auto;
   position: relative;
   margin-top: 35px;
@@ -40,7 +40,7 @@
   text-align: center;
   display: block;
   font-family: "Microsoft Yahei";
-  font-size: 28px;
+  font-size: 1.5em;
   line-height: 38px;
 
 }
@@ -50,72 +50,79 @@
 }
 .gis{
   background: url("../bg/index/gisbg.png");
-  width: 711px;
-  height: 293px;
+  width: 37vw;
+  height: 27.1vh;
   position: absolute;
   left: 0;
 }
 .user{
   background: url("../bg/index/userbg.png");
-  width: 237px;
-  height: 293px;
+  width: 12.3vw;
+  height: 27.1vh;
   position: absolute;
-  left: 721px;
+  left: 37.4vw;
 }
 .set{
   background: url("../bg/index/setbg.png");
-  width: 237px;
-  height: 293px;
+  width: 12.3vw;
+  height: 27.1vh;
   position: absolute;
   right: 0;
 }
 .warning{
    background: url("../bg/index/warningbg.png");
-   width: 447px;
-   height: 199px;
+   width: 23.3vw;
+   height: 18.4vh;
    position: absolute;
-   top: 303px;
+   top: 28.1vh;
  }
 .energy{
   background: url("../bg/index/engerybg.png");
-  width: 447px;
-  height: 199px;
+  width: 23.3vw;
+  height: 18.4vh;
   position: absolute;
-  top: 512px;
+  top: 47.5vh;
 }
 .lamp{
   background: url("../bg/index/lampbg.png");
-  width: 254px;
-  height: 408px;
+  width: 13.3vw;
+  height: 37.8vh;
   position: absolute;
-  left: 457px;
-  top: 303px;
+  left: 23.7vw;
+  top: 28.1vh;
 }
 .road{
   background: url("../bg/index/roadbg.png") no-repeat;
   background-size: cover;
-  width: 484px;
-  height: 199px;
+  width: 25.1vw;
+  height: 18.4vh;
   position: absolute;
-  top: 303px;
-  left: 721px;
+  top: 28.1vh;
+  right: 0;
 }
 .project{
   background: url("../bg/index/productbg.png") no-repeat;
   background-size: cover;
-  width: 484px;
-  height: 199px;
+  width: 25.1vw;
+  height: 18.4vh;
   position: absolute;
-  top: 512px;
-  left: 721px;
+  top: 47.5vh;
+  right: 0;
 }
-.gis img,.set img,.user img{
-  margin: 60px auto 0;
+.gis img,.set img,.user img {
+  margin: 6vh auto 0;
+  width: 6.2vw;
+  height: 9.5vh;
+
 }
 /*.warning img,.energy img,.lamp img,.road img,.product img*/
 .warning img,.energy img,.road img,.project img{
-  margin: 30px auto 0;
+  margin: 2vh auto 0;
+  width: 5.2vw;
+  height: 9.1vh;
 }
 .lamp img{
-  margin: 48px auto 0;
+  margin: 2.5vh auto 0;
+  width: 10.3vw;
+  height: 26.1vh;
 }
