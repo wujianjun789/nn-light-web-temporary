@@ -126,7 +126,9 @@
 <script type="text/javascript" src="js/api/requestRoot.js"></script>
 <script type="text/javascript" src="js/api/ajaxScript.js"></script>
 <script type="text/javascript">
-
+  // if (!window.localStorage.getItem('user_info')) { // 如果存在用户信息。则写进表单
+  //   window.location.href = 'Login.html'
+  // }
   //获取菜单图标
   function getIconByMenuName (name) {
     var icon = "";
@@ -190,9 +192,12 @@
   function flushMenu () {
     $("#menuContain").empty();
     ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
-      console.log(data)
       if (data) {
         if (data.header.code == 1000) {
+          if(!data.body.data.length){
+            location.replace("Login.html");
+            return;
+          }
           var menuArray = data.body.data;
           for (var i = 0; i < menuArray.length; ++i) {
             var menu = menuArray[i];
