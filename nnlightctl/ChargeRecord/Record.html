@@ -7,39 +7,13 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>能耗报表</title>
+    <title>充电记录</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css?v=1" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="../css/record.css" />
 <style>
-    .monthengery{
-        width: 100%;
-    }
-    .con{
-        position: relative;
-    }
-    #tab-system{
-        /*width: 75vw;*/
-        width: 98%;
-        overflow: auto;
-        position: absolute;
-        right: 2vw;
-    }
-    .con-left{
-        position: absolute;
-        left: 2vw;
-        width: 20vw;
-        background: #fff;
 
-    }
-    .row{
-        position: absolute;
-        margin-left: 20px;
-    }
-    .form-label{
-        line-height: 30px;
-        font-size: 12px;
-    }
 </style>
 </head>
 <body>
@@ -53,9 +27,9 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        <a href="javascript:dayStatistics(1);" class="btn btn-success radius">天统计</a>
-        <a href="javascript:dayStatistics(2);" class="btn btn-success radius">月统计</a>
-        <a href="javascript:dayStatistics(3);" class="btn btn-success radius mr-20">年统计</a>
+        <a href="javascript:dayStatistics(1);" class="btn btn-success radius">日期</a>
+        <a href="javascript:dayStatistics(2);" class="btn btn-success radius">月份</a>
+        <a href="javascript:dayStatistics(3);" class="btn btn-success radius mr-20">高级筛选</a>
         <span>日期范围：</span>
         <input type="text" class="input-text" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin">
         -
@@ -70,18 +44,6 @@
 						</span>
             </div>
         </span>
-        <!--<p>-->
-            <!--<span class="row">-->
-            <!--<label class="form-label col-xs-4 col-sm-4 text-r" id="cutkey1">分公司：</label>-->
-            <!--<div class="formControls col-xs-3 col-sm-1">-->
-						<!--<span class="select-box" style="width:150px;">-->
-							<!--<select class="select" name="senceParent1">-->
-								<!--<option value="0">请选择分公司</option>-->
-							<!--</select>-->
-						<!--</span>-->
-            <!--</div>-->
-        <!--</span>-->
-        <!--</p>-->
         <button name="" id="Button1" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div><!--搜索end-->
     <div class="con">
@@ -89,11 +51,26 @@
 
         </div>
     <div id="tab-system" class="HuiTab mt-30">
-        <div id="container"></div><!--绑定线图end-->
+        <div class="chart">
+            <div class="f-l chart-left">
+                <div id="container"></div>
+            </div>
+            <div class="f-r chart-right">
+                <p>总充电量：</p>
+                <p class="c-green">199080</p>
+                <p>总充电次数：</p>
+                <p class="c-blue1">199080</p>
+                <p>总充电时长：</p>
+                <p class="c-orange">1004小时4分28秒</p>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--绑定线图end-->
 
         <div class="tabCon mt-30">
             <div class="monthengery f-l">
-                <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+                <!--table-responsive-->
+                <table class="table table-border table-bordered table-bg table-hover table-sort">
                     <thead>
                     <tr class="text-c">
                         <th>序号</th>
@@ -280,9 +257,9 @@
             });
 
         //绑定表单
-        $('.table-sort').dataTable({
-            "ordering": false,//设置所有布排序
-        });
+        // $('.table-sort').dataTable({
+        //     "ordering": false,//设置所有布排序
+        // });
         //tab切换
         $("#tab-system").Huitab({
             index: 0//默认第一个；
