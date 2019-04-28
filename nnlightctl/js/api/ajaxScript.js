@@ -175,5 +175,6 @@ function loadJScript() {
 
 //获取bitNumber上第bit位的数值为0还是1
 function getNumberBitValue(bitNumber, bit) {
-    return ((1 << bit) & bitNumber) >> bit;
+    // return ((1 << bit) & bitNumber) >> bit;
+    return bitNumber >> (bitNumber.toString(2).length - bit) & 1;
 }
