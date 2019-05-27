@@ -4,6 +4,7 @@ html, body{ height:100%}
 body{font-size:14px; font-family: '黑体'}
 .page-container{
     position: relative;
+    min-width: 1650px;
 }
 .right-bar{
     position: absolute;

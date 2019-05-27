@@ -40,3 +40,27 @@ body{font-size:14px; font-family: '黑体'}
 .c-blue1{
     color: #2388ed;
 }
+.top-bar{
+
+}
+.top-bar span{
+    border: 1px solid #dedede;
+    padding: 5px 8px;
+    margin-right: 15px;
+    cursor: pointer;
+    line-height: 30px;
+}
+.tab-con li{
+    display: none;
+    width: 100%;
+}
+.tab-con li div{
+    width: 100%;
+}
+.tab-con li.show{
+    display: block;
+}
+.style1{
+    background: #00af2c;
+    color: #fff;
+}
