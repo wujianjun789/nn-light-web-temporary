@@ -22,6 +22,15 @@
                 <input type="text" class="input-text" value="" placeholder="任务开关名称" id="switchName" name="switchName">
             </div>
         </div>
+        <div class="row cl mt-10">
+            <label class="form-label col-xs-4 col-sm-3 text-r"><span class="c-red">*</span>周期：</label>
+            <div class="formControls col-xs-8 col-sm-9">
+        <span class="select-box" id="period" name="period" style="width:200px;">
+            <label><input name="period" id="period1" type="radio" value="1" checked />平常 </label>
+            <label><input name="period"  id="period3" type="radio" value="4" />节假日 </label>
+        </span>
+            </div>
+        </div>
         <!--<div class="row cl mt-10">-->
             <!--<label class="form-label col-xs-4 col-sm-3 text-r"><span class="c-red">*</span>描述：</label>-->
             <!--<div class="formControls col-xs-8 col-sm-9">-->
@@ -31,22 +40,22 @@
         <div class="row cl mt-10">
             <label class="form-label col-xs-4 col-sm-3 text-r"><span class="c-red">*</span>定时设置：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" style="width:150px;" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'08:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})" id="startTime" placeholder="开始时间">
+                <input type="text" class="input-text" style="width:150px;" onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'08:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})" id="startTime" placeholder="开始时间">
                 -
-                <input type="text" class="input-text" style="width:150px;" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'08:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})" id="endTime" placeholder="结束时间">
+                <input type="text" class="input-text" style="width:150px;" onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'08:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})" id="endTime" placeholder="结束时间">
             </div>
         </div>
-        <div class="row cl mt-10">
-            <label class="form-label col-xs-4 col-sm-3 text-r">是否启用光照计：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <span class="select-box" style="width:150px;">
-                    <select class="select" name="isUsebeam" id="isUsebeam" size="1">
-                        <option value="1">是</option>
-                        <option value="0">否</option>
-                    </select>
-                </span>
-            </div>
-        </div>
+        <!--<div class="row cl mt-10">-->
+            <!--<label class="form-label col-xs-4 col-sm-3 text-r">是否启用光照计：</label>-->
+            <!--<div class="formControls col-xs-8 col-sm-9">-->
+                <!--<span class="select-box" style="width:150px;">-->
+                    <!--<select class="select" name="isUsebeam" id="isUsebeam" size="1">-->
+                        <!--<option value="1">是</option>-->
+                        <!--<option value="0">否</option>-->
+                    <!--</select>-->
+                <!--</span>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="row cl mt-10">
             <label class="form-label col-xs-4 col-sm-3 text-r">是否开灯：</label>
             <div class="formControls col-xs-8 col-sm-9">
@@ -57,16 +66,6 @@
                     </select>
                 </span>
              </div>
-        </div>
-        <div class="row cl mt-10">
-            <label class="form-label col-xs-4 col-sm-3 text-r"><span class="c-red">*</span>周期：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-            <span class="select-box" id="period" name="period" style="width:200px;">
-                <label><input name="period1" id="period1" type="checkbox" value="1" />平常 </label>
-                <label><input name="period2"  id="period2" type="checkbox" value="2" />周末 </label>
-                <label><input name="period3"  id="period3" type="checkbox" value="4" />节假日 </label>
-            </span>
-            </div>
         </div>
         <!--<div class="row cl mt-10">-->
             <!--<label class="form-label col-xs-4 col-sm-3 text-r">经度：</label>-->
@@ -135,7 +134,7 @@
                     var param = {};
                     var paramArray = $(form).serializeArray();
                     var isLighton = $("#isLighton").val();
-                    var isUsebeam = $("#isUsebeam").val();
+                    // var isUsebeam = $("#isUsebeam").val();
                     var startTime = $("#startTime").val();
                     var endTime = $("#endTime").val();
                     for (var i = 0; i < paramArray.length; ++i) {
@@ -147,11 +146,11 @@
                     }else {
                         param["isLighton"] = 1
                     }
-                    if(isUsebeam == 0){
-                        param["isUsebeam"] = 0
-                    }else {
-                        param["isUsebeam"] = 1
-                    }
+                    // if(isUsebeam == 0){
+                    //     param["isUsebeam"] = 0
+                    // }else {
+                    //     param["isUsebeam"] = 1
+                    // }
                     var period = ($("#period3").is(":checked")?"1":"0") + ($("#period2").is(":checked")?"1":"0") + ($("#period1").is(":checked")?"1":"0" ) ;
                     // console.info(period);
                     param["period"] = parseInt(period ,2);
@@ -240,7 +239,7 @@
                             $("#startTime").val(transDate(taskSwitch.startTime));
                             $("#endTime").val(transDate(taskSwitch.endTime));
                             $("#isLighton").val(taskSwitch.isLighton);
-                            $("#isUsebeam").val(taskSwitch.isUsebeam);
+                            // $("#isUsebeam").val(taskSwitch.isUsebeam);
                             $("#period").val(taskSwitch.period);
                             $("#lightPercent").val(taskSwitch.lightPercent);
 
