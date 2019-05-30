@@ -187,7 +187,8 @@ function layer_show () {
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
         maxmin: true,
-        shade: 0.4,
+        moveOut: true,
+        shade: 0,
         title: title,
         content: url
       });
@@ -200,7 +201,8 @@ function layer_show () {
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
         maxmin: true,
-        shade: 0.4,
+        moveOut: true,
+        shade: 0,
         title: title,
         content: url,
         btn: ['确定', '关闭'],

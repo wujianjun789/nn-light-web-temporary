@@ -24,7 +24,7 @@
         <div class="row cl mt-10">
             <label class="form-label col-xs-4 col-sm-3 text-r"><span class="c-red">*</span>描述：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <textarea cols="" rows="" class="textarea" placeholder="说点什么...512个字符以内" dragonfly="true" id="mem" name="mem" maxlength="512"></textarea>
+                <textarea cols="" rows="" class="textarea" placeholder="添加描述" dragonfly="true" id="mem" name="mem" maxlength="512" style="height: 60px;"></textarea>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                     <table border="0">
                         <tr>
                             <td style="height:260px;width:48%;overflow-y:scroll;border:1px solid #ddd;" valign="top">
-                                <h4 class="f-18 tit"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">可添加灯具列表（<span class="f-18 c-orange">备注：点击当前列，移除</span>）</span></h4>
+                                <h4 class="f-14 tit"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">可添加灯具列表（<span class="f-14 c-orange">备注：点击当前列，移除</span>）</span></h4>
                                 <table class="table table-border table-bordered table-bg table-hover">
                                     <thead>
                                         <tr class="text-c">
@@ -72,10 +72,10 @@
                                 </table>
                             </td>
 
-                            <td width="4%" align="center"> </td>
+                            <td width="2%" align="center"> </td>
                             <td style="height:260px;width:48%;overflow-y:scroll;border:1px solid #ddd;" valign="top">
-                                <h4 class="f-18 tit"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">已添加灯具列表（<span class="f-18 c-orange">备注：点击当前列，移除</span>）</span></h4>
-                                
+                                <h4 class="f-14 tit"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">已添加灯具列表（<span class="f-14 c-orange">备注：点击当前列，移除</span>）</span></h4>
+
                                 <table class="table table-border table-bordered table-bg table-hover">
                                     <thead>
                                         <tr class="text-c">
@@ -92,7 +92,7 @@
 
                         </tr>
                     </table><!--控制柜模式end-->
-                <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-4 mt-20">
+                <div class="col-xs-8 col-sm-8 col-xs-offset-4 col-sm-offset-4 mt-20">
                     <input class="btn btn-primary radius" type="submit" id = "lightingGroupBtn" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
                 </div>
             </div>
@@ -120,14 +120,14 @@
                                 </tbody>
                             </table>
                         </td>
-                        <td width="4%" align="center"> </td>
+                        <td width="2%" align="center"> </td>
                         <td style="height:260px;width:48%;overflow-y:scroll;border:1px solid #ddd;" valign="top">
                             <h4 class="f-18 tit"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">已添加灯具分组（<span class="f-18 c-orange">备注：点击当前列，移除</span>）</span></h4>
                             <table class="table table-border table-bordered table-bg table-hover">
                                 <thead>
                                     <tr class="text-c">
-                                        <th>灯具分组名称</th>
-                                        <th>描述</th>
+                                        <th width="50%">灯具分组名称</th>
+                                        <th width="50%">描述</th>
                                     </tr>
                                 </thead>
                                 <tbody class="tb1" id="tb1"></tbody>
@@ -161,8 +161,8 @@
 
                         })
                 }
-                
-                
+
+
                 //tab切换
 	            $("#tab-system").Huitab({
 	                index:0//默认第一个；

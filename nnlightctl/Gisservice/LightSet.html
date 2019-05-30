@@ -16,26 +16,27 @@
 
 </head>
 <body>
-<div class="page-container" id="light-set" style="max-height: 300px;  overflow: auto; padding-bottom: 32px;">
-    <p class="f-14"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span id="latitude">纬度：39.830931</span></p>
-    <p class="f-14"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>
-    <p class="f-14"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>
-    <p class="f-14"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>
-    <p class="f-14"><span>灯杆号：</span><span id="lamppost">21.56 </span>
+<div class="page-container" id="light-set" style="max-height: 460px;padding-bottom: 20px;">
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span
+            id="latitude">纬度：39.830931</span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯杆号：</span><span id="lamppost">21.56 </span>
     </p>
-    <p class="f-14"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>
-    <p class="f-14"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>
     <div class="linghtbox clearfix mt-20">
         <img src="../bg//lightsbg_0.png" class="imgbox"/>
         <div id="powerange">
             <div style="font-size: 14px;">
-            <span class="p1-10">电源模式：</span>
-            <select id="powerTypeSelect" onchange="powerTypeChangeEvent()">
-                <option value="0">0~10V</option>
-                <option value="1">PWM</option>
-                <option value="2">UART</option>
-                <option value="3">DALI</option>
-            </select>
+                <span class="p1-10">调光模式：</span>
+                <select id="powerTypeSelect" onchange="powerTypeChangeEvent()">
+                    <option value="0">0~10V</option>
+                    <option value="1">PWM</option>
+                    <option value="2">UART</option>
+                    <option value="3">DALI</option>
+                </select>
             </div>
 
             <a onclick="addlights(100)" href="javascript:void(0);" rel="100" class="btn btn-danger radius mt-20"
@@ -63,97 +64,113 @@
     </div>-->
 
 </div><!--地图弹出内容-->
+<script type="text/javascript" src="../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
 <script type="text/javascript">
 
-    var globalLightId = null;
+  var globalLightId = null;
 
-    function doLightAdjust(precent) {
-        var lightIdArray = [];
-        lightIdArray.push(globalLightId);
+  function doLightAdjust (precent) {
+    var lightIdArray = [];
+    lightIdArray.push(globalLightId);
 
-        ajaxRequest("post", "/api/command/sendLightAdjustCommandBatch", transArray({"lightPercent" : precent, "lightIds" : lightIdArray}), function (data) {
+    ajaxRequest("post", "/api/command/sendLightAdjustCommandBatch", transArray({
+      "lightPercent": precent,
+      "lightIds": lightIdArray
+    }), function (data) {
+      if (data) {
+        if (data.header.code != 1000) {
+          layer.msg(data.header.msg, {icon: 2, time: 3000});
+        }
+      }
+    });
+  }
+
+  function lightschange (num) {
+    var x = 0;
+    var LightsUrl = "";
+    if (num > 0 && num <= 20) {
+      x = 20;
+    }
+    if (num > 20 && num <= 40) {
+      x = 40;
+    }
+    if (num > 40 && num <= 60) {
+      x = 60;
+    }
+    if (num > 60 && num <= 80) {
+      x = 80;
+    }
+    if (num > 80 && num <= 100) {
+      x = 100;
+    }
+    LightsUrl = "../bg//lightsbg_" + x + ".png";
+    $(".imgbox").attr("src", LightsUrl);
+  }
+
+  function addlights (value) {
+    $("input[name='range']").val(value);
+    $("p[name='rangeval']").html(value);
+    lightschange(value);
+    doLightAdjust(value);
+  }
+
+  function changerange (obj) {
+    $("p[name='rangeval']").html(obj.value);
+    lightschange(obj.value);
+    doLightAdjust(obj.value);
+  }
+
+  function powerTypeChangeEvent () {
+    ajaxRequest("post", "/api/command/batchCommandConfigTerminalPowerType",
+    {"lightUUIDs[0]": $("#uuid").text().trim(), "powerType": $("#powerTypeSelect").val()}, function () {
+
+    });
+  }
+
+  //获取灯具信息
+  function flushLightInfo () {
+    ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+      console.log(data);
+      if (data) {
+        if (data.header.code == 1000) {
+          var light = data.body.data[0];
+
+          //刷新灯具信息
+          $("#longitude").text("经度：" + light.longitude);
+          $("#latitude").text("  纬度：" + light.latitude);
+          $("#lightingCode").text(light.lightingCode);
+          $("#uuid").text(light.uid);
+          $("#lamppost").text(light.lamppost);
+          $("#lamphead").text(light.lamphead);
+          $("#imei").text(light.lightingImei)
+          ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
             if (data) {
-                if (data.header.code != 1000) {
-                    layer.msg(data.header.msg, {icon : 2, time : 3000});
-                }
+              console.log(data);
+              if (data.header.code == 1000) {
+                $("#signalIntensity").text(data.body.data);
+              }
             }
-        });
-    }
-    function lightschange(num) {
-        var x = 0;
-        var LightsUrl = "";
-        if (num > 0 && num <= 20)
-        { x = 20; }
-        if (num > 20 && num <= 40)
-        { x = 40; }
-        if (num > 40 && num <= 60)
-        { x = 60; }
-        if (num > 60 && num <= 80)
-        { x = 80; }
-        if (num > 80 && num <= 100)
-        { x = 100; }
-        LightsUrl = "../bg//lightsbg_" + x + ".png";
-        $(".imgbox").attr("src", LightsUrl);
-    }
-    function addlights(value) {
-        $("input[name='range']").val(value);
-        $("p[name='rangeval']").html(value);
-        lightschange(value);
-        doLightAdjust(value);
-    }
+          })
+        }
+      }
+    });
+  }
 
-    function changerange(obj) {
-        $("p[name='rangeval']").html(obj.value);
-        lightschange(obj.value);
-        doLightAdjust(obj.value);
-    }
+  $(function () {
+    globalLightId = editModel(window.location.href)
+    flushLightInfo();
+  })
 
-    function powerTypeChangeEvent() {
-        console.log("电源模式选择：" + $("#powerTypeSelect").val());
-        ajaxRequest("post", "/api/command/batchCommandConfigTerminalPowerType",
-            {"lightUUIDs[0]" : $("#uuid").text().trim(), "powerType" : $("#powerTypeSelect").val()}, function () {
+  // function LightAdjustInit (lightId) {
+  //   globalLightId = lightId;
+  //   flushLightInfo();
+  // }
 
-        });
-    }
-
-    //获取灯具信息
-    function flushLightInfo() {
-        ajaxRequest("post", "/api/roadlighting/getLighting", {"id" : globalLightId}, function (data) {
-            console.log(data);
-            if (data) {
-                if (data.header.code == 1000) {
-                    var light = data.body.data[0];
-
-                    //刷新灯具信息
-                    $("#longitude").text("经度：" + light.longitude);
-                    $("#latitude").text("  纬度：" + light.latitude);
-                    $("#lightingCode").text(light.lightingCode);
-                    $("#uuid").text(light.uid);
-                    $("#lamppost").text(light.lamppost);
-                    $("#lamphead").text(light.lamphead);
-                    $("#imei").text(light.lightingImei)
-                        ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid" : light.uid}, function (data) {
-                            if (data) {
-                                console.log(data);
-                                if (data.header.code == 1000) {
-                                    $("#signalIntensity").text(data.body.data);
-                                }
-                            }
-                        })
-                }
-            }
-        });
-    }
-
-    function LightAdjustInit(lightId) {
-        console.log("the baiduMap click light is : " + lightId);
-        globalLightId = lightId;
-        flushLightInfo();
-    }
- /*  function checkLeave(){
-        return '确定要离开吗？'
-    }
-    window.onbeforeunload=function(){return '确定要离开吗？'}*/
+  /*  function checkLeave(){
+         return '确定要离开吗？'
+     }
+     window.onbeforeunload=function(){return '确定要离开吗？'}*/
 
 </script>
 
