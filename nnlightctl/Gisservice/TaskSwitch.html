@@ -23,7 +23,7 @@
     <div class="page-container">
         <div class="cl pd-5 bg-1 bk-gray">
             <span class="l">
-                <a href="javascript:void(0);" class="btn btn-primary radius" onclick="addTaskSwitch('新建任务开关', 'addTaskSwitch.html', '1000', '650')"><i class="Hui-iconfont">&#xe600;</i>新建任务开关</a>
+                <a href="javascript:void(0);" class="btn btn-primary radius" onclick="addTaskSwitch('新建任务开关', 'addTaskSwitch.html', '800', '650')"><i class="Hui-iconfont">&#xe600;</i>新建任务开关</a>
             </span>
         </div>
         <div class="mt-20">
@@ -33,9 +33,9 @@
                         <th width="25"><input type="checkbox" name="" value=""></th>
                         <th width="150">任务开关名称</th>
                         <!--<th>描述</th>-->
-                        <th>开始时间</th>
-                        <th>结束时间</th>
-                        <th>启用光照计</th>
+                        <!--<th>开始时间</th>-->
+                        <!--<th>结束时间</th>-->
+                        <!--<th>启用光照计</th>-->
                         <!--<th>经度</th>-->
                         <!--<th>纬度</th>-->
                         <th>是否开灯</th>
@@ -144,7 +144,7 @@
                        return '<input type="checkbox" value="' + row.id + '" >';
                    }
                }, {
-                   targets: 8,
+                   targets: 5,
                    render: function (data, type, row) {
                        return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="editTaskSwitch(\'任务开关编辑\', \'addTaskSwitch.html\', \'' + row.id + '\', \'800\', \'500\')" title="任务开关编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
                            '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="del_one(this, \'' + row.id + '\' )" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>';
@@ -154,9 +154,9 @@
            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                { "data": "id","visible": false },
                { "data": "switchName", "defaultContent":""},
-               { "data": "startTime", "render": function (data) { return formatDateTime(data); } },
-               { "data": "endTime", "render": function (data) { return formatDateTime(data); } },
-               { "data": "isUsebeam", "defaultContent": "" },
+               // { "data": "startTime", "render": function (data) { return formatDateTime(data); } },
+               // { "data": "endTime", "render": function (data) { return formatDateTime(data); } },
+               // { "data": "isUsebeam", "defaultContent": "" },
                { "data": "isLighton", "defaultContent": "" },
                { "data": "lightPercent", "defaultContent": "" },
                { "data": "period", "defaultContent": "" ,"render" : function (data) {

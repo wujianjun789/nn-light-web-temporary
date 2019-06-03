@@ -384,7 +384,7 @@
             addMarker(point, false, eleboxArray[i].id);
 
             if (i == 0 && isInit) {
-              map.centerAndZoom(point, 15);
+              map.centerAndZoom(point, 16);
             }
 
             //获取控制柜中全部模块
@@ -397,7 +397,7 @@
 
   function init () {
     map = new BMap.Map("map");
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 15);
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 20);
     var mapType1 = new BMap.MapTypeControl(
     {
       mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP],
