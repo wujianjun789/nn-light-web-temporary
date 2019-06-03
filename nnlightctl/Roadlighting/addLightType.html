@@ -19,9 +19,15 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>型号名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="型号名称" id="modelName" name="modelName">
+                    <input type="text" class="input-text" value="" placeholder="灯具型号" id="luminaireType" name="luminaireType">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具名称：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="灯具名称" id="luminaireName" name="luminaireName">
                 </div>
             </div>
             <div class="row cl">
@@ -43,11 +49,48 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">LED数量：</label>
+                <label class="form-label col-xs-4 col-sm-3">LED芯片：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="LED数量" id="ledCount" name="ledCount">
+                    <input type="text" class="input-text" value="" placeholder="LED芯片" id="chip" name="chip">
                 </div>
             </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">光通量：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="光通量" id="luminaireFlux" name="luminaireFlux">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">显色指数：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="显色指数" id="chromogeniIndex" name="chromogeniIndex">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">IP等级：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="IP等级" id="grade" name="grade">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">色温：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="色温" id="colorTemperature" name="colorTemperature">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">控制方式：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="控制方式" id="controllerMode" name="controllerMode">
+                </div>
+            </div><div class="row cl">
+            <label class="form-label col-xs-4 col-sm-3">光束角（单位：°）：</label>
+            <div class="formControls col-xs-4 col-sm-4">
+                <input type="text" class="input-text" value="" placeholder="光束角" id="BeanAngle" name="BeanAngle">
+            </div>
+            <span>°</span>
+        </div>
+
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">

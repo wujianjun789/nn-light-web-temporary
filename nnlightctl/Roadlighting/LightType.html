@@ -41,11 +41,19 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>型号名称</th>
+                <th>灯具型号</th>
+                <th>灯具名称</th>
                 <th>额定电压</th>
                 <th>额定电流</th>
                 <th>额定功率</th>
-                <th>LED数量</th>
+                <th>LED芯片</th>
+                <!--<th>LED数量</th>-->
+                <th>光通量</th>
+                <th>显色指数</th>
+                <th>IP等级</th>
+                <th>色温</th>
+                <th>控制方式</th>
+                <th>光束角</th>
                 <th>备注</th>
                 <th width="120">操作</th>
             </tr>
@@ -119,7 +127,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 7,
+                    targets: 14,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑灯具型号\', \'addLightType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -128,11 +136,18 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
-                        { "data": "modelName", "defaultContent": "" },
+                        { "data": "luminaireType", "defaultContent": "" },
+                        { "data": "luminaireName", "defaultContent": "" },
                         { "data": "ratedVoltage", "defaultContent": "" },
                         { "data": "ratedElectric", "defaultContent": "" },
                         { "data": "ratedPower", "defaultContent": "" },
-                        { "data": "ledCount", "defaultContent": "" },
+                        { "data": "chip", "defaultContent": "" },
+                        { "data": "luminaireFlux", "defaultContent": "" },
+                        { "data": "chromogeniIndex", "defaultContent": "" },
+                        { "data": "grade", "defaultContent": "" },
+                        { "data": "colorTemperature", "defaultContent": "" },
+                        { "data": "controllerMode", "defaultContent": "" },
+                        { "data": "BeanAngle", "defaultContent": "" },
                         { "data": "mem", "defaultContent": "" }
             ]
         });
