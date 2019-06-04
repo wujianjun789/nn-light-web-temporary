@@ -66,7 +66,10 @@
             <div class="formControls col-xs-9 col-sm-9">
                 <input type="text" class="input-text" style="width:150px;"
                        onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
-                       id="startDate" placeholder="选择日期">
+                       id="startDate" placeholder="选择开始日期">
+                <input type="text" class="input-text" style="width:150px;"
+                       onfocus="WdatePicker({dateFmt:'yyyy-MM-dd'})"
+                       id="endDate" placeholder="选择结束日期">
                 <!-- - -->
                 <button type="button" style="background: #5a98de;color: #fff;border: none;padding: 5px 3px;"
                         id="addRules">添加时间规则
@@ -193,12 +196,16 @@
     $('#sureRules').click(function () {
       $(this).hide()
       if ($('#holidayTime').val() && 0 <= $('#lightPercent').val() <= 100) {
-        holidayRules.push({time: $('#holidayTime').val(), percent: $('#lightPercent').val()})
+        holidayRules.push({
+          beginTime: str2Date('2019-01-01 ' + $('#holidayTime').val()),
+          lightPercent: $('#lightPercent').val(),
+          switchTaskInfoId: null
+        })
         var str = '<div class="row cl mt-10">' +
         '<label class="form-label col-xs-3 col-sm-3 text-r">已选择的：</label>' +
         '<div class="formControls col-xs-9 col-sm-9">' +
-        '<span class="f-14">时间点: </span><input type="text" class="input-text" style="width:50px;" value="' + $('#holidayTime').val() + '"> ' +
-        '<span class="f-14">调光百分比: </span><input type="text" class="input-text" style="width:50px;" value="' + $('#lightPercent').val() + '"> ' +
+        '<span class="f-14">时间点: </span><input type="text" class="input-text" disabled style="width:50px;" value="' + $('#holidayTime').val() + '"> ' +
+        '<span class="f-14">调光百分比: </span><input type="text" class="input-text" disabled style="width:50px;" value="' + $('#lightPercent').val() + '"> ' +
         '<button type="button" style="background: #5a98de;color: #fff;border: none;padding: 5px 5px;" onclick="deleteRuels(' + (holidayRules.length - 1) + ')">删除 </button>' +
         '</div>' +
         '</div>'
@@ -234,8 +241,6 @@
         var param = {};
         var paramArray = $(form).serializeArray();
         var isLighton = $("#isLighton").val();
-        var startTime = $("#startTime").val();
-        var endTime = $("#endTime").val();
         for (var i = 0; i < paramArray.length; ++i) {
           var o = paramArray[i];
           param[o["name"]] = o["value"];
@@ -245,29 +250,60 @@
         } else {
           param["isLighton"] = 1
         }
-        var period = ($("#period3").is(":checked") ? "1" : "0") + ($("#period2").is(":checked") ? "1" : "0") + ($("#period1").is(":checked") ? "1" : "0");
-        param["period"] = parseInt(period, 2);
-        var startdate = str2Date($("#startTime").val());
-        var enddate = str2Date($("#endTime").val());
-
+        var period = ($("#period3").is(":checked") ? 4 : 0) + ($("#period1").is(":checked") ? 1 : 0);
+        param["period"] = period
+        if (period == 1) {
+          var startdate = str2Date('2018-01-01 ' + $("#startTime").val());
+          var enddate = str2Date('2019-01-01 ' + $("#endTime").val());
+        } else {
+          param["switchTaskInfoArray"] = []
+          holidayRules.forEach(function (value) {
+            param["switchTaskInfoArray"].push(value)
+          })
+          param['lightPercent'] = null
+          var startdate = str2Date($("#startDate").val());
+          var enddate = str2Date($("#endDate").val());
+        }
         param["startTime"] = startdate;
         param["endTime"] = enddate;
-
         param["id"] = editModel(window.location.href);
-        ajaxRequest("post", "/api/switchTask/addOrUpdateSwitchTask", param, function (data) {
-          if (data) {
-            if (data.header.code == 1000) {
-              if (editModel(window.location.href)) {
-                layer.msg("编辑任务开关信息成功！", {icon: 1, time: 3000});
+        console.log(param)
+
+        $.ajax({
+          method: 'POST',
+          contentType: "application/json",
+          url: 'http://192.168.10.165:8080/nnlightctl/api/switchTask/addOrUpdateSwitchTask',
+          data: JSON.stringify(param),
+          // dataType: "json",
+          success: function (data) {
+            if (data) {
+              if (data.header.code == 1000) {
+                if (editModel(window.location.href)) {
+                  layer.msg("编辑任务开关信息成功！", {icon: 1, time: 3000});
+                } else {
+                  layer.msg("添加任务开关信息成功！", {icon: 1, time: 3000});
+                }
+                ResetWindow();
               } else {
-                layer.msg("添加任务开关信息成功！", {icon: 1, time: 3000});
+                layer.msg('操作失败', {icon: 2, time: 3000});
               }
-              ResetWindow();
-            } else {
-              layer.msg('操作失败', {icon: 2, time: 3000});
             }
           }
-        });
+        })
+        // ajaxRequest("post", "/api/switchTask/addOrUpdateSwitchTask", param, function (data) {
+        //   if (data) {
+        //     if (data.header.code == 1000) {
+        //       if (editModel(window.location.href)) {
+        //         layer.msg("编辑任务开关信息成功！", {icon: 1, time: 3000});
+        //       } else {
+        //         layer.msg("添加任务开关信息成功！", {icon: 1, time: 3000});
+        //       }
+        //       ResetWindow();
+        //     } else {
+        //       layer.msg('操作失败', {icon: 2, time: 3000});
+        //     }
+        //   }
+        // });
       }
     });
 
@@ -279,59 +315,42 @@
           if (data.header.code == 1000) {
             var taskSwitch = data.body.data[0];
             var tp = taskSwitch.period;
-            if ((tp & 1) == 1) {
+            $("#period1").attr("disabled", true);
+            $("#period3").attr("disabled", true);
+            ajaxRequest("post", "/api/switchTask/listSwitchTask", {"switchName": taskSwitch.switchName}, function (d) {
+              var simpleSwitch = d.body.data[0];
+              var startDate = new Date(simpleSwitch.startTime)
+              var endDate = new Date(simpleSwitch.endTime)
+              if (simpleSwitch.period == 4) {
+                $("#startDate").val(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate())
+                $("#endDate").val(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate())
+                simpleSwitch.infos.forEach(function (i) {
+                  holidayRules.push({lightPercent: i.lightPercent, beginTime: new Date(i.beginTime), switchTaskInfoId: i.id})
+                  var str = '<div class="row cl mt-10">' +
+                  '<label class="form-label col-xs-3 col-sm-3 text-r">已选择的：</label>' +
+                  '<div class="formControls col-xs-9 col-sm-9">' +
+                  '<span class="f-14">时间点: </span><input type="text" class="input-text" disabled style="width:50px;" value="' + new Date(i.beginTime).getHours() + ':' + new Date(i.beginTime).getMinutes() + '"> ' +
+                  '<span class="f-14">调光百分比: </span><input type="text" class="input-text" disabled style="width:50px;" value="' + i.lightPercent + '"> ' +
+                  '<button type="button" style="background: #5a98de;color: #fff;border: none;padding: 5px 5px;" onclick="deleteRuels(' + (holidayRules.length - 1) + ')">删除 </button>' +
+                  '</div>' +
+                  '</div>'
+                  $('.selectedRules').append(str)
+                })
+              } else {
+                $("#startTime").val(startDate.getHours() + ':' + startDate.getMinutes());
+                $("#endTime").val(endDate.getHours() + ':' + endDate.getMinutes());
+              }
+            })
+            if (tp == 1) {
               $("#period1").attr("checked", true);
-            } else if ((tp & 1) == 0) {
-              $("#period1").attr("checked", false);
-            }
-            if ((tp & 2) == 2) {
-              $("#period2").attr("checked", true);
-            } else if ((tp & 2) == 0) {
-              $("#period2").attr("checked", false);
-            }
-            if ((tp & 4) == 4) {
+            } else {
               $("#period3").attr("checked", true);
-            } else if ((tp & 4) == 0) {
-              $("#period3").attr("checked", false);
             }
-            // switch (taskSwitch.period){
-            //     case 1:
-            //         $("#period1").attr("checked",true);
-            //         break;
-            //     case 2:
-            //         $("#period2").attr("checked",true);
-            //         break;
-            //     case 3:
-            //         $("#period1").attr("checked",true);
-            //         $("#period2").attr("checked",true);
-            //         break;
-            //     case 4:
-            //         $("#period3").attr("checked",true);
-            //         break;
-            //     case 5:
-            //         $("#period1").attr("checked",true);
-            //         $("#period3").attr("checked",true);
-            //         break;
-            //     case 6:
-            //         $("#period2").attr("checked",true);
-            //         $("#period3").attr("checked",true);
-            //         break;
-            //     case 7:
-            //         $("#period1").attr("checked",true);
-            //         $("#period2").attr("checked",true);
-            //         $("#period3").attr("checked",true);
-            //         break;
-            //
-            // }
+            changePeriod();
             //刷新表单
             $("#switchName").val(taskSwitch.switchName);
-            $("#mem").val(taskSwitch.mem);
-            $("#startTime").val(transDate(taskSwitch.startTime));
-            $("#endTime").val(transDate(taskSwitch.endTime));
             $("#isLighton").val(taskSwitch.isLighton);
-            $("#period").val(taskSwitch.period);
             $("#lightPercent").val(taskSwitch.lightPercent);
-
           } else {
             layer.msg(data.header.msg, {icon: 2});
           }
