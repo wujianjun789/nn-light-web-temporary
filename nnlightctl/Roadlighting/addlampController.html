@@ -19,84 +19,51 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光照计型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯具型号" id="luminaireType" name="luminaireType">
+                    <input type="text" class="input-text" value="" placeholder="光照计型号" id="photoperiodModel" name="photoperiodModel">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光照计名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯具名称" id="luminaireName" name="luminaireName">
+                    <input type="text" class="input-text" value="" placeholder="光照计名称" id="photoperiodName" name="photoperiodName">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电压：</label>
-                <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="额定电压" id="ratedVoltage" name="ratedVoltage">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电流：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="额定电流" id="ratedElectric" name="ratedElectric">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定功率：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="额定功率" id="ratedPower" name="ratedPower">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">LED芯片：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="LED芯片" id="chip" name="chip">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">光通量：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="光通量" id="luminaireFlux" name="luminaireFlux">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">显色指数：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="显色指数" id="chromogeniIndex" name="chromogeniIndex">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">IP等级：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="IP等级" id="grade" name="grade">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">色温：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="色温" id="colorTemperature" name="colorTemperature">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">控制方式：</label>
+                <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
-                        <select class="select" name="controllerMode" id="controllerMode" size="1">
-                            <option value="0">请选择控制方式</option>
-                            <option value="1">0-10v</option>
-                            <option value="2">PWM</option>
+                        <select class="select" name="communicationMode" id="communicationMode" size="1">
+                            <option value="0">请选择通讯方式</option>
+                            <option value="1">RS485</option>
                         </select>
                     </span>
                 </div>
-            </div><div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">光束角（单位：°）：</label>
-            <div class="formControls col-xs-4 col-sm-4">
-                <input type="text" class="input-text" value="" placeholder="光束角" id="BeanAngle" name="BeanAngle">
             </div>
-            <span>°</span>
-        </div>
-
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">量程：</label>
+                <div class="formControls col-xs-7 col-sm-8 text-l">
+                    <span class="select-box" style="width:150px;">
+                        <select class="select" name="dimmingMode" id="dimmingMode" size="1">
+                            <option value="0">请选择量程</option>
+                            <option value="1">0-200000</option>
+                        </select>
+                    </span>
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">精度：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="精度" id="accuracy" name="accuracy">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">工作电压：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="工作电压" id="workVoltage" name="workVoltage">
+                </div>
+            </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
@@ -195,18 +162,12 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#luminaireType").val(lightModel.luminaireType);
-                            $("#luminaireName").val(lightModel.luminaireName);
-                            $("#ratedVoltage").val(lightModel.ratedVoltage);
-                            $("#ratedElectric").val(lightModel.ratedElectric);
-                            $("#ratedPower").val(lightModel.ratedPower);
-                            $("#chip").val(lightModel.chip);
-                            $("#luminaireFlux").val(lightModel.luminaireFlux);
-                            $("#chromogeniIndex").val(lightModel.chromogeniIndex);
-                            $("#grade").val(lightModel.grade);
-                            $("#colorTemperature").val(lightModel.colorTemperature);
-                            $("#controllerMode").val(lightModel.controllerMode);
-                            $("#BeanAngle").val(lightModel.BeanAngle);
+                            $("#photoperiodModel").val(lightModel.photoperiodModel);
+                            $("#photoperiodName").val(lightModel.photoperiodName);
+                            $("#communicationMode").val(lightModel.communicationMode);
+                            $("#dimmingMode").val(lightModel.dimmingMode);
+                            $("#accuracy").val(lightModel.accuracy);
+                            $("#workVoltage").val(lightModel.workVoltage);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});
