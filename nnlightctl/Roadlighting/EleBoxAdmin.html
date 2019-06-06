@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <title>单灯控制器</title>
+    <title>控制柜</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
@@ -18,7 +18,7 @@
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>
     首页 <span class="c-gray en">&gt;</span>道路照明系统
-    <span class="c-gray en">&gt;</span>单灯控制器
+    <span class="c-gray en">&gt;</span>控制柜
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -28,12 +28,12 @@
     <div class="text-l">
         型号名称：
         <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>单灯控制器型号</button>
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>控制柜型号</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="单灯控制器" onclick="add('单灯控制器', 'addLampController.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>单灯控制器</a>
+                <a class="btn btn-primary radius" data-title="添加控制柜" onclick="add('添加控制柜', 'addEleBoxAdmin.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加控制柜</a>
             </span>
     </div>
     <div class="mt-20">
@@ -43,14 +43,12 @@
                 <th width="25"><input type="checkbox" name="" value=""></th>
                 <th>型号</th>
                 <th>名称</th>
-                <th>额定电压</th>
-                <th>额定电流</th>
-                <th>通讯方式</th>
-                <th>调光方式</th>
+                <th>所属项目</th>
                 <th>经度</th>
                 <th>纬度</th>
-                <th>静态功能</th>
-                <th>报警信息</th>
+                <th>材质</th>
+                <th>外观颜色</th>
+                <th>尺寸</th>
                 <th>备注</th>
                 <th width="120">操作</th>
             </tr>
@@ -75,7 +73,6 @@
     $("#btnSearch").click(function () {
         //搜索条件
         var searchLightModelName = $("#modelName").val().trim();
-
         param["modelName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
@@ -97,7 +94,7 @@
                         if (data.header.code == 1000) {
                             returnData.data = data.body.data;
                         }
-                    }
+                    };
                     callback(returnData);
                 });
             },
@@ -108,26 +105,24 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 12,
+                    targets: 10,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>'+
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
-                        { "data": "lampModel", "defaultContent": "" },
-                        { "data": "lampName", "defaultContent": "" },
-                        { "data": "ratedVoltage", "defaultContent": "" },
-                        { "data": "ratedCurrent", "defaultContent": "" },
-                        { "data": "dimmingMode", "defaultContent": "" },
-                        { "data": "dimmingMode", "defaultContent": "" },
+                        { "data": "eleboxModel", "defaultContent": "" },
+                        { "data": "eleboxName", "defaultContent": "" },
+                        { "data": "subordinateProjects", "defaultContent": "" },
                         { "data": "longitude", "defaultContent": "" },
                         { "data": "latitude", "defaultContent": "" },
-                        { "data": "staticPower", "defaultContent": "" },
-                        { "data": "alarmMessage", "defaultContent": "" },
-                        { "data": "mem", "defaultContent": "" }
+                        { "data": "materialQuality", "defaultContent": "" },
+                        { "data": "AppearanceColors", "defaultContent": "" },
+                        { "data": "eleboxSize", "defaultContent": "" },
+                        { "data": "grade", "defaultContent": "" }
             ]
         });
     }

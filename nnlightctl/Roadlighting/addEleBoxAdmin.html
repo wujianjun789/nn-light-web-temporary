@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加单灯控制器</title>
+    <title>添加控制柜型号</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -18,45 +18,27 @@
     <article class="page-container">
         <form class="form form-horizontal" id="form-admin-add">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="单灯控制器型号" id="lampModel" name="eleboxModel">
+                    <input type="text" class="input-text" value="" placeholder="控制柜型号" id="eleboxModel" name="eleboxModel">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="单灯控制器名称" id="lampName" name="lampName">
+                    <input type="text" class="input-text" value="" placeholder="控制柜名称" id="eleboxName" name="eleboxName">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电压：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                  <input type="text" class="input-text" value="" placeholder="额定电压" id="ratedVoltage" name="ratedVoltage">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电流：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="额定电流" id="ratedCurrent" name="ratedCurrent">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <select class="input-text" placeholder="调光方式" id="dimmingMode" name="dimmingMode">
-                      <option class="input-text" placeholder="通讯方式" id="communicationMode" name="communicationMode">
-                        <option value=""></option>
-                      </option>
+                    <select class="input-text" placeholder="所属项目" id="subordinateProjects" name="subordinateProjects">
+                      <option value="3213">阿萨德</option>
+                      <option value="312">第三次</option>
+                      <option value="13">按顺序</option>
+                      <option value="44">uuu</option>
                     </select>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>调光方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <select class="input-text" placeholder="调光方式" id="dimmingMode" name="dimmingMode">
-                      <option value=""></option>
-                    </select>
+                    
                 </div>
             </div>
             <div class="row cl">
@@ -84,21 +66,27 @@
                 </div>
             </div> -->
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">静态功耗：</label>
+                <label class="form-label col-xs-4 col-sm-3">材质：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="静态功耗" id="staticPower" name="staticPower">
+                    <input type="text" class="input-text" value="" placeholder="材质" id="materialQuality" name="materialQuality">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">报警信息：</label>
+                <label class="form-label col-xs-4 col-sm-3">外观颜色：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="报警信息" id="alarmMessage" name="alarmMessage">
+                    <input type="text" class="input-text" value="" placeholder="外观颜色" id="AppearanceColors" name="AppearanceColors">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">尺寸：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="尺寸" id="eleboxSize" name="eleboxSize">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
+                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
                 </div>
             </div>
@@ -127,28 +115,24 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    lampModel: {
+                    eleboxModel: {
                         required: true,
                     },
-                    lampName: {
+                    eleboxName: {
                         required: true,
-                        isFloat:true
+//                        isFloat:true
+                    },
+                    subordinateProjects: {
+                        required: true,
+//                        isFloat: true
                     },
                     longitude: {
                         required: true,
-                        isFloat: true
+//                        isFloat: true
                     },
                     latitude: {
                         required: true,
-                        isFloat: true
-                    },
-                    communicationMode: {
-                        required: true,
-                        isNumber:true
-                    },
-                    dimmingMode: {
-                        required: true,
-                        isNumber:true
+//                        isNumber:true
                     }
                 },
                 onkeyup: false,
@@ -168,9 +152,9 @@
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑单灯控制器信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑控制柜信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加单灯控制器信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加控制柜信息成功！", {icon: 1, time: 3000});
                                 }
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
@@ -215,11 +199,12 @@
             content: url,
             btn: ['确定', '关闭'],
             yes: function (index) {
+              console.log(index);
               var body = layer.getChildFrame('body', index);
-              var lng = body.find('#lng').val()
-              var lat = body.find('#lat').val()
-              $('#longitude').val(lng)
-              $('#latitude').val(lat)
+              var lng = body.find('#lng').val();
+              var lat = body.find('#lat').val();
+              $('#longitude').val(lng);
+              $('#latitude').val(lat);
               //最后关闭弹出层
               layer.close(index);
             },

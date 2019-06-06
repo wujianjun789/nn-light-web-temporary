@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加单灯控制器</title>
+    <title>添加灯具型号</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -18,54 +18,24 @@
     <article class="page-container">
         <form class="form form-horizontal" id="form-admin-add">
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>集中控器型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="单灯控制器型号" id="lampModel" name="eleboxModel">
+                    <input type="text" class="input-text" value="" placeholder="集中控器型号" id="eleboxModel" name="eleboxModel">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>集中控制器名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="单灯控制器名称" id="lampName" name="lampName">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电压：</label>
-                <div class="formControls col-xs-7 col-sm-8">
-                  <input type="text" class="input-text" value="" placeholder="额定电压" id="ratedVoltage" name="ratedVoltage">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电流：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="额定电流" id="ratedCurrent" name="ratedCurrent">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <select class="input-text" placeholder="调光方式" id="dimmingMode" name="dimmingMode">
-                      <option class="input-text" placeholder="通讯方式" id="communicationMode" name="communicationMode">
-                        <option value=""></option>
-                      </option>
-                    </select>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>调光方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <select class="input-text" placeholder="调光方式" id="dimmingMode" name="dimmingMode">
-                      <option value=""></option>
-                    </select>
+                    <input type="text" class="input-text" value="" placeholder="集中控制器名称" id="eleboxName" name="eleboxName">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经纬度：</label>
                 <div class="formControls col-xs-8 col-sm-7" style="width:593px;">
                     <input type="text" class="input-text f-l" value="" placeholder="经度" id="longitude" name="longitude"
-                           style="width: 224px;margin-right: 10px;">
+                           style="width: 218px;margin-right: 10px;">
                     <input type="text" class="input-text f-l" value="" placeholder="纬度" id="latitude" name="latitude"
-                           style="width: 224px;margin-right: 10px;">
+                           style="width: 218px;margin-right: 10px;">
                     <a class="f-l btn btn-primary radius" href="javascript:void(0);" data-title="坐标选择"
                        onclick="site_add('坐标选择', '../Project/Site-Select.html', '700', '600')"
                        style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
@@ -73,32 +43,68 @@
             </div>
             <!-- <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="经度" id="longitude" name="longitude">
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="经度" id="subordinateProjects" name="subordinateProjects">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>纬度：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="纬度" id="latitude" name="latitude">
+                    <input type="text" class="input-text" value="" placeholder="纬度" id="longitude" name="longitude">
                 </div>
             </div> -->
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">静态功耗：</label>
+                <label class="form-label col-xs-4 col-sm-3">DO通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="静态功耗" id="staticPower" name="staticPower">
+                    <input type="text" class="input-text" value="" placeholder="DO通道" id="latitude" name="latitude">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">报警信息：</label>
+                <label class="form-label col-xs-4 col-sm-3">交流ID通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="报警信息" id="alarmMessage" name="alarmMessage">
+                    <input type="text" class="input-text" value="" placeholder="交流ID通道" id="materialQuality" name="materialQuality">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开关量ID通道：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="开关量ID通道" id="AppearanceColors" name="AppearanceColors">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">电压检测通道：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="电压检测通道" id="eleboxSize" name="eleboxSize">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">电流检测通道：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="电流检测通道" id="eleboxSize" name="eleboxSize">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3">漏电检测通道：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="漏电检测通道" id="eleboxSize" name="eleboxSize">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上行通讯接口：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="上行通讯接口" id="eleboxSize" name="eleboxSize">
+                </div>
+            </div>
+            <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>下行通讯接口：</label>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="下行通讯接口" id="eleboxSize" name="eleboxSize">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
+                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
                 </div>
             </div>
@@ -127,10 +133,10 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    lampModel: {
+                    centralizeModel: {
                         required: true,
                     },
-                    lampName: {
+                    centralizeName: {
                         required: true,
                         isFloat:true
                     },
@@ -140,15 +146,19 @@
                     },
                     latitude: {
                         required: true,
+                        isNumber:true
+                    },
+                    switchChannel: {
+                        required: true,
                         isFloat: true
                     },
-                    communicationMode: {
+                    upChannel: {
                         required: true,
-                        isNumber:true
+                        isFloat: true
                     },
-                    dimmingMode: {
+                    downChannel: {
                         required: true,
-                        isNumber:true
+                        isFloat: true
                     }
                 },
                 onkeyup: false,
@@ -168,9 +178,9 @@
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑单灯控制器信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑集中控制器信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加单灯控制器信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加集中控制器信息成功！", {icon: 1, time: 3000});
                                 }
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
@@ -183,6 +193,7 @@
 
             //判断是否编辑模式
             var id = editModel(window.location.href);
+            console.log(id)
             if (id) {
                 ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
                     if (data) {
@@ -230,7 +241,7 @@
           // layer_show(title, url, w, h, function (layer) {
           //   console.log(layer)
           // });
-        }
+        }  
     </script>
     <!--/请在上方写此页面业务相关的脚本-->
 </body>
