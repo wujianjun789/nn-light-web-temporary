@@ -163,6 +163,7 @@ function layer_show () {
   var url = arguments[1];
   var w = arguments[2];
   var h = arguments[3];
+  var callbackfun;
   if (title == null || title == '') {
     title = false;
   }
@@ -190,7 +191,7 @@ function layer_show () {
         content: url
       });break;
     case 5:
-      var callbackfun = arguments[4];
+      callbackfun = arguments[4];
       layer.open({
         type: 2,
         area: [w + 'px', h + 'px'],
@@ -217,6 +218,7 @@ function layer_show () {
       });
       break;
     case 6:
+      callbackfun = arguments[4];
       var addUrl = arguments[5];
       layer.open({
         type: 2,
@@ -232,17 +234,14 @@ function layer_show () {
         yes: function (index,layero) {
           //当点击‘确定’按钮的时候，获取弹出层返回的值
           var res = window["layui-layer-iframe" + index].getData();
-          console.log(res);
-          var body = layer.getChildFrame('body', index);
-          var isJsonList = $(body).find("#dataList").attr("data");
-          var jsonList = isJsonList instanceof String ?JSON.parse($(body).find("#dataList").attr("data")): isJsonList;
-          document.write('<script language=javascript src="../js/api/ajaxScript.js"></script>');//引入封装的ajax
-          ajaxRequest("post",addUrl,jsonList,function(data){
-            console.log(data);
-            callbackfun(jsonList);
-          });
-          //最后关闭弹出层
-          layer.close(index);
+          if(!(res == null || res == "")){
+            document.write('<script language=javascript src="../js/api/ajaxScript.js"></script>');//引入封装的ajax
+            ajaxRequest("post",addUrl,res,function(data){
+              callbackfun(data);
+            });
+            //最后关闭弹出层
+            layer.close(index);
+          }
         },
         cancel: function () {
           //右上角关闭回调
