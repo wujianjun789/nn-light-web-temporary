@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+  <title>添加设备</title>
+
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+  <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+
+</head>
+<body>
+<p id="dataList" data="eqwdqwdasdqwd"></p>
+<article class="page-container">
+  <form class="form form-horizontal" id="form-admin-add">
+    <div style="width:49.5%;border:1px solid #ddd;height:420px;overflow:hidden;" class="mt-20 f-l">
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>UUID：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="UUID" id="uid" name="uid">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>模块名称：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="模块名称" id="centralizeName" name="centralizeName">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>模块型号：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="模块型号" id="modularModel" name="centralizeName">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4"><span class="c-red">*</span>模块编码：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="模块编码" id="centralizeCode" name="centralizeCode">
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4">通讯方式：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="通讯方式" id="communicationMode" name="communicationMode">
+          <label id="powerRating-error" class="error" style="display:none">*格式不正确。</label>
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4">最大负载电流：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="最大负载电流" id="electricRating" name="electricRating">
+          <label id="electricRating-error" class="error" style="display:none">*格式不正确。</label>
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4">所属相序：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="所属相序" id="sequence" name="electricRating">
+          <label id="sequence-error" class="error" style="display:none">*格式不正确。</label>
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4">回路数量：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="回路数量" id="loopQuantity" name="electricRating">
+          <label id="loopQuantity-error" class="error" style="display:none">*格式不正确。</label>
+        </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-xs-4 col-sm-4">状态：</label>
+        <div class="formControls col-xs-8 col-sm-7">
+          <input type="text" class="input-text" value="" placeholder="额定电压" id="voltageRating" name="voltageRating">
+          <label id="voltageRating-error" class="error" style="display:none">*格式不正确。</label>
+        </div>
+      </div>
+    </div>
+    <div style="width:49.5%;border:1px solid #ddd;height:420px;overflow:hidden;" class="mt-20 f-r">
+      <h3 class="f-20">
+        <span class="pl-10">回路</span>
+        <a class="btn btn-primary radius f-r mr-10" data-title="添加回路" onclick="addLoop('编辑回路', 'switchModuleLoop.html', '540', '440')" href="javascript:void(0);">
+          <i class="Hui-iconfont">&#xe600;</i>编辑回路
+        </a>
+      </h3>
+      <div style="overflow-y:scroll;height:490px;width:100%;" class="mt-10">
+        <table id="modelLoopTable" class="table table-border table-bordered">
+          <thead>
+          <tr class="text-c">
+            <th>模块编号</th>
+            <th>回路编号</th>
+            <th>单灯控制器</th>
+            <th>备注</th>
+          </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="clear"></div>
+
+  </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
+
+<script type="text/javascript" src="../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<script type="text/javascript">
+
+  $(document).ready(function () {
+    var list = [{
+      "modelCode":"123",
+      "modelName":"DEQDWE",
+      "loopCount":"12",
+      "state":"好",
+      "remarks":"测试"
+    }];
+    $("#dataList").attr("data",JSON.stringify(list));
+    var doureg = /^[0-9,.]*$/ //^[-\+]?\d+(\.\d+)?$/;
+    var numreg = /^\d+$/;
+    $("#powerRating").blur(function () {
+      var a = $("#powerRating").val();
+      if (!doureg.test(a) || a == "") {
+        layer.tips('请输入double类型数字', '#powerRating');
+        $("#powerRating-error").show();
+      } else { $("#powerRating-error").hide(); }
+    });
+    $("#electricRating").blur(function () {
+      var a = $("#electricRating").val();
+      if (!doureg.test(a) || a == "") {
+        layer.tips('请输入double类型数字', '#electricRating');
+        $("#electricRating-error").show();
+      } else { $("#electricRating-error").hide(); }
+    });
+    $("#voltageRating").blur(function () {
+      var a = $("#voltageRating").val();
+      if (!doureg.test(a) || a == "") {
+        layer.tips('请输入double类型数字', '#voltageRating');
+        $("#voltageRating-error").show();
+      } else { $("#voltageRating-error").hide(); }
+    });
+    $("#loopElectricity").blur(function () {
+      var a = $("#loopElectricity").val();
+      if (!doureg.test(a) || a == "") {
+        layer.tips('请输入double类型数字', '#loopElectricity');
+        $("#loopElectricity-error").show();
+      } else { $("#loopElectricity-error").hide(); }
+    });
+    $("#loopCount").blur(function () {
+      var a = $("#loopCount").val();
+      if (!numreg.test(a) || a == "") {
+        layer.tips('请输入byte类型数字', '#loopCount');
+        $("#loopCount-error").show();
+      } else { $("#loopCount-error").hide(); }
+    });
+  });
+  var modelLoopArray = [];
+
+  //添加回路
+  function addLoop(title, url, w, h) {
+
+    layer_show(title, url, w, h, function (modelLoop) {
+
+      if (modelLoop.loopCode == "" || modelLoop.loopCode == undefined) {
+        layer.msg("请输入回路编号！", { icon: 2, time: 2000 });
+        return false;
+      }
+
+      //保存到全局模块回路数组中
+      var index = modelLoopArray.push(modelLoop) - 1;
+
+      //添加到回路表格中
+      var $tbody = $("#modelLoopTable").find("tbody").eq(0);
+
+      //构造编辑时回路字符参数
+      var urlParam = object2UrlParamStr(modelLoop);
+
+      $('<tr value="'+index+'" class="text-c">\n' +
+        '<td>'+modelLoop.loopCode+'</td>\n' +
+        '<td>'+modelLoop.voltage+'</td>\n' +
+        '<td>'+modelLoop.electricity+'</td>\n' +
+        '<td>'+modelLoop.lightCount+'</td>\n' +
+        '<td><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'420\', \'350\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
+        '</tr>').appendTo($tbody);
+    });
+  }
+  //编辑回路
+  function editLoop(obj, title, url, param, w, h) {
+    var index = $(obj).parents("tr").eq(0).attr("value");
+
+    layer_show(title, url + "?" + param, w, h, function (modelLoop) {
+      if (modelLoop.loopCode == "" || modelLoop.loopCode == undefined) {
+        layer.msg("请输入回路编号！", { icon: 2, time: 2000 });
+        return false;
+      }
+      //更新数组
+      modelLoopArray[index] = modelLoop;
+
+      //构造编辑时回路字符参数
+      var urlParam = object2UrlParamStr(modelLoop);
+
+      //更新表格
+      $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
+        '<td>'+modelLoop.loopCode+'</td>\n' +
+        '<td>'+modelLoop.voltage+'</td>\n' +
+        '<td>'+modelLoop.electricity+'</td>\n' +
+        '<td>'+modelLoop.lightCount+'</td>\n' +
+        '<td><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'420\', \'350\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
+        '</tr>');
+    });
+  }
+
+  var getData = function () {
+    var modelArray = [];
+    //单个模块的信息收集
+    var model = {};
+    var formDataArray = $("#form-admin-add").serializeArray();
+    for (var i = 0; i < formDataArray.length; ++i) {
+      var pair = formDataArray[i];
+      model[pair["name"]] = pair["value"];
+    }
+    delete model.count;
+
+    model["modelLoopList"] = modelLoopArray;
+
+    //构造模块集合
+//            var modelNumber = $("#count").val().trim() ? Number($("#count").val().trim()) : 1;
+//            for (var i = 0; i < modelNumber; ++i) {
+//                modelArray.push(model);
+//            }
+
+    return modelArray;
+  };
+
+</script>
+<!--/请在上方写此页面业务相关的脚本-->
+</body>
+
+</html>
+
+

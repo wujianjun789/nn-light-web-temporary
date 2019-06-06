@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit|ie-comp|ie-stand">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+  <title>部署控制柜-添加光照计</title>
+  <link rel="stylesheet" type="text/css" href="../css/common.css" />
+  <link rel="stylesheet" type="text/css" href="../css/admin.css" />
+  <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+
+</head>
+<body>
+<article class="page-container">
+  <form class="form form-horizontal" id="form-admin-add">
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">光照计IMEI：</label>
+      <div class="formControls col-xs-7 col-sm-8">
+        <input type="text" class="input-text" value="" placeholder="光照计IMEI" id="eleboxModel" name="eleboxModel">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光照计名称：</label>
+      <div class="formControls col-xs-7 col-sm-8">
+        <input type="text" class="input-text" value="" placeholder="光照计名称" id="eleboxName" name="eleboxName">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光照计型号：</label>
+      <div class="formControls col-xs-7 col-sm-8">
+        <select class="input-text" placeholder="光照计型号" id="subordinateProjects" name="subordinateProjects">
+          <option value="3213">阿萨德</option>
+          <option value="312">第三次</option>
+          <option value="13">按顺序</option>
+          <option value="44">uuu</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">状态：</label>
+      <div class="formControls col-xs-8 col-sm-8">
+        <input type="text" class="input-text" value="" placeholder="状态" id="state" name="state">
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">是否启用：</label>
+      <div class="formControls col-xs-8 col-sm-8" style="display: flex;padding-top: 4px">
+        <p style="margin: 0 12px 0 0">是<input type="radio" value="" placeholder="是否启用" id="yeEnable" name="isEnable"></p>
+        <p style="margin: 0 12px 0 0">否<input type="radio" value="" placeholder="是否启用" id="noEnable" name="isEnable"></p>
+      </div>
+    </div>
+    <div class="row cl">
+      <label class="form-label col-xs-4 col-sm-3">备注：</label>
+      <div class="formControls col-xs-8 col-sm-8">
+        <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
+        <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+      </div>
+    </div>
+    <!--<div class="row cl">-->
+    <!--<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">-->
+    <!--<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
+    <!--</div>-->
+    <!--</div>-->
+  </form>
+</article>
+<!--_footer 作为公共模版分离出去-->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
+
+<script type="text/javascript" src="../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<!--/_footer 作为公共模版分离出去-->
+<!--请在下方写此页面业务相关的脚本-->
+
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
+<script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
+<script type="text/javascript">
+  $(function () {
+    //数据验证
+//    $("#form-admin-add").validate({
+//      rules: {
+//        eleboxModel: {
+//          required: true,
+//        },
+//        eleboxName: {
+//          required: true,
+////                        isFloat:true
+//        },
+//        subordinateProjects: {
+//          required: true,
+////                        isFloat: true
+//        },
+//        longitude: {
+//          required: true,
+////                        isFloat: true
+//        },
+//        latitude: {
+//          required: true,
+////                        isNumber:true
+//        }
+//      },
+//      onkeyup: false,
+//      focusCleanup: true,
+//      success: "valid",
+//      submitHandler: function (form) {
+//        //ajax上传表单
+//        //构造上传数据
+//        var param = {};
+//        var paramArray = $(form).serializeArray();
+//        for (var i = 0; i < paramArray.length; ++i) {
+//          var o = paramArray[i];
+//          param[o["name"]] = o["value"];
+//        }
+//        param["id"] = editModel(window.location.href);
+//        ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
+//          if (data) {
+//            if (data.header.code == 1000) {
+//              if (editModel(window.location.href)) {
+//                layer.msg("编辑控制柜信息成功！", {icon: 1, time: 3000});
+//              } else {
+//                layer.msg("添加控制柜信息成功！", {icon: 1, time: 3000});
+//              }
+//            } else {
+//              layer.msg(data.header.msg, {icon: 2, time: 3000});
+//            }
+//          }
+//        });
+//        ResetWindow();
+//      }
+//    });
+    //判断是否编辑模式
+    var id = editModel(window.location.href);
+    if (id) {
+      ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+        if (data) {
+          if (data.header.code == 1000) {
+            var lightModel = data.body.data[0];
+            //刷新表单
+            $("#modelName").val(lightModel.modelName);
+            $("#ratedVoltage").val(lightModel.ratedVoltage);
+            $("#ratedElectric").val(lightModel.ratedElectric);
+            $("#ratedPower").val(lightModel.ratedPower);
+            $("#ledCount").val(lightModel.ledCount);
+            $("#mem").val(lightModel.mem);
+          } else {
+            layer.msg(data.header.msg, {icon : 2});
+          }
+        }
+      });
+    }
+
+  });
+  var getData = function () {
+    var isSuccess = true;
+    $(".error").each(function(){
+      if(!($(this).is(':hidden'))){
+        isSuccess = false;
+        return false;
+      }
+    });
+    if(isSuccess){
+      var formDataArray = $(".form").serializeArray();
+      var param = {};
+      for (var i = 0; i < formDataArray.length; ++i) {
+        var o = formDataArray[i];
+        param[o["name"]] = o["value"];
+      }
+      return param;
+    }
+  };
+</script>
+
+</body>
+
+</html>
+
+
