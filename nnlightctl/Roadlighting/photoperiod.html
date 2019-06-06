@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <title>灯具型号</title>
+    <title>光照计</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
@@ -18,7 +18,7 @@
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>
     首页 <span class="c-gray en">&gt;</span>道路照明系统
-    <span class="c-gray en">&gt;</span>灯具型号
+    <span class="c-gray en">&gt;</span>光照计
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -28,12 +28,12 @@
     <div class="text-l">
         型号名称：
         <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>灯具型号</button>
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>光照计</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加灯具型号" onclick="add('添加灯具型号', 'addLightType.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加灯具型号</a>
+                <a class="btn btn-primary radius" data-title="添加光照计型号" onclick="add('添加光照计型号', 'addlampController.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加光照计型号</a>
             </span>
     </div>
     <div class="mt-20">
@@ -41,19 +41,14 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>灯具型号</th>
-                <th>灯具名称</th>
-                <th>额定电压</th>
-                <th>额定电流</th>
-                <th>额定功率</th>
-                <th>LED芯片</th>
-                <!--<th>LED数量</th>-->
-                <th>光通量</th>
-                <th>显色指数</th>
-                <th>IP等级</th>
-                <th>色温</th>
-                <th>控制方式</th>
-                <th>光束角</th>
+                <th>光照计型号</th>
+                <th>光照计名称</th>
+                <th>通讯方式</th>
+                <th>量程</th>
+                <th>精度</th>
+                <th>工作电压</th>
+                <!--<th>工作温度</th>-->
+                <!--<th>工作湿度</th>-->
                 <th>备注</th>
                 <th width="120">操作</th>
             </tr>
@@ -136,18 +131,12 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
-                        { "data": "luminaireType", "defaultContent": "" },
-                        { "data": "luminaireName", "defaultContent": "" },
-                        { "data": "ratedVoltage", "defaultContent": "" },
-                        { "data": "ratedElectric", "defaultContent": "" },
-                        { "data": "ratedPower", "defaultContent": "" },
-                        { "data": "chip", "defaultContent": "" },
-                        { "data": "luminaireFlux", "defaultContent": "" },
-                        { "data": "chromogeniIndex", "defaultContent": "" },
-                        { "data": "grade", "defaultContent": "" },
-                        { "data": "colorTemperature", "defaultContent": "" },
-                        { "data": "controllerMode", "defaultContent": "" },
-                        { "data": "BeanAngle", "defaultContent": "" },
+                        { "data": "photoperiodModel", "defaultContent": "" },
+                        { "data": "photoperiodName", "defaultContent": "" },
+                        { "data": "communicationMode", "defaultContent": "" },
+                        { "data": "dimmingMode", "defaultContent": "" },
+                        { "data": "accuracy", "defaultContent": "" },
+                        { "data": "workVoltage", "defaultContent": "" },
                         { "data": "mem", "defaultContent": "" }
             ]
         });
@@ -173,7 +162,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({photoperiodIds : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/nnlightctlLamppost", transArray({deleteLightModelList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);
