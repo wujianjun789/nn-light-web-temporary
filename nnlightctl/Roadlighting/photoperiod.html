@@ -33,7 +33,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加光照计型号" onclick="add('添加光照计型号', 'addlampController.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加光照计型号</a>
+                <a class="btn btn-primary radius" data-title="添加光照计型号" onclick="add('添加光照计型号', 'addPhotoperiod.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加光照计型号</a>
             </span>
     </div>
     <div class="mt-20">
@@ -104,7 +104,7 @@
             "ordering": false, //设置所有布排序
             "bStateSave": true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listLightModel", param, function (data) {
+                ajaxRequest("post", "/api/roadlighting/listpotoperiod", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -122,7 +122,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 14,
+                    targets: 8,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑灯具型号\', \'addLightType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -162,7 +162,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/nnlightctlLamppost", transArray({deleteLightModelList : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deletephotoperiod", transArray({photoperiodIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加灯具型号</title>
+    <title>添加光照计型号</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -43,13 +43,16 @@
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">量程：</label>
-                <div class="formControls col-xs-7 col-sm-8 text-l">
-                    <span class="select-box" style="width:150px;">
-                        <select class="select" name="dimmingMode" id="dimmingMode" size="1">
-                            <option value="0">请选择量程</option>
-                            <option value="1">0-200000</option>
-                        </select>
-                    </span>
+                <!--<div class="formControls col-xs-7 col-sm-8 text-l">-->
+                    <!--<span class="select-box" style="width:150px;">-->
+                        <!--<select class="select" name="dimmingMode" id="dimmingMode" size="1">-->
+                            <!--<option value="0">请选择量程</option>-->
+                            <!--<option value="1">0-200000</option>-->
+                        <!--</select>-->
+                    <!--</span>-->
+                <!--</div>-->
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="量程" id="dimmingMode" name="dimmingMode">
                 </div>
             </div>
             <div class="row cl">
@@ -57,12 +60,14 @@
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="精度" id="accuracy" name="accuracy">
                 </div>
+
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">工作电压：</label>
-                <div class="formControls col-xs-8 col-sm-8">
+                <div class="formControls col-xs-4 col-sm-4">
                     <input type="text" class="input-text" value="" placeholder="工作电压" id="workVoltage" name="workVoltage">
                 </div>
+                <span>V</span>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
@@ -126,18 +131,32 @@
                     var param = {};
                     var paramArray = $(form).serializeArray();
                     var controllerMode = $('#controllerMode').val();
+                    var communicationModeRegion = $('#communicationMode').val();
+                    var dimmingMode = $('#dimmingMode').val();
+
                     for (var i = 0; i < paramArray.length; ++i) {
                         var o = paramArray[i];
                         param[o["name"]] = o["value"];
-                    }
+                    };
+                    if(communicationModeRegion == 0){
+                        param["communicationMode"] = 0
+                    }else {
+                        param["communicationMode"] = 'RS485'
+                    };
+                    // if(dimmingMode == 0){
+                    //     param["dimmingMode"] = 0
+                    // }else {
+                    //     param["dimmingMode"] = '0-200000'
+                    // }
+
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
+                    ajaxRequest("post", "/api/roadlighting/addorupdatephotoperiod", param, function (data) {
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑光照计型号信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加光照计型号信息成功！", {icon: 1, time: 3000});
                                 }
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
@@ -151,7 +170,7 @@
             //判断是否编辑模式
             var id = editModel(window.location.href);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+                ajaxRequest("post", "/api/roadlighting/photoperiodbyid", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
