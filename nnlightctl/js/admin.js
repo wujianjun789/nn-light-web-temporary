@@ -1,3 +1,4 @@
+
 var num = 0, oUl = $("#min_title_list"), hide_nav = $("#Hui-tabNav");
 
 /*获取顶部选项卡总长度*/
@@ -162,23 +163,18 @@ function layer_show () {
   var url = arguments[1];
   var w = arguments[2];
   var h = arguments[3];
-
   if (title == null || title == '') {
     title = false;
   }
-  ;
   if (url == null || url == '') {
     url = "404.html";
   }
-  ;
   if (w == null || w == '') {
     w = 800;
   }
-  ;
   if (h == null || h == '') {
     h = ($(window).height() - 50);
   }
-  ;
 
   switch (arguments.length) {
     case 4:
@@ -187,13 +183,12 @@ function layer_show () {
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
         maxmin: true,
+        shadeClose: false,
+        shade: [0.8, '#393D49'],
         moveOut: true,
-        shade: 0,
         title: title,
         content: url
-      });
-      break;
-
+      });break;
     case 5:
       var callbackfun = arguments[4];
       layer.open({
@@ -201,21 +196,51 @@ function layer_show () {
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
         maxmin: true,
+        shadeClose: false,
+        shade: [0.8, '#393D49'],
         moveOut: true,
-        shade: 0,
         title: title,
         content: url,
         btn: ['确定', '关闭'],
-        yes: function (index) {
+        yes: function (index,layero) {
           //当点击‘确定’按钮的时候，获取弹出层返回的值
-          // var res = window["layui-layer-iframe" + index].getData();
-          // //打印返回的值，看是否有我们想返回的值。
-          // //console.log(res);
+          var res = window["layui-layer-iframe" + index].getData();
+          if(!(res == null || res == "")){
+            callbackfun(res);
+            //最后关闭弹出层
+            layer.close(index);
+          }
+        },
+        cancel: function () {
+          //右上角关闭回调
+        }
+      });
+      break;
+    case 6:
+      var addUrl = arguments[5];
+      layer.open({
+        type: 2,
+        area: [w + 'px', h + 'px'],
+        fix: false, //不固定
+        maxmin: true,
+        shadeClose: false,
+        shade: [0.8, '#393D49'],
+        moveOut: true,
+        title: title,
+        content: url,
+        btn: ['确定', '关闭'],
+        yes: function (index,layero) {
+          //当点击‘确定’按钮的时候，获取弹出层返回的值
+          var res = window["layui-layer-iframe" + index].getData();
+          console.log(res);
           var body = layer.getChildFrame('body', index);
-          var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：iframeWin.method();
-          iframeWin.method();
-          var lng = body.find('#lng').val()
-          callbackfun('layer');
+          var isJsonList = $(body).find("#dataList").attr("data");
+          var jsonList = isJsonList instanceof String ?JSON.parse($(body).find("#dataList").attr("data")): isJsonList;
+          document.write('<script language=javascript src="../js/api/ajaxScript.js"></script>');//引入封装的ajax
+          ajaxRequest("post",addUrl,jsonList,function(data){
+            console.log(data);
+            callbackfun(jsonList);
+          });
           //最后关闭弹出层
           layer.close(index);
         },
