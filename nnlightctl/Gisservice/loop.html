@@ -50,84 +50,84 @@
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
 <script type="text/javascript">
 
-    function flushModelLoop(modelId) {
-        ajaxRequest("post", "/api/roadlighting/listmodelloop", {"modelId": modelId}, function (data) {
-            if (data) {
-                if (data.header.code == 1000) {
-                    var loopArray = data.body.data;
+  function flushModelLoop (modelId) {
+    ajaxRequest("post", "/api/roadlighting/listmodelloop", {"modelId": modelId}, function (data) {
+      if (data) {
+        if (data.header.code == 1000) {
+          var loopArray = data.body.data;
 
-                    var $tbody = $("#tb");
-                    $tbody.empty();
+          var $tbody = $("#tb");
+          $tbody.empty();
 
-                    for (var i = 0; i < loopArray.length; ++i) {
-                        var loop = loopArray[i];
-                        $('<tr class="text-l">\n' +
-                            '                        <td>' + loop.loopCode + '</td>\n' +
-                            '                        <td>' + loop.lightCount + '</td>\n' +
-                            '                        <td>' + MODELLOOP_STATE[loop.state] + '</td>\n' +
-                            '                        <td>\n' +
-                            '                            <label class="switch-btn">\n' +
-                            '                                <input onclick="switchEvent(this, '+loop.id+')" class="checked-switch" type="checkbox">\n' +
-                            '                                <span class="text-switch" data-yes="yes" data-no="no"></span>\n' +
-                            '                                <span class="toggle-btn"></span>\n' +
-                            '                            </label>\n' +
-                            '                        </td>\n' +
-                            '                    </tr>').appendTo($tbody);
-                    }
+          for (var i = 0; i < loopArray.length; ++i) {
+            var loop = loopArray[i];
+            $('<tr class="text-l">\n' +
+            '                        <td>' + loop.loopCode + '</td>\n' +
+            '                        <td>' + loop.lightCount + '</td>\n' +
+            '                        <td>' + MODELLOOP_STATE[loop.state] + '</td>\n' +
+            '                        <td>\n' +
+            '                            <label class="switch-btn">\n' +
+            '                                <input onclick="switchEvent(this, ' + loop.id + ')" class="checked-switch" type="checkbox">\n' +
+            '                                <span class="text-switch" data-yes="yes" data-no="no"></span>\n' +
+            '                                <span class="toggle-btn"></span>\n' +
+            '                            </label>\n' +
+            '                        </td>\n' +
+            '                    </tr>').appendTo($tbody);
+          }
 
-                    flushModelLoopState(modelId);
-                }
-            }
-        });
-    }
-
-    //获取模块继电器状态
-    function flushModelLoopState(modelId) {
-        ajaxRequest("post", "/api/command/commandGetModelStateInfoId", {"modelId" : modelId}, function (data) {
-            if (data) {
-                if (data.header.code == 1000) {
-                    var modelState = data.body.data[0];
-                    console.log(modelState);
-
-                    var modelStateNumber = parseInt(modelState.modelStateDesc, 16);
-                    //刷新表格回路状态
-                    $("#tb").find("tr").each(function (index, value) {
-                        var loopCode = $(this).find("td").eq(0).text();
-
-                        if (getNumberBitValue(modelStateNumber, Number(loopCode)) == 1) {
-                            $(this).find("input[type='checkbox']").eq(0).prop("checked", true);
-                            $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
-                        }
-                    });
-                }
-            }
-        });
-    }
-
-    //开关事件
-    function switchEvent(obj, loopId) {
-        var switchState = $(obj).prop("checked");
-        console.log("the switch state is " + switchState + " , the loop id is : " + loopId);
-        if (switchState) {  //回路通电
-            $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
-        } else {    //回路断电
-            $(this).find("td").eq(2).text(MODELLOOP_STATE[1]);
+          flushModelLoopState(modelId);
         }
+      }
+    });
+  }
 
-        //发送指令
-        var modelLoopBit = $(obj).parents("tr").find("td").eq(0).text().trim();
-        var modelLoopState = switchState ? 1 : 0;
-        ajaxRequest("post", "/api/command/configModelStateId",
-            {"loopId" : loopId, "modelLoop" : (1 << (Number(modelLoopBit) - 1)), "modelLoopState" : (modelLoopState << (Number(modelLoopBit) - 1))}, function () {
+  //获取模块继电器状态
+  function flushModelLoopState (modelId) {
+    ajaxRequest("post", "/api/command/commandGetModelStateInfoId", {"modelId": modelId}, function (data) {
+      if (data) {
+        if (data.header.code == 1000) {
+          var modelState = data.body.data[0];
+          var modelStateNumber = parseInt(modelState.modelStateDesc, 16);
+          //刷新表格回路状态
+          $("#tb").find("tr").each(function (index, value) {
+            var loopCode = $(this).find("td").eq(0).text();
+            if (getNumberBitValue(modelStateNumber, Number(loopCode)) == 1) {
+              $(this).find("input[type='checkbox']").eq(0).prop("checked", true);
+              $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
+            }
+          });
+        }
+      }
+    });
+  }
 
-        });
+  //开关事件
+  function switchEvent (obj, loopId) {
+    var switchState = $(obj).prop("checked");
+    console.log("the switch state is " + switchState + " , the loop id is : " + loopId);
+    if (switchState) {  //回路通电
+      $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
+    } else {    //回路断电
+      $(this).find("td").eq(2).text(MODELLOOP_STATE[1]);
     }
 
-    $(function () {
-        //刷新回路
-        var modelId = editModel(location.href);
-        flushModelLoop(modelId);
+    //发送指令
+    var modelLoopBit = $(obj).parents("tr").find("td").eq(0).text().trim();
+    var modelLoopState = switchState ? 1 : 0;
+    ajaxRequest("post", "/api/command/configModelStateId",
+    {
+      "loopId": loopId,
+      "modelLoop": (1 << (Number(modelLoopBit) - 1)),
+      "modelLoopState": (modelLoopState << (Number(modelLoopBit) - 1))
+    }, function () {
     });
+  }
+
+  $(function () {
+    //刷新回路
+    var modelId = editModel(location.href);
+    flushModelLoop(modelId);
+  });
 </script>
 
 </body>
