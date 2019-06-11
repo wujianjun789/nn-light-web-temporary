@@ -139,13 +139,13 @@
                         param[o["name"]] = o["value"];
                     }
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
+                    ajaxRequest("post", "/api/roadlighting/addorupdatelamppost", param, function (data) {
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑灯杆型号信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加灯杆型号信息成功！", {icon: 1, time: 3000});
                                 }
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
@@ -158,8 +158,9 @@
 
             //判断是否编辑模式
             var id = editModel(window.location.href);
+            alert(id);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+                ajaxRequest("post", "/api/roadlighting/selectlamppostbyid", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
@@ -170,15 +171,15 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#lamppostModel").val(lightModel.luminaireType);
-                            $("#lampostName").val(lightModel.luminaireName);
-                            $("#high").val(lightModel.ratedVoltage);
-                            $("#lampheadNumber").val(lightModel.ratedElectric);
-                            $("#longitude").val(lightModel.ratedPower);
-                            $("#latitude").val(lightModel.chip);
-                            $("#materima").val(lightModel.luminaireFlux);
-                            $("#land").val(lightModel.chromogeniIndex);
-                            $("#lampheadColor").val(lightModel.grade);
+                            $("#lamppostModel").val(lightModel.lamppostModel);
+                            $("#lampostName").val(lightModel.lampostName);
+                            $("#high").val(lightModel.high);
+                            $("#lampheadNumber").val(lightModel.lampheadNumber);
+                            $("#longitude").val(lightModel.longitude);
+                            $("#latitude").val(lightModel.latitude);
+                            $("#materima").val(lightModel.materima);
+                            $("#land").val(lightModel.land);
+                            $("#lampheadColor").val(lightModel.lampheadColor);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});

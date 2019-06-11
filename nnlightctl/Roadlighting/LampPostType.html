@@ -27,7 +27,7 @@
 <div class="page-container">
     <div class="text-l">
         型号名称：
-        <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
+        <input type="text" name="lampostName" id="lampostName" placeholder="灯杆名称" style="width:250px" class="input-text">
         <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>灯杆型号</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
@@ -90,9 +90,9 @@
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#modelName").val().trim();
+        var searchLightModelName = $("#lampostName").val().trim();
 
-        param["modelName"] = searchLightModelName;
+        param["lampostName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
@@ -106,7 +106,7 @@
             "ordering": false, //设置所有布排序
             "bStateSave": true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listLightModel", param, function (data) {
+                ajaxRequest("post", "/api/roadlighting/listlamppost", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -124,9 +124,9 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 14,
+                    targets: 11,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑灯具型号\', \'addLightType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯杆型号" onclick="edit(\'编辑灯杆型号\', \'addLampPostType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
@@ -160,6 +160,7 @@
     //编辑
     function edit(title, url, id, w, h) {
         layer_show(title, url + "?id=" + id, w, h);
+        alert(id);
     }
 
     /*删除*/
@@ -167,12 +168,15 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/nnlightctlLamppost", transArray({deleteLightModelList : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deletelamppost", transArray({lamppostIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
+                    alert(1);
                     searchLightModel(1);
                 } else {
+                    alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
+
                 }
             }
         });
