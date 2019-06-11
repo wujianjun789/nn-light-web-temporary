@@ -13,6 +13,8 @@
   <link rel="stylesheet" type="text/css" href="../css/common.css" />
   <link rel="stylesheet" type="text/css" href="../css/admin.css" />
   <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+  <link rel="stylesheet" type="text/css" href="../monitor.over/layui/css/layui.css">
+  <link rel="stylesheet" type="text/css" href="../monitor.over/layui/formSelects-v4.css">
 
 </head>
 <body>
@@ -20,27 +22,21 @@
 <article class="page-container">
   <form class="form form-horizontal" id="form-admin-add">
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3 text-c"><span class="c-red">*</span>模块编号：</label>
-      <div class="formControls col-xs-8 col-sm-6">
-        <select class="input-text"  id="loopCode" name="loopCode"></select>
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3 text-r">回路编号：</label>
+      <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">回路编号：</label>
       <div class="formControls col-xs-8 col-sm-6">
         <input type="text" class="input-text" value="" placeholder="回路编号" id="voltage" name="voltage">
         <label id="voltage-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3 text-r">单灯控制器：</label>
+      <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">单灯控制器：</label>
       <div class="formControls col-xs-8 col-sm-6">
-        <select class="input-text" id="electricity" name="electricity"></select>
+        <select id="electricity" name="electricity" xm-select="electricity" xm-select-skin="normal" xm-select-search=""></select>
         <label id="electricity-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
     <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">备注：</label>
+      <label class="form-label col-xs-4 col-sm-3" style="width: 27.333333%">备注：</label>
       <div class="formControls col-xs-8 col-sm-8">
         <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
         <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
@@ -52,12 +48,23 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../monitor.over/layui/layui.js"></script>
+<script type="text/javascript" src="../monitor.over/layui/layui.all.js"></script>
+<script type="text/javascript" src="../monitor.over/layui/formSelects-v4.min.js"></script>
 
 <!--表单验证-->
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
 <script type="text/javascript">
   $(document).ready(function () {
-    var doureg = /^[0-9,.]*$/ //^[-\+]?\d+(\.\d+)?$/;
+    /* 初始化下拉多选插件 */
+    var formSelects = layui.formSelects;
+    formSelects.config('electricity',{//‘单灯控制器’下拉多选配置
+      searchUrl:"../json/tsconfig.json",
+      keyName:"text",
+      keyVal:"val"
+    });
+
+    var doureg = /^[0-9,.]*$/; //^[-\+]?\d+(\.\d+)?$/;
     var numreg = /^\d+$/;
     $("#voltage").blur(function () {
       var a = $("#voltage").val();
@@ -65,24 +72,15 @@
         layer.tips('请输入double类型数字', '#voltage');
         $("#voltage-error").show();
         $(this).val('');
-      } else { $("#voltage-error").hide(); }
+      } else { $("#voltage-error").hide(); }  
     });
     $("#electricity").blur(function () {
       var a = $("#electricity").val();
-      if (!doureg.test(a) || a == "") {
-        layer.tips('请输入double类型数字', '#electricity');
+      if (a == null || a == "") {
         $("#electricity-error").show();
         $(this).val('');
       } else { $("#electricity-error").hide(); }
     });
-    $("#lightCount").blur(function () {
-      var a = $("#lightCount").val();
-      if (!numreg.test(a) || a == "") {
-        layer.tips('请输入byte类型数字', '#lightCount');
-        $("#lightCount-error").show();
-        $(this).val('');
-      } else { $("#lightCount-error").hide(); }
-    })
   });
   var getData = function () {
     var isSuccess = true;

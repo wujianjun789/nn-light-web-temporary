@@ -83,11 +83,10 @@
                     <table id="modelLoopTable" class="table table-border table-bordered">
                         <thead>
                             <tr class="text-c">
-                                <th>集控器编号</th>
                                 <th>开关通道</th>
-                                <th>单灯控制器型号</th>
-                                <th>单灯控制器数量</th>
+                                <th>单灯控制器</th>
                                 <th>备注</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -168,13 +167,13 @@
         
         //添加回路
         function addLoop(title, url, w, h) {
-            
             layer_show(title, url, w, h, function (modelLoop) {
-                
-                if (modelLoop.loopCode == "" || modelLoop.loopCode == undefined) {
-                    layer.msg("请输入回路编号！", { icon: 2, time: 2000 });
-                    return false;
-                }
+//                $.each(modelLoop,function(i,item){
+//                    if (item == "" || item == undefined) {
+//                        layer.msg("请输入必填项！", { icon: 2, time: 2000 });
+//                        return false;
+//                    }
+//                });
 
                 //保存到全局模块回路数组中
                 var index = modelLoopArray.push(modelLoop) - 1;
@@ -184,13 +183,12 @@
 
                 //构造编辑时回路字符参数
                 var urlParam = object2UrlParamStr(modelLoop);
-
+                debugger
                 $('<tr value="'+index+'" class="text-c">\n' +
-                    '<td>'+modelLoop.loopCode+'</td>\n' +
-                    '<td>'+modelLoop.voltage+'</td>\n' +
-                    '<td>'+modelLoop.electricity+'</td>\n' +
-                    '<td>'+modelLoop.lightCount+'</td>\n' +
-                    '<td><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'addLoop.html\', \''+urlParam+'\', \'420\', \'350\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
+                    '<td class="voltage">'+modelLoop.voltage+'</td>\n' +
+                    '<td class="electricity">'+modelLoop.electricity+'</td>\n' +
+                    '<td class="grade">'+modelLoop.grade+'</td>\n' +
+                    '<td class="action"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'addLoop.html\', \''+urlParam+'\', \'540\', \'440\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
                     '</tr>').appendTo($tbody);
             });
         }
@@ -199,23 +197,17 @@
             var index = $(obj).parents("tr").eq(0).attr("value");
 
             layer_show(title, url + "?" + param, w, h, function (modelLoop) {
-                if (modelLoop.loopCode == "" || modelLoop.loopCode == undefined) {
-                    layer.msg("请输入回路编号！", { icon: 2, time: 2000 });
-                    return false;
-                }
                 //更新数组
                 modelLoopArray[index] = modelLoop;
-
                 //构造编辑时回路字符参数
                 var urlParam = object2UrlParamStr(modelLoop);
 
                 //更新表格
                 $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
-                    '<td>'+modelLoop.loopCode+'</td>\n' +
-                    '<td>'+modelLoop.voltage+'</td>\n' +
-                    '<td>'+modelLoop.electricity+'</td>\n' +
-                    '<td>'+modelLoop.lightCount+'</td>\n' +
-                    '<td><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'addLoop.html\', \''+urlParam+'\', \'420\', \'350\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
+                    '<td class="voltage">'+modelLoop.voltage+'</td>\n' +
+                    '<td class="electricity">'+modelLoop.electricity+'</td>\n' +
+                    '<td class="grade">'+modelLoop.grade+'</td>\n' +
+                    '<td class="action"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'addLoop.html\', \''+urlParam+'\', \'540\', \'440\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
                     '</tr>');
             });
         }
