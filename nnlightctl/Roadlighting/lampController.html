@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <title>光照计</title>
+    <title>设备管理 - 单灯控制器</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
@@ -18,7 +18,7 @@
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>
     首页 <span class="c-gray en">&gt;</span>道路照明系统
-    <span class="c-gray en">&gt;</span>光照计
+    <span class="c-gray en">&gt;</span>单灯控制器
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -27,13 +27,13 @@
 <div class="page-container">
     <div class="text-l">
         型号名称：
-        <input type="text" name="photoperiodName" id="photoperiodName" placeholder="型号名称" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>光照计</button>
+        <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>单灯控制器型号</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加光照计型号" onclick="add('添加光照计型号', 'addlampController.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加光照计型号</a>
+                <a class="btn btn-primary radius" data-title="单灯控制器" onclick="add('单灯控制器', 'addLampController.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>单灯控制器</a>
             </span>
     </div>
     <div class="mt-20">
@@ -41,35 +41,21 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>光照计型号</th>
-                <th>光照计名称</th>
+                <th>型号</th>
+                <th>名称</th>
+                <th>额定电压</th>
+                <th>额定电流</th>
                 <th>通讯方式</th>
-                <th>量程</th>
-                <th>精度</th>
-                <th>工作电压</th>
-                <!--<th>工作温度</th>-->
-                <!--<th>工作湿度</th>-->
+                <th>调光方式</th>
+                <th>经度</th>
+                <th>纬度</th>
+                <th>静态功能</th>
+                <th>报警信息</th>
                 <th>备注</th>
                 <th width="120">操作</th>
             </tr>
             </thead>
-            <tbody>
-            <!--<tr class="text-c">
-                <td><input type="checkbox" value="" name=""></td>
-                <td>modelName</td>
-                <td>ratedVoltage</td>
-                <td>ratedElectric</td>
-                <td>ratedPower</td>
-                <td>ledCount</td>
-                <td class="text-l">
-                    <div class="ell" style="width:300px;">两个灯泡串联起来，根据串联分压原理，每个灯泡110V电压，每个灯泡虽然暗一些开关控制连接。</div>
-                </td>
-                <td class="f-14 td-manage" style="background:#fff;">
-                    <a style="text-decoration:none" class="ml-5" onclick="edit('编辑灯具型号', 'addLightType.html', '1', '800', '500')" href="javascript:void(0);" title="编辑灯具型号"><i class="Hui-iconfont">&#xe6df;</i></a>
-                    <a style="text-decoration:none" class="ml-5" onClick="del_one(this, '10001')" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>
-            </tr>-->
-
-            </tbody>
+            <tbody></tbody>
         </table>
     </div>
 </div>
@@ -84,13 +70,18 @@
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
 <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
 <script type="text/javascript">
-    var param = {};
+    var pageNumber = 10;
+    var pageSize = 1;
+    var param = {
+        pageNumber: pageNumber,
+        pageSize: pageSize
+    };
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#photoperiodName").val().trim();
+        var searchLightModelName = $("#modelName").val().trim();
 
-        param["photoperiodName"] = searchLightModelName;
+        param["lampName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
@@ -101,10 +92,13 @@
             "destroy": true,
             "searching": false,
             "autoWidth": true,
-            "ordering": false, //设置所有布排序
-            "bStateSave": true,
+            "ordering": false, //设置所有不排序
+            bPaginate: true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listpotoperiod", param, function (data) {
+                console.log(data);
+                console.log(callback);
+                console.log(settings);
+                ajaxRequest("post", "api/roadlighting/listlampcontroller", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -122,21 +116,25 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 8,
+                    targets: 12,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑灯具型号\', \'addLightType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
-                        { "data": "id" },
-                        { "data": "photoperiodModel", "defaultContent": "" },
-                        { "data": "photoperiodName", "defaultContent": "" },
+                        { "data": "id" },//选择
+                        { "data": "lampName", "defaultContent": "" },//名称
+                        { "data": "lampModel", "defaultContent": "" },
+                        { "data": "ratedVoltage", "defaultContent": "" },
+                        { "data": "ratedCurrent", "defaultContent": "" },
                         { "data": "communicationMode", "defaultContent": "" },
                         { "data": "dimmingMode", "defaultContent": "" },
-                        { "data": "accuracy", "defaultContent": "" },
-                        { "data": "workVoltage", "defaultContent": "" },
+                        { "data": "longitude", "defaultContent": "" },
+                        { "data": "latitude", "defaultContent": "" },
+                        { "data": "staticPower", "defaultContent": "" },
+                        { "data": "alarmMessage", "defaultContent": "" },
                         { "data": "mem", "defaultContent": "" }
             ]
         });
@@ -162,8 +160,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deletephotoperiod", transArray({photoperiodIds : idArray}), function (data) {
-            // contentType: 'application/json;charset=UTF-8';
+        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({deleteLightModelList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);
@@ -202,65 +199,6 @@
             layer.close(index);
         });
     }
-
-    //通过搜索条件分页搜索灯具型号数据
-    //function searchLightModel(pageNumber) {
-    //    //搜索条件
-    //    var searchLightModelName = $("#modelName").val().trim();
-
-    //    //搜索
-    //    var param = {};
-    //    param["modelName"] = searchLightModelName;
-
-    //    debugger;
-    //    ajaxRequest("post", "/api/roadlighting/listLightModel", param, function (data) {
-    //        debugger;
-    //        if (data) {
-    //            if (data.header.code == 1000) {
-    //                var lightModelArray = data.body.data;
-
-    //                //更新表格
-    //                var $tableBody = $("table.table").find("tbody").eq(0);
-    //                $tableBody.empty();
-
-    //                for (var i = 0; i < lightModelArray.length; ++i) {
-    //                    var lightModel = lightModelArray[i];
-    //                    $('<tr class="text-c">\n' +
-    //                        '<td><input type="checkbox" value="'+lightModel.id+'" name=""></td>\n' +
-    //                        '<td>'+lightModel.modelName+'</td>\n' +
-    //                        '<td>'+lightModel.ratedVoltage+'</td>\n' +
-    //                        '<td>'+lightModel.ratedElectric+'</td>\n' +
-    //                        '<td>'+lightModel.ratedPower+'</td>\n' +
-    //                        '<td>'+lightModel.ledCount+'</td>\n' +
-    //                        '<td class="text-l">\n' +
-    //                        '<div class="ell" style="width:300px;">'+lightModel.mem+'</div>\n' +
-    //                        '</td>\n' +
-    //                        '<td class="f-14 td-manage" style="background:#fff;">\n' +
-    //                        '<a style="text-decoration:none" class="ml-5"\n' +
-    //                        'onclick="edit(\'编辑灯具型号\', \'addLightType.html\', \''+lightModel.id+'\', \'800\', \'500\')" href="javascript:void(0);"\n' +
-    //                        'title="编辑灯具型号"><i class="Hui-iconfont">&#xe6df;</i></a>\n' +
-    //                        '<a style="text-decoration:none" class="ml-5" onClick="del_one(this, \''+lightModel.id+'\')"\n' +
-    //                        'href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-    //                        '</tr>').appendTo($tableBody);
-    //                }
-
-    //                //更新分页
-    //                $('.table-sort').dataTable();
-
-    //            } else {
-    //                layer.msg(data.header.msg,{icon:2,time:3000});
-    //            }
-    //        }
-    //    });
-    //}
-
-    //searchLightModel(1);
-
-    ////注册搜索按扭事件
-    //$("#Button1").click(function (event) {
-    //    searchLightModel(1);
-    //});
-
 </script>
 </body>
 </html>
