@@ -25,83 +25,45 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="电表型号" id="electricityModel" name="electricityModel">
+                    <input type="text" class="input-text" value="" placeholder="型号" id="modularModel" name="modularModel">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="电表名称" id="electricityName" name="electricityName">
+                    <input type="text" class="input-text" value="" placeholder="名称" id="modularName" name="modularName">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">电流规格：</label>
-                <div class="formControls col-xs-7 col-sm-8 text-l">
-                    <span class="select-box" style="width:150px;">
-                        <select class="select" name="electricStandards" id="electricStandards" size="1">
-                            <option value="0">请选择通讯方式</option>
-                            <option value="1">RS485</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">电流测试：</label>
-                <div class="formControls col-xs-7 col-sm-8 text-l">
-                    <span class="select-box" style="width:150px;">
-                        <select class="select" name="voltageTest" id="voltageTest" size="1">
-                            <option value="0">请选择量程</option>
-                            <option value="1">0-200000</option>
-                        </select>
-                    </span>
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">有功电能：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="有功电能" id="activeEnergy" name="activeEnergy">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">安装方式：</label>
-                <div class="formControls col-xs-7 col-sm-8 text-l">
-                    <span class="select-box" style="width:150px;">
-                        <select class="select" name="installationMode" id="installationMode" size="1">
-                            <option value="0">请选择安装方式</option>
-                            <option value="1">0-200000</option>
-                        </select>
-                    </span>
+                <label class="form-label col-xs-4 col-sm-3">回路数：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="回路数" id="loopNumber" name="loopNumber">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
-                <div class="formControls col-xs-7 col-sm-8 text-l">
-                    <span class="select-box" style="width:150px;">
-                        <select class="select" name="communityMode" id="communityMode" size="1">
-                            <option value="0">请选择通讯方式</option>
-                            <option value="1">0-200000</option>
-                        </select>
-                    </span>
+                <div class="formControls col-xs-8 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="通讯方式" id="communicationMode" name="communicationMode">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">测量精度：</label>
+                <label class="form-label col-xs-4 col-sm-3">单回路最大电流：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="测量精度" id="measureMode" name="measureMode">
+                    <input type="text" class="input-text" value="" placeholder="单回路最大电流" id="maxElectric" name="maxElectric">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">功率因数：</label>
+                <label class="form-label col-xs-4 col-sm-3">最大负载电流：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="功率因数" id="powerFactor" name="powerFactor">
+                    <input type="text" class="input-text" value="" placeholder="最大负载电流" id="loadElectric" name="loadElectric">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">功耗：</label>
+                <label class="form-label col-xs-4 col-sm-3">安装方式：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="功耗" id="powerWaste" name="powerWaste">
+                    <input type="text" class="input-text" value="" placeholder="安装方式" id="installationMode" name="installationMode">
                 </div>
             </div>
             <div class="row cl">
@@ -171,13 +133,13 @@
                         param[o["name"]] = o["value"];
                     }
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addorupdateelectricitymeter", param, function (data) {
+                    ajaxRequest("post", "/api/roadlighting/addorupdatemodular", param, function (data) {
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑灯杆型号信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加灯具型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加灯杆型号信息成功！", {icon: 1, time: 3000});
                                 }
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
@@ -190,8 +152,9 @@
 
             //判断是否编辑模式
             var id = editModel(window.location.href);
+            // alert(id);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/selectelectricityById", {"id" : id}, function (data) {
+                ajaxRequest("post", "/api/roadlighting/selectmodularbyid", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
@@ -203,16 +166,13 @@
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
                             $("#equipmentNumber").val(lightModel.equipmentNumber);
-                            $("#electricityModel").val(lightModel.electricityModel);
-                            $("#electricityName").val(lightModel.electricityName);
-                            $("#electricStandards").val(lightModel.electricStandards);
-                            $("#voltageTest").val(lightModel.voltageTest);
-                            $("#activeEnergy").val(lightModel.activeEnergy);
+                            $("#modularModel").val(lightModel.modularModel);
+                            $("#modularName").val(lightModel.modularName);
+                            $("#loopNumber").val(lightModel.loopNumber);
+                            $("#communicationMode").val(lightModel.communicationMode);
+                            $("#maxElectric").val(lightModel.maxElectric);
+                            $("#loadElectric").val(lightModel.loadElectric);
                             $("#installationMode").val(lightModel.installationMode);
-                            $("#communityMode").val(lightModel.communityMode);
-                            $("#measureMode").val(lightModel.measureMode);
-                            $("#powerFactor").val(lightModel.powerFactor);
-                            $("#powerWaste").val(lightModel.powerWaste);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});

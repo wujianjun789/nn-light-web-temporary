@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <title>电表型号</title>
+    <title>开关模块</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
@@ -18,7 +18,7 @@
 <nav class="breadcrumb">
     <i class="Hui-iconfont">&#xe67f;</i>
     首页 <span class="c-gray en">&gt;</span>道路照明系统
-    <span class="c-gray en">&gt;</span>电表
+    <span class="c-gray en">&gt;</span>灯具型号
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
        href="javascript:location.replace(location.href);" title="刷新">
         <i class="Hui-iconfont">&#xe68f;</i>
@@ -26,14 +26,14 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        型号名称：
-        <input type="text" name="electricityModel" id="electricityModel" placeholder="电表型号" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>电表型号</button>
+        开关模块：
+        <input type="text" name="lampostName" id="lampostName" placeholder="开关模块" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>开关模块</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加电表" onclick="add('添加电表', 'addElectricityMeter.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加电表</a>
+                <a class="btn btn-primary radius" data-title="添加灯杆型号" onclick="add('添加开关模块', 'addModular.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加开关模块</a>
             </span>
     </div>
     <div class="mt-20">
@@ -42,16 +42,13 @@
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
                 <th>设备编码</th>
-                <th>电表型号</th>
-                <th>电表名称</th>
-                <th>电流规格</th>
-                <th>电流测试</th>
-                <th>有功电能</th>
-                <th>安装方式</th>
+                <th>型号</th>
+                <th>名称</th>
+                <th>回路数</th>
                 <th>通讯方式</th>
-                <th>测量精度</th>
-                <th>功率因数</th>
-                <th>功耗</th>
+                <th>单回路最大电流</th>
+                <th>最大负载电流</th>
+                <th>安装方式</th>
                 <th>备注</th>
                 <th width="120">操作</th>
             </tr>
@@ -91,9 +88,9 @@
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#electricityModel").val().trim();
+        var searchLightModelName = $("#lampostName").val().trim();
 
-        param["electricityModel"] = searchLightModelName;
+        param["lampostName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
@@ -107,7 +104,7 @@
             "ordering": false, //设置所有布排序
             "bStateSave": true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/selectelectricityall", param, function (data) {
+                ajaxRequest("post", "/api/roadlighting/selectmodularall", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -125,9 +122,9 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 13,
+                    targets: 10,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑电表型号" onclick="edit(\'编辑电表\', \'addElectricityMeter.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯杆型号" onclick="edit(\'编辑灯杆型号\', \'addModular.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
@@ -135,16 +132,13 @@
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
                         { "data": "equipmentNumber", "defaultContent": "" },
-                        { "data": "electricityModel", "defaultContent": "" },
-                        { "data": "electricityName", "defaultContent": "" },
-                        { "data": "electricStandards", "defaultContent": "" },
-                        { "data": "voltageTest", "defaultContent": "" },
-                        { "data": "activeEnergy", "defaultContent": "" },
+                        { "data": "modularModel", "defaultContent": "" },
+                        { "data": "modularName", "defaultContent": "" },
+                        { "data": "loopNumber", "defaultContent": "" },
+                        { "data": "communicationMode", "defaultContent": "" },
+                        { "data": "maxElectric", "defaultContent": "" },
+                        { "data": "loadElectric", "defaultContent": "" },
                         { "data": "installationMode", "defaultContent": "" },
-                        { "data": "communityMode", "defaultContent": "" },
-                        { "data": "measureMode", "defaultContent": "" },
-                        { "data": "powerFactor", "defaultContent": "" },
-                        { "data": "powerWaste", "defaultContent": "" },
                         { "data": "mem", "defaultContent": "" }
             ]
         });
@@ -171,12 +165,15 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/delectelectricitymeter", transArray({electricityMeterIds : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deletemodular", transArray({modularIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
+                    alert(1);
                     searchLightModel(1);
                 } else {
+                    alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
+
                 }
             }
         });
