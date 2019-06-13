@@ -59,8 +59,8 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">有功电能：</label>
-                <div class="formControls col-xs-8 col-sm-8">
+                <label class="form-label col-xs-4 col-sm-3">有功电能：(W)</label>
+                <div class="formControls col-xs-4 col-sm-4">
                     <input type="text" class="input-text" value="" placeholder="有功电能" id="activeEnergy" name="activeEnergy">
                 </div>
             </div>
@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="communityMode" id="communityMode" size="1">
@@ -87,20 +87,20 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">测量精度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>测量精度：(S)</label>
+                <div class="formControls col-xs-4 col-sm-4">
                     <input type="text" class="input-text" value="" placeholder="测量精度" id="measureMode" name="measureMode">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">功率因数：</label>
-                <div class="formControls col-xs-8 col-sm-8">
+                <div class="formControls col-xs-4 col-sm-4">
                     <input type="text" class="input-text" value="" placeholder="功率因数" id="powerFactor" name="powerFactor">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">功耗：</label>
-                <div class="formControls col-xs-8 col-sm-8">
+                <label class="form-label col-xs-4 col-sm-3">功耗：(W)</label>
+                <div class="formControls col-xs-4 col-sm-4">
                     <input type="text" class="input-text" value="" placeholder="功耗" id="powerWaste" name="powerWaste">
                 </div>
             </div>
@@ -137,22 +137,23 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    modelName: {
-                        required: true,
-                    },
-                    ratedVoltage: {
+                    equipmentNumber: {
                         required: true,
                         isFloat:true
                     },
-                    ratedElectric: {
+                    electricityModel: {
+                        required: true,
+                        isFloat:true
+                    },
+                    electricityName: {
                         required: true,
                         isFloat: true
                     },
-                    ratedPower: {
+                    communityMode: {
                         required: true,
                         isFloat: true
                     },
-                    ledCount: {
+                    measureMode: {
                         required: true,
                         isNumber:true
                     },

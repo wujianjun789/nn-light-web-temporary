@@ -19,6 +19,12 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光照计型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="光照计型号" id="photoperiodModel" name="photoperiodModel">
@@ -31,7 +37,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="communicationMode" id="communicationMode" size="1">
@@ -102,24 +108,21 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    modelName: {
-                        required: true,
-                    },
-                    ratedVoltage: {
+                    equipmentNumber: {
                         required: true,
                         isFloat:true
                     },
-                    ratedElectric: {
+                    photoperiodModel: {
+                        required: true,
+                        isFloat:true
+                    },
+                    photoperiodName: {
                         required: true,
                         isFloat: true
                     },
-                    ratedPower: {
+                    communicationMode: {
                         required: true,
                         isFloat: true
-                    },
-                    ledCount: {
-                        required: true,
-                        isNumber:true
                     },
                 },
                 onkeyup: false,
@@ -181,6 +184,7 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber);
                             $("#photoperiodModel").val(lightModel.photoperiodModel);
                             $("#photoperiodName").val(lightModel.photoperiodName);
                             $("#communicationMode").val(lightModel.communicationMode);

@@ -41,6 +41,7 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
+                <th>设备编码</th>
                 <th>光照计型号</th>
                 <th>光照计名称</th>
                 <th>通讯方式</th>
@@ -122,7 +123,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 8,
+                    targets: 9,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑光照计型号" onclick="edit(\'编辑光照计型号\', \'addPhotoperiod.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -131,6 +132,7 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
+                        { "data": "equipmentNumber", "defaultContent": "" },
                         { "data": "photoperiodModel", "defaultContent": "" },
                         { "data": "photoperiodName", "defaultContent": "" },
                         { "data": "communicationMode", "defaultContent": "" },
@@ -166,10 +168,10 @@
         ajaxRequest("post", "/api/roadlighting/deletephotoperiod", transArray({photoperiodIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
-                    alert(1);
+                    // alert(1);
                     searchLightModel(1);
                 } else {
-                    alert(2);
+                    // alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
                 }
             }

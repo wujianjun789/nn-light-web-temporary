@@ -99,22 +99,27 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    modelName: {
-                        required: true,
-                    },
-                    ratedVoltage: {
+                    equipmentNumber: {
                         required: true,
                         isFloat:true
                     },
-                    ratedElectric: {
+                    modularModel: {
+                        required: true,
+                        isFloat:true
+                    },
+                    modularName: {
                         required: true,
                         isFloat: true
                     },
-                    ratedPower: {
+                    loopNumber: {
                         required: true,
                         isFloat: true
                     },
-                    ledCount: {
+                    communicationMode: {
+                        required: true,
+                        isNumber:true
+                    },
+                    maxElectric: {
                         required: true,
                         isNumber:true
                     },

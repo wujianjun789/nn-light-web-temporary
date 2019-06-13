@@ -173,10 +173,10 @@
         ajaxRequest("post", "/api/roadlighting/deletelamppost", transArray({lamppostIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
-                    alert(1);
+                    // alert(1);
                     searchLightModel(1);
                 } else {
-                    alert(2);
+                    // alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
 
                 }
