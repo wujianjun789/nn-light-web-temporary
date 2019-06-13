@@ -41,6 +41,7 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
+                <th>设备编码</th>
                 <th>灯杆型号</th>
                 <th>灯杆名称</th>
                 <th>高度</th>
@@ -124,7 +125,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 11,
+                    targets: 12,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯杆型号" onclick="edit(\'编辑灯杆型号\', \'addLampPostType.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -133,6 +134,7 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
+                        { "data": "equipmentNumber", "defaultContent": "" },
                         { "data": "lamppostModel", "defaultContent": "" },
                         { "data": "lampostName", "defaultContent": "" },
                         { "data": "high", "defaultContent": "" },
@@ -160,7 +162,7 @@
     //编辑
     function edit(title, url, id, w, h) {
         layer_show(title, url + "?id=" + id, w, h);
-        alert(id);
+        // alert(id);
     }
 
     /*删除*/
