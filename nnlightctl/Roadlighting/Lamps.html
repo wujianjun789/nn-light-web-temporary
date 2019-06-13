@@ -46,7 +46,7 @@
             <!--<li><a href="javascript:void(0);" onclick="setMappic('设置地图图标', 'setMappic.html', '500', '300')">设置地图图标</a></li>&ndash;&gt;-->
             <!--</ul>-->
             <!--</li>-->
-            <li><a class="btn btn-primary radius mr-10" data-title="添加灯具" onclick="addLamps('添加灯具', 'addLamps.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加灯具</a></li>
+            <li><a class="btn btn-primary radius mr-10" data-title="添加灯具" onclick="addLamps('添加灯具', 'addLamps.html', '800', '600')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加灯具</a></li>
             <!--<li><a class="btn btn-primary radius" data-title="批量添加灯具" onclick="addLampsMore('批量添加灯具', 'addLampsMore.html', '1050', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>批量添加灯具</a></li>-->
         </ul>
 
@@ -103,44 +103,44 @@
 
     //管理灯具
     function lampsManage(title, url, id, w, h) {
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url + "?id=" + id
-        });
-        layer.full(index);
-        //layer_show(title, url + "?id=" + id, w, h);
+        // var index = layer.open({
+        //     type: 2,
+        //     title: title,
+        //     content: url + "?id=" + id
+        // });
+        // layer.full(index);
+        layer_show(title, url + "?id=" + id, w, h);
     }
 
     //批量添加灯具
     function addLampsMore(title, url, w, h) {
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        });
-        layer.full(index);
-        //layer_show(title, url, w, h);
+        // var index = layer.open({
+        //     type: 2,
+        //     title: title,
+        //     content: url
+        // });
+        // layer.full(index);
+        layer_show(title, url, w, h);
     }
     //添加灯具
     function addLamps(title, url, w, h) {
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url
-        });
-        layer.full(index);
-        //layer_show(title, url, w, h);
+        // var index = layer.open({
+        //     type: 2,
+        //     title: title,
+        //     content: url
+        // });
+        // layer.full(index);
+        layer_show(title, url, w, h);
     }
     //编辑灯具
     function editLamps(title, url, id, w, h) {
-        var index = layer.open({
-            type: 2,
-            title: title,
-            content: url + "?id=" + id
-        });
-        layer.full(index);
-        //layer_show(title, url + "?id=" + id, w, h);
+        // var index = layer.open({
+        //     type: 2,
+        //     title: title,
+        //     content: url + "?id=" + id
+        // });
+        // layer.full(index);
+        layer_show(title, url + "?id=" + id, w, h);
     }
 
     /*批量删除灯具*/
