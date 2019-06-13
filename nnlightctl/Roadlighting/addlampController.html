@@ -67,11 +67,11 @@
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经纬度：</label>
-                <div class="formControls col-xs-8 col-sm-7" style="width:593px;">
+                <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text f-l" value="" placeholder="经度" id="longitude" name="longitude"
-                           style="width: 224px;margin-right: 10px;">
+                           style="width: 184.9px;margin-right: 10px;">
                     <input type="text" class="input-text f-l" value="" placeholder="纬度" id="latitude" name="latitude"
-                           style="width: 224px;margin-right: 10px;">
+                           style="width: 184.9px;margin-right: 10px;">
                     <a class="f-l btn btn-primary radius" href="javascript:void(0);" data-title="坐标选择"
                        onclick="site_add('坐标选择', '../Project/Site-Select.html', '700', '600')"
                        style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
@@ -184,16 +184,21 @@
             //判断是否编辑模式
             var id = editModel(window.location.href);
             if (id) {
-                ajaxRequest("post", "api/roadlighting/addorupdatelampcontroller", {"id" : id}, function (data) {
+                ajaxRequest("post", "api/roadlighting/selectbyidlampcontroller", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
                             //刷新表单
-                            $("#modelName").val(lightModel.modelName);
+                            $("#lampName").val(lightModel.lampName);
+                            $("#lampModel").val(lightModel.lampModel);
                             $("#ratedVoltage").val(lightModel.ratedVoltage);
-                            $("#ratedElectric").val(lightModel.ratedElectric);
-                            $("#ratedPower").val(lightModel.ratedPower);
-                            $("#ledCount").val(lightModel.ledCount);
+                            $("#ratedCurrent").val(lightModel.ratedCurrent);
+                            $("#communicationMode").val(lightModel.communicationMode);
+                            $("#dimmingMode").val(lightModel.dimmingMode);
+                            $("#longitude").val(lightModel.longitude);
+                            $("#latitude").val(lightModel.latitude);
+                            $("#staticPower").val(lightModel.staticPower);
+                            $("#alarmMessage").val(lightModel.alarmMessage);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});

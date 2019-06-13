@@ -1,0 +1,44 @@
+{
+  "header":{"msg":"成功","code":"1000"},
+  "body":{"total":2,"data":[
+    {"id":1,"name":"首页","subMenuViewList":[],"url":""},
+    {"id":2,"name":"用户管理","subMenuViewList":[
+      {"id":4,"name":"部门岗位","subMenuViewList":[],"url":"User/Department.html"},
+      {"id":5,"name":"用户列表","subMenuViewList":[],"url":"User/UserList.html"},
+      {"id":6,"name":"在线用户","subMenuViewList":[],"url":"User/OnlineUser.html"},
+      {"id":7,"name":"项目归属","subMenuViewList":[],"url":"User/Belong.html"},
+      {"id":8,"name":"操作日志","subMenuViewList":[],"url":"User/Index.html"}
+    ],"url":""},
+    {"id":9,"name":"项目管理","subMenuViewList":[
+      {"id":10,"name":"项目总览","subMenuViewList":[],"url":"Project/Index.html"},
+      {"id":11,"name":"项目列表","subMenuViewList":[],"url":"Project/OverView.html"},
+      {"id":12,"name":"全球地区","subMenuViewList":[],"url":"Project/GlobalRegion.html"}
+    ],"url":""},
+    {"id":13,"name":"道路照明系统","subMenuViewList":[
+      {"id":15,"name":"总览","subMenuViewList":[],"url":"Roadlighting/EquipmentType.html"},
+      {"id":16,"name":"设备管理","subMenuViewList":[],"url":"Roadlighting/LightType.html"},
+      {"id":17,"name":"区域管理","subMenuViewList":[],"url":"Roadlighting/AreaAdmin.html"},
+      {"id":27,"name":"控制柜部署","subMenuViewList":[],"url":"Roadlighting/EleBox.html"},
+      {"id":28,"name":"灯具部署","subMenuViewList":[],"url":"Roadlighting/Lamps.html"}
+    ],"url":""},
+    {"id":18,"name":"Gis地理信息系统","subMenuViewList":[
+      {"id":19,"name":"项目地理信息","subMenuViewList":[],"url":"Gisservice/Project.html"}
+    ],"url":""},
+    {"id":21,"name":"能耗分析","subMenuViewList":[
+      {"id":22,"name":"能耗分析","subMenuViewList":[],"url":"Engery/Analyze.html"},
+      {"id":23,"name":"能耗监测","subMenuViewList":[],"url":"Engery/EnergyMonitor.html"},
+      {"id":24,"name":"能耗报表","subMenuViewList":[],"url":"Engery/EnergyReport.html"},
+      {"id":26,"name":"终端信号日志","subMenuViewList":[],"url":"Engery/Analyzelog.html"}
+      ],"url":""}
+    ]
+  }
+}
+
+
+
+
+
+
+
+
+

@@ -119,8 +119,8 @@
   //刷新菜单
   function flushMenu () {
     $("#menuContain").empty();
-    ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
-      console.log(data)
+    ajaxRequest("post", "/api/login/getStaticMenu", {}, function (data) {
+      console.log(data);
       if (data) {
         if (data.header.code == 1000) {
           var menuArray = data.body.data;
