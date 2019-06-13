@@ -17,7 +17,8 @@
 <body>
 <header class="admintop">
     <div class="adminnav">
-        <p class="logotit"><span class="pl10 wh f14"><a href="Index.html"><img src="bg/new/logo-word.png" class="logo"/></a></span></p>
+        <p class="logotit"><span class="pl10 wh f14"><a href="Index.html"><img src="bg/new/logo-word.png" class="logo"/></a></span>
+        </p>
         <p class="user"><a href="javascript:void(0)" ref="0" id="changepassword"><span id="username">系统管理员</span></a>
             <a id="btnLogout" href="#" class="red pl20 f14" title="注销登录"><img src="bg/new/logout.png"></a></p>
     </div>
@@ -97,59 +98,198 @@
       'class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>\n';
 
       var subMenuList = menu.subMenuViewList;
-      if (subMenuList && subMenuList.length > 0) {
-        menuHtml += '<dd class="pl15">\n' +
-        '                <ul>';
 
+      if (subMenuList && subMenuList.length > 0) {
+        menuHtml += '<dd class="pl15"><ul>';
         for (var i = 0; i < subMenuList.length; ++i) {
           var subMenu = subMenuList[i];
-
-          menuHtml += '<li><a data-href="' + subMenu.url + '" data-title="' + subMenu.name + '" href="javascript:void(0)">' + subMenu.name + '</a></li>';
+          var Smenu = subMenuList[i].subMenuViewList
+          if (Smenu.length) {
+            menuHtml += '<li><a data-href="' + Smenu[0].url + '" data-title="' + Smenu[0].name + '" href="javascript:void(0)" disabled>' + subMenu.name + '<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>';
+          } else {
+            menuHtml += '<li><a data-href="' + subMenu.url + '" data-title="' + subMenu.name + '" href="javascript:void(0)">' + subMenu.name;
+          }
+          for (var j = 0; j < Smenu.length; j++) {
+            menuHtml += '<p class="s-menu"><a data-href="' + Smenu[j].url + '" data-title="' + Smenu[j].name + '" href="javascript:void(0)">' + Smenu[j].name + '</a></p>'
+          }
+          menuHtml += '</a></li>';
         }
-
-        menuHtml += '</ul>\n' +
-        '            </dd>';
+        menuHtml += '</ul></dd>';
       }
-
       menuHtml += '</dl>';
     }
     $(menuHtml).appendTo($menu);
+    $('.Hui-aside .menu_dropdown dd li i').click(function (e) {
+      e.stopPropagation()
+      $(this).parent().toggleClass('selected')
+      $(this).parent().siblings('.s-menu').slideToggle()
+    })
   }
 
   //刷新菜单
   function flushMenu () {
     $("#menuContain").empty();
-    ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
-      console.log(data)
-      if (data) {
-        if (data.header.code == 1000) {
-          var menuArray = data.body.data;
-          for (var i = 0; i < menuArray.length; ++i) {
-            var menu = menuArray[i];
-            addMenu(menu);
-          }
-          //注册菜单事件
-          $(".nav-toggle").click(function () {
-            $(".Hui-aside").slideToggle();
-          });
-          $(".Hui-aside").on("click", ".menu_dropdown dd li a", function () {
-            if ($(window).width() < 768) {
-              $(".Hui-aside").slideToggle();
+    var menu = {
+      "id": 13,
+      "name": "道路照明系统",
+      "subMenuViewList": [
+        {
+          "id": 15,
+          "name": "总览",
+          "subMenuViewList": [],
+          "url": "Roadlighting/EquipmentType.html"
+        },
+        {
+          "id": 16,
+          "name": "设备管理",
+          "subMenuViewList": [
+            {
+              "id": 29,
+              "name": "电表",
+              "subMenuViewList": [],
+              "url": "Roadlighting/electricityMeter.html"
+            },
+            {
+              "id": 30,
+              "name": "集中控制器",
+              "subMenuViewList": [],
+              "url": "Roadlighting/centralizeController.html"
+            },
+            {
+              "id": 31,
+              "name": "开关模块",
+              "subMenuViewList": [],
+              "url": "Roadlighting/SwitchModule.html"
+            },
+            {
+              "id": 32,
+              "name": "单灯控制器",
+              "subMenuViewList": [],
+              "url": "Roadlighting/lampController.html"
+            },
+            {
+              "id": 34,
+              "name": "光照计",
+              "subMenuViewList": [],
+              "url": "Roadlighting/photoperiod.html"
+            },
+            {
+              "id": 35,
+              "name": "控制柜",
+              "subMenuViewList": [],
+              "url": "Roadlighting/EleBoxAdmin.htmll"
+            },
+            {
+              "id": 36,
+              "name": "灯具",
+              "subMenuViewList": [],
+              "url": "Roadlighting/LightType.html"
+            },
+            // {
+            //   "id": 39,
+            //   "name": "控制柜",
+            //   "subMenuViewList": [],
+            //   "url": "Roadlighting/EleBoxDebug.html"
+            // },
+            // {
+            //   "id": 40,
+            //   "name": "单灯控制器",
+            //   "subMenuViewList": [],
+            //   "url": "Roadlighting/SingleLampController.html"
+            // },
+            {
+              "id": 41,
+              "name": "灯杆",
+              "subMenuViewList": [],
+              "url": "Roadlighting/LampPostType.html"
             }
-          });
-          /*左侧菜单*/
-          $(".Hui-aside").Huifold({
-            titCell: '.menu_dropdown dl dt',
-            mainCell: '.menu_dropdown dl dd',
-          });
-
-          /*选项卡导航*/
-          $(".Hui-aside").on("click", ".menu_dropdown a", function () {
-            Hui_admin_tab(this);
-          });
+          ],
+          "url": "Roadlighting/DeviceManagement.html"
+        },
+        {
+          "id": 17,
+          "name": "设备部署",
+          "subMenuViewList": [
+            {
+              "id": 37,
+              "name": "控制柜部署",
+              "subMenuViewList": [],
+              "url": "Roadlighting/EleBox.html"
+            },
+            {
+              "id": 38,
+              "name": "灯具部署",
+              "subMenuViewList": [],
+              "url": "Roadlighting/LampsDeploy.html"
+            }
+          ],
+          "url": "Roadlighting/EquipmentDeployment.html"
+        },
+        {
+          "id": 27,
+          "name": "设备调试",
+          "subMenuViewList": [],
+          "url": "Roadlighting/EquipmentCommission.html"
+        },
+        {
+          "id": 28,
+          "name": "设备维护升级",
+          "subMenuViewList": [],
+          "url": "Roadlighting/Upgrade.html"
         }
+      ],
+      "url": ""
+    }
+    addMenu(menu)
+    $(".nav-toggle").click(function () {
+      $(".Hui-aside").slideToggle();
+    });
+    $(".Hui-aside").on("click", ".menu_dropdown dd li a", function () {
+      if ($(window).width() < 768) {
+        $(".Hui-aside").slideToggle();
       }
     });
+    /*左侧菜单*/
+    $(".Hui-aside").Huifold({
+      titCell: '.menu_dropdown dl dt',
+      mainCell: '.menu_dropdown dl dd',
+    });
+
+    /*选项卡导航*/
+    $(".Hui-aside").on("click", ".menu_dropdown a", function () {
+      Hui_admin_tab(this);
+    });
+    // ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
+    //   console.log(data)
+    //   if (data) {
+    //     if (data.header.code == 1000) {
+    //       var menuArray = data.body.data;
+    //       for (var i = 0; i < menuArray.length; ++i) {
+    //         var menu = menuArray[i];
+    //         addMenu(menu);
+    //       }
+    //       //注册菜单事件
+    //       $(".nav-toggle").click(function () {
+    //         $(".Hui-aside").slideToggle();
+    //       });
+    //       $(".Hui-aside").on("click", ".menu_dropdown dd li a", function () {
+    //         if ($(window).width() < 768) {
+    //           $(".Hui-aside").slideToggle();
+    //         }
+    //       });
+    //       /*左侧菜单*/
+    //       $(".Hui-aside").Huifold({
+    //         titCell: '.menu_dropdown dl dt',
+    //         mainCell: '.menu_dropdown dl dd',
+    //       });
+    //
+    //       /*选项卡导航*/
+    //       $(".Hui-aside").on("click", ".menu_dropdown a", function () {
+    //         Hui_admin_tab(this);
+    //       });
+    //     }
+    //   }
+    // });
   }
 
   $("#changepassword").click(function () {
