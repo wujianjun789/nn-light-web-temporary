@@ -82,7 +82,7 @@
     height: 40px;
 }
 .Hui-aside .menu_dropdown dd li i{
-    padding: 10px;
+    padding:0 10px;
 }
 /*选项卡导航*/
 .Hui-tabNav-wp{position:relative; height:35px;overflow:hidden}
