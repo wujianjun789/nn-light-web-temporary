@@ -26,9 +26,9 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        开关模块：
-        <input type="text" name="lampostName" id="lampostName" placeholder="开关模块" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>开关模块</button>
+        开关模块型号：
+        <input type="text" name="modularModel" id="modularModel" placeholder="开关模块型号" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
@@ -88,9 +88,9 @@
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#lampostName").val().trim();
+        var searchLightModelName = $("#modularModel").val().trim();
 
-        param["lampostName"] = searchLightModelName;
+        param["modularModel"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);

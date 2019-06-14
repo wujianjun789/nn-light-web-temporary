@@ -26,9 +26,9 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        型号名称：
-        <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>光照计</button>
+        光照计型号：
+        <input type="text" name="photoperiodModel" id="photoperiodModel" placeholder="光照计型号" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
@@ -89,9 +89,9 @@
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#modelName").val().trim();
+        var searchLightModelName = $("#photoperiodModel").val().trim();
 
-        param["modelName"] = searchLightModelName;
+        param["photoperiodModel"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
