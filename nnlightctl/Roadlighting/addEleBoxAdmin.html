@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加控制柜型号</title>
+    <title>设备管理-控制柜-添加控制柜型号</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -18,9 +18,15 @@
     <article class="page-container">
         <form class="form form-horizontal" id="form-admin-add">
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜编码：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="控制柜编码" id="equipmentNumber" name="equipmentNumber">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="控制柜型号" id="eleboxModel" name="eleboxModel">
+                    <input type="text" class="input-text" value="" placeholder="控制柜型号" id="eleboxMode" name="eleboxMode">
                 </div>
             </div>
             <div class="row cl">
@@ -29,18 +35,18 @@
                     <input type="text" class="input-text" value="" placeholder="控制柜名称" id="eleboxName" name="eleboxName">
                 </div>
             </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>
-                <div class="formControls col-xs-7 col-sm-8">
-                    <select class="input-text" placeholder="所属项目" id="subordinateProjects" name="subordinateProjects">
-                      <option value="3213">阿萨德</option>
-                      <option value="312">第三次</option>
-                      <option value="13">按顺序</option>
-                      <option value="44">uuu</option>
-                    </select>
-                    
-                </div>
-            </div>
+            <!--<div class="row cl">-->
+                <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>-->
+                <!--<div class="formControls col-xs-7 col-sm-8">-->
+                    <!--<select class="input-text" placeholder="所属项目" id="subordinateProjects" name="subordinateProjects">-->
+                      <!--<option value="3213">阿萨德</option>-->
+                      <!--<option value="312">第三次</option>-->
+                      <!--<option value="13">按顺序</option>-->
+                      <!--<option value="44">uuu</option>-->
+                    <!--</select>-->
+                    <!---->
+                <!--</div>-->
+            <!--</div>-->
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经纬度：</label>
                 <div class="formControls col-xs-8 col-sm-7" style="width:593px;">
@@ -53,28 +59,16 @@
                        style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
                 </div>
             </div>
-            <!-- <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="经度" id="longitude" name="longitude">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>纬度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="纬度" id="latitude" name="latitude">
-                </div>
-            </div> -->
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">材质：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="材质" id="materialQuality" name="materialQuality">
+                    <input type="text" class="input-text" value="" placeholder="材质" id="eleboxMaterial" name="eleboxMaterial">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">外观颜色：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="外观颜色" id="AppearanceColors" name="AppearanceColors">
+                    <input type="text" class="input-text" value="" placeholder="外观颜色" id="eleboxColors" name="eleboxColors">
                 </div>
             </div>
             <div class="row cl">
@@ -86,7 +80,7 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
+                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
                 </div>
             </div>
@@ -116,23 +110,19 @@
             $("#form-admin-add").validate({
                 rules: {
                     eleboxModel: {
-                        required: true,
+                        required: true
                     },
                     eleboxName: {
-                        required: true,
-//                        isFloat:true
+                        required: true
                     },
-                    subordinateProjects: {
-                        required: true,
-//                        isFloat: true
+                    eleboxMaterial: {
+                        required: true
                     },
-                    longitude: {
-                        required: true,
-//                        isFloat: true
+                    eleboxColors: {
+                        required: true
                     },
-                    latitude: {
-                        required: true,
-//                        isNumber:true
+                    equipmentNumber: {
+                        required: true
                     }
                 },
                 onkeyup: false,
@@ -148,7 +138,7 @@
                         param[o["name"]] = o["value"];
                     }
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
+                    ajaxRequest("post", "api/roadlighting/addorupdateelebox", param, function (data) {
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
@@ -156,29 +146,33 @@
                                 } else {
                                     layer.msg("添加控制柜信息成功！", {icon: 1, time: 3000});
                                 }
+                                ResetWindow();
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
                             }
                         }
                     });
-                    ResetWindow();
                 }
             });
 
             //判断是否编辑模式
             var id = editModel(window.location.href);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+                ajaxRequest("post", "api/roadlighting/selecteleboxbyid", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
                             //刷新表单
-                            $("#modelName").val(lightModel.modelName);
-                            $("#ratedVoltage").val(lightModel.ratedVoltage);
-                            $("#ratedElectric").val(lightModel.ratedElectric);
-                            $("#ratedPower").val(lightModel.ratedPower);
-                            $("#ledCount").val(lightModel.ledCount);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#eleboxMode").val(lightModel.eleboxMode);
+                            $("#eleboxName").val(lightModel.eleboxName);
+                            $("#longitude").val(lightModel.longitude);
+                            $("#latitude").val(lightModel.latitude);
+                            $("#eleboxMaterial").val(lightModel.eleboxMaterial);
+                            $("#eleboxColors").val(lightModel.eleboxColors);
+                            $("#eleboxSize").val(lightModel.eleboxSize);
                             $("#mem").val(lightModel.mem);
+
                         } else {
                             layer.msg(data.header.msg, {icon : 2});
                         }
