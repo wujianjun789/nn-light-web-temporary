@@ -8,7 +8,7 @@
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <title>集中控制器</title>
+    <title>设备管理-集中控制器</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
@@ -41,6 +41,7 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
+                <th>编码</th>
                 <th>型号</th>
                 <th>名称</th>
                 <th>经度</th>
@@ -72,13 +73,15 @@
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
 <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
 <script type="text/javascript">
-    var param = {};
+    var param = {
+        pageNumber: 1, //当期页数
+        pageSize: 10 //默认每页展示条数
+    };
+    //加载DOM完成
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#modelName").val().trim();
-
-        param["modelName"] = searchLightModelName;
+        param["centralizeName"] = $("#modelName").val().trim();
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
@@ -90,9 +93,8 @@
             "searching": false,
             "autoWidth": true,
             "ordering": false, //设置所有布排序
-            "bStateSave": true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listLightModel", param, function (data) {
+                ajaxRequest("post", "api/roadlighting/listCentralizeController", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -110,39 +112,34 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 14,
+                    targets: 15,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addCentralizeController.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addCentralizeController.html\', \'' + row.id + '\', \'900\', \'700\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
-                        { "data": "id" },
-                        { "data": "centralizeModel", "defaultContent": "" },
-                        { "data": "centralizeName", "defaultContent": "" },
-                        { "data": "longitude", "defaultContent": "" },
-                        { "data": "latitude", "defaultContent": "" },
-                        { "data": "doChannel", "defaultContent": "" },
-                        { "data": "diChannel", "defaultContent": "" },
-                        { "data": "switchChannel", "defaultContent": "" },
-                        { "data": "voltageChannel", "defaultContent": "" },
-                        { "data": "electricChannel", "defaultContent": "" },
-                        { "data": "testChannel", "defaultContent": "" },
-                        { "data": "upChannel", "defaultContent": "" },
-                        { "data": "downChannel", "defaultContent": "" },
-                        { "data": "mem", "defaultContent": "" }
+                { "data": "id" },
+                { "data": "equipmentNumber", "defaultContent": "" },
+                { "data": "centralizeModel", "defaultContent": "" },
+                { "data": "centralizeName", "defaultContent": "" },
+                { "data": "longitude", "defaultContent": "" },
+                { "data": "latitude", "defaultContent": "" },
+                { "data": "doChannel", "defaultContent": "" },
+                { "data": "diChannel", "defaultContent": "" },
+                { "data": "switchChannel", "defaultContent": "" },
+                { "data": "voltageChannel", "defaultContent": "" },
+                { "data": "electricChannel", "defaultContent": "" },
+                { "data": "testChannel", "defaultContent": "" },
+                { "data": "upChannel", "defaultContent": "" },
+                { "data": "downChannel", "defaultContent": "" },
+                { "data": "mem", "defaultContent": "" }
             ]
         });
     }
     //增加
     function add(title, url, w, h) {
-        // var index = layer.open({
-        //     type: 2,
-        //     title: title,
-        //     content: url
-        // });
-       //  layer.full(index);
         layer_show(title, url, w, h);
     }
 
@@ -156,7 +153,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({deleteLightModelList : idArray}), function (data) {
+        ajaxRequest("post", "api/roadlighting/deleteCentralizeController", transArray({centralizeControllerIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);

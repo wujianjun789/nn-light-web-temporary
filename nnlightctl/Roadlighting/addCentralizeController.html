@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加灯具型号</title>
+    <title>添加集中控制器</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -18,93 +18,83 @@
     <article class="page-container">
         <form class="form form-horizontal" id="form-admin-add">
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>集中控器型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="集中控器型号" id="eleboxModel" name="eleboxModel">
+                    <input type="text" class="input-text" value="" placeholder="集中控器型号" id="centralizeModel" name="centralizeModel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>集中控制器名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="集中控制器名称" id="eleboxName" name="eleboxName">
+                    <input type="text" class="input-text" value="" placeholder="集中控制器名称" id="centralizeName" name="centralizeName">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经纬度：</label>
                 <div class="formControls col-xs-8 col-sm-7" style="width:593px;">
-                    <input type="text" class="input-text f-l" value="" placeholder="经度" id="longitude" name="longitude"
-                           style="width: 218px;margin-right: 10px;">
-                    <input type="text" class="input-text f-l" value="" placeholder="纬度" id="latitude" name="latitude"
-                           style="width: 218px;margin-right: 10px;">
-                    <a class="f-l btn btn-primary radius" href="javascript:void(0);" data-title="坐标选择"
-                       onclick="site_add('坐标选择', '../Project/Site-Select.html', '700', '600')"
-                       style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
+                    <input type="text" class="input-text f-l" value="" placeholder="经度" id="longitude" name="longitude" style="width: 218px;margin-right: 10px;">
+                    <input type="text" class="input-text f-l" value="" placeholder="纬度" id="latitude" name="latitude" style="width: 218px;margin-right: 10px;">
+                    <a class="f-l btn btn-primary radius" href="javascript:void(0);" data-title="坐标选择" onclick="site_add('坐标选择', '../Project/Site-Select.html', '700', '600')" style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
                 </div>
             </div>
-            <!-- <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经度：</label>
-                <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="经度" id="subordinateProjects" name="subordinateProjects">
-                </div>
-            </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>纬度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="纬度" id="longitude" name="longitude">
-                </div>
-            </div> -->
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">DO通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="DO通道" id="latitude" name="latitude">
+                    <input type="text" class="input-text" value="" placeholder="DO通道" id="doChannel" name="doChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">交流ID通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="交流ID通道" id="materialQuality" name="materialQuality">
+                    <input type="text" class="input-text" value="" placeholder="交流ID通道" id="diChannel" name="diChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开关量ID通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="开关量ID通道" id="AppearanceColors" name="AppearanceColors">
+                    <input type="text" class="input-text" value="" placeholder="开关量ID通道" id="switchChannel" name="switchChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">电压检测通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="电压检测通道" id="eleboxSize" name="eleboxSize">
+                    <input type="text" class="input-text" value="" placeholder="电压检测通道" id="voltageChannel" name="voltageChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">电流检测通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="电流检测通道" id="eleboxSize" name="eleboxSize">
+                    <input type="text" class="input-text" value="" placeholder="电流检测通道" id="electricChannel" name="electricChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">漏电检测通道：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="漏电检测通道" id="eleboxSize" name="eleboxSize">
+                    <input type="text" class="input-text" value="" placeholder="漏电检测通道" id="testChannel" name="testChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上行通讯接口：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="上行通讯接口" id="eleboxSize" name="eleboxSize">
+                    <input type="text" class="input-text" value="" placeholder="上行通讯接口" id="upChannel" name="upChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>下行通讯接口：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="下行通讯接口" id="eleboxSize" name="eleboxSize">
+                    <input type="text" class="input-text" value="" placeholder="下行通讯接口" id="downChannel" name="downChannel">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
+                    <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
                     <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
                 </div>
             </div>
@@ -138,7 +128,7 @@
                     },
                     centralizeName: {
                         required: true,
-                        isFloat:true
+//                        isFloat:true
                     },
                     longitude: {
                         required: true,
@@ -150,15 +140,15 @@
                     },
                     switchChannel: {
                         required: true,
-                        isFloat: true
+//                        isFloat: true
                     },
                     upChannel: {
                         required: true,
-                        isFloat: true
+//                        isFloat: true
                     },
                     downChannel: {
                         required: true,
-                        isFloat: true
+//                        isFloat: true
                     }
                 },
                 onkeyup: false,
@@ -174,7 +164,8 @@
                         param[o["name"]] = o["value"];
                     }
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
+                    ajaxRequest("post","api/roadlighting/addorupdatecentralizecontroller" , param, function (data) {
+                        console.log(data);
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
@@ -182,29 +173,38 @@
                                 } else {
                                     layer.msg("添加集中控制器信息成功！", {icon: 1, time: 3000});
                                 }
+                                ResetWindow();
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
                             }
                         }
                     });
-                    ResetWindow();
+
                 }
             });
 
             //判断是否编辑模式
             var id = editModel(window.location.href);
-            console.log(id)
+            console.log(id);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+                ajaxRequest("post", "api/roadlighting/selectbyidcentralizecontroller", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
                             //刷新表单
-                            $("#modelName").val(lightModel.modelName);
-                            $("#ratedVoltage").val(lightModel.ratedVoltage);
-                            $("#ratedElectric").val(lightModel.ratedElectric);
-                            $("#ratedPower").val(lightModel.ratedPower);
-                            $("#ledCount").val(lightModel.ledCount);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#centralizeModel").val(lightModel.centralizeModel);
+                            $("#centralizeName").val(lightModel.centralizeName);
+                            $("#longitude").val(lightModel.longitude);
+                            $("#latitude").val(lightModel.latitude);
+                            $("#doChannel").val(lightModel.doChannel);
+                            $("#diChannel").val(lightModel.diChannel);
+                            $("#switchChannel").val(lightModel.switchChannel);
+                            $("#voltageChannel").val(lightModel.voltageChannel);
+                            $("#electricChannel").val(lightModel.electricChannel);
+                            $("#testChannel").val(lightModel.testChannel);
+                            $("#upChannel").val(lightModel.upChannel);
+                            $("#downChannel").val(lightModel.downChannel);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});
@@ -227,10 +227,10 @@
             btn: ['确定', '关闭'],
             yes: function (index) {
               var body = layer.getChildFrame('body', index);
-              var lng = body.find('#lng').val()
-              var lat = body.find('#lat').val()
-              $('#longitude').val(lng)
-              $('#latitude').val(lat)
+              var lng = body.find('#lng').val();
+              var lat = body.find('#lat').val();
+              $('#longitude').val(lng);
+              $('#latitude').val(lat);
               //最后关闭弹出层
               layer.close(index);
             },
@@ -238,12 +238,8 @@
               // 右上角关闭回调
             }
           });
-          // layer_show(title, url, w, h, function (layer) {
-          //   console.log(layer)
-          // });
         }  
     </script>
-    <!--/请在上方写此页面业务相关的脚本-->
 </body>
 
 </html>

@@ -41,6 +41,7 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
+                <th>编码</th>
                 <th>型号</th>
                 <th>名称</th>
                 <th>额定电压</th>
@@ -70,11 +71,9 @@
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
 <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
 <script type="text/javascript">
-    var pageNumber = 10;
-    var pageSize = 1;
     var param = {
-        pageNumber: pageNumber,
-        pageSize: pageSize
+//        pageNumber: 1, //当期页数
+//        pageSize: 10 //默认每页展示条数
     };
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
@@ -95,9 +94,6 @@
             "ordering": false, //设置所有不排序
             bPaginate: true,
             "ajax": function (data, callback, settings) {
-                console.log(data);
-                console.log(callback);
-                console.log(settings);
                 ajaxRequest("post", "api/roadlighting/listlampcontroller", param, function (data) {
                     //封装返回数据
                     var returnData = {};
@@ -116,21 +112,40 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 12,
+                    targets: 13,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'900\', \'710\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },//选择
+                        { "data": "equipmentNumber", "defaultContent": "" },
                         { "data": "lampName", "defaultContent": "" },//名称
                         { "data": "lampModel", "defaultContent": "" },
                         { "data": "ratedVoltage", "defaultContent": "" },
                         { "data": "ratedCurrent", "defaultContent": "" },
-                        { "data": "communicationMode", "defaultContent": "" },
-                        { "data": "dimmingMode", "defaultContent": "" },
+                        { "data": "communicationMode", "defaultContent": "","render":function(data, type, full, meta){
+                            data = parseInt(data);
+                            switch(data){
+                                case 1 : return 'NB-IoT';break;
+                                case 2 : return '4G';break;
+                                case 3 : return 'Zigbee';break;
+                                case 4 : return 'PLC';break;
+                                case 5 : return 'RS485';break;
+                                case 6 : return 'GPRS';break;
+                            }
+                        }},
+                        { "data": "dimmingMode", "defaultContent": "","render":function(data, type, full, meta){
+                            data = parseInt(data);
+                            switch(data){
+                                case 1 : return 'PWM';break;
+                                case 2 : return '0-10V';break;
+                                case 3 : return 'YUART';break;
+                                case 4 : return 'DALI';break;
+                            }
+                        }},
                         { "data": "longitude", "defaultContent": "" },
                         { "data": "latitude", "defaultContent": "" },
                         { "data": "staticPower", "defaultContent": "" },
@@ -141,12 +156,6 @@
     }
     //增加
     function add(title, url, w, h) {
-        // var index = layer.open({
-        //     type: 2,
-        //     title: title,
-        //     content: url
-        // });
-       //  layer.full(index);
         layer_show(title, url, w, h);
     }
 
@@ -160,7 +169,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({deleteLightModelList : idArray}), function (data) {
+        ajaxRequest("post", "api/roadlighting/deletelampcontroller", transArray({lampControllerIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);

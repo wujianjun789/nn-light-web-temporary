@@ -18,9 +18,15 @@
     <article class="page-container">
         <form class="form form-horizontal" id="form-admin-add">
             <div class="row cl">
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>编码：</label>
+                <div class="formControls col-xs-7 col-sm-8">
+                    <input type="text" class="input-text" value="" placeholder="编号" id="equipmentNumber" name="equipmentNumber">
+                </div>
+            </div>
+            <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="单灯控制器型号" id="lampModel" name="eleboxModel">
+                    <input type="text" class="input-text" value="" placeholder="单灯控制器型号" id="lampModel" name="lampModel">
                 </div>
             </div>
             <div class="row cl">
@@ -45,12 +51,12 @@
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <select class="input-text" id="communicationMode" name="communicationMode">
-                        <option value="NB-IoT">NB-IoT</option>
-                        <option value="4G">4G</option>
-                        <option value="Zigbee">Zigbee</option>
-                        <option value="PLC">PLC</option>
-                        <option value="RS485">RS485</option>
-                        <option value="GPRS">GPRS</option>
+                        <option value="1">NB-IoT</option>
+                        <option value="2">4G</option>
+                        <option value="3">Zigbee</option>
+                        <option value="4">PLC</option>
+                        <option value="5">RS485</option>
+                        <option value="6">GPRS</option>
                     </select>
                 </div>
             </div>
@@ -58,10 +64,10 @@
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>调光方式：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <select class="input-text" id="dimmingMode" name="dimmingMode">
-                        <option value="PWM">PWM</option>
-                        <option value="0-10V">0-10V</option>
-                        <option value="YUART">YUART</option>
-                        <option value="DALI">DALI</option>
+                        <option value="1">PWM</option>
+                        <option value="2">0-10V</option>
+                        <option value="3">YUART</option>
+                        <option value="4">DALI</option>
                     </select>
                 </div>
             </div>
@@ -185,11 +191,13 @@
             var id = editModel(window.location.href);
             if (id) {
                 ajaxRequest("post", "api/roadlighting/selectbyidlampcontroller", {"id" : id}, function (data) {
+                    debugger;
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
                             //刷新表单
                             $("#lampName").val(lightModel.lampName);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber);
                             $("#lampModel").val(lightModel.lampModel);
                             $("#ratedVoltage").val(lightModel.ratedVoltage);
                             $("#ratedCurrent").val(lightModel.ratedCurrent);
@@ -221,10 +229,10 @@
             btn: ['确定', '关闭'],
             yes: function (index) {
               var body = layer.getChildFrame('body', index);
-              var lng = body.find('#lng').val()
-              var lat = body.find('#lat').val()
-              $('#longitude').val(lng)
-              $('#latitude').val(lat)
+              var lng = body.find('#lng').val();
+              var lat = body.find('#lat').val();
+              $('#longitude').val(lng);
+              $('#latitude').val(lat);
               //最后关闭弹出层
               layer.close(index);
             },
