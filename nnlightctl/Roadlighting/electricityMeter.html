@@ -45,7 +45,7 @@
                 <th>电表型号</th>
                 <th>电表名称</th>
                 <th>电流规格</th>
-                <th>电流测试</th>
+                <th>电流测量</th>
                 <th>有功电能</th>
                 <th>安装方式</th>
                 <th>通讯方式</th>
@@ -137,11 +137,36 @@
                         { "data": "equipmentNumber", "defaultContent": "" },
                         { "data": "electricityModel", "defaultContent": "" },
                         { "data": "electricityName", "defaultContent": "" },
-                        { "data": "electricStandards", "defaultContent": "" },
+                        { "data": "electricStandards", "defaultContent": "","render":function(data, type, full, meta){
+                                data = parseInt(data);
+                                switch(data){
+                                    case 0 : return '&nbsp;';break;
+                                    case 1 : return '3×0.3(1.2)A';break;
+                                    case 2 : return '3×1.5(6)A';break;
+                                    case 3 : return '3×5(60)A';break;
+                                    case 4 : return '3×10(40)A';break;
+                                    case 5 : return '3×20(80)A';break;
+                                    case 6 : return '3×30(100)A';break;
+                                }
+                            }},
                         { "data": "voltageTest", "defaultContent": "" },
                         { "data": "activeEnergy", "defaultContent": "" },
-                        { "data": "installationMode", "defaultContent": "" },
-                        { "data": "communityMode", "defaultContent": "" },
+                        { "data": "installationMode", "defaultContent": "","render":function(data, type, full, meta){
+                                data = parseInt(data);
+                                switch(data){
+                                    case 0 : return '配电箱式';break;
+                                    case 1 : return '导轨式';break;
+                                }
+                            }},
+                        { "data": "communityMode", "defaultContent": "","render":function(data, type, full, meta){
+                                data = parseInt(data);
+                                switch(data){
+                                    case 0 : return '1路RS485接口';break;
+                                    case 1 : return '0-远红外通讯接口';break;
+                                    case 2 : return '其他数字调光接口';break;
+
+                                }
+                            }},
                         { "data": "measureMode", "defaultContent": "" },
                         { "data": "powerFactor", "defaultContent": "" },
                         { "data": "powerWaste", "defaultContent": "" },

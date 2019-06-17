@@ -19,15 +19,15 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯具型号" id="luminaireType" name="luminaireType">
+                    <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>型号名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯具名称" id="luminaireName" name="luminaireName">
+                    <input type="text" class="input-text" value="" placeholder="型号名称" id="modelName" name="modelName">
                 </div>
             </div>
             <div class="row cl">
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">LED芯片：</label>
+                <label class="form-label col-xs-4 col-sm-3">灯具类型：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="LED芯片" id="chip" name="chip">
                 </div>
@@ -57,13 +57,13 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">光通量：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="光通量" id="luminaireFlux" name="luminaireFlux">
+                    <input type="text" class="input-text" value="" placeholder="光通量" id="flux" name="flux">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">显色指数：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="显色指数" id="chromogeniIndex" name="chromogeniIndex">
+                    <input type="text" class="input-text" value="" placeholder="显色指数" id="indexMode" name="indexMode">
                 </div>
             </div>
             <div class="row cl">
@@ -75,7 +75,7 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">色温：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="色温" id="colorTemperature" name="colorTemperature">
+                    <input type="text" class="input-text" value="" placeholder="色温" id="colorMode" name="colorMode">
                 </div>
             </div>
             <div class="row cl">
@@ -83,18 +83,18 @@
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="controllerMode" id="controllerMode" size="1">
-                            <option value="0">请选择控制方式</option>
-                            <option value="1">0-10v</option>
-                            <option value="2">PWM</option>
+                            <option value="0">0-10v</option>
+                            <option value="1">PWM</option>
+                            <option value="2">其他数字调光接口</option>
                         </select>
                     </span>
                 </div>
             </div><div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">光束角（单位：°）：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光束角（°）：</label>
             <div class="formControls col-xs-4 col-sm-4">
-                <input type="text" class="input-text" value="" placeholder="光束角" id="BeanAngle" name="BeanAngle">
+                <input type="text" class="input-text" value="" placeholder="光束角" id="beanAngle" name="BeanAngle">
             </div>
-            <span>°</span>
+            <!--<span>°</span>-->
         </div>
 
             <div class="row cl">
@@ -133,22 +133,22 @@
                     modelName: {
                         required: true,
                     },
-                    ratedVoltage: {
+                    equipmentNumber: {
                         required: true,
                         isFloat:true
                     },
-                    ratedElectric: {
+                    beanAngle: {
                         required: true,
                         isFloat: true
                     },
-                    ratedPower: {
-                        required: true,
-                        isFloat: true
-                    },
-                    ledCount: {
-                        required: true,
-                        isNumber:true
-                    },
+                    // ratedPower: {
+                    //     required: true,
+                    //     isFloat: true
+                    // },
+                    // ledCount: {
+                    //     required: true,
+                    //     isNumber:true
+                    // },
                 },
                 onkeyup: false,
                 focusCleanup: true,
@@ -195,16 +195,17 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#luminaireType").val(lightModel.luminaireType);
-                            $("#luminaireName").val(lightModel.luminaireName);
+                            $("#equipmentNumber").val(lightModel.luminaireType);
+                            $("#modelName").val(lightModel.modelName);
                             $("#ratedVoltage").val(lightModel.ratedVoltage);
+                            // $("#ratedVoltage").val(lightModel.ratedVoltage);
                             $("#ratedElectric").val(lightModel.ratedElectric);
                             $("#ratedPower").val(lightModel.ratedPower);
                             $("#chip").val(lightModel.chip);
-                            $("#luminaireFlux").val(lightModel.luminaireFlux);
-                            $("#chromogeniIndex").val(lightModel.chromogeniIndex);
+                            $("#flux").val(lightModel.flux);
+                            $("#indexMode").val(lightModel.indexMode);
                             $("#grade").val(lightModel.grade);
-                            $("#colorTemperature").val(lightModel.colorTemperature);
+                            $("#colorMode").val(lightModel.colorMode);
                             $("#controllerMode").val(lightModel.controllerMode);
                             $("#BeanAngle").val(lightModel.BeanAngle);
                             $("#mem").val(lightModel.mem);

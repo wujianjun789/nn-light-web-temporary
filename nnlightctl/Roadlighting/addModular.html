@@ -21,50 +21,65 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
+                    <input type="text" class="input-text" value="" placeholder="设备编码" id="modelCode" name="modelCode">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="型号" id="modularModel" name="modularModel">
+                    <input type="text" class="input-text" value="" placeholder="型号" id="modelType" name="modelType">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="名称" id="modularName" name="modularName">
+                    <input type="text" class="input-text" value="" placeholder="名称" id="modelName" name="modelName">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">回路数：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="回路数" id="loopNumber" name="loopNumber">
+                    <input type="text" class="input-text" value="" placeholder="回路数" id="loopCount" name="loopCount">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="通讯方式" id="communicationMode" name="communicationMode">
+                <div class="formControls col-xs-7 col-sm-8 text-l">
+                    <span class="select-box" style="width:150px;">
+                        <select class="select" name="communicationMethods" id="communicationMethods" size="1">
+                            <option value="0">RS485</option>
+                            <option value="1">Zigbee</option>
+                        </select>
+                    </span>
                 </div>
+                <!--<div class="formControls col-xs-8 col-sm-8">-->
+                    <!--<input type="text" class="input-text" value="" placeholder="通讯方式" id="communicationMethods" name="communicationMethods">-->
+                <!--</div>-->
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">单回路最大电流：</label>
+                <label class="form-label col-xs-4 col-sm-3">单回路最大电流(A)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="单回路最大电流" id="maxElectric" name="maxElectric">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">最大负载电流：</label>
+                <label class="form-label col-xs-4 col-sm-3">最大负载电流(A)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="最大负载电流" id="loadElectric" name="loadElectric">
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">安装方式：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="安装方式" id="installationMode" name="installationMode">
+                <div class="formControls col-xs-7 col-sm-8 text-l">
+                    <span class="select-box" style="width:150px;">
+                        <select class="select" name="installationMethods" id="installationMethods" size="1">
+                            <option value="0">导轨式</option>
+                        </select>
+                    </span>
                 </div>
+                <!--<div class="formControls col-xs-8 col-sm-8">-->
+                    <!--<input type="text" class="input-text" value="" placeholder="安装方式" id="installationMethods" name="installationMethods">-->
+                <!--</div>-->
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
@@ -99,30 +114,30 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    equipmentNumber: {
+                    modelCode: {
                         required: true,
                         isFloat:true
                     },
-                    modularModel: {
+                    modelType: {
                         required: true,
                         isFloat:true
                     },
-                    modularName: {
+                    modelName: {
                         required: true,
                         isFloat: true
                     },
-                    loopNumber: {
+                    loopCount: {
                         required: true,
                         isFloat: true
                     },
-                    communicationMode: {
-                        required: true,
-                        isNumber:true
-                    },
-                    maxElectric: {
-                        required: true,
-                        isNumber:true
-                    },
+                    // communicationMode: {
+                    //     required: true,
+                    //     isNumber:true
+                    // },
+                    // maxElectric: {
+                    //     required: true,
+                    //     isNumber:true
+                    // },
                 },
                 onkeyup: false,
                 focusCleanup: true,
@@ -138,7 +153,7 @@
                         param[o["name"]] = o["value"];
                     }
                     param["id"] = editModel(window.location.href);
-                    ajaxRequest("post", "/api/roadlighting/addorupdatemodular", param, function (data) {
+                    ajaxRequest("post", "/deployElebox/deployAddOrModifyEleboxModel", param, function (data) {
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
@@ -159,7 +174,7 @@
             var id = editModel(window.location.href);
             // alert(id);
             if (id) {
-                ajaxRequest("post", "/api/roadlighting/selectmodularbyid", {"id" : id}, function (data) {
+                ajaxRequest("post", "/api/roadlighting/getEleboxModel", {"id" : id}, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
@@ -170,14 +185,14 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#equipmentNumber").val(lightModel.equipmentNumber);
-                            $("#modularModel").val(lightModel.modularModel);
-                            $("#modularName").val(lightModel.modularName);
-                            $("#loopNumber").val(lightModel.loopNumber);
-                            $("#communicationMode").val(lightModel.communicationMode);
+                            $("#modelCode").val(lightModel.modelCode);
+                            $("#modelType").val(lightModel.modelType);
+                            $("#modelName").val(lightModel.modelName);
+                            $("#loopCount").val(lightModel.loopCount);
+                            $("#communicationMethods").val(lightModel.communicationMethods);
                             $("#maxElectric").val(lightModel.maxElectric);
                             $("#loadElectric").val(lightModel.loadElectric);
-                            $("#installationMode").val(lightModel.installationMode);
+                            $("#installationMethods").val(lightModel.installationMethods);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});

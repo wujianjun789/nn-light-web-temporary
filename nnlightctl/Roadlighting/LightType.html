@@ -26,9 +26,9 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        灯具型号：
-        <input type="text" name="modelName" id="modelName" placeholder="灯具型号" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>灯具型号</button>
+        型号名称：
+        <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
@@ -41,12 +41,12 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>灯具型号</th>
-                <th>灯具名称</th>
+                <th>设备编码</th>
+                <th>型号名称</th>
                 <th>额定电压</th>
                 <th>额定电流</th>
                 <th>额定功率</th>
-                <th>LED芯片</th>
+                <th>灯具类型</th>
                 <!--<th>LED数量</th>-->
                 <th>光通量</th>
                 <th>显色指数</th>
@@ -136,7 +136,7 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                         { "data": "id" },
-                        { "data": "modelName", "defaultContent": "" },
+                        { "data": "equipmentNumber", "defaultContent": "" },
                         { "data": "modelName", "defaultContent": "" },
                         { "data": "ratedVoltage", "defaultContent": "" },
                         { "data": "ratedElectric", "defaultContent": "" },
@@ -145,9 +145,17 @@
                         { "data": "flux", "defaultContent": "" },
                         { "data": "indexMode", "defaultContent": "" },
                         { "data": "grade", "defaultContent": "" },
-                        { "data": "colorTemperature", "defaultContent": "" },
-                        { "data": "controllerMode", "defaultContent": "" },
-                        { "data": "BeanAngle", "defaultContent": "" },
+                        { "data": "colorMode", "defaultContent": "" },
+                        { "data": "controllerMode", "defaultContent": "","render":function(data, type, full, meta){
+                                data = parseInt(data);
+                                switch(data){
+                                    case 0 : return '0-10v';break;
+                                    case 1 : return 'PWM';break;
+                                    case 2 : return '其他数字调光接口';break;
+
+                                }
+                            }},
+                        { "data": "beanAngle", "defaultContent": "" },
                         { "data": "mem", "defaultContent": "" }
             ]
         });
@@ -173,7 +181,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({photoperiodIds : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deleteLightModel", transArray({deleteLightModelList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);

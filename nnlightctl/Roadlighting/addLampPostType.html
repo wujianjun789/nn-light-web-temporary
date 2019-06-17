@@ -37,29 +37,41 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">高度：</label>
+                <label class="form-label col-xs-4 col-sm-3">高度（m）：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="高度" id="high" name="high">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">灯头数量：</label>
+                <label class="form-label col-xs-4 col-sm-3">灯头数量（个）：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="灯头数量" id="lampheadNumber" name="lampheadNumber">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">经度：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>经纬度：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="经度" id="longitude" name="longitude">
+                    <input type="text" class="input-text f-l" value="" placeholder="经度" id="longitude" name="longitude"
+                           style="width: 184.9px;margin-right: 10px;">
+                    <input type="text" class="input-text f-l" value="" placeholder="纬度" id="latitude" name="latitude"
+                           style="width: 184.9px;margin-right: 10px;">
+                    <a class="f-l btn btn-primary radius" href="javascript:void(0);" data-title="坐标选择"
+                       onclick="site_add('坐标选择', '../Project/Site-Select.html', '700', '600')"
+                       style="display: inline-block;line-height: 30px;background:#5b98de;padding: 0 4px;color: #fff;">在地图上选择</a>
                 </div>
             </div>
-            <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">纬度：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="纬度" id="latitude" name="latitude">
-                </div>
-            </div>
+            <!--<div class="row cl">-->
+                <!--<label class="form-label col-xs-4 col-sm-3">经度：</label>-->
+                <!--<div class="formControls col-xs-8 col-sm-8">-->
+                    <!--<input type="text" class="input-text" value="" placeholder="经度" id="longitude" name="longitude">-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="row cl">-->
+                <!--<label class="form-label col-xs-4 col-sm-3">纬度：</label>-->
+                <!--<div class="formControls col-xs-8 col-sm-8">-->
+                    <!--<input type="text" class="input-text" value="" placeholder="纬度" id="latitude" name="latitude">-->
+                <!--</div>-->
+            <!--</div>-->
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">材质：</label>
                 <div class="formControls col-xs-8 col-sm-8">
@@ -67,7 +79,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">壁厚：</label>
+                <label class="form-label col-xs-4 col-sm-3">壁厚（mm）：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="壁厚" id="land" name="land">
                 </div>
@@ -111,24 +123,27 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    modelName: {
+                    equipmentNumber: {
                         required: true,
                     },
-                    ratedVoltage: {
+                    lamppostModel: {
                         required: true,
-                        isFloat:true
                     },
-                    ratedElectric: {
+                    lampostName: {
+                        required: true,
+                        // isFloat:true
+                    },
+                    lampheadNumber: {
                         required: true,
                         isFloat: true
                     },
-                    ratedPower: {
+                    longitude: {
                         required: true,
-                        isFloat: true
+                        // isFloat: true
                     },
-                    ledCount: {
+                    latitude: {
                         required: true,
-                        isNumber:true
+                        // isNumber:true
                     },
                 },
                 onkeyup: false,
@@ -195,6 +210,35 @@
                 });
             }
         });
+        /*坐标选择*/
+        function site_add (title, url, w, h) {
+            layer.open({
+                type: 2,
+                area: [w + 'px', h + 'px'],
+                fix: false, //不固定
+                maxmin: true,
+                shade: 0.4,
+                title: title,
+                moveOut: true,
+                content: url,
+                btn: ['确定', '关闭'],
+                yes: function (index) {
+                    var body = layer.getChildFrame('body', index);
+                    var lng = body.find('#lng').val();
+                    var lat = body.find('#lat').val();
+                    $('#longitude').val(lng);
+                    $('#latitude').val(lat);
+                    //最后关闭弹出层
+                    layer.close(index);
+                },
+                cancel: function () {
+                    // 右上角关闭回调
+                }
+            });
+            // layer_show(title, url, w, h, function (layer) {
+            //   console.log(layer)
+            // });
+        }
     </script>
     <!--/请在上方写此页面业务相关的脚本-->
 </body>

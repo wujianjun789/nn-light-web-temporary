@@ -41,8 +41,8 @@
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="communicationMode" id="communicationMode" size="1">
-                            <option value="0">请选择通讯方式</option>
-                            <option value="1">RS485</option>
+                            <option value="0">RS485</option>
+                            <!--<option value="1">RS485</option>-->
                         </select>
                     </span>
                 </div>
@@ -62,18 +62,18 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">精度：</label>
+                <label class="form-label col-xs-4 col-sm-3">精度(S)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="精度" id="accuracy" name="accuracy">
                 </div>
 
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">工作电压：</label>
-                <div class="formControls col-xs-4 col-sm-4">
+                <label class="form-label col-xs-4 col-sm-3">工作电压(V)：</label>
+                <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="工作电压" id="workVoltage" name="workVoltage">
                 </div>
-                <span>V</span>
+                <!--<span>V</span>-->
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
@@ -142,8 +142,6 @@
                         param[o["name"]] = o["value"];
                     };
                     if(communicationModeRegion == 0){
-                        param["communicationMode"] = 0
-                    }else {
                         param["communicationMode"] = 'RS485'
                     };
                     // if(dimmingMode == 0){

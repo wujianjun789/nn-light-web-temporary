@@ -44,6 +44,8 @@
                 <th>编号</th>
                 <th>型号</th>
                 <th>名称</th>
+                <th>网卡地址</th>
+                <th>所属区域</th>
                 <th>所属项目</th>
                 <th>经度</th>
                 <th>纬度</th>
@@ -87,7 +89,7 @@
             "autoWidth": true,
             "ordering": false, //设置所有布排序
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "api/roadlighting/listeleboxmessage", param, function (data) {
+                ajaxRequest("post", "/api/roadlighting/listelebox", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -105,7 +107,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 10,
+                    targets: 13,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'900\', \'700\')"><i class="Hui-iconfont">&#xe6df;</i></a>'+
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -114,13 +116,15 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                 { "data": "id" },
-                { "data": "equipmentNumber", "defaultContent": ""},
-                { "data": "eleboxMode", "defaultContent": "" },
+                { "data": "codeNumber", "defaultContent": ""},
+                { "data": "eleboxModel", "defaultContent": "" },
                 { "data": "eleboxName", "defaultContent": "" },
-                { "data": "subordinateProjects", "defaultContent": "" },
+                { "data": "networkAddr", "defaultContent": "" },
+                { "data": "nnlightctlRegionId", "defaultContent": "" },
+                { "data": "nnlightctlProjectId", "defaultContent": "" },
                 { "data": "longitude", "defaultContent": "" },
                 { "data": "latitude", "defaultContent": "" },
-                { "data": "eleboxMaterial", "defaultContent": "" },
+                { "data": "materialQuality", "defaultContent": "" },
                 { "data": "eleboxColors", "defaultContent": "" },
                 { "data": "eleboxSize", "defaultContent": "" },
                 { "data": "mem", "defaultContent": "" }
@@ -142,7 +146,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "api/roadlighting/deleteeleboxbyids", transArray({eleboxIdList : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deleteelebox", transArray({eleboxIdList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);
