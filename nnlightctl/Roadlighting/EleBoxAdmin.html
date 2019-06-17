@@ -26,9 +26,9 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        型号名称：
-        <input type="text" name="modelName" id="modelName" placeholder="型号名称" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>控制柜型号</button>
+        控制柜名称：
+        <input type="text" name="eleboxName" id="eleboxName" placeholder="控制柜名称" style="width:250px" class="input-text">
+        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
@@ -75,8 +75,8 @@
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        var searchLightModelName = $("#modelName").val().trim();
-        param["modelName"] = searchLightModelName;
+        var searchLightModelName = $("#eleboxName").val().trim();
+        param["eleboxName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
