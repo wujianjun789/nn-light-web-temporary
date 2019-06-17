@@ -159,6 +159,7 @@ function removeIframeAll () {
 
 /*弹出层*/
 function layer_show () {
+  debugger
   var title = arguments[0];
   var url = arguments[1];
   var w = arguments[2];
@@ -178,16 +179,6 @@ function layer_show () {
   //if (h == null || h == '') {
   //  h = ($(window).height() - 50);
   //}
-  var option = {
-    type: 2,
-    fix: false, //不固定
-    maxmin: true,
-    shadeClose: false,
-    shade: [0.8, '#393D49'],
-    moveOut: true,
-    title: title,
-    content: url
-  };
   if(w == null || w == '' && h == null || h == ''){
     isFull = true;
   }
@@ -195,7 +186,7 @@ function layer_show () {
     case 4:
       index = layer.open({
         type: 2,
-        area: [w , h + 'px'],
+        area: [w + 'px' , h + 'px'],
         fix: false, //不固定
         maxmin: true,
         shadeClose: false,

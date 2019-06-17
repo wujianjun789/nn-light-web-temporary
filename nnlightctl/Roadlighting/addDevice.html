@@ -121,6 +121,7 @@
     <!--/_footer 作为公共模版分离出去-->
     <script type="text/javascript">
         var table = null;//表格全局变量
+        var modelLoopObj = {};//集中控制器数据全局变量
         $(document).ready(function () {
 //            var list = [{
 //                "modelCode":"123",
@@ -223,43 +224,22 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        var modelLoopArray = [];
         
         //添加回路
         function addLoop(title, url, w, h) {
             layer_show(title, url, w, h, function (modelLoop) {
-//                $.each(modelLoop,function(i,item){
-//                    if (item == "" || item == undefined) {
-//                        layer.msg("请输入必填项！", { icon: 2, time: 2000 });
-//                        return false;
-//                    }
-//                });
-
+                console.log(modelLoop);
+                modelLoopObj['loopInfo'] = modelLoop;
                 //保存到全局模块回路数组中
-                var index = modelLoopArray.push(modelLoop) - 1;
-
+                var index = modelLoopObj;
                 //添加到回路表格中
                 var $tbody = $("#modelLoopTable").find("tbody").eq(0);
-
                 //构造编辑时回路字符参数
                 var urlParam = object2UrlParamStr(modelLoop);
                 $('<tr value="'+index+'" class="text-c">\n' +
-                    '<td class="voltage">'+modelLoop.voltage+'</td>\n' +
-                    '<td class="electricity">'+modelLoop.electricity+'</td>\n' +
-                    '<td class="grade">'+modelLoop.grade+'</td>\n' +
+                    '<td class="voltage">'+modelLoop.doChannel+'</td>\n' +
+                    '<td class="electricity">'+modelLoop.lampNumber+'</td>\n' +
+                    '<td class="grade">'+modelLoop.mem+'</td>\n' +
                     '<td class="action"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'addLoop.html\', \''+urlParam+'\', \'540\', \'440\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a></td>\n' +
                     '</tr>').appendTo($tbody);
             });
@@ -269,7 +249,7 @@
             var index = $(obj).parents("tr").eq(0).attr("value");
             layer_show(title, url + "?" + param, w, h, function (modelLoop) {
                 //更新数组
-                modelLoopArray[index] = modelLoop;
+                modelLoopObj[index] = modelLoop;
                 //构造编辑时回路字符参数
                 var urlParam = object2UrlParamStr(modelLoop);
 
@@ -297,7 +277,7 @@
             }
             delete model.count;
 
-            model["modelLoopList"] = modelLoopArray;
+            model["modelLoopList"] = modelLoopObj;
 
             //构造模块集合
 //            var modelNumber = $("#count").val().trim() ? Number($("#count").val().trim()) : 1;
