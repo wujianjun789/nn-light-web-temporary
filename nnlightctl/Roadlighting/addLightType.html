@@ -92,7 +92,7 @@
             </div><div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光束角（°）：</label>
             <div class="formControls col-xs-4 col-sm-4">
-                <input type="text" class="input-text" value="" placeholder="光束角" id="beanAngle" name="BeanAngle">
+                <input type="text" class="input-text" value="" placeholder="光束角" id="beanAngle" name="beanAngle">
             </div>
             <!--<span>°</span>-->
         </div>
@@ -195,7 +195,7 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#equipmentNumber").val(lightModel.luminaireType);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber);
                             $("#modelName").val(lightModel.modelName);
                             $("#ratedVoltage").val(lightModel.ratedVoltage);
                             // $("#ratedVoltage").val(lightModel.ratedVoltage);
@@ -207,7 +207,7 @@
                             $("#grade").val(lightModel.grade);
                             $("#colorMode").val(lightModel.colorMode);
                             $("#controllerMode").val(lightModel.controllerMode);
-                            $("#BeanAngle").val(lightModel.BeanAngle);
+                            $("#beanAngle").val(lightModel.beanAngle);
                             $("#mem").val(lightModel.mem);
                         } else {
                             layer.msg(data.header.msg, {icon : 2});
