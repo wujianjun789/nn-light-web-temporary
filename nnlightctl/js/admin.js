@@ -163,6 +163,8 @@ function layer_show () {
   var url = arguments[1];
   var w = arguments[2];
   var h = arguments[3];
+  var isFull = false;//是否全屏
+  var index = null;//定义全局弹框变量
   var callbackfun;
   if (title == null || title == '') {
     title = false;
@@ -170,18 +172,30 @@ function layer_show () {
   if (url == null || url == '') {
     url = "404.html";
   }
-  if (w == null || w == '') {
-    w = 800;
+  //if (w == null || w == '') {
+  //  w = '100%';
+  //}
+  //if (h == null || h == '') {
+  //  h = ($(window).height() - 50);
+  //}
+  var option = {
+    type: 2,
+    fix: false, //不固定
+    maxmin: true,
+    shadeClose: false,
+    shade: [0.8, '#393D49'],
+    moveOut: true,
+    title: title,
+    content: url
+  };
+  if(w == null || w == '' && h == null || h == ''){
+    isFull = true;
   }
-  if (h == null || h == '') {
-    h = ($(window).height() - 50);
-  }
-
   switch (arguments.length) {
     case 4:
-      layer.open({
+      index = layer.open({
         type: 2,
-        area: [w + 'px', h + 'px'],
+        area: [w , h + 'px'],
         fix: false, //不固定
         maxmin: true,
         shadeClose: false,
@@ -189,10 +203,11 @@ function layer_show () {
         moveOut: true,
         title: title,
         content: url
-      });break;
+      });
+      if(isFull)layer.full(index);break;
     case 5:
       callbackfun = arguments[4];
-      layer.open({
+      index = layer.open({
         type: 2,
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
@@ -216,11 +231,11 @@ function layer_show () {
           //右上角关闭回调
         }
       });
-      break;
+      if(isFull)layer.full(index);break;
     case 6:
       callbackfun = arguments[4];
       var addUrl = arguments[5];
-      layer.open({
+      index = layer.open({
         type: 2,
         area: [w + 'px', h + 'px'],
         fix: false, //不固定
@@ -247,7 +262,7 @@ function layer_show () {
           //右上角关闭回调
         }
       });
-      break;
+      if(isFull)layer.full(index);break;
   }
 }
 

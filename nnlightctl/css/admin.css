@@ -39,6 +39,7 @@
 .Hui-aside .menu_dropdown dd{padding-left: 0;}
 .Hui-aside .menu_dropdown dd li{line-height:56px;}
 .Hui-aside .menu_dropdown dd li a{line-height:56px; border-bottom:none; font-weight:normal;padding-left: 42px;}
+.Hui-aside .menu_dropdown dd li p a{line-height:56px; border-bottom:none; font-weight:normal;padding-left: 60px;}
 .Hui-aside .menu_dropdown dd li p{
     line-height: 40px;
     height: 40px;
@@ -55,7 +56,7 @@
 }
 .Hui-aside .menu_dropdown dd li p{
     /*display: none;*/
-    padding-left: 20px;
+    /*padding-left: 20px;*/
 }
 .Hui-aside .menu_dropdown dd li p:nth-of-type(1) a:nth-of-type(1){display: none!important;}
 .Hui-aside .menu_dropdown li a:hover{text-decoration:none}
@@ -72,7 +73,7 @@
 .Hui-aside .menu_dropdown dt:hover{color:#148cf1}
 .Hui-aside .menu_dropdown dt:hover [class^="icon-"]{color:#7e8795}
 .Hui-aside .menu_dropdown li a{/*color:#666;border-bottom: 1px solid #e5e5e5*/color:#fff;}
-.Hui-aside .menu_dropdown li a:hover{color:#148cf1;background-color:#252738;}
+.Hui-aside .menu_dropdown li a:hover{color: #148cf1;background-color:#252738;}
 .Hui-aside .menu_dropdown li.current a,.menu_dropdown li.current a:hover{color:#148cf1}
 .Hui-aside .menu_dropdown dt .Hui-iconfont{ color:#a0a7b1}
 .Hui-aside .menu_dropdown dt .menu_dropdown-arrow{ color:#b6b7b8}
@@ -84,6 +85,7 @@
 .Hui-aside .menu_dropdown dd li i{
     padding:0 10px;
 }
+.Hui-aside .menu_dropdown .active>a{color: #148cf1;background-color: #252738}
 /*选项卡导航*/
 .Hui-tabNav-wp{position:relative; height:35px;overflow:hidden}
 .Hui-tabNav,
@@ -404,3 +406,6 @@ input[type="range"]::-webkit-slider-thumb {
   border: 5px solid #006eb3;
   /*-webkit-box-shadow: 0 -1px 1px #fc7701 inset;*/
 }
+
+/* 字体默认大小 */
+.Hui-iconfont{font-size: 14px}

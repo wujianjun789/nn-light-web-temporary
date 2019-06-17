@@ -58,21 +58,11 @@
             /* 初始化下拉多选插件 */
             var formSelects = layui.formSelects;
             formSelects.config('electricity',{//‘单灯控制器’下拉多选配置
-                searchUrl:"../json/tsconfig.json",
-                keyName:"text",
-                keyVal:"val",
-                success: function(id, url, searchVal, result){
-                    console.log(id);
-                    console.log(url);
-                    console.log(searchVal);
-                    console.log(result);
-                },
+                searchUrl:BASE_ROOT+"api/roadlighting/listlampcontroller",
+                keyName:"equipmentNumber",
+                keyVal:"equipmentNumber",
                 beforeSuccess: function(id, url, searchVal, result){
-                    console.log(id);
-                    console.log(url);
-                    console.log(searchVal);
-                    console.log(result);
-                    return result
+                    return returnList = result.body.data;
                 }
             });
 

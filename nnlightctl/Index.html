@@ -192,6 +192,7 @@
   function flushMenu () {
     $("#menuContain").empty();
     ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
+      console.log(data);
       if (data) {
         if (data.header.code == 1000) {
           if(!data.body.data.length){

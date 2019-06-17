@@ -103,7 +103,7 @@
         menuHtml += '<dd class="pl15"><ul>';
         for (var i = 0; i < subMenuList.length; ++i) {
           var subMenu = subMenuList[i];
-          var Smenu = subMenuList[i].subMenuViewList
+          var Smenu = subMenuList[i].subMenuViewList;
           if (Smenu.length) {
             menuHtml += '<li><a data-href="' + Smenu[0].url + '" data-title="' + Smenu[0].name + '" href="javascript:void(0)" disabled>' + subMenu.name + '<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>';
           } else {
@@ -120,10 +120,20 @@
     }
     $(menuHtml).appendTo($menu);
     $('.Hui-aside .menu_dropdown dd li i').click(function (e) {
-      e.stopPropagation()
-      $(this).parent().toggleClass('selected')
+      e.stopPropagation();
+      $(this).parent().toggleClass('selected');
       $(this).parent().siblings('.s-menu').slideToggle()
-    })
+    });
+    $(".Hui-aside .menu_dropdown dd").on("click","li,p",function(){
+      if($(this).is("li")){
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active").children("p").removeClass("active");
+      }else if($(this).is("p")){
+        $(this).parent("li").removeClass("active").siblings("li").removeClass("active").children("p").removeClass("active");
+        $(this).addClass("active");
+        $(this).siblings().removeClass("active");
+      }
+    });
   }
 
   //刷新菜单

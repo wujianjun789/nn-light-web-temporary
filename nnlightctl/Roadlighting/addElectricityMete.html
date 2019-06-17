@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
   <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-  <title>添加控制柜型号</title>
+  <title>设备部署 - 控制柜部署 - 添加电表设备</title>
 
   <link rel="stylesheet" type="text/css" href="../css/common.css" />
   <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -16,56 +16,68 @@
 </head>
 <body>
 <article class="page-container">
-  <form class="form form-horizontal" id="form-admin-add">
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">电表IMEI：</label>
-      <div class="formControls col-xs-7 col-sm-8">
-        <input type="text" class="input-text" value="" placeholder="电表IMEI" id="eleboxModel" name="eleboxModel">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表名称：</label>
-      <div class="formControls col-xs-7 col-sm-8">
-        <input type="text" class="input-text" value="" placeholder="电表名称" id="eleboxName" name="eleboxName">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表型号：</label>
-      <div class="formControls col-xs-7 col-sm-8">
-        <select class="input-text" placeholder="电表型号" id="subordinateProjects" name="subordinateProjects">
-          <option value="3213">阿萨德</option>
-          <option value="312">第三次</option>
-          <option value="13">按顺序</option>
-          <option value="44">uuu</option>
-        </select>
+  <table id="eleboxTable" class="table table-border table-bordered table-bg table-hover table-sort">
+    <thead>
+    <tr class="text-l">
+      <th width="25"></th>
+      <th>电表编码</th>
+      <th>电表名称</th>
+      <th>电表型号</th>
+      <th>备注</th>
+    </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <!--<form class="form form-horizontal" id="form-admin-add">-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3">电表IMEI：</label>-->
+      <!--<div class="formControls col-xs-7 col-sm-8">-->
+        <!--<input type="text" class="input-text" value="" placeholder="电表IMEI" id="eleboxModel" name="eleboxModel">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表名称：</label>-->
+      <!--<div class="formControls col-xs-7 col-sm-8">-->
+        <!--<input type="text" class="input-text" value="" placeholder="电表名称" id="eleboxName" name="eleboxName">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表型号：</label>-->
+      <!--<div class="formControls col-xs-7 col-sm-8">-->
+        <!--<select class="input-text" placeholder="电表型号" id="subordinateProjects" name="subordinateProjects">-->
+          <!--<option value="3213">阿萨德</option>-->
+          <!--<option value="312">第三次</option>-->
+          <!--<option value="13">按顺序</option>-->
+          <!--<option value="44">uuu</option>-->
+        <!--</select>-->
 
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">状态：</label>
-      <div class="formControls col-xs-8 col-sm-8">
-        <input type="text" class="input-text" value="" placeholder="状态" id="state" name="materialQuality">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">电量：</label>
-      <div class="formControls col-xs-8 col-sm-8">
-        <input type="text" class="input-text" value="" placeholder="电量" id="electricQuantity" name="AppearanceColors">
-      </div>
-    </div>
-    <div class="row cl">
-      <label class="form-label col-xs-4 col-sm-3">备注：</label>
-      <div class="formControls col-xs-8 col-sm-8">
-        <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
-        <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
-      </div>
-    </div>
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3">状态：</label>-->
+      <!--<div class="formControls col-xs-8 col-sm-8">-->
+        <!--<input type="text" class="input-text" value="" placeholder="状态" id="state" name="materialQuality">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3">电量：</label>-->
+      <!--<div class="formControls col-xs-8 col-sm-8">-->
+        <!--<input type="text" class="input-text" value="" placeholder="电量" id="electricQuantity" name="AppearanceColors">-->
+      <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row cl">-->
+      <!--<label class="form-label col-xs-4 col-sm-3">备注：</label>-->
+      <!--<div class="formControls col-xs-8 col-sm-8">-->
+        <!--<textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>-->
+        <!--<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>-->
+      <!--</div>-->
+    <!--</div>-->
     <!--<div class="row cl">-->
       <!--<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">-->
         <!--<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">-->
       <!--</div>-->
     <!--</div>-->
-  </form>
+  <!--</form>-->
 </article>
 <!--_footer 作为公共模版分离出去-->
 <script type="text/javascript" src="../js/jquery.min.js"></script>
@@ -75,66 +87,13 @@
 
 <script type="text/javascript" src="../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
-<!--/_footer 作为公共模版分离出去-->
-<!--请在下方写此页面业务相关的脚本-->
-<!--<script type="text/javascript" src="../lib/jquery.validation/1.14.0/jquery.validate.js"></script>-->
-<!--<script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>-->
-<!--<script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>-->
-<script type="text/javascript">
-  $(function () {
-    //数据验证
-//    $("#form-admin-add").validate({
-//      rules: {
-//        eleboxModel: {
-//          required: true,
-//        },
-//        eleboxName: {
-//          required: true,
-////                        isFloat:true
-//        },
-//        subordinateProjects: {
-//          required: true,
-////                        isFloat: true
-//        },
-//        longitude: {
-//          required: true,
-////                        isFloat: true
-//        },
-//        latitude: {
-//          required: true,
-////                        isNumber:true
-//        }
-//      },
-//      onkeyup: false,
-//      focusCleanup: true,
-//      success: "valid",
-//      submitHandler: function (form) {
-//        //ajax上传表单
-//        //构造上传数据
-//        var param = {};
-//        var paramArray = $(form).serializeArray();
-//        for (var i = 0; i < paramArray.length; ++i) {
-//          var o = paramArray[i];
-//          param[o["name"]] = o["value"];
-//        }
-//        param["id"] = editModel(window.location.href);
-//        ajaxRequest("post", "/api/roadlighting/addOrUpdateLightModel", param, function (data) {
-//          if (data) {
-//            if (data.header.code == 1000) {
-//              if (editModel(window.location.href)) {
-//                layer.msg("编辑控制柜信息成功！", {icon: 1, time: 3000});
-//              } else {
-//                layer.msg("添加控制柜信息成功！", {icon: 1, time: 3000});
-//              }
-//            } else {
-//              layer.msg(data.header.msg, {icon: 2, time: 3000});
-//            }
-//          }
-//        });
-//        ResetWindow();
-//      }
-//    });
+<!-- 表格插件 -->
+<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
 
+<script type="text/javascript">
+  var table = null;//表格全局变量
+  $(function () {
+    getElectricityInfo();
     //判断是否编辑模式
     var id = editModel(window.location.href);
     if (id) {
@@ -156,23 +115,57 @@
       });
     }
   });
-  var getData = function () {
-    var isSuccess = true;
-    $(".error").each(function(){
-      if(!($(this).is(':hidden'))){
-        isSuccess = false;
-        return false;
-      }
+
+  function getElectricityInfo(){
+    table = $('#eleboxTable').DataTable({
+      "bStateSave": true,
+      "destroy": true,
+      "searching": false,
+      "autoWidth": true,
+      "ordering": false, //设置所有不排序
+      "ajax": function (data, callback, settings) {
+        ajaxRequest("post", "api/roadlighting/selectelectricityall", {}, function (result) {
+          //封装返回数据
+          var returnData = {};
+          if (result) {
+            if (result.header.code == 1000) {
+              var dataList = result.body.data;
+              $.each(dataList,function(n,value) {
+                value['equType'] = "电表";
+                if (value.state == 1){
+                  dataList.splice(n,1);
+                }
+              });
+              returnData.data = dataList;
+              callback(returnData);
+            } else {
+              layer.msg(data.header.msg, { icon: 2, time: 3000 });
+            }
+          }
+        });
+      },
+      "columnDefs": [//对table格式的定义（表格的列从0开始）
+        {
+          sClass:"tr-select",
+          targets: 0,
+          render: function (data, type, row) {
+            return '<input type="radio" name="table-select" value="' + row.id + '" >';
+          }
+        }
+      ],
+      "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+        { "data": "id"},
+        { "data": "equipmentNumber", "defaultContent": "" },
+        { "data": "electricityName", "defaultContent": "" },
+        { "data": "electricityModel", "defaultContent": "" },
+        { "data": "mem", "defaultContent": "" }
+      ]
     });
-    if(isSuccess){
-      var formDataArray = $(".form").serializeArray();
-      var param = {};
-      for (var i = 0; i < formDataArray.length; ++i) {
-        var o = formDataArray[i];
-        param[o["name"]] = o["value"];
-      }
-      return param;
-    }
+  }
+
+  var getData = function () {
+    var checkedTr = $(".tr-select").children("input:checked").parent().parent();
+    return table.row( checkedTr ).data();
   };
 </script>
 
