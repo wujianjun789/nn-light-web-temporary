@@ -159,7 +159,6 @@ function removeIframeAll () {
 
 /*弹出层*/
 function layer_show () {
-  debugger
   var title = arguments[0];
   var url = arguments[1];
   var w = arguments[2];
@@ -216,6 +215,8 @@ function layer_show () {
             callbackfun(res);
             //最后关闭弹出层
             layer.close(index);
+          }else{
+            layer.msg("请将信息补充完整", { icon: 2, time: 3000 });
           }
         },
         cancel: function () {
@@ -247,6 +248,8 @@ function layer_show () {
             });
             //最后关闭弹出层
             layer.close(index);
+          }else{
+            layer.msg("请将信息补充完整", { icon: 2, time: 3000 });
           }
         },
         cancel: function () {
