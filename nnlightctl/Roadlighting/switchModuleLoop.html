@@ -24,21 +24,21 @@
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">回路编号：</label>
       <div class="formControls col-xs-8 col-sm-6">
-        <input type="text" class="input-text" value="" placeholder="回路编号" id="voltage" name="voltage">
+        <input type="text" class="input-text" value="" placeholder="回路编号" id="doChannel" name="doChannel">
         <label id="voltage-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">单灯控制器：</label>
       <div class="formControls col-xs-8 col-sm-6">
-        <select id="electricity" name="electricity" xm-select="electricity" xm-select-skin="normal" xm-select-search=""></select>
+        <select id="electricity" name="lampNumber" xm-select="lampNumber" xm-select-skin="normal" xm-select-search=""></select>
         <label id="electricity-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3" style="width: 27.333333%">备注：</label>
       <div class="formControls col-xs-8 col-sm-8">
-        <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="grade" name="grade"></textarea>
+        <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
         <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
       </div>
     </div>
@@ -46,6 +46,7 @@
 </article>
 
 <script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
 <script type="text/javascript" src="../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
 <script type="text/javascript" src="../monitor.over/layui/layui.js"></script>
@@ -55,14 +56,25 @@
 <!--表单验证-->
 <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
 <script type="text/javascript">
+  console.log("开关模块回路");
+  var formSelect = null; //下拉多选全局变量
+  var exleboxModelId = editModel(window.location.href);//当前回路所属模块
   $(document).ready(function () {
-    /* 初始化下拉多选插件 */
-    var formSelects = layui.formSelects;
-    formSelects.config('electricity',{//‘单灯控制器’下拉多选配置
-      searchUrl:"../json/tsconfig.json",
-      keyName:"text",
-      keyVal:"val"
-    });
+    //判断是否编辑模式
+    var paramContext = editModelParam(window.location.href);
+    if (paramContext) {
+      var paramArray = paramContext.split(",");
+      for (var i = 0; i < paramArray.length; ++i) {
+        var paramStr = paramArray[i];
+        var paramSplitArray = paramStr.split("=");
+        if(paramSplitArray[0] == 'lampNumber'){
+          initSelect(paramSplitArray[1].split('_'));
+        }
+        $("#" + paramSplitArray[0]).val(paramSplitArray[1]);
+      }
+    }else{
+      initSelect()
+    }
 
     var doureg = /^[0-9,.]*$/; //^[-\+]?\d+(\.\d+)?$/;
     var numreg = /^\d+$/;
@@ -82,7 +94,29 @@
       } else { $("#electricity-error").hide(); }
     });
   });
+  var getSelectList = function(checked){
+    formSelect.value('lampNumber', checked);
+  };
+  function initSelect(checked){
+    /* 初始化下拉多选插件 */
+    formSelect = layui.formSelects;
+    formSelect.config('lampNumber',{//‘单灯控制器’下拉多选配置
+      searchUrl:BASE_ROOT+"api/roadlighting/listlampcontroller",
+      type: 'post',
+      keyName:"equipmentNumber",
+      keyVal:"equipmentNumber",
+      success: function(data){
+        getSelectList(checked)
+      },
+      beforeSuccess: function(id, url, searchVal, result){
+        return returnList = result.body.data;
+      }
+    });
+  }
+
   var getData = function () {
+    $("#doChannel").blur();
+    $("#lampNumber").blur();
     var isSuccess = true;
     $(".error").each(function(){
       if(!($(this).is(':hidden'))){
@@ -95,23 +129,19 @@
       var param = {};
       for (var i = 0; i < formDataArray.length; ++i) {
         var o = formDataArray[i];
-        param[o["name"]] = o["value"];
+        o["value"] = o["value"].replace(/,/g,"_");
+        if(o["name"] == "doChannel"){
+          param["loopCode"] = o["value"];
+        }else if(o["name"] == "lampNumber"){
+          param["lightingList"] = o["value"];
+        }else {
+          param[o["name"]] = o["value"];
+        }
+        param["exleboxModelId"] = exleboxModelId;
       }
       return param;
     }
   };
-  $(function () {
-    //判断是否编辑模式
-    var paramContext = editModelParam(window.location.href);
-    if (paramContext) {
-      var paramArray = paramContext.split(",");
-      for (var i = 0; i < paramArray.length; ++i) {
-        var paramStr = paramArray[i];
-        var paramSplitArray = paramStr.split("=");
-        $("#" + paramSplitArray[0]).val(paramSplitArray[1]);
-      }
-    }
-  });
 </script>
 
 </body>
