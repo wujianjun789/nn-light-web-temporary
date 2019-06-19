@@ -77,7 +77,7 @@
             $("#voltage").blur(function () {
                 var a = $("#voltage").val();
                 if (!doureg.test(a) || a=="") {
-//                    layer.tips('请输入double类型数字', '#voltage');
+                    layer.tips('请输入double类型数字', '#voltage');
                     $("#voltage-error").show();
                     $(this).val('');
                 } else { $("#voltage-error").hide(); }
