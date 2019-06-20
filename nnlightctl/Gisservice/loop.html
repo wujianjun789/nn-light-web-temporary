@@ -22,7 +22,6 @@
             <thead>
             <tr class="text-l">
                 <th>回路编码</th>
-                <th>回路灯具数量</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -30,7 +29,6 @@
             <tbody id="tb">
             <tr class="text-l">
                 <td>modelCode</td>
-                <td>222</td>
                 <td>通电</td>
                 <td>
                     <label class="switch-btn">
@@ -63,7 +61,6 @@
             var loop = loopArray[i];
             $('<tr class="text-l">\n' +
             '                        <td>' + loop.loopCode + '</td>\n' +
-            '                        <td>' + loop.lightCount + '</td>\n' +
             '                        <td>' + MODELLOOP_STATE[loop.state] + '</td>\n' +
             '                        <td>\n' +
             '                            <label class="switch-btn">\n' +
