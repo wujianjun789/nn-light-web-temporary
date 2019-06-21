@@ -156,7 +156,8 @@
                 submitHandler: function (form) {
                     //ajax上传表单
                     //构造上传数据
-                    var param = {};
+                    var param = {}
+
                     var paramArray = $(form).serializeArray();
                     var controllerMode = $('#controllerMode').val();
                     for (var i = 0; i < paramArray.length; ++i) {
