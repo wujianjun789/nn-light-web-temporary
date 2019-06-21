@@ -235,7 +235,7 @@
             }else{
                 layer_show(title, url, w, h, function (modelLoop) {
                     console.log(modelLoop);
-                    modelLoopObj['loopInfo'] = modelLoop;
+                    modelLoopObj['controllerRequests'] = modelLoop;
                     //添加到回路表格中
                     var $tbody = $("#modelLoopTable").find("tbody").eq(0);
                     //构造编辑时回路字符参数

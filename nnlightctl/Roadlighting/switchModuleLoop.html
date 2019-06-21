@@ -24,14 +24,14 @@
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">回路编号：</label>
       <div class="formControls col-xs-8 col-sm-6">
-        <input type="text" class="input-text" value="" placeholder="回路编号" id="doChannel" name="doChannel">
+        <input type="text" class="input-text" value="" placeholder="回路编号" id="loopCode" name="loopCode">
         <label id="voltage-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
     <div class="row cl">
       <label class="form-label col-xs-4 col-sm-3 text-r" style="width: 27.333333%">单灯控制器：</label>
       <div class="formControls col-xs-8 col-sm-6">
-        <select id="electricity" name="lampNumber" xm-select="lampNumber" xm-select-skin="normal" xm-select-search=""></select>
+        <select id="lightingList" name="lightingList" xm-select="lightingList" xm-select-skin="normal" xm-select-search=""></select>
         <label id="electricity-error" class="error" style="display:none">*格式不正确。</label>
       </div>
     </div>
@@ -58,53 +58,55 @@
 <script type="text/javascript">
   console.log("开关模块回路");
   var formSelect = null; //下拉多选全局变量
-  var exleboxModelId = editModel(window.location.href);//当前回路所属模块
+  var exleboxModelId = null;//当前回路所属模块ID
   $(document).ready(function () {
     //判断是否编辑模式
-    var paramContext = editModelParam(window.location.href);
-    if (paramContext) {
-      var paramArray = paramContext.split(",");
-      for (var i = 0; i < paramArray.length; ++i) {
-        var paramStr = paramArray[i];
-        var paramSplitArray = paramStr.split("=");
-        if(paramSplitArray[0] == 'lampNumber'){
-          initSelect(paramSplitArray[1].split('_'));
-        }
-        $("#" + paramSplitArray[0]).val(paramSplitArray[1]);
-      }
+    var paramContext = JSON.parse(editModelParam(window.location.href));
+    exleboxModelId = paramContext.exleboxModelId;
+    if (paramContext.index > -1) {
+      var slightingList = paramContext.lightingList instanceof Array ? paramContext.lightingList : paramContext.lightingList.split("_");
+      initSelect(slightingList);
+      $("#loopCode").val(paramContext.loopCode);
+      $("#mem").val(paramContext.mem);
     }else{
       initSelect()
     }
 
     var doureg = /^[0-9,.]*$/; //^[-\+]?\d+(\.\d+)?$/;
     var numreg = /^\d+$/;
-    $("#voltage").blur(function () {
-      var a = $("#voltage").val();
+    $("#loopCode").blur(function () {
+      var a = $("#loopCode").val()-0;
+      var loopCuntMax = paramContext.loopCount-0;
       if (!doureg.test(a) || a=="") {
-        layer.tips('请输入double类型数字', '#voltage');
+        layer.tips('请输入double类型数字', '#loopCode');
         $("#voltage-error").show();
         $(this).val('');
-      } else { $("#voltage-error").hide(); }  
+      } else if(a > loopCuntMax){
+        layer.tips('回路编码不能大于“'+loopCuntMax+'”', '#loopCode');
+        $("#voltage-error").show();
+      }else{
+        $("#voltage-error").hide();
+      }
     });
-    $("#electricity").blur(function () {
-      var a = $("#electricity").val();
-      if (a == null || a == "") {
-        $("#electricity-error").show();
-        $(this).val('');
-      } else { $("#electricity-error").hide(); }
-    });
+//    $("#lightingList").blur(function () {
+//      var a = $("#lightingList").val();
+//      if (a == null || a == "") {
+////        $("#electricity-error").show();
+//        $(this).val('');
+//      } else { $("#electricity-error").hide(); }
+//    });
   });
   var getSelectList = function(checked){
-    formSelect.value('lampNumber', checked);
+    formSelect.value('lightingList', checked);
   };
   function initSelect(checked){
     /* 初始化下拉多选插件 */
     formSelect = layui.formSelects;
-    formSelect.config('lampNumber',{//‘单灯控制器’下拉多选配置
-      searchUrl:BASE_ROOT+"api/roadlighting/listlampcontroller",
+    formSelect.config('lightingList',{//‘单灯控制器’下拉多选配置
+      searchUrl: BASE_ROOT+"api/roadlighting/queryLightingByLoop",
       type: 'post',
-      keyName:"equipmentNumber",
-      keyVal:"equipmentNumber",
+      keyName: "equipmentNumber",
+      keyVal: "id",
       success: function(data){
         getSelectList(checked)
       },
@@ -115,8 +117,8 @@
   }
 
   var getData = function () {
-    $("#doChannel").blur();
-    $("#lampNumber").blur();
+    $("#loopCode").blur();
+//    $("#lightingList").blur();
     var isSuccess = true;
     $(".error").each(function(){
       if(!($(this).is(':hidden'))){
@@ -130,9 +132,9 @@
       for (var i = 0; i < formDataArray.length; ++i) {
         var o = formDataArray[i];
         o["value"] = o["value"].replace(/,/g,"_");
-        if(o["name"] == "doChannel"){
+        if(o["name"] == "loopCode"){
           param["loopCode"] = o["value"];
-        }else if(o["name"] == "lampNumber"){
+        }else if(o["name"] == "lightingList"){
           param["lightingList"] = o["value"];
         }else {
           param[o["name"]] = o["value"];

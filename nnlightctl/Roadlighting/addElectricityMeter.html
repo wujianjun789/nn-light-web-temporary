@@ -183,12 +183,12 @@
                                 } else {
                                     layer.msg("添加灯具型号信息成功！", {icon: 1, time: 3000});
                                 }
+                                ResetWindow();
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
                             }
                         }
                     });
-                    ResetWindow();
                 }
             });
 

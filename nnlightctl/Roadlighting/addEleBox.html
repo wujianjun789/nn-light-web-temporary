@@ -77,8 +77,8 @@
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
-
-    //控制柜包含模块集合
+  console.log("添加设备");
+  //控制柜包含模块集合
     var modelArray = [];
     //添加设备
     function addTypeDevice(title) {
@@ -86,11 +86,11 @@
       if(equipmentType == 1) {//电表
         addDevice(title,'addElectricityMete.html','900','540')
       }else if(equipmentType == 2){//集中控制器
-        addDevice(title,'addDevice.html','900','600','/api/roadlighting/addOrUpdateLightModel')
+        addDevice(title,'addDevice.html','900','600')
       }else if(equipmentType == 3){//开关模块
-        addDevice(title, 'eleboxDepSwitchModule.html', '', '','/api/roadlighting/addOrUpdateLightModel')
+        addDevice(title, 'eleboxDepSwitchModule.html', '', '')
       }else if(equipmentType == 4){//光照计
-        addDevice(title, 'eleboxDepPhotoperiod.html', '900', '600','/api/roadlighting/addOrUpdateLightModel')
+        addDevice(title, 'eleboxDepPhotoperiod.html', '900', '600')
       }
     }
     //不同类型添加的设备
@@ -101,91 +101,69 @@
         deviceArray = [deviceArray];
         for (var i = 0; i < deviceArray.length; ++i) {
           var index = modelArray.push(deviceArray[i]) - 1;
-          var paramStr = object2UrlParamStr(deviceArray[i]);
+//          var paramStr = object2UrlParamStr(deviceArray[i]);
           var deviceArrayStr = JSON.stringify(deviceArray);
           //添加入表格中
+          var isAdd = true;
           if(deviceArray[i].equType == '电表'){
-            $('<tr value="' + index + '" class="text-c">\n' +
-              '<td class="equipmentItemData" style="display: none;">' + deviceArrayStr + '</td>\n' +
-              '<td>' + deviceArray[i].equType + '</td>\n' +
-              '<td>' + deviceArray[i].equipmentNumber + '</td>\n' +
-              '<td>' + deviceArray[i].electricityName + '</td>\n' +
-              '<td>' + deviceArray[i].electricityModel + '</td>\n' +
-//              '<td>' + deviceArray[i].state + '</td>\n' +
-              '<td><a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \'editDevice.html\', \'' + paramStr + '\', \'800\', \'500\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-              '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-              '</tr>').appendTo($tbody);
+            showTableList(isAdd,index,deviceArrayStr,deviceArray[i].equType,deviceArray[i].equipmentNumber,deviceArray[i].electricityName,deviceArray[i].electricityModel);
           }else if(deviceArray[i].equType == '光照计'){
-            $('<tr value="' + index + '" data="'+deviceArrayStr+'" class="text-c equipmentItem">\n' +
-              '<td class="equipmentItemData" style="display: none;">' + deviceArrayStr + '</td>\n' +
-              '<td>' + deviceArray[i].equType + '</td>\n' +
-              '<td>' + deviceArray[i].equipmentNumber + '</td>\n' +
-              '<td>' + deviceArray[i].photoperiodName + '</td>\n' +
-              '<td>' + deviceArray[i].photoperiodModel + '</td>\n' +
-              '<td>' +
-                //<a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \'editDevice.html\', \'' + paramStr + '\', \'800\', \'500\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>
-              '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-              '</tr>').appendTo($tbody);
+            showTableList(isAdd,index,deviceArrayStr,deviceArray[i].equType,deviceArray[i].equipmentNumber,deviceArray[i].photoperiodName,deviceArray[i].photoperiodModel);
           }else if(deviceArray[i].equType == '集中控制器'){
-            $('<tr value="' + index + '" data="'+deviceArrayStr+'" class="text-c equipmentItem">\n' +
-              '<td class="equipmentItemData" style="display: none;">' + deviceArrayStr + '</td>\n' +
-              '<td>' + deviceArray[i].equType + '</td>\n' +
-              '<td>' + deviceArray[i].equipmentNumber + '</td>\n' +
-              '<td>' + deviceArray[i].centralizeName + '</td>\n' +
-              '<td>' + deviceArray[i].centralizeModel + '</td>\n' +
-              '<td>' +
-              //<a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \'editDevice.html\', \'' + paramStr + '\', \'800\', \'500\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>
-              '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-              '</tr>').appendTo($tbody);
+            showTableList(isAdd,index,deviceArrayStr,deviceArray[i].equType,deviceArray[i].equipmentNumber,deviceArray[i].centralizeName,deviceArray[i].centralizeModel);
           }else if(deviceArray[i].equType == '开关模块'){
-            $('<tr value="' + index + '" data="'+deviceArrayStr+'" class="text-c equipmentItem">\n' +
-              '<td class="equipmentItemData" style="display: none;">' + deviceArrayStr + '</td>\n' +
-              '<td>' + deviceArray[i].equType + '</td>\n' +
-              '<td>' + deviceArray[i].modelCode + '</td>\n' +
-              '<td>' + deviceArray[i].modelName + '</td>\n' +
-              '<td>' + deviceArray[i].modelType + '</td>\n' +
-              //<a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \'editDevice.html\', \'' + paramStr + '\', \'800\', \'500\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>
-              '<td>' +
-              '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-              '</tr>').appendTo($tbody);
+            showTableList(isAdd,index,deviceArrayStr,deviceArray[i].equType,deviceArray[i].modelCode,deviceArray[i].modelName,deviceArray[i].modelType);
           }
-
         }
       });
     }
+    //渲染表格
+    function showTableList(isAdd,index,deviceArrayStr,equType,modelCode,modelName,modelType){
+      var param = encodeURIComponent(deviceArrayStr, 'utf-8');
+      var editUrl = null,w = '',h = '';
+      var isEdit = true;
+      switch(equType){
+        case '电表': editUrl = 'addElectricityMete.html';w=900;h=540;isEdit = false;break;
+        case '光照计': editUrl = 'eleboxDepPhotoperiod.html';w=900;h=600;isEdit = false;break;
+        case '集中控制器': editUrl = 'addDevice.html';isEdit = true;break;
+        case '开关模块': editUrl = 'eleboxDepSwitchModule.html';isEdit = true;break;
+      }
+      var editBox = isEdit ? '<a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \''+editUrl+'\', \'' + param + '\', \''+w+'\', \''+h+'\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>': '';
+      var domTr = '<tr value="' + index + '" class="text-c equipmentItem">\n' +
+        '<td class="equipmentItemData" style="display: none;">' + deviceArrayStr + '</td>\n' +
+        '<td>' + equType + '</td>\n' +
+        '<td>' + modelCode + '</td>\n' +
+        '<td>' + modelName + '</td>\n' +
+        '<td>' + modelType + '</td>\n' +
+        '<td>' + editBox +
+        '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
+        '</tr>';
+      if(isAdd){
+        $("#equipmentTBody").append(domTr)
+      }else{
+        $("#equipmentTBody").find("tr").eq(index).replaceWith(domTr);
+      }
+    }
+
     //编辑设备
     function editDevice(obj, title, url, param, w, h) {
         var index = $(obj).parents("tr").eq(0).attr("value");
-
         layer_show(title, url + "?" + param, w, h, function (data) {
-            /*if (data.modelCode == "" || data.modelCode == undefined) {
-                layer.msg("请输入模块编码！", { icon: 2, time: 2000 });
-                return false;
-            }
-            if (data.modelName == "" || data.modelName == undefined) {
-                layer.msg("请输入模块名称！", { icon: 2, time: 2000 });
-                return false;
-            }*/
             //更新数组
-            var modelLoopArray = modelArray[index].modelLoopList;
-            data["modelLoopList"] = modelLoopArray;
             modelArray[index] = data;
-
             //构造编辑时回路字符参数
-            var urlParam = object2UrlParamStr(data);
-
+            var deviceArrayStr = JSON.stringify(data);
             //更新表格
-            $("table.table").find("tbody").find("tr").eq(index).replaceWith('<tr value="' + index + '" class="text-c">\n' +
-                '<td>' + data.modelCode + '</td>\n' +
-                '<td>' + data.modelName + '</td>\n' +
-                '<td>' + data.loopCount + '</td>\n' +
-                '<td>' + data.ac + '</td>\n' +
-                '<td>' + data.voltageRating + '</td>\n' +
-                '<td>' + data.electricRating + '</td>\n' +
-                '<td><a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="editDevice(this, \'编辑设备\', \'editDevice.html\', \'' + urlParam + '\', \'800\', \'500\')" title="编辑设备"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-                '<a style="text-decoration:none" class="ml-5" onclick="deleteDevice(this)" href="javascript:void(0);" title="删除设备"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-                '</tr>');
-
+            var isAdd = false;
+            if(data.equType == '电表'){
+              showTableList(isAdd,index,deviceArrayStr,data.equType,data.modelCode,data.modelName,data.modelType);
+            }else if(data.equType == '光照计'){
+              showTableList(isAdd,index,deviceArrayStr,data.equType,data.equipmentNumber,data.photoperiodName,data.photoperiodModel);
+            }else if(data.equType == '集中控制器'){
+              showTableList(isAdd,index,deviceArrayStr,data.equType,data.equipmentNumber,data.centralizeName,data.centralizeModel);
+            }else if(data.equType == '开关模块'){
+              showTableList(isAdd,index,deviceArrayStr,data.equType,data.modelCode,data.modelName,data.modelType);
+            }
         });
     }
 
@@ -204,66 +182,131 @@
         btn: ['确定', '关闭'],
         yes: function (index, layero) {
           var $tr = $(obj).parent().parent("tr").eq(0);
-          var index = $tr.attr("value");
+          var i = $tr.attr("value");
           $tr.remove();
-          modelArray[index] = null;
+          modelArray.splice(i,1);
           layer.close(index);
         }
       });
     }
 
     $(function () {
-      //获取控制柜编号
-      ajaxRequest("post", "api/roadlighting/listelebox",{pageNumber:1,pageSize:10}, function (res) {
-        var list = res.body.data;
-        for(var i=0;i<list.length;i++){
-          $("#equipmentCode").append('<option value="'+list[i].id+'">'+list[i].codeNumber+'</option>')
-        }
-      });
       //设备类型
       var equipmentData = [
-          {"type":"电表","code":1},
-          {"type":"集中控制器","code":2},
-          {"type":"开关模块","code":3},
-          {"type":"光照计","code":4}
+        {"type":"电表","code":1},
+//          {"type":"集中控制器","code":2},
+        {"type":"开关模块","code":3},
+        {"type":"光照计","code":4}
       ];
       for(var i=0;i<equipmentData.length;i++){
         var item = equipmentData[i];
         $("#equipmentType").append('<option value="'+item.code+'">'+item.type+'</option>')
       }
-
       //提交按扭事件
       $("#btnSubmit").click(function (e) {
         var returnJson = {};
+        returnJson['electricityMeterIds'] = [];//电表IDS
+        returnJson['photoperiodIds'] = [];//光照计IDS
+//        returnJson['centralizeControllerIds'] = [];//集中控制器IDS
+        returnJson['exleboxModelIds'] = [];//开关模块IDS
+        returnJson['modelLoopRequests'] = [];//开关模块对应回路信息
         $('.equipmentItemData').each(function(i,val){
           console.log(i);
           console.log(val);
-          var list = JSON.parse($(this).text())[0];
+          var list = JSON.parse($(this).text()) instanceof Array ? JSON.parse($(this).text())[0] : JSON.parse($(this).text());
           returnJson['exleboxId'] = $("#equipmentCode option:selected").val();
           if(list.equType == '电表'){
-            returnJson['electricityMeterIds'] = list
+            returnJson['electricityMeterIds'].push(list.id);
           }else if(list.equType == '光照计'){
-            returnJson['photoperiodIds'] = list
+            returnJson['photoperiodIds'].push(list.id);
           }else if(list.equType == '集中控制器'){
-            returnJson['centralizeControllerIds'] = list
+//            returnJson['centralizeControllerIds'].push(list)
           }else if(list.equType == '开关模块'){
-            returnJson['modelLoopRequests'] = list
+            var lightingList = list.modelLoopRequests? list.modelLoopRequests: list.exleboxModel.modelLoopRequests;
+            for(var x=0;x<lightingList.length;x++){
+              if(lightingList[x].lightingList instanceof Array){
+                for(var a=0;a<lightingList[x].lightingList.length;a++){
+                  lightingList[x].lightingList[a] = lightingList[x].lightingList[a].id
+                }
+              }else{
+                lightingList[x].lightingList = lightingList[x].lightingList.split('_');
+              }
+            }
+            returnJson['exleboxModelIds'].push(list.id);
+            returnJson['modelLoopRequests'] = lightingList;
           }
         });
         console.log(returnJson);
         if(JSON.stringify(returnJson) == "{}"){
           layer.msg("请添加设备", {icon : 1, time : 3000});
         }else{
-//          ajaxRequest("post", "deployElebox/deployExleboxArrange", returnJson, function (data) {
-//          if (data) {
-//            if (data.header.code == 1000) {
-//              layer.msg("添加控制柜成功！", {icon : 1, time : 3000});
-//              ResetWindow();
-//            } else {
-//              layer.msg(data.header.msg, {icon : 2, time : 3000});
+          var returnJsonStr = JSON.stringify(returnJson);
+          console.log(returnJsonStr);
+          $.ajax({
+            contentType : "application/json",
+            url: BASE_ROOT + isAddUrl,
+            type: "POST",
+            data: returnJsonStr,//将对象序列化成JSON字符串
+            dataType:"json",
+            success: function(result){
+              if (result) {
+                if (data.header.code == 1000) {
+                  layer.msg("添加控制柜成功！", {icon : 1, time : 3000});
+                  ResetWindow();
+                } else {
+                  layer.msg(data.header.msg, {icon : 2, time : 3000});
+                }
+              }
+            },
+            error: function(result){
+            }
+          });
+//          ajaxRequest("post", isAddUrl , returnJsonStr, function (data) {
+//            if (data) {
+//              if (data.header.code == 1000) {
+//                layer.msg("添加控制柜成功！", {icon : 1, time : 3000});
+//                ResetWindow();
+//              } else {
+//                layer.msg(data.header.msg, {icon : 2, time : 3000});
+//              }
 //            }
-//          }
-//        });
+//          });
+        }
+      });
+      /*判断是否编辑*/
+      var eleBoxParam = editModelParam(window.location.href);
+      var isAddUrl = null;
+      if(eleBoxParam){
+        var eleBoxParamObj = JSON.parse(eleBoxParam);
+        isAddUrl = 'deployElebox/deployExleboxModify';
+        //回显控制柜编号
+        $("#equipmentCode").html('').append('<option value="'+eleBoxParamObj.id+'">'+eleBoxParamObj.codeNumber+'</option>').attr("disabled","disabled");
+        //根据控制柜ID获取控制柜信息
+        ajaxRequest("post", 'deployElebox/modifyByView',{exleboxId:eleBoxParamObj.id}, function (res) {
+          console.log(res);
+          var dataList = res.body.data;
+          for(var i=0;i<dataList.length;i++){
+            switch (dataList[i].equType-0){
+              case 1 : dataList[i].equType = '开关模块';break;
+              case 2 : dataList[i].equType = '集中控制器';break;
+              case 3 : dataList[i].equType = '电表';break;
+              case 4 : dataList[i].equType = '光照计';break;
+            }
+            //渲染表格数据
+            var deviceArrayStr = JSON.stringify(dataList[i]);
+            modelArray.push(dataList[i]);
+            var isAdd = true;
+            showTableList(isAdd,i,deviceArrayStr,dataList[i].equType,dataList[i].modelCode,dataList[i].modelName,dataList[i].modelType);
+          }
+        });
+        return false;
+      }
+      isAddUrl = 'deployElebox/deployExleboxArrange';
+      //获取控制柜编号
+      ajaxRequest("post", "api/roadlighting/listelebox",{pageNumber:1,pageSize:10}, function (res) {
+        var list = res.body.data;
+        for(var i=0;i<list.length;i++){
+          $("#equipmentCode").append('<option value="'+list[i].id+'">'+list[i].codeNumber+'</option>')
         }
       });
 

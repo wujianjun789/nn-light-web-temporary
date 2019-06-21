@@ -21,8 +21,8 @@
 <body>
 <article class="page-container">
   <!--<form class="form form-horizontal" id="form-admin-add">-->
-  <form class="layui-form" action="">
-    <div class="layui-form-item">
+  <form class="layui-form" action="" style="display: none">
+    <div class="layui-form-item" >
       <label class="layui-form-label" style="padding: 9px 0">是否启用：</label>
       <input type="checkbox" name="close" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
     </div>
@@ -124,24 +124,32 @@
     });
 
     //判断是否编辑模式
-    var id = editModel(window.location.href);
-    if (id) {
-      ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
-        if (data) {
-          if (data.header.code == 1000) {
-            var lightModel = data.body.data[0];
-            //刷新表单
-            $("#modelName").val(lightModel.modelName);
-            $("#ratedVoltage").val(lightModel.ratedVoltage);
-            $("#ratedElectric").val(lightModel.ratedElectric);
-            $("#ratedPower").val(lightModel.ratedPower);
-            $("#ledCount").val(lightModel.ledCount);
-            $("#mem").val(lightModel.mem);
-          } else {
-            layer.msg(data.header.msg, {icon : 2});
-          }
+    debugger;
+    var param = editModelParam(window.location.href);
+    if (param) {
+      debugger;
+      var id = JSON.parse(param) instanceof Array ? JSON.parse(param)[0].id : JSON.parse(param).id;
+      $(".tr-select").each(function(){
+        if($(this).children('input').val() == id){
+          $(this).children('input').attr("checked",true);
         }
       });
+//      ajaxRequest("post", "/api/roadlighting/getLightTypeById", {"id" : id}, function (data) {
+//        if (data) {
+//          if (data.header.code == 1000) {
+//            var lightModel = data.body.data[0];
+//            //刷新表单
+//            $("#modelName").val(lightModel.modelName);
+//            $("#ratedVoltage").val(lightModel.ratedVoltage);
+//            $("#ratedElectric").val(lightModel.ratedElectric);
+//            $("#ratedPower").val(lightModel.ratedPower);
+//            $("#ledCount").val(lightModel.ledCount);
+//            $("#mem").val(lightModel.mem);
+//          } else {
+//            layer.msg(data.header.msg, {icon : 2});
+//          }
+//        }
+//      });
     }
 
   });
@@ -162,13 +170,14 @@
           if (result) {
             if (result.header.code == 1000) {
               var dataList = result.body.data;
+              var returnList = [];
               $.each(dataList,function(n,value) {
                 value['equType'] = "光照计";
-                if (value.state == 1){
-                  dataList.splice(n,1);
+                if (value.state != 1){
+                  returnList.push(value);
                 }
               });
-              returnData.data = dataList;
+              returnData.data = returnList;
               callback(returnData);
             } else {
               layer.msg("出错啦！！！", { icon: 2, time: 3000 });
@@ -195,8 +204,7 @@
       ]
     });
   }
-  var getData = function () {console.log("123123");
-
+  var getData = function () {
     var checkedTr = $(".tr-select").children("input:checked").parent().parent();
     return table.row( checkedTr ).data();
 //    var formDataArray = $(".form").serializeArray();

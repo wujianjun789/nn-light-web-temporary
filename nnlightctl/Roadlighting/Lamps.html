@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>道路照明系统</title>
+    <title>设备部署 - 灯具部署</title>
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
@@ -134,12 +134,6 @@
     }
     //编辑灯具
     function editLamps(title, url, id, w, h) {
-        // var index = layer.open({
-        //     type: 2,
-        //     title: title,
-        //     content: url + "?id=" + id
-        // });
-        // layer.full(index);
         layer_show(title, url + "?id=" + id, w, h);
     }
 
@@ -148,7 +142,7 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "/api/roadlighting/deleteLighting", transArray({deleteLightIdList : idArray}), function (data) {
+        ajaxRequest("post", "api/deploy/deletedeploylighting", transArray({lampControllerIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLight();
@@ -257,7 +251,7 @@
             "autoWidth": true,
             "ordering": false, //设置所有不排序
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "roadlighting/listLighting", param, function (result) {
+                ajaxRequest("post", "api/deploy/showdeploylighting", param, function (result) {
                     //封装返回数据
                     var returnData = {};
                     if (result) {
@@ -286,14 +280,13 @@
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                 { "data": "id" },
-                { "data": "lightingCode", "defaultContent": "" },
-                { "data": "uid", "defaultContent": "" },
-                { "data": "lightingImei", "defaultContent": "" },
-                { "data": "lamphead", "defaultContent": "" },
-                { "data": "lamppost", "defaultContent": "" },
-                { "data": "decay", "defaultContent": "" },
-                { "data": "maxUseTime", "defaultContent": "" },
-                { "data": "regionLevelDesc", "defaultContent": "" },
+                { "data": "modelType", "defaultContent": "" },
+                { "data": "equipmentNumber", "defaultContent": "" },
+                { "data": "lamppostModel", "defaultContent": "" },
+                { "data": "lamppostNumber", "defaultContent": "" },
+                { "data": "lampModel", "defaultContent": "" },
+                { "data": "projectName", "defaultContent": "" },
+                { "data": "staticPower", "defaultContent": "" },
                 { "data": "mem", "defaultContent": "" }
             ]
         });

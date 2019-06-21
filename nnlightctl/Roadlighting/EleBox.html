@@ -55,11 +55,11 @@
                         <th>电表</th>
                         <th>集中控制器</th>
                         <th>开关模式</th>
-                        <th>单灯管理器</th>
+                        <!--<th>单灯管理器</th>-->
                         <th>光照计</th>
                         <th>经度</th>
                         <th>纬度</th>
-                        <th>区域</th>
+                        <!--<th>区域</th>-->
                         <th>备注</th>
                         <th>操作</th>
                     </tr>
@@ -80,7 +80,10 @@
     <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
     <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
-        var param = {};
+        var param = {
+            pageNumber:1,
+            pageSize: 10
+        };
         $(function () {
             //搜索控制柜列表
             searchElebox(param);
@@ -100,7 +103,7 @@
             if (!idArray) {
                 return;
             }
-            ajaxRequest("post", "/api/roadlighting/deleteelebox", transArray({"eleboxIdList" : idArray}), function (data) {
+            ajaxRequest("post", "deployElebox/deployExleboxDelete", transArray({"exleboxId" : idArray}), function (data) {
                 if (data) {
                     if (data.header.code == 1000) {
                         searchElebox();
@@ -110,8 +113,7 @@
                 }
             });
         }
-        function del_more_elebox()
-        {
+        function del_more_elebox(){
             //获取全部批量删除的id
             var idArray = [];
             $("#eleboxTable").find("input[type='checkbox']:checked").each(function () {
@@ -147,12 +149,13 @@
 //            layer_show(title, url, w, h);
         }
         //编辑控制柜
-        function editElebox(title, url, id, w, h) {
-            console.log(id);
+        function editElebox(title, url, param) {
+            console.log(param);
+
             var index = layer.open({
                 type: 2,
                 title: title,
-                content: url + "?id=" + id
+                content: url + "?" + param
             });
             layer.full(index);
             //layer_show(title, url + "?id=" + id, w, h);
@@ -242,7 +245,7 @@
                 "autoWidth": true,
                 "ordering": false, //设置所有不排序
                 "ajax": function (data, callback, settings) {
-                    ajaxRequest("post", "/api/roadlighting/listelebox", param, function (result) {
+                    ajaxRequest("post", "deployElebox/deployEleboxList", param, function (result) {
                         //封装返回数据
                         var returnData = {};
                         if (result) {
@@ -262,29 +265,31 @@
                             return '<input type="checkbox" value="' + row.id + '" >';
                         }
                     }, {
-                        targets: 12,
+                        targets: 10,
                         render: function (data, type, row) {
                             console.log(row);
-                            return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="lampsManage(\'管理灯具\', \'addLight.html\', \'' + row.id + '\', \'1200\', \'600\')" title="管理灯具"><i class="Hui-iconfont">&#xe61d;</i></a>' +
-                                   '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="editElebox(\'控制柜编辑\', \'editEleBox.html\', \'' + row.id + '\', \'800\', \'500\')" title="控制柜编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                            var param = {
+                                id: row.id,
+                                codeNumber: row.codeNumber
+                            };
+                            var paramUTF = encodeURIComponent(JSON.stringify(param), 'utf-8');
+//                             '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="lampsManage(\'管理灯具\', \'addLight.html\', \'' + row.id + '\', \'1200\', \'600\')" title="管理灯具"><i class="Hui-iconfont">&#xe61d;</i></a>' +
+                            return '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onclick="editElebox(\'控制柜编辑\', \'addEleBox.html\', \'' + paramUTF + '\')" title="控制柜编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                    '<a href="javascript:void(0);" style="text-decoration:none" class="ml-10" onClick="delElebox(this, \'' + row.id + '\')" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                         }
                     }
                 ],
                 "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                             { "data": "id"},
+                            { "data": "projectName", "defaultContent": "" },
                             { "data": "codeNumber", "defaultContent": "" },
-                            { "data": "ratedVoltage", "defaultContent": "" },
-                            { "data": "ratedVoltage", "defaultContent": "" },
-                            { "data": "zxcaseqwe", "defaultContent": "" },
-                            { "data": "ewqe", "defaultContent": "" },
-                            { "data": "ratedElectricty", "defaultContent": "" },
-                            { "data": "powerRating", "defaultContent": "" },
-                            { "data": "mainSwitch", "defaultContent": "" },
-                            { "data": "spd", "defaultContent": "" },
+                            { "data": "electricityMeterCount", "defaultContent": "" },
+                            { "data": "centralizeControllerCount", "defaultContent": "" },
+                            { "data": "modleCount", "defaultContent": "" },
+                            { "data": "photoperiodCount", "defaultContent": "" },
                             { "data": "longitude", "defaultContent": "" },
                             { "data": "latitude", "defaultContent": "" },
-                            { "data": "regionLevelDesc", "defaultContent": "" }
+                            { "data": "mem", "defaultContent": "" }
                          ]
                 });
             }
