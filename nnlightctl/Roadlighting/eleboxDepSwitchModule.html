@@ -134,11 +134,63 @@
   console.log("开关模块");
   var table = null;
   var modelLoopObj = {};//存储数据的全局变量
+  modelLoopObj['modelLoopRequests'] = [];//设备回路数据
+  var paramContext = editModelParam(window.location.href);//获取url参数
   $(function(){
     setTimeout(function(){//等框完全展开后初始化表格
-      getDepSwitchModeInfo()
-    },300);
+      //判断是否编辑模式
+      if (paramContext) {
+        var paramObj = JSON.parse(paramContext) instanceof Array ? JSON.parse(paramContext)[0] : JSON.parse(paramContext);
+//        $(".tr-select").each(function(){
+//          if($(this).children('input').val() == paramObj.id){
+//            $(this).children('input').attr('checked',true);
+//          }
+//        });
+        var paramObjList = paramObj.exleboxModel? paramObj.exleboxModel : paramObj;
+        if(paramObjList){//回显回路编辑
+          table = $('#table').DataTable({
+            "data": [paramObjList],
+            "bStateSave": true,
+            "destroy": true,
+            "searching": false,
+            "autoWidth": true,
+            "pageLength": 10,
+            "info": false,
+            "lengthChange": false,
+            "ordering": false, //设置所有不排序
+            "columnDefs": [//对table格式的定义（表格的列从0开始）
+              {
+                sClass:"tr-select",
+                targets: 0,
+                render: function (data, type, row) {
+                  return '<input type="radio" checked="checked" name="table-select" value="' + row.id + '" >';
+                }
+              }
+            ],
+            "columns": [
+              { "data": "id"},
+              { "data": "modelCode", "defaultContent": "" },
+              { "data": "modelName", "defaultContent": "" },
+              { "data": "modelType", "defaultContent": "" },
+              { "data": "communicationMethods", "defaultContent": "" },
+              { "data": "maxElectric", "defaultContent": "" },
+              { "data": "loopCount", "defaultContent": ""},
+              { "data": "mem", "defaultContent": ""}
+            ]
+          });
+          for(var x=0;x<paramObjList.modelLoopRequests.length;x++){
+            showLoopList(paramObjList.modelLoopRequests[x]);
+          }
 
+        }else{
+          for(var i=0;i<paramObj.modelLoopRequests.length;i++){
+            showLoopList(paramObj.modelLoopRequests[i]);
+          }
+        }
+      }else{
+        getDepSwitchModeInfo();
+      }
+    },300);
   });
   function getDepSwitchModeInfo(){
     table = $('#table').DataTable({
@@ -201,37 +253,45 @@
     if(deviceData == undefined || deviceData == ""){
       layer.msg("请选择开关模块", { icon: 2, time: 3000 });
     }else{
-      layer_show(title, url+"?id="+deviceData.id, w, h, function (modelLoop) {
-        modelLoopObj['modelLoopRequests'] = [];
-        //保存到全局模块回路数组中
-        var index = modelLoopObj['modelLoopRequests'].push(modelLoop) -1;
-        //添加到回路表格中
-        var $tbody = $("#modelLoopTable").find("tbody").eq(0);
-        //构造编辑时回路字符参数
-        var urlParam = object2UrlParamStr(modelLoop);
-        $('<tr value="'+index+'" class="text-c">\n' +
-          '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
-          '<td class="lightingList">'+modelLoop.lightingList+'</td>\n' +
-          '<td class="mem">'+modelLoop.mem+'</td>\n' +
-          '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
-          '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n'+
-          '</tr>').appendTo($tbody);
+      var prams = {exleboxModelId: deviceData.id,loopCount: deviceData.loopCount};
+      layer_show(title, url+'?'+encodeURIComponent(JSON.stringify(prams), 'utf-8'), w, h, function(modelLoop){
+        showLoopList(modelLoop)
       });
     }
   }
+  //添加回路回调函数
+  function showLoopList(modelLoop) {
+    if(modelLoop.lightingList[0].equipmentNumber){//回显编辑
+      for(var i=0;i<modelLoop.lightingList.length;i++){
+        modelLoop.lightingList[i] = modelLoop.lightingList[i].id;
+      }
+    }else{
+      if(modelLoop.lightingList instanceof Array) modelLoop.lightingList = modelLoop.lightingList.join().replace(/,/g,"_");
+    }
+    modelLoop['exleboxModelId'] = $('input[name="table-select"]:checked').val();
+    var index = modelLoopObj['modelLoopRequests'].push(modelLoop) -1; //保存到全局模块回路数组中
+    modelLoop['index'] = index;
+    var urlParam = encodeURIComponent(JSON.stringify(modelLoop), 'utf-8');
+    //添加到回路表格中
+    var $tbody = $("#modelLoopTable").find("tbody").eq(0);
+    $('<tr value="'+index+'" class="text-c">\n' +
+      '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
+      '<td class="lightingList">'+modelLoop.lightingList+'</td>\n' +
+      '<td class="mem">'+modelLoop.mem+'</td>\n' +
+      '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
+      '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n'+
+      '</tr>').appendTo($tbody);
+
+  }
+
   //编辑回路
   function editLoop(obj, title, url, param, w, h) {
     var index = $(obj).parents("tr").eq(0).attr("value");
     layer_show(title, url + "?" + param, w, h, function (modelLoop) {
-      debugger;
-      if (modelLoop.loopCode == "" || modelLoop.loopCode == undefined) {
-        layer.msg("请输入回路编号！", { icon: 2, time: 2000 });
-        return false;
-      }
+      modelLoop['index'] = index;
+      var urlParam = encodeURIComponent(JSON.stringify(modelLoop), 'utf-8');
       //更新数组
       modelLoopObj['modelLoopRequests'][index] = modelLoop;
-      //构造编辑时回路字符参数
-      var urlParam = object2UrlParamStr(modelLoop);
       //更新表格
       $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
         '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
@@ -266,6 +326,7 @@
     }else{
       return ''
     }
+    modelLoopObj['equType'] = '开关模块';
     return modelLoopObj;
   };
 

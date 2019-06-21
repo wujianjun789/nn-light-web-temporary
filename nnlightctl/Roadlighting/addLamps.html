@@ -19,7 +19,7 @@
 <article class="page-container">
     <form class="form form-horizontal" id="form-admin-add">
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">单灯控制器型号：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器型号：</label>
             <div class="formControls col-xs-8 col-sm-9" style="width:200px;">
                 <span class="select-box" style="width:170px;">
                     <select class="select" name="lampModel" id="lampModel" size="1">
@@ -41,7 +41,11 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具型号：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="灯具型号" id="lightingCode" name="lightingCode" disabled style="width:170px;">
+                <span class="select-box" style="width:170px;">
+                    <select class="select" name="modelType" id="modelType" size="1">
+                        <option class="select-option" value="">请选择</option>
+                    </select>
+                </span>
             </div>
         </div>
         <div class="row cl">
@@ -56,12 +60,13 @@
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯头号：</label>
-            <span class="select-box" style="width:170px;">
-                <select class="select" name="lampheadNumber" id="lampheadNumber" size="1"></select>
-            </span>
-            <!--<div class="formControls col-xs-8 col-sm-9" style="width:200px;">-->
-                <!--<input type="text" class="input-text" value="" placeholder="灯头号" id="lampheadNumber" name="lampheadNumber" disabled style="width:170px;">-->
-            <!--</div>-->
+            <div class="formControls col-xs-8 col-sm-9">
+                <span class="select-box" style="width:170px;">
+                    <select class="select" name="lampheadNumber" id="lampheadNumber" size="1">
+                        <option class="select-option" value="">请选择</option>
+                    </select>
+                </span>
+            </div>
         </div>
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>
@@ -76,7 +81,7 @@
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">灯具功率：</label>
             <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" placeholder="灯具功率" id="lampPower" name="lampPower">
+                <input type="text" class="input-text" value="" disabled placeholder="灯具功率" id="staticPower" name="staticPower">
             </div>
         </div>
         <div class="row cl">
@@ -107,37 +112,76 @@
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script typeof="text/javascript">
     $(function () {
-        //获取部署灯具信息并展示
+        //获取部署灯具所需数据
         ajaxRequest("post", "api/deploy/selectdeploylighting", {}, function (data) {
             var res = data.body.data[0];
             var lampController = res.lampControllerViews;//单灯控制器、灯具编码、灯具功率
+            var projectViewList = res.projectViewList;//所属项目
+            var lamppostViews = res.lamppostViews;//灯杆型号、灯头号
+            var lightingViews = res.lightingViews;//灯具型号
             for(var n=0;n<lampController.length;n++){//单灯控制器型号
-                $("#lampModel").append('<option staticPower="'+lampController[n].staticPower+'" equipmentNumber="'+lampController[n].equipmentNumber+'" value="'+lampController[n].id+'">'+lampController[n].lampModel+'</option>')
+                $("#lampModel").append('<option staticPower="'+lampController[n].staticPower+'" value="'+lampController[n].id+'">'+lampController[n].lampModel+'</option>')
             }
-            $("#lampModel").change(function(){
-                $("#lightingCode").val($(this).children('option:selected').attr('attr')).text($(this).attr('attr'));
+            $("#lampModel").change(function () {
+                var lampModel = $(this).children('option:checked').text();
+                ajaxRequest("post", "api/deploy/selectByLampModel", {lampModel:lampModel}, function (data) {
+                    var res = data.body.data;
+                    $("#lightingImei").html('<option class="select-option">请选择</option>');
+                    for(var i=0;i<res.length;i++){
+                        $("#lightingImei").append('<option staticPower="'+res[i].staticPower+'" mem="'+res[i].mem+'" value="'+res[i].id+'">'+res[i].equipmentNumber+'</option>')
+                    }
+                })
+            });
+            for(var x=0;x<projectViewList.length;x++){
+                $("#projectViewList").append('<option value="'+projectViewList[x].id+'">'+projectViewList[x].projectName+'</option>')
+            }
+            for(var i=0;i<lightingViews.length;i++){
+                $("#modelType").append('<option value="'+lightingViews[i].id+'">'+lightingViews[i].modelType+'</option>')
+            }
+            for(var q=0;q<lamppostViews.length;q++){
+                $("#lamppostModel").append('<option value="'+lamppostViews[q].id+'" lampheadNumber="'+lamppostViews[q].lampheadNumber+'">'+lamppostViews[q].lamppostModel+'</option>')
+            }
+            $("#lamppostModel").change(function(){
+                var lampheadNumber = $(this).children('option:checked').attr('lampheadNumber')-0;
+                $("#lampheadNumber").html('<option class="select-option">请选择</option>');
+                for(var i=0;i<lampheadNumber;i++){
+                    var index = i+1;
+                    $("#lampheadNumber").append('<option value="'+index+'">'+index+'</option>')
+                }
+            });
+            $("#lightingImei").change(function(){
+                $("#mem").text($(this).children('option:checked').attr('mem'));
+                $("#staticPower").val($(this).children('option:checked').attr("staticPower"))
             });
 
-            for(var i=0;i<res.lightingViews.length;i++){
-                $("#lightingImei").append('<option attr="'+res.lightingViews[i].lightingCode+'" value="'+res.lightingViews[i].id+'">'+res.lightingViews[i].lightingImei+'</option>');
-            }
-            for(var e=0;e<res.lamppostViews.length;e++){//灯杆型号
-                $("#lamppostModel").append('<option attr="'+res.lamppostViews[e].lampheadNumber+'" value="'+res.lightingViews[e].id+'">'+res.lightingViews[e].lamppostModel+'</option>')
-            }
 
-            for(var x=0;x<res.projectViewList.length;x++){
-                $("#projectViewList").append('<option attr="" value="'+res.projectViewList[x].id+'">'+res.projectViewList[x].projectName+'</option>')
-            }
+
+//            $("#lampModel").change(function(){
+//                $("#lightingCode").val($(this).children('option:selected').attr('attr')).text($(this).attr('attr'));
+//            });
+//
+//            for(var i=0;i<res.lightingViews.length;i++){
+//                $("#lightingImei").append('<option attr="'+res.lightingViews[i].lightingCode+'" value="'+res.lightingViews[i].id+'">'+res.lightingViews[i].lightingImei+'</option>');
+//            }
+//            for(var e=0;e<res.lamppostViews.length;e++){//灯杆型号
+//                $("#lamppostModel").append('<option attr="'+res.lamppostViews[e].lampheadNumber+'" value="'+res.lightingViews[e].id+'">'+res.lightingViews[e].lamppostModel+'</option>')
+//            }
+//
+//            for(var x=0;x<res.projectViewList.length;x++){
+//                $("#projectViewList").append('<option attr="" value="'+res.projectViewList[x].id+'">'+res.projectViewList[x].projectName+'</option>')
+//            }
         });
-        $("#lightingImei").change(function(){
-            $("#lightingCode").val($(this).children('option:selected').attr('attr')).text($(this).attr('attr'));
-        });
-        $("#lamppostModel").change(function(){
-            var lampheadNumber = $(this).children('option:selected').attr('attr');
-            for(var i=0;i<lampheadNumber.length;i++){
-                $("#lampheadNumber").append('<option value="'+i+'">'+i+'</option>');
-            }
-        });
+
+
+//        $("#lightingImei").change(function(){
+//            $("#lightingCode").val($(this).children('option:selected').attr('attr')).text($(this).attr('attr'));
+//        });
+//        $("#lamppostModel").change(function(){
+//            var lampheadNumber = $(this).children('option:selected').attr('attr');
+//            for(var i=0;i<lampheadNumber.length;i++){
+//                $("#lampheadNumber").append('<option value="'+i+'">'+i+'</option>');
+//            }
+//        });
 
 
         //注册区域文本框点击事件
@@ -160,35 +204,28 @@
         //数据验证
         $("#form-admin-add").validate({
             rules: {
-                uid: {
+                lampModel: {
                     required: true
                 },
-                lightingCode : {
+                lightingImei : {
                     required : true
                 },
-
-                lamppost : {
+                modelType : {
                     required : true
                 },
-
-                lamphead : {
+                lamppostModel : {
                     required : true
                 },
-
-                nnlightctlProjectId : {
+                lampheadNumber : {
                     required : true
                 },
-                nnlightctlLightingModelId : {
+                projectViewList : {
                     required : true
                 },
-                maxUseTime: {
+                staticPower: {
                     required : true,
                     isFloat: true
-                },
-                decay: {
-                    required : true,
-                    isFloat: true
-                },
+                }
             },
             onkeyup: false,
             focusCleanup: true,
@@ -196,18 +233,18 @@
             submitHandler: function (form) {
                 //ajax上传表单
                 //构造上传数据
-                var param = {};
-                var paramArray = $(form).serializeArray();
-                for (var i = 0; i < paramArray.length; ++i) {
-                    var o = paramArray[i];
-                    param[o["name"]] = o["value"];
-                }
-                param["manufacture"] = str2Date($("#manufacture").val().trim());
-                param["useDate"] = str2Date($("#useDate").val().trim());
-                param["uid"] = $("#lightingUid").val().trim();
-                param["id"] = editModel(window.location.href);
-                debugger;
-                ajaxRequest("post", "/api/roadlighting/addOrUpdateLighting", param, function (data) {
+//                nnlightctlLampModelId	是	int	灯具型号外键id
+//                nnlightctlLamppostId	是	int	灯杆的外键id
+//                id	是	int	单灯控制器的id
+//                nnlightctlProjectId	是	int	项目外键id
+
+                var param = {
+                    nnlightctlLampModelId: $("#modelType").children('option:checked').val(),
+                    nnlightctlLamppostId: $("#lamppostModel").children('option:checked').val(),
+                    id: $("#lampModel").children('option:checked').val(),
+                    nnlightctlProjectId: $("#projectViewList").children('option:checked').val()
+                };
+                ajaxRequest("post", "api/deploy/updatedeploylighting", param, function (data) {
                     if (data) {
                         if (data.header.code == 1000) {
                             if (editModel(window.location.href)) {
@@ -215,95 +252,89 @@
                             } else {
                                 layer.msg("添加灯具成功！", {icon: 1, time: 3000});
                             }
+                            ResetWindow();
                         } else {
                             layer.msg(data.header.msg, {icon: 2, time: 3000});
                         }
                     }
                 });
-                ResetWindow();
-                //var index = parent.layer.getFrameIndex(window.name);
-                //parent.$('.btn-refresh').click();
-                //parent.layer.close(index);
             }
         });
-
-        //刷新灯具型号
-        function flushLightModel() {
-            ajaxRequest("post", "/api/roadlighting/listLightModel", {}, function (data) {
-                if (data) {
-                    console.log(data);
-                    if (data.header.code == 1000) {
-                        var lightModelArray = data.body.data;
-
-                        var $lightModelSelect = $("#nnlightctlLightingModelId");
-                        $lightModelSelect.empty();
-
-                        for (var i = 0; i < lightModelArray.length; ++i) {
-                            var lightModel = lightModelArray[i];
-                            $('<option value="'+lightModel.id+'">'+lightModel.modelName+'</option>').appendTo($lightModelSelect);
-                        }
-                    } else {
-                        layer.msg(data.header.msg, {icon : 2, time : 3000});
-                    }
-                }
-            });
-        }
-
-        flushLightModel();
-
-        //刷新项目列表
-        function flushProjectSelect() {
-            ajaxRequest("post", "/api/project/listproject", {}, function (data) {
-                if (data) {
-                    if (data.header.code == 1000) {
-                        var projectArray = data.body.data;
-
-                        var $projectSelect = $("#nnlightctlProjectId");
-                        $projectSelect.empty();
-
-                        for (var i = 0; i < projectArray.length; ++i) {
-                            var project = projectArray[i];
-                            $('<option value="'+project.id+'">'+project.projectName+'</option>').appendTo($projectSelect);
-                        }
-                    } else {
-                        layer.msg(data.header.msg, {icon : 2, time : 3000});
-                    }
-                }
-            });
-        }
-
-        flushProjectSelect();
+//
+//        刷新灯具型号
+//        function flushLightModel() {
+//            ajaxRequest("post", "/api/roadlighting/listLightModel", {}, function (data) {
+//                if (data) {
+//                    console.log(data);
+//                    if (data.header.code == 1000) {
+//                        var lightModelArray = data.body.data;
+//
+//                        var $lightModelSelect = $("#nnlightctlLightingModelId");
+//                        $lightModelSelect.empty();
+//
+//                        for (var i = 0; i < lightModelArray.length; ++i) {
+//                            var lightModel = lightModelArray[i];
+//                            $('<option value="'+lightModel.id+'">'+lightModel.modelName+'</option>').appendTo($lightModelSelect);
+//                        }
+//                    } else {
+//                        layer.msg(data.header.msg, {icon : 2, time : 3000});
+//                    }
+//                }
+//            });
+//        }
+//
+//        flushLightModel();
+//
+//        刷新项目列表
+//        function flushProjectSelect() {
+//            ajaxRequest("post", "/api/project/listproject", {}, function (data) {
+//                if (data) {
+//                    if (data.header.code == 1000) {
+//                        var projectArray = data.body.data;
+//
+//                        var $projectSelect = $("#nnlightctlProjectId");
+//                        $projectSelect.empty();
+//
+//                        for (var i = 0; i < projectArray.length; ++i) {
+//                            var project = projectArray[i];
+//                            $('<option value="'+project.id+'">'+project.projectName+'</option>').appendTo($projectSelect);
+//                        }
+//                    } else {
+//                        layer.msg(data.header.msg, {icon : 2, time : 3000});
+//                    }
+//                }
+//            });
+//        }
+//
+//        flushProjectSelect();
 
         //判断是否编辑模式
         var id = editModel(window.location.href);
         if (id) {
-            debugger;
-            ajaxRequest("post", "/api/roadlighting/getLighting", {"id" : id}, function (data) {
-                debugger;
+            ajaxRequest("post", "api/deploy/selectbyiddeploylighting", {"id" : id}, function (data) {
                 if (data) {
-                    console.log();
                     if (data.header.code == 1000) {
                         console.log(data);
                         var light = data.body.data[0];
-                        //隐藏uuid
-                        $("#uuidDiv").hide();
+//                        $("#uuidDiv").hide();
                         //刷新表单
-                        $("#lightingCode").val(light.lightingCode);
-                        $("#lightingUid").val(light.uid);
-                        $("#manufacture").val(formatDate(light.manufacture));
-                        $("#useDate").val(formatDate(light.useDate));
-                        $("#lamphead").val(light.lamphead);
-                        $("#lamppost").val(light.lamppost);
-                        $("#nnlightctlLightingModelId").val(light.nnlightctlLightingModelId);
-                        $("#longitude").val(light.longitude);
-                        $("#latitude").val(light.latitude);
-                        $("#propertySerialNumber").val(light.propertySerialNumber);
-                        $("#maxUseTime").val(light.maxUseTime);
-                        $("#decay").val(light.decay);
-                        $("#mem").val(light.mem);
-                        $("#nnlightctlRegionId").val(light.nnlightctlRegionId);
-                        $("#regionLevelDesc").val(light.regionLevelDesc);
-                        $("#nnlightctlProjectId").val(light.nnlightctlProjectId);
+                        $("#lampModel option").each(function(){//单灯控制器型号
+                            if($(this).val() == light.id) $(this).attr('selected',true);
+                        });
+                        $("#lightingImei").html('').append('<option selected="selected" value="'+light.id+'">'+light.equipmentNumber+'</option>');//灯具IMEI
+                        $("#modelType option").each(function(){//灯具型号
+                            if($(this).val() == light.nnlightctlLampModelId) $(this).attr('selected',true) ;
+                        });
+                        $("#lamppostModel option").each(function(){//灯杆型号
+                            if($(this).val() == light.nnlightctlLamppostId) $(this).attr('selected',true) ;
+                        });
+                        $("#lampheadNumber").html('').append('<option value="" selected="selected">'+light.lamppostNumber+'</option>');//灯头号
+
+                        $("#projectViewList option").each(function(){//所属项目
+                            if($(this).val() == light.nnlightctlProjectId) $(this).attr('selected',true) ;
+                        });
+                        $("#staticPower").val(light.staticPower);//灯具功率
+                        $("#mem").val(light.mem);//备注
                     } else {
                         layer.msg(data.header.msg, {icon : 2});
                     }

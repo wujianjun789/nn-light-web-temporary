@@ -58,37 +58,35 @@
 <script type="text/javascript">
   console.log("开关模块回路");
   var formSelect = null; //下拉多选全局变量
-  var exleboxModelId = null;//当前回路所属模块
+  var exleboxModelId = null;//当前回路所属模块ID
   $(document).ready(function () {
     //判断是否编辑模式
-    var paramContext = editModelParam(window.location.href);
-    var paramArray = paramContext.split(",");
-    if (paramContext.indexOf('id') == -1) {
-      for (var i = 0; i < paramArray.length; ++i) {
-        var paramStr = paramArray[i];
-        var paramSplitArray = paramStr.split("=");
-        if(paramSplitArray[0] == 'lightingList'){
-          initSelect(paramSplitArray[1].split('_'));
-        }
-        if(paramSplitArray[0] == 'exleboxModelId'){
-          exleboxModelId = paramSplitArray[1];
-        }
-        $("#" + paramSplitArray[0]).val(paramSplitArray[1]);
-      }
+    var paramContext = JSON.parse(editModelParam(window.location.href));
+    exleboxModelId = paramContext.exleboxModelId;
+    if (paramContext.index > -1) {
+      var slightingList = paramContext.lightingList instanceof Array ? paramContext.lightingList : paramContext.lightingList.split("_");
+      initSelect(slightingList);
+      $("#loopCode").val(paramContext.loopCode);
+      $("#mem").val(paramContext.mem);
     }else{
-      exleboxModelId = paramArray[0].split('=')[1];
       initSelect()
     }
 
     var doureg = /^[0-9,.]*$/; //^[-\+]?\d+(\.\d+)?$/;
     var numreg = /^\d+$/;
     $("#loopCode").blur(function () {
-      var a = $("#loopCode").val();
+      var a = $("#loopCode").val()-0;
+      var loopCuntMax = paramContext.loopCount-0;
       if (!doureg.test(a) || a=="") {
         layer.tips('请输入double类型数字', '#loopCode');
         $("#voltage-error").show();
         $(this).val('');
-      } else { $("#voltage-error").hide(); }  
+      } else if(a > loopCuntMax){
+        layer.tips('回路编码不能大于“'+loopCuntMax+'”', '#loopCode');
+        $("#voltage-error").show();
+      }else{
+        $("#voltage-error").hide();
+      }
     });
 //    $("#lightingList").blur(function () {
 //      var a = $("#lightingList").val();
@@ -105,10 +103,10 @@
     /* 初始化下拉多选插件 */
     formSelect = layui.formSelects;
     formSelect.config('lightingList',{//‘单灯控制器’下拉多选配置
-      searchUrl:BASE_ROOT+"api/roadlighting/listlampcontroller",
+      searchUrl: BASE_ROOT+"api/roadlighting/queryLightingByLoop",
       type: 'post',
-      keyName:"equipmentNumber",
-      keyVal:"equipmentNumber",
+      keyName: "equipmentNumber",
+      keyVal: "id",
       success: function(data){
         getSelectList(checked)
       },
