@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="monitor.over/layui/formSelects-v4.css">
+
+</head>
+<body>
+<select id="electricity" name="lampNumber" xm-select="lampNumber" xm-select-skin="normal" xm-select-search="">
+  <!--<option value="1">3112</option>-->
+  <!--<option value="2">555</option>-->
+  <!--<option value="3">777</option>-->
+  <!--<option value="4">888</option>-->
+</select>
+</body>
+</html>
+<script src="js/jquery.min.js"></script>
+<script src="monitor.over/layui/layui.all.js"></script>
+<script src="monitor.over/layui/formSelects-v4.min.js"></script>
+<script>
+  formSelect = layui.formSelects;
+  formSelect.config('lampNumber',{//‘单灯控制器’下拉多选配置
+    searchUrl:"json/tsconfig.json",
+    keyName:"text",
+    keyVal:"val",
+    clearInput: true,
+    success: function(id, url, searchVal, result){
+      formSelect.value('lampNumber', [1,2]);
+    },
+    beforeSuccess: function(id, url, searchVal, result){
+      console.log("123123");
+      return returnList = result;
+    }
+  });
+
+  var obj = {name:"123",val:"333"};
+
+  if(obj.id){
+    console.log(obj.id);
+  }else{
+    console.log("123");
+  }
+
+
+
+</script>
