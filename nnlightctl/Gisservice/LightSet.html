@@ -17,15 +17,25 @@
 </head>
 <body>
 <div class="page-container" id="light-set" style="max-height: 460px;padding-bottom: 20px;">
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标1：</span><span id="longitude">经度：116.306681 </span><span
             id="latitude">纬度：39.830931</span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯杆号：</span><span id="lamppost">21.56 </span>
-    </p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>IMEI：</span><span id="UUID">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯杆号：</span><span id="lamppost">21.56 </span>-->
+    <!--</p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>-->
     <div class="linghtbox clearfix mt-20">
         <img src="../bg//lightsbg_0.png" class="imgbox"/>
         <div id="powerange">
@@ -139,11 +149,25 @@
           //刷新灯具信息
           $("#longitude").text("经度：" + light.longitude);
           $("#latitude").text("  纬度：" + light.latitude);
-          $("#lightingCode").text(light.lightingCode);
-          $("#uuid").text(light.uid);
-          $("#lamppost").text(light.lamppost);
-          $("#lamphead").text(light.lamphead);
-          $("#imei").text(light.lightingImei)
+            $("#alarmMessage").text(light.alarmMessage);
+            $("#communicationMode").text(light.communicationMode);
+            $("#dimmingMode").text(light.dimmingMode);
+            $("#equipmentNumber").text(light.equipmentNumber);
+            $("#UUID").text(light.UUID);
+            $("#lampModel").text(light.lampModel);
+            $("#lampName").text(light.lampName);
+            $("#ratedCurrent").text(light.ratedCurrent);
+            $("#ratedVoltage").text(light.ratedVoltage);
+            $("#staticPower").text(light.staticPower);
+            // $("#lightingCode").text(light.lightingCode);
+            // $("#lightingCode").text(light.lightingCode);
+            // $("#lightingCode").text(light.lightingCode);
+            // $("#lightingCode").text(light.lightingCode);
+          // $("#lightingCode").text(light.lightingCode);
+          // $("#uuid").text(light.uid);
+          // $("#lamppost").text(light.lamppost);
+          // $("#lamphead").text(light.lamphead);
+          // $("#imei").text(light.lightingImei)
           ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
             if (data) {
               console.log(data);
