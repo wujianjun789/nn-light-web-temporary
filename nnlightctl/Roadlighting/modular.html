@@ -179,12 +179,10 @@
         ajaxRequest("post", "/api/roadlighting/deleteeleboxmodel", transArray({eleboxModelIdList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
-                    // alert(1);
                     searchLightModel(1);
+                    layer.msg('成功！！ 一去不复返', { icon: 1, time: 3000 });
                 } else {
-                    // alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
-
                 }
             }
         });

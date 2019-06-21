@@ -42,13 +42,13 @@
                 <input type="text" class="input-text" value="" placeholder="网卡地址" id="networkAddr" name="networkAddr">
             </div>
         </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属区域：</label>
-            <div class="formControls col-xs-7 col-sm-8">
-                <select class="input-text" placeholder="所属区域" id="nnlightctlRegionId" name="nnlightctlRegionId">
-                </select>
-            </div>
-        </div>
+        <!--<div class="row cl">-->
+            <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属区域：</label>-->
+            <!--<div class="formControls col-xs-7 col-sm-8">-->
+                <!--<select class="input-text" placeholder="所属区域" id="nnlightctlRegionId" name="nnlightctlRegionId">-->
+                <!--</select>-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>
             <div class="formControls col-xs-7 col-sm-8">
@@ -165,19 +165,31 @@
         codeNumber: {
           required: true
         },
-        longitude: {
+        eleboxModel: {
           required: true
         },
-        longitude: {
+        eleboxName: {
           required: true
         },
         networkAddr: {
           required: true
         },
-        nnlightctlRegionId: {
+        nnlightctlProjectId: {
           required: true
         },
-        nnlightctlProjectId: {
+        longitude: {
+          required: true
+        },
+        latitude: {
+          required: true
+        },
+        materialQuality: {
+          required: true
+        },
+        eleboxColors: {
+          required: true
+        },
+        eleboxSize: {
           required: true
         },
       },

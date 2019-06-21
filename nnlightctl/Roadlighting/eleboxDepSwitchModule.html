@@ -261,13 +261,11 @@
   }
   //添加回路回调函数
   function showLoopList(modelLoop) {
-    if(modelLoop.lightingList[0].equipmentNumber){//回显编辑
-      for(var i=0;i<modelLoop.lightingList.length;i++){
-        modelLoop.lightingList[i] = modelLoop.lightingList[i].id;
-      }
-    }else{
-      if(modelLoop.lightingList instanceof Array) modelLoop.lightingList = modelLoop.lightingList.join().replace(/,/g,"_");
+    var lightingListArr = [];
+    for(var i=0;i<modelLoop.lightingList.length;i++){
+      lightingListArr.push(modelLoop.lightingList[i].equipmentNumber);
     }
+    lightingListArr = lightingListArr.join().replace(/,/g,"_");
     modelLoop['exleboxModelId'] = $('input[name="table-select"]:checked').val();
     var index = modelLoopObj['modelLoopRequests'].push(modelLoop) -1; //保存到全局模块回路数组中
     modelLoop['index'] = index;
@@ -276,7 +274,7 @@
     var $tbody = $("#modelLoopTable").find("tbody").eq(0);
     $('<tr value="'+index+'" class="text-c">\n' +
       '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
-      '<td class="lightingList">'+modelLoop.lightingList+'</td>\n' +
+      '<td class="lightingList">'+lightingListArr+'</td>\n' +
       '<td class="mem">'+modelLoop.mem+'</td>\n' +
       '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
       '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n'+
@@ -288,6 +286,11 @@
   function editLoop(obj, title, url, param, w, h) {
     var index = $(obj).parents("tr").eq(0).attr("value");
     layer_show(title, url + "?" + param, w, h, function (modelLoop) {
+      var lightingListArr = [];
+      for(var i=0;i<modelLoop.lightingList.length;i++){
+        lightingListArr.push(modelLoop.lightingList[i].equipmentNumber);
+      }
+      lightingListArr = lightingListArr.join().replace(/,/g,"_");
       modelLoop['index'] = index;
       var urlParam = encodeURIComponent(JSON.stringify(modelLoop), 'utf-8');
       //更新数组
@@ -295,7 +298,7 @@
       //更新表格
       $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
         '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
-        '<td class="lightingList">'+modelLoop.lightingList+'</td>\n' +
+        '<td class="lightingList">'+lightingListArr+'</td>\n' +
         '<td class="mem">'+modelLoop.mem+'</td>\n' +
         '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
         '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
@@ -320,14 +323,15 @@
     var checkedTr = $(".tr-select").children("input:checked").parent().parent();
     var deviceData = table.row( checkedTr ).data();
     if(!(deviceData == undefined || deviceData == '')){
-      $.each(deviceData,function(i,val){
-        modelLoopObj[i] = val
-      });
+//      $.each(deviceData,function(i,val){
+//        modelLoopObj[i] = val
+//      });
+      deviceData['modelLoopRequests'] = modelLoopObj.modelLoopRequests;
     }else{
       return ''
     }
-    modelLoopObj['equType'] = '开关模块';
-    return modelLoopObj;
+    deviceData['equType'] = '开关模块';
+    return deviceData;
   };
 
 </script>

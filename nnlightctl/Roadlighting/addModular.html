@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加灯具型号</title>
+    <title>开关模块</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -157,16 +157,16 @@
                         if (data) {
                             if (data.header.code == 1000) {
                                 if (editModel(window.location.href)) {
-                                    layer.msg("编辑灯杆型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("编辑开关模块信息成功！", {icon: 1, time: 3000});
                                 } else {
-                                    layer.msg("添加灯杆型号信息成功！", {icon: 1, time: 3000});
+                                    layer.msg("添加开关模块信息成功！", {icon: 1, time: 3000});
                                 }
+                                ResetWindow();
                             } else {
                                 layer.msg(data.header.msg, {icon: 2, time: 3000});
                             }
                         }
                     });
-                    ResetWindow();
                 }
             });
 

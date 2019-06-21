@@ -45,7 +45,7 @@
                 <th>型号</th>
                 <th>名称</th>
                 <th>网卡地址</th>
-                <th>所属区域</th>
+                <!--<th>所属区域</th>-->
                 <th>所属项目</th>
                 <th>经度</th>
                 <th>纬度</th>
@@ -107,7 +107,7 @@
                         return '<input type="checkbox" value="' + row.id + '" >';
                     }
                 }, {
-                    targets: 13,
+                    targets: 12,
                     render: function (data, type, row) {
                         return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'900\', \'700\')"><i class="Hui-iconfont">&#xe6df;</i></a>'+
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
@@ -120,7 +120,7 @@
                 { "data": "eleboxModel", "defaultContent": "" },
                 { "data": "eleboxName", "defaultContent": "" },
                 { "data": "networkAddr", "defaultContent": "" },
-                { "data": "nnlightctlRegionId", "defaultContent": "" },
+//                { "data": "nnlightctlRegionId", "defaultContent": "" },
                 { "data": "nnlightctlProjectId", "defaultContent": "" },
                 { "data": "longitude", "defaultContent": "" },
                 { "data": "latitude", "defaultContent": "" },
@@ -150,6 +150,7 @@
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);
+                    layer.msg('成功！！ 一去不复返', { icon: 1, time: 3000 });
                 } else {
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
                 }

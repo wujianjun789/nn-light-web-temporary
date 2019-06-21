@@ -250,7 +250,7 @@
             dataType:"json",
             success: function(result){
               if (result) {
-                if (data.header.code == 1000) {
+                if (result.header.code == 1000) {
                   layer.msg("添加控制柜成功！", {icon : 1, time : 3000});
                   ResetWindow();
                 } else {

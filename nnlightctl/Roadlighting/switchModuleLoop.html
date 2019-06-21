@@ -97,7 +97,12 @@
 //    });
   });
   var getSelectList = function(checked){
-    formSelect.value('lightingList', checked);
+    var checkedArr = [];
+    for(var i=0;i<checked.length;i++){
+        checkedArr.push(checked[i].id);
+    }
+    formSelect.data('lightingList', 'local', {arr: checked});
+    formSelect.value('lightingList', checkedArr, true);
   };
   function initSelect(checked){
     /* 初始化下拉多选插件 */
@@ -134,13 +139,12 @@
         o["value"] = o["value"].replace(/,/g,"_");
         if(o["name"] == "loopCode"){
           param["loopCode"] = o["value"];
-        }else if(o["name"] == "lightingList"){
-          param["lightingList"] = o["value"];
         }else {
           param[o["name"]] = o["value"];
         }
         param["exleboxModelId"] = exleboxModelId;
       }
+      param["lightingList"] = formSelect.value('lightingList','equipmentNumber','id');
       return param;
     }
   };

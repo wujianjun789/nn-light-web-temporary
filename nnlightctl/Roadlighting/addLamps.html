@@ -328,7 +328,7 @@
                         $("#lamppostModel option").each(function(){//灯杆型号
                             if($(this).val() == light.nnlightctlLamppostId) $(this).attr('selected',true) ;
                         });
-                        $("#lampheadNumber").html('').append('<option value="" selected="selected">'+light.lamppostNumber+'</option>');//灯头号
+                        $("#lampheadNumber").html('').append('<option value="'+light.nnlightctlLamppostId+'" selected="selected">'+light.lamppostNumber+'</option>');//灯头号
 
                         $("#projectViewList option").each(function(){//所属项目
                             if($(this).val() == light.nnlightctlProjectId) $(this).attr('selected',true) ;
