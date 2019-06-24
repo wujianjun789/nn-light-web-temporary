@@ -272,7 +272,7 @@
         $.ajax({
           method: 'POST',
           contentType: "application/json",
-          url: 'http://192.168.10.165:8080/nnlightctl/api/switchTask/addOrUpdateSwitchTask',
+          url: BASE_ROOT + '/api/switchTask/addOrUpdateSwitchTask',
           data: JSON.stringify(param),
           // dataType: "json",
           success: function (data) {
@@ -325,7 +325,11 @@
                 $("#startDate").val(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate())
                 $("#endDate").val(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate())
                 simpleSwitch.infos.forEach(function (i) {
-                  holidayRules.push({lightPercent: i.lightPercent, beginTime: new Date(i.beginTime), switchTaskInfoId: i.id})
+                  holidayRules.push({
+                    lightPercent: i.lightPercent,
+                    beginTime: new Date(i.beginTime),
+                    switchTaskInfoId: i.id
+                  })
                   var str = '<div class="row cl mt-10">' +
                   '<label class="form-label col-xs-3 col-sm-3 text-r">已选择的：</label>' +
                   '<div class="formControls col-xs-9 col-sm-9">' +
