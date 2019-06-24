@@ -236,13 +236,13 @@
   }
 
   /*根据序号查询灯具，可多返回*/
-  function searchLightByPriority (lightArray, priority) {
+  function searchLightByPriority (lightArray) {//, priority
     var searchLightArray = [];
     for (var i = 0; i < lightArray.length; ++i) {
       var light = lightArray[i];
-      if (light.loopPriority == priority) {
+      // if (light.loopPriority == priority) {
         searchLightArray.push(light);
-      }
+      // }
     }
     return searchLightArray;
   }
