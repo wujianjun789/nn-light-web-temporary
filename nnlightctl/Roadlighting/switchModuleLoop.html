@@ -97,12 +97,17 @@
 //    });
   });
   var getSelectList = function(checked){
-    var checkedArr = [];
-    for(var i=0;i<checked.length;i++){
-        checkedArr.push(checked[i].id);
+    if(checked instanceof Array && checked.length == 0){
+      return false;
     }
-    formSelect.data('lightingList', 'local', {arr: checked});
-    formSelect.value('lightingList', checkedArr, true);
+    var checkedArr = [];
+    if(checked != undefined && checked != ''){
+      for(var i=0;i<checked.length;i++){
+        checkedArr.push(checked[i].id);
+      }
+      formSelect.data('lightingList', 'local', {arr: checked});
+      formSelect.value('lightingList', checkedArr, true);
+    }
   };
   function initSelect(checked){
     /* 初始化下拉多选插件 */

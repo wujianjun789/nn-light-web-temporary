@@ -37,7 +37,7 @@
             </span>
     </div>
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+        <table id="lightTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
@@ -94,7 +94,6 @@
     $("#btnSearch").click(function () {
         //搜索条件
         var searchLightModelName = $("#modelName").val().trim();
-
         param["modelName"] = searchLightModelName;
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
@@ -122,9 +121,10 @@
             },
             "columnDefs": [//对table格式的定义（表格的列从0开始）
                 {
+                    sClass: 'tr-select',
                     targets: 0,
                     render: function (data, type, row) {
-                        return '<input type="checkbox" value="' + row.id + '" >';
+                        return '<input type="checkbox" name="tr-select" value="' + row.id + '" >';
                     }
                 }, {
                     targets: 14,
@@ -191,24 +191,23 @@
     function del_more() {
         //获取全部批量删除的id
         var idArray = [];
-        $("table.table").find("input[type='checkbox']:checked").each(function () {
+        $("#lightTable").find("input[name='tr-select']:checked").each(function () {
             idArray.push($(this).val());
         });
-
         if (idArray.length <= 0) {
-            return;
+            layer.msg("请选择灯具", { icon: 2, time: 3000 });
+        }else{
+            layer.confirm('确认删除已选中的信息吗？', function (index) {
+                batchDeleteLightModel(idArray);
+                $("#lightTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                layer.close(index);
+            })
         }
-
-        layer.confirm('确认批量删除？', function (index) {
-            batchDeleteLightModel(idArray);
-            layer.close(index);
-        })
     }
 
     //删除单个
     function del_one(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-            // var id = $(obj).parents("tr").find("input[type='checkbox']").eq(0).val();
             var idArray = [];
             idArray.push(id);
             batchDeleteLightModel(idArray);
