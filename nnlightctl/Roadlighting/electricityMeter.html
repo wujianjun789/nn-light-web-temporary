@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
@@ -105,7 +105,6 @@
             "searching": false,
             "autoWidth": true,
             "ordering": false, //设置所有布排序
-            "bStateSave": true,
             "ajax": function (data, callback, settings) {
                 ajaxRequest("post", "/api/roadlighting/selectelectricityall", param, function (data) {
                     //封装返回数据
@@ -179,7 +178,6 @@
     function add(title, url, w, h) {
         layer_show(title, url, w, h);
     }
-
     //编辑
     function edit(title, url, id, w, h) {
         layer_show(title, url + "?id=" + id, w, h);
