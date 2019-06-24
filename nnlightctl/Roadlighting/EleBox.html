@@ -107,6 +107,7 @@
                 if (data) {
                     if (data.header.code == 1000) {
                         searchElebox();
+                        layer.msg('成功！！一去不复返', { icon: 1, time: 3000 });
                     } else {
                         layer.msg(data.header.msg, {icon : 2, time : 3000});
                     }
@@ -119,14 +120,15 @@
             $("#eleboxTable").find("input[name='tr-select']:checked").each(function () {
                 idArray.push($(this).val());
             });
-
             if (idArray.length <= 0) {
-                return;
+                layer.msg("请选择控制柜", { icon: 2, time: 3000 });
+            }else{
+                layer.confirm('确认删除已选中的信息吗？', function (index) {
+                    batchDeleteElebox(idArray);
+                    $("#eleboxTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                    layer.close(index);
+                });
             }
-            layer.confirm('确认批量删除？', function (index) {
-                batchDeleteElebox(idArray);
-                layer.close(index);
-            });
         }
         //管理灯具
         function lampsManage(title, url, id, w, h) {
@@ -163,7 +165,6 @@
         /*删除控制柜*/
         function delElebox(obj, id) {
             layer.confirm('确认要删除吗？', function (index) {
-                // var id = $(obj).parents("tr").find("input[type='checkbox']").eq(0).val();
                 var idArray = [];
                 idArray.push(id);
                 batchDeleteElebox(idArray);

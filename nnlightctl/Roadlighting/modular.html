@@ -37,7 +37,7 @@
             </span>
     </div>
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+        <table id="modularTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
@@ -104,7 +104,7 @@
             "ordering": false, //设置所有布排序
             "bStateSave": true,
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listmodel", param, function (data) {
+                ajaxRequest("post", "api/roadlighting/listmodel", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -117,9 +117,10 @@
             },
             "columnDefs": [//对table格式的定义（表格的列从0开始）
                 {
+                    sClass: 'tr-select',
                     targets: 0,
                     render: function (data, type, row) {
-                        return '<input type="checkbox" value="' + row.id + '" >';
+                        return '<input type="checkbox" name="tr-select" value="' + row.id + '" >';
                     }
                 }, {
                     targets: 10,
@@ -138,8 +139,12 @@
                         { "data": "communicationMethods", "defaultContent": "","render":function(data, type, full, meta){
                                 data = parseInt(data);
                                 switch(data){
-                                    case 0 : return 'RS485';break;
-                                    case 1 : return 'Zigbee';break;
+                                    case 1 : return 'NB-IoT';break;
+                                    case 2 : return '4G';break;
+                                    case 3 : return 'Zigbee';break;
+                                    case 4 : return 'PLC';break;
+                                    case 5 : return 'RS485';break;
+                                    case 6 : return 'GPRS';break;
                                 }
                             }},
                         { "data": "maxElectric", "defaultContent": "" },
@@ -156,19 +161,12 @@
     }
     //增加
     function add(title, url, w, h) {
-        // var index = layer.open({
-        //     type: 2,
-        //     title: title,
-        //     content: url
-        // });
-       //  layer.full(index);
         layer_show(title, url, w, h);
     }
 
     //编辑
     function edit(title, url, id, w, h) {
         layer_show(title, url + "?id=" + id, w, h);
-        // alert(id);
     }
 
     /*删除*/
@@ -192,24 +190,23 @@
     function del_more() {
         //获取全部批量删除的id
         var idArray = [];
-        $("table.table").find("input[type='checkbox']:checked").each(function () {
+        $("#modularTable").find("input[name='tr-select']:checked").each(function () {
             idArray.push($(this).val());
         });
-
-        if (idArray.length <= 0) {
-            return;
+        if(idArray.length<=0){
+            layer.msg("请选择开关模块", { icon: 2, time: 3000 });
+        }else{
+            layer.confirm('确认删除已选中的信息吗？', function (index) {
+                batchDeleteLightModel(idArray);
+                $("#modularTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                layer.close(index);
+            });
         }
-
-        layer.confirm('确认批量删除？', function (index) {
-            batchDeleteLightModel(idArray);
-            layer.close(index);
-        })
     }
 
     //删除单个
     function del_one(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-            // var id = $(obj).parents("tr").find("input[type='checkbox']").eq(0).val();
             var idArray = [];
             idArray.push(id);
             batchDeleteLightModel(idArray);

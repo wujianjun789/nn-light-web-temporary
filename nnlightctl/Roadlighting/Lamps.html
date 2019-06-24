@@ -143,6 +143,7 @@
         ajaxRequest("post", "api/deploy/deletedeploylighting", transArray({lampControllerIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
+                    layer.msg('成功！！一去不复返', { icon: 1, time: 3000 });
                     searchLight();
                 } else {
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
@@ -157,16 +158,16 @@
         $("#lightTable").find("input[name='tr-select']:checked").each(function () {
             idArray.push($(this).val());
         });
-
         if (idArray.length <= 0) {
-            alert("请先选择！");
-            return;
+            layer.msg("请选择灯具", { icon: 2, time: 3000 });
+        }else{
+            layer.confirm('确认删除已选中的信息吗？', function (index) {
+                batchDeleteLight(idArray);
+                $("#lightTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                layer.close(index);
+            });
         }
 
-        layer.confirm('确认批量删除？', function (index) {
-            batchDeleteLight(idArray);
-            layer.close(index);
-        });
     }
 
     //删除灯具

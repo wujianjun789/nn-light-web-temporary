@@ -37,7 +37,7 @@
             </span>
     </div>
     <div class="mt-20">
-        <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+        <table id="lampPostTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
@@ -105,7 +105,6 @@
             "searching": false,
             "autoWidth": true,
             "ordering": false, //设置所有布排序
-            "bStateSave": true,
             "ajax": function (data, callback, settings) {
                 ajaxRequest("post", "/api/roadlighting/listlamppost", param, function (data) {
                     //封装返回数据
@@ -120,9 +119,10 @@
             },
             "columnDefs": [//对table格式的定义（表格的列从0开始）
                 {
+                    sClass: 'tr-select',
                     targets: 0,
                     render: function (data, type, row) {
-                        return '<input type="checkbox" value="' + row.id + '" >';
+                        return '<input type="checkbox" name="tr-select" value="' + row.id + '" >';
                     }
                 }, {
                     targets: 12,
@@ -150,19 +150,12 @@
     }
     //增加
     function add(title, url, w, h) {
-        // var index = layer.open({
-        //     type: 2,
-        //     title: title,
-        //     content: url
-        // });
-       //  layer.full(index);
         layer_show(title, url, w, h);
     }
 
     //编辑
     function edit(title, url, id, w, h) {
         layer_show(title, url + "?id=" + id, w, h);
-        // alert(id);
     }
 
     /*删除*/
@@ -173,12 +166,11 @@
         ajaxRequest("post", "/api/roadlighting/deletelamppost", transArray({lamppostIds : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
-                    // alert(1);
                     searchLightModel(1);
+                    layer.msg('成功！！一去不复返', { icon: 1, time: 3000 });
                 } else {
-                    // alert(2);
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
-
+                    layer.msg(data.header.msg, { icon: 2, time: 3000 });
                 }
             }
         });
@@ -188,24 +180,23 @@
     function del_more() {
         //获取全部批量删除的id
         var idArray = [];
-        $("table.table").find("input[type='checkbox']:checked").each(function () {
+        $("#lampPostTable").find("input[name='tr-select']:checked").each(function () {
             idArray.push($(this).val());
         });
-
         if (idArray.length <= 0) {
-            return;
+            layer.msg("请选择灯杆", { icon: 2, time: 3000 });
+        }else{
+            layer.confirm('确认删除已选中的信息吗？', function (index) {
+                batchDeleteLightModel(idArray);
+                $("#lampPostTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                layer.close(index);
+            })
         }
-
-        layer.confirm('确认批量删除？', function (index) {
-            batchDeleteLightModel(idArray);
-            layer.close(index);
-        })
     }
 
     //删除单个
     function del_one(obj, id) {
         layer.confirm('确认要删除吗？', function (index) {
-            // var id = $(obj).parents("tr").find("input[type='checkbox']").eq(0).val();
             var idArray = [];
             idArray.push(id);
             batchDeleteLightModel(idArray);

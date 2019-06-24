@@ -136,18 +136,14 @@
   var modelLoopObj = {};//存储数据的全局变量
   modelLoopObj['modelLoopRequests'] = [];//设备回路数据
   var paramContext = editModelParam(window.location.href);//获取url参数
+  var loopLists = [];//记录全部回路数据
   $(function(){
     setTimeout(function(){//等框完全展开后初始化表格
       //判断是否编辑模式
       if (paramContext) {
         var paramObj = JSON.parse(paramContext) instanceof Array ? JSON.parse(paramContext)[0] : JSON.parse(paramContext);
-//        $(".tr-select").each(function(){
-//          if($(this).children('input').val() == paramObj.id){
-//            $(this).children('input').attr('checked',true);
-//          }
-//        });
         var paramObjList = paramObj.exleboxModel? paramObj.exleboxModel : paramObj;
-        if(paramObjList){//回显回路编辑
+        if(paramObjList){//回显模块信息
           table = $('#table').DataTable({
             "data": [paramObjList],
             "bStateSave": true,
@@ -237,7 +233,17 @@
         { "data": "modelCode", "defaultContent": "" },
         { "data": "modelName", "defaultContent": "" },
         { "data": "modelType", "defaultContent": "" },
-        { "data": "communicationMethods", "defaultContent": "" },
+        { "data": "communicationMethods", "defaultContent": "", "render":function(data, type, full, meta){
+          data = parseInt(data);
+          switch(data){
+            case 1 : return 'NB-IoT';break;
+            case 2 : return '4G';break;
+            case 3 : return 'Zigbee';break;
+            case 4 : return 'PLC';break;
+            case 5 : return 'RS485';break;
+            case 6 : return 'GPRS';break;
+          }
+        }},
         { "data": "maxElectric", "defaultContent": "" },
         { "data": "loopCount", "defaultContent": ""},
         { "data": "mem", "defaultContent": ""}
@@ -255,17 +261,45 @@
     }else{
       var prams = {exleboxModelId: deviceData.id,loopCount: deviceData.loopCount};
       layer_show(title, url+'?'+encodeURIComponent(JSON.stringify(prams), 'utf-8'), w, h, function(modelLoop){
-        showLoopList(modelLoop)
+        loopLists = JSON.parse(JSON.stringify(modelLoopObj['modelLoopRequests']));
+        loopLists.push(modelLoop);
+        if(LoopDuplicateRemoval() == 0){
+          showLoopList(modelLoop)
+        }else if(LoopDuplicateRemoval() == 1){
+          layer.msg("该回路编号以被添加，不妨换一个？", { icon: 2, time: 3000 });
+        }else if(LoopDuplicateRemoval() == 2){
+          layer.msg("该单灯控制器以被添加，不妨换一个？", { icon: 2, time: 3000 });
+        }
       });
     }
   }
+  //回路去重
+  function LoopDuplicateRemoval(){// 0：不重复 1：回路编号重复 2：单灯控制器重复
+    var loopCodes = [],equipmentNumbers = [];
+    var find = 0;
+    for(var i=0;i<loopLists.length;i++){
+      loopCodes.push(loopLists[i].loopCode);
+      for(var x=0;x<loopLists[i].lightingList.length;x++){
+        equipmentNumbers.push(loopLists[i].lightingList[x].equipmentNumber)
+      }
+    }
+    var arr1 = [],arr2 = [];
+    for(var z=0;z<loopCodes.length;z++){
+      if(arr1.indexOf(loopCodes[z]) === -1){arr1.push(loopCodes[z])}else{find = 1;break;}
+    }
+    for(var a=0;a<equipmentNumbers.length;a++){
+      if(arr2.indexOf(equipmentNumbers[a]) === -1){arr2.push(equipmentNumbers[a])}else{find = 2;break;}
+    }
+    return find;
+  }
+
+
   //添加回路回调函数
   function showLoopList(modelLoop) {
-    var lightingListArr = [];
+    var lightingListOption = '';
     for(var i=0;i<modelLoop.lightingList.length;i++){
-      lightingListArr.push(modelLoop.lightingList[i].equipmentNumber);
+      lightingListOption += '<option value="'+modelLoop.lightingList[i].id+'">'+modelLoop.lightingList[i].equipmentNumber+'</option>'
     }
-    lightingListArr = lightingListArr.join().replace(/,/g,"_");
     modelLoop['exleboxModelId'] = $('input[name="table-select"]:checked').val();
     var index = modelLoopObj['modelLoopRequests'].push(modelLoop) -1; //保存到全局模块回路数组中
     modelLoop['index'] = index;
@@ -274,7 +308,7 @@
     var $tbody = $("#modelLoopTable").find("tbody").eq(0);
     $('<tr value="'+index+'" class="text-c">\n' +
       '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
-      '<td class="lightingList">'+lightingListArr+'</td>\n' +
+      '<td class="lightingList"><select class="select" style="width: 180px;border: none">'+lightingListOption+'</select></td>\n' +
       '<td class="mem">'+modelLoop.mem+'</td>\n' +
       '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
       '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n'+
@@ -286,32 +320,42 @@
   function editLoop(obj, title, url, param, w, h) {
     var index = $(obj).parents("tr").eq(0).attr("value");
     layer_show(title, url + "?" + param, w, h, function (modelLoop) {
-      var lightingListArr = [];
-      for(var i=0;i<modelLoop.lightingList.length;i++){
-        lightingListArr.push(modelLoop.lightingList[i].equipmentNumber);
+      loopLists = JSON.parse(JSON.stringify(modelLoopObj['modelLoopRequests']));
+      loopLists[index] = modelLoop;
+      if(LoopDuplicateRemoval() == 0){
+        var lightingListArr = [];
+        for(var i=0;i<modelLoop.lightingList.length;i++){
+          lightingListArr.push(modelLoop.lightingList[i].equipmentNumber);
+        }
+        lightingListArr = lightingListArr.join().replace(/,/g,"_");
+        modelLoop['index'] = index;
+        var urlParam = encodeURIComponent(JSON.stringify(modelLoop), 'utf-8');
+        //更新数组
+        modelLoopObj['modelLoopRequests'][index] = modelLoop;
+        //更新表格
+        $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
+            '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
+            '<td class="lightingList">'+lightingListArr+'</td>\n' +
+            '<td class="mem">'+modelLoop.mem+'</td>\n' +
+            '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
+            '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
+            '</tr>');
+      }else if(LoopDuplicateRemoval() == 1){
+        layer.msg("该回路编号以被添加，不妨换一个？", { icon: 2, time: 3000 });
+      }else if(LoopDuplicateRemoval() == 2){
+        layer.msg("该单灯控制器以被添加，不妨换一个？", { icon: 2, time: 3000 });
       }
-      lightingListArr = lightingListArr.join().replace(/,/g,"_");
-      modelLoop['index'] = index;
-      var urlParam = encodeURIComponent(JSON.stringify(modelLoop), 'utf-8');
-      //更新数组
-      modelLoopObj['modelLoopRequests'][index] = modelLoop;
-      //更新表格
-      $("#modelLoopTable").find("tbody").find("tr").eq(index).replaceWith('<tr value="'+index+'" class="text-c">\n' +
-        '<td class="loopCode">'+modelLoop.loopCode+'</td>\n' +
-        '<td class="lightingList">'+lightingListArr+'</td>\n' +
-        '<td class="mem">'+modelLoop.mem+'</td>\n' +
-        '<td class="operation"><a style="text-decoration:none" class="ml-5" onclick="editLoop(this, \'编辑回路\', \'switchModuleLoop.html\', \''+urlParam+'\', \'600\', \'500\')" href="javascript:void(0);" title="回路编辑"><i class="Hui-iconfont">&#xe6df;</i></a>'+
-        '<a style="text-decoration:none" class="ml-10" onClick="delLoop(this)" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>\n' +
-        '</tr>');
     });
   }
   /*删除回路*/
   function delLoop(obj){
-    layer.confirm('确认要删除吗？', function () {
+    layer.confirm('确认要删除吗？', function (layerIndex) {
       var index = $(obj).parents("tr").eq(0).attr("value");
+      //删除tr
+      $(obj).parents("tr").remove();
       //更新数组
       modelLoopObj['modelLoopRequests'].splice(index,1);
-      layer.close(index);
+      layer.close(layerIndex);
     });
   }
 
@@ -333,7 +377,19 @@
     deviceData['equType'] = '开关模块';
     return deviceData;
   };
-
+  //判断一个json数组内是否有重复的val
+  function displayDate(arr,val1,val2){
+    var find = false;
+    for (var i = 0; i < arr.length; i++) {
+      for (var j = i + 1; j < arr.length; j++) {
+        if(arr[i].val1 != undefined || arr[i].val1 != ''){
+          if(arr[i].val1 === arr[j].val1) {find = 1; break;}
+        }else if(arr[i].val2 === arr[j].val2){find = 2; break;}
+      }
+      if (find) break;
+    }
+    return find;
+  }
 </script>
 <!--/请在上方写此页面业务相关的脚本-->
 </body>
