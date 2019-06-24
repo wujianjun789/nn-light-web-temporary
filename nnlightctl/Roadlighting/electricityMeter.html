@@ -26,7 +26,7 @@
 </nav>
 <div class="page-container">
     <div class="text-l">
-        电表：
+        电表型号：
         <input type="text" name="electricityModel" id="electricityModel" placeholder="电表型号" style="width:250px" class="input-text">
         <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
     </div>
@@ -216,6 +216,7 @@
         });
 
         if (idArray.length <= 0) {
+            alert('请选择数据！');
             return;
         }
 
