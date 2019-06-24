@@ -281,6 +281,8 @@
                                                 var light = data.body.data[0].lightingList[i];
                                                 $("#tb2").append("<tr class='text-c' ref="+light.id+" data-id='0'>"+
                                                     "<td>"+light.id+"</td>"+
+                                                    // "<td>"+light.lampostName+"</td>"+
+                                                    // "<td>"+light.modelName+"</td>"+
                                                     "<td>"+light.lamppost+"</td>"+
                                                     "<td>"+light.lamphead+"</td>"+
                                                     "<td>"+light.longitude+"</td>"+
@@ -355,8 +357,8 @@
                             for (var i = 0 ; i < data.body.data.length ; i++){
                                 $(".tb0_1").append("<tr class='text-c' ref="+data.body.data[i].id+" data-id='0'>"+
                                     "<td>"+data.body.data[i].id+"</td>"+
-                                    "<td>"+data.body.data[i].lamppost+"</td>"+
-                                    "<td>"+data.body.data[i].lamphead+"</td>"+
+                                    "<td>"+data.body.data[i].lampostName+"</td>"+
+                                    "<td>"+data.body.data[i].modelName+"</td>"+
                                     "<td>"+data.body.data[i].longitude+"</td>"+
                                     "<td>"+data.body.data[i].latitude+"</td>"+
                                     "</tr>");
