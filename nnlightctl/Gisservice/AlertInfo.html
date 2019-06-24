@@ -131,7 +131,7 @@
             </div>
             <div class="clear"></div>
         </div>
-        
+
        <!-- <div class="row cl mt-20">
             <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
                 <input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -141,20 +141,31 @@
 
 
     </div>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../js/api/requestRoot.js"></script>
     <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
     <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
     <script type="text/javascript">
         $(function () {
             findAram(1);
             $(".navtit").click(function () {
                 var _this = $(this);
-                $(".ucnav .Hui-iconfont").html("&#xe6d7;");
-                _this.children("i").html("&#xe6d5;");
-                $(".ucsub").hide();
-                var TabId = "tab" + _this.attr("ref");
-                $("." + TabId).show(500);
+              _this.children("i").toggleClass('active-i')
+                if(!_this.children("i").hasClass("active-i")){
+                  _this.children("i").html("&#xe6d7;");
+                }else {
+                  _this.children("i").html("&#xe6d5;");
+                }
+                // $(".ucnav .Hui-iconfont").html("&#xe6d7;");
+                // _this.children("i").html("&#xe6d5;");
+                // $(".ucsub").hide();
+              if(_this.attr("ref")==1){
+                $(".tab1").toggle();
+              }else if (_this.attr("ref")==2) {
+                $(".tab2").toggle();
+              }
+                // var TabId = "tab" + _this.attr("ref");
+                // $("." + TabId).show(500);
             });
             $(".ucsub a").click(function () {
                 // //此处请求后台程序，绑定右侧table数据

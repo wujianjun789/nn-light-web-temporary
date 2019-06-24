@@ -142,23 +142,40 @@
                 rules: {
                     equipmentNumber: {
                         required: true,
-                        isFloat:true
+                        isNumber:true,
+                        maxlength:20
                     },
                     electricityModel: {
                         required: true,
-                        // isFloat:true
+                        // isFloat:true,
+                        maxlength:58
                     },
                     electricityName: {
                         required: true,
-                        // isFloat: true
+                        // isFloat: true,
+                        maxlength:58
                     },
                     communityMode: {
                         required: true,
-                        // isFloat: true
+                        // isFloat: true,
+                        maxlength:58
                     },
                     measureMode: {
                         required: true,
-                        // isNumber:true
+                        // isNumber:true,
+                        maxlength:20
+                    },
+                    voltageTest:{
+                        maxlength:58
+                    },
+                    powerFactor:{
+                        maxlength:20
+                    },
+                    powerWaste:{
+                        maxlength:58
+                    },
+                    mem:{
+                        maxlength:65535
                     },
                 },
                 onkeyup: false,

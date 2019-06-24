@@ -172,7 +172,9 @@
   }
 
   function deleteRuels (index) {
-    holidayRules.splice(index, 1)
+    holidayRules[index].isAdd = false;
+    console.log(index)
+    console.log(holidayRules)
     $('.selectedRules>div').eq(index).hide()
   }
 
@@ -199,7 +201,8 @@
         holidayRules.push({
           beginTime: str2Date('2019-01-01 ' + $('#holidayTime').val()),
           lightPercent: $('#lightPercent').val(),
-          switchTaskInfoId: null
+          switchTaskInfoId: null,
+          isAdd: true
         })
         var str = '<div class="row cl mt-10">' +
         '<label class="form-label col-xs-3 col-sm-3 text-r">已选择的：</label>' +
@@ -214,7 +217,6 @@
         layer.msg('填写错误', {icon: 2, time: 1000});
         return;
       }
-      console.log(holidayRules)
       $('.time-select').hide()
       $('.percent').hide()
       $('#addRules').show()
@@ -234,7 +236,13 @@
       submitHandler: function (form) {
         //ajax上传表单
         //构造上传数据
-        if (!holidayRules.length && $('input[name=period]:checked').val() == 4) {
+        var flag = false
+        holidayRules.forEach(function (val) {
+          if (val.isAdd) {
+            flag = true
+          }
+        })
+        if (!flag && $('input[name=period]:checked').val() == 4) {
           layer.msg('请选择时间点', {icon: 2, time: 1000});
           return
         }
@@ -258,7 +266,9 @@
         } else {
           param["switchTaskInfoArray"] = []
           holidayRules.forEach(function (value) {
-            param["switchTaskInfoArray"].push(value)
+            if(value.isAdd){
+              param["switchTaskInfoArray"].push(value)
+            }
           })
           param['lightPercent'] = null
           var startdate = str2Date($("#startDate").val());
@@ -267,12 +277,11 @@
         param["startTime"] = startdate;
         param["endTime"] = enddate;
         param["id"] = editModel(window.location.href);
-        console.log(param)
 
         $.ajax({
           method: 'POST',
           contentType: "application/json",
-          url: 'http://192.168.10.165:8080/nnlightctl/api/switchTask/addOrUpdateSwitchTask',
+          url: BASE_ROOT + '/api/switchTask/addOrUpdateSwitchTask',
           data: JSON.stringify(param),
           // dataType: "json",
           success: function (data) {
@@ -325,7 +334,12 @@
                 $("#startDate").val(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate())
                 $("#endDate").val(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate())
                 simpleSwitch.infos.forEach(function (i) {
-                  holidayRules.push({lightPercent: i.lightPercent, beginTime: new Date(i.beginTime), switchTaskInfoId: i.id})
+                  holidayRules.push({
+                    lightPercent: i.lightPercent,
+                    beginTime: new Date(i.beginTime),
+                    switchTaskInfoId: i.id,
+                    isAdd: true
+                  })
                   var str = '<div class="row cl mt-10">' +
                   '<label class="form-label col-xs-3 col-sm-3 text-r">已选择的：</label>' +
                   '<div class="formControls col-xs-9 col-sm-9">' +
