@@ -208,7 +208,7 @@
             idArray.push($(this).val());
         });
         if (idArray.length <= 0) {
-            layer.msg("请选择控制柜", { icon: 2, time: 3000 });
+            layer.msg("请选择电表", { icon: 2, time: 3000 });
         }else{
             layer.confirm('确认删除已选中的信息吗？', function (index) {
                 batchDeleteLightModel(idArray);
