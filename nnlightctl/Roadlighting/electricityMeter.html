@@ -161,9 +161,12 @@
                         { "data": "communityMode", "defaultContent": "","render":function(data, type, full, meta){
                                 data = parseInt(data);
                                 switch(data){
-                                    case 0 : return '1路RS485接口';break;
-                                    case 1 : return '0-远红外通讯接口';break;
-                                    case 2 : return '其他数字调光接口';break;
+                                    case 0 : return 'RS485接口';break;
+                                    case 1 : return '远红外通讯接口';break;
+                                    case 2 : return 'WIFI';break;
+                                    case 3 : return 'Zigbee';break;
+                                    case 4 : return 'Zora';break;
+                                    case 5 : return '其他数字调光接口';break;
 
                                 }
                             }},
