@@ -82,20 +82,32 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>上行通讯接口：</label>
                 <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="上行通讯接口" id="upChannel" name="upChannel">
+                    <span class="select-box">
+                        <select class="select" name="upChannel" id="upChannel" size="1">
+                            <option value="0">4G</option>
+                            <option value="1">TCP</option>
+                            <option value="2">GPRS</option>
+                        </select>
+                    </span>
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>下行通讯接口：</label>
-                <div class="formControls col-xs-8 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="下行通讯接口" id="downChannel" name="downChannel">
+                <div class="formControls col-xs-7 col-sm-8 text-l">
+                    <span class="select-box">
+                        <select class="select" name="downChannel" id="downChannel" size="1">
+                            <option value="0">RS485</option>
+                            <option value="1">PLC</option>
+                            <option value="2">Zigbee</option>
+                        </select>
+                    </span>
                 </div>
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
-                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                    <p class="textarea-numberbar">100</p>
                 </div>
             </div>
             <div class="row cl">
@@ -121,34 +133,69 @@
     <script type="text/javascript">
         $(function () {
             //数据验证
+            jQuery.validator.addMethod("regex",function(value,element,params){
+                var exp = new RegExp(params);
+                return exp.test(value);
+            },"格式错误");
             $("#form-admin-add").validate({
                 rules: {
+                    equipmentNumber:{
+                        required: true,
+                        isNumber:true,
+                        rangelength:[17,17]
+                    },
                     centralizeModel: {
                         required: true,
+                        regex: /(?=.[A-Z])(?=.*[0-9])[A-Z0-9]/
                     },
                     centralizeName: {
-                        required: true,
-//                        isFloat:true
+                        maxlength:58
                     },
                     longitude: {
                         required: true,
-                        isFloat: true
+                        isNumber: true
                     },
                     latitude: {
                         required: true,
                         isNumber:true
                     },
-                    switchChannel: {
+                    doChannel:{
                         required: true,
-//                        isFloat: true
+                        digits: true
+                    },
+                    diChannel:{
+                        maxlength: 2,
+                        digits: true
+                    },
+                    switchChannel: {
+                        maxlength: 2,
+                        digits: true
+                    },
+                    voltageChannel:{
+                        maxlength: 2,
+                        digits: true
+                    },
+                    electricChannel:{
+                        maxlength: 2,
+                        digits: true
+                    },
+                    testChannel:{
+                        maxlength: 2,
+                        digits: true
                     },
                     upChannel: {
-                        required: true,
-//                        isFloat: true
+                        required: true
                     },
                     downChannel: {
-                        required: true,
-//                        isFloat: true
+                        required: true
+                    }
+                },
+                messages:{
+                    equipmentNumber:{
+                        rangelength: '编码长度为17位'
+                    },
+                    centralizeModel:{
+                        regex: '由开头字母(大写)+数字组成'
                     }
                 },
                 onkeyup: false,
