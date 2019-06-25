@@ -25,13 +25,13 @@
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><!--<span class="c-red">*</span>-->控制柜型号：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜型号：</label>
             <div class="formControls col-xs-7 col-sm-8">
                 <input type="text" class="input-text" value="" placeholder="控制柜型号" id="eleboxModel" name="eleboxModel">
             </div>
         </div>
         <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3"><!--<span class="c-red">*</span>-->控制柜名称：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>控制柜名称：</label>
             <div class="formControls col-xs-7 col-sm-8">
                 <input type="text" class="input-text" value="" placeholder="控制柜名称" id="eleboxName" name="eleboxName">
             </div>
@@ -93,7 +93,7 @@
             <div class="formControls col-xs-8 col-sm-8">
                 <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem"
                           name="mem"></textarea>
-                <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                <p class="textarea-numberbar"><!--<em class="textarea-length">0</em>/-->100</p>
             </div>
         </div>
         <div class="row cl">
@@ -162,9 +162,12 @@
     //数据验证
     $("#form-admin-add").validate({
       rules: {
-        codeNumber: {
-          required: true
-        },
+          codeNumber: {
+              required: true,
+              digits:true,
+              maxlength:17,
+              minlength:17
+          },
         eleboxModel: {
           required: true
         },
@@ -184,14 +187,17 @@
           required: true
         },
         materialQuality: {
-          required: true
+          // required: true
         },
         eleboxColors: {
-          required: true
+          // required: true
         },
         eleboxSize: {
-          required: true
+          // required: true
         },
+          mem: {
+              maxlength:100,
+          },
       },
       onkeyup: false,
       focusCleanup: true,

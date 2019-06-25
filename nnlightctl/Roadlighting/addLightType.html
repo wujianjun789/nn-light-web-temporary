@@ -25,7 +25,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">灯具类型：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具类型：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="灯具类型" id="chip" name="chip">
                 </div>
@@ -37,19 +37,19 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电压：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>额定电压(V)：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="额定电压" id="ratedVoltage" name="ratedVoltage">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定电流：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>额定电流(A)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="额定电流" id="ratedElectric" name="ratedElectric">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">额定功率：</label>
+                <label class="form-label col-xs-4 col-sm-3">额定功率(W)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="额定功率" id="ratedPower" name="ratedPower">
                 </div>
@@ -67,13 +67,13 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">IP等级：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>IP等级：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="IP等级" id="grade" name="grade">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">色温：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>色温：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="色温" id="colorMode" name="colorMode">
                 </div>
@@ -101,7 +101,7 @@
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
-                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                    <p class="textarea-numberbar"><!--<em class="textarea-length">0</em>/-->100</p>
                 </div>
             </div>
             <div class="row cl">
@@ -130,24 +130,71 @@
             //数据验证
             $("#form-admin-add").validate({
                 rules: {
-                    modelName: {
-                        required: true,
-                    },
                     equipmentNumber: {
                         required: true,
-                        isFloat:true
+                        digits:true,
+                        maxlength:17,
+                        minlength:17
                     },
-                    beanAngle: {
+                    chip: {
                         required: true,
-                        // isFloat: true
+                        maxlength:58,
+
+                    },
+                    modelName: {
+                        required: true,
+                        maxlength:64,
+
+                    },
+                    ratedVoltage:{
+                        required: true,
+                        maxlength:10,
+                        number:true,
+                    },
+                    ratedElectric:{
+                        required: true,
+                        maxlength:10,
+                        number:true,
+                    },
+                    ratedPower:{
+                        // required: true,
+                        maxlength:10,
+                        number:true,
                     },
                     indexMode: {
                         required: true,
+                        digits:true,
                         // isFloat: true
                     },
                     flux: {
                         required: true,
+                        digits:true,
+                        maxlength:4,
                         // isNumber:true
+                    },
+                    grade:{
+                        required: true,
+                        maxlength:4,
+                        number:true,
+                    },
+                    indexMode:{
+                        required: true,
+                        maxlength:4,
+                        digits:true,
+                    },
+                    colorMode:{
+                        required: true,
+                        maxlength:4,
+                        number:true,
+                    },
+                    beanAngle: {
+                        required: true,
+                        maxlength:4,
+                        number:true,
+                        // isFloat: true
+                    },
+                    mem: {
+                        maxlength:100,
                     },
                 },
                 onkeyup: false,
