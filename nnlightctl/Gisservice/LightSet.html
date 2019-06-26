@@ -208,16 +208,16 @@
       var d1 = parseInt($('#dimmingMode').text());
       switch (d1) {
           case 1 :
-              d2='NB-IoT';
+              d2='PWM';
               break;
           case 2 :
-              d2='4G';
+              d2='0-10V';
               break;
           case 3 :
-              d2='Zigbee';
+              d2='YUART';
               break;
           case 4 :
-              d2='PLC';
+              d2='DALI';
               break;
       }
       $('#dimmingMode').html(d2);
