@@ -158,14 +158,15 @@
             $("#ratedCurrent").text(light.ratedCurrent);
             $("#ratedVoltage").text(light.ratedVoltage);
             $("#staticPower").text(light.staticPower);
-            ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
-            if (data) {
-              console.log(data);
-              if (data.header.code == 1000) {
-                $("#signalIntensity").text(data.body.data);
-              }
-            }
-          })
+            //注释接口getLightSignalByUUID
+          //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+          //   if (data) {
+          //     console.log(data);
+          //     if (data.header.code == 1000) {
+          //       $("#signalIntensity").text(data.body.data);
+          //     }
+          //   }
+          // })
         }
       }
     });
