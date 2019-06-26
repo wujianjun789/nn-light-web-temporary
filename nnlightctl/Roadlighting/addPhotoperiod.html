@@ -48,13 +48,13 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>量程：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>量程(lux)：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="量程" id="dimmingMode" name="dimmingMode">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>精度(S)：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>精度(lux)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="精度" id="accuracy" name="accuracy">
                 </div>
@@ -105,7 +105,7 @@
                 rules: {
                     equipmentNumber: {
                         required: true,
-                        isNumber:true,
+                        digits:true,
                         rangelength:[17,17]
                     },
                     photoperiodModel: {
@@ -121,15 +121,21 @@
                     },
                     dimmingMode:{
                         required: true,
-                        isNumber:true
+                        digits: true,
+                        maxlength:12
                     },
                     accuracy:{
                         required: true,
-                        isNumber:true
+                        digits:true,
+                        maxlength:12
                     },
                     workVoltage:{
                         required: true,
-                        isNumber:true
+                        digits:true,
+                        maxlength:12
+                    },
+                    mem:{
+                        maxlength:100
                     }
                 },
                 onkeyup: false,

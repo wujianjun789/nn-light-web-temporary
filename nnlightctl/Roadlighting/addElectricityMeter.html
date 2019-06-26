@@ -19,7 +19,7 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
                 </div>
@@ -146,44 +146,47 @@
                 rules: {
                     equipmentNumber: {//编码
                         required: true,
-                        isNumber:true,
+                        digits: true,
                         rangelength:[17,17]
                     },
                     electricityModel: {//型号
                         required: true,
-                        regex: /(?=.[A-Z])(?=.*[0-9])[A-Z0-9]/,
-                        maxlength:7
+                        maxlength:7,
+                        regex: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{2,7}/
                     },
                     electricityName: {//名称
+                        required: true,
                         maxlength:58
                     },
                     electricStandards:{//电流规格
                         required: true
                     },
                     activeEnergy:{
-                        isNumber:true
+                        isNumber:true,
+                        maxlength:8
                     },
                     communityMode: {
                         required: true
                     },
                     measureMode: {
                         required: true,
-                        maxlength:20
+                        isNumber:true,
+                        maxlength:58
                     },
                     voltageTest:{
+                        digits:true,
                         maxlength:58
                     },
                     powerFactor:{
                         max: 1,
-                        isNumber:true,
-                        maxlength:20
+                        isNumber:true
                     },
                     powerWaste:{
                         isNumber:true,
                         maxlength:58
                     },
                     mem:{
-                        maxlength:65535
+                        maxlength:100
                     }
                 },
                 messages:{

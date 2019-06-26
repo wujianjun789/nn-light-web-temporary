@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光通量：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>光通量(lux)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="光通量" id="flux" name="flux">
                 </div>
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>色温：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>色温(k)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="色温" id="colorMode" name="colorMode">
                 </div>
@@ -133,69 +133,60 @@
                     equipmentNumber: {
                         required: true,
                         digits:true,
-                        maxlength:17,
-                        minlength:17
+                        rangelength:[17,17]
                     },
                     chip: {
                         required: true,
-                        maxlength:58,
+                        maxlength:58
 
                     },
                     modelName: {
                         required: true,
-                        maxlength:64,
+                        maxlength:58
 
                     },
                     ratedVoltage:{
                         required: true,
                         maxlength:10,
-                        number:true,
+                        digits:true
                     },
                     ratedElectric:{
                         required: true,
                         maxlength:10,
-                        number:true,
+                        number:true
                     },
                     ratedPower:{
-                        // required: true,
                         maxlength:10,
-                        number:true,
+                        number:true
                     },
                     indexMode: {
                         required: true,
-                        digits:true,
-                        // isFloat: true
+                        number:true,
+                        max: 100
                     },
                     flux: {
                         required: true,
                         digits:true,
-                        maxlength:4,
+                        maxlength:4
                         // isNumber:true
                     },
                     grade:{
                         required: true,
                         maxlength:4,
-                        number:true,
-                    },
-                    indexMode:{
-                        required: true,
-                        maxlength:4,
-                        digits:true,
+                        number:true
                     },
                     colorMode:{
                         required: true,
                         maxlength:4,
-                        number:true,
+                        number:true
                     },
                     beanAngle: {
-                        required: true,
                         maxlength:4,
-                        number:true,
-                        // isFloat: true
+                        number:true
                     },
                     mem: {
-                        maxlength:100,
-                    },
+                        maxlength:100
+                    }
                 },
                 onkeyup: false,
                 focusCleanup: true,
@@ -203,7 +194,7 @@
                 submitHandler: function (form) {
                     //ajax上传表单
                     //构造上传数据
-                    var param = {}
+                    var param = {};
 
                     var paramArray = $(form).serializeArray();
                     var controllerMode = $('#controllerMode').val();

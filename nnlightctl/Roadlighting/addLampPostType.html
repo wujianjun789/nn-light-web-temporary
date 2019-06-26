@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加灯具型号</title>
+    <title>添加灯杆</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -19,9 +19,9 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯杆编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯杆型号" id="equipmentNumber" name="equipmentNumber">
+                    <input type="text" class="input-text" value="" placeholder="灯杆编码" id="equipmentNumber" name="equipmentNumber">
                 </div>
             </div>
             <div class="row cl">
@@ -126,58 +126,47 @@
                     equipmentNumber: {
                         required: true,
                         digits:true,
-                        maxlength:17,
-                        minlength:17
+                        rangelength:[17,17]
                     },
                     lamppostModel: {
                         required: true,
-                        maxlength:58,
+                        maxlength:58
                     },
                     lampostName: {
                         required: true,
-                        maxlength:58,
-                        // isFloat:true
+                        maxlength:58
                     },
                     high: {
                         required: true,
                         maxlength:10,
-                        number:true,
-                        // isFloat:true
+                        number:true
                     },
                     lampheadNumber: {
                         required: true,
-                        // isFloat: true,
-                        maxlength:8,
-                        digits:true,
+                        maxlength:2,
+                        digits:true
                     },
                     longitude: {
                         required: true,
-                        // isFloat: true
-                        maxlength:58,
+                        maxlength:58
                     },
                     latitude: {
                         required: true,
-                        // isNumber:true
-                        maxlength:58,
+                        maxlength:58
                     },
                     materima: {
-                        // required: true,
-                        maxlength:58,
+                        maxlength:58
                     },
                     land: {
-                        // required: true,
                         maxlength:20,
-                        number:true,
-                        // isFloat:true
+                        number:true
                     },
                     lampheadColor: {
-                        // required: true,
-                        maxlength:58,
+                        maxlength:58
                     },
                     mem: {
-                        // required: true,
-                        maxlength:100,
-                    },
+                        maxlength:100
+                    }
                 },
                 onkeyup: false,
                 focusCleanup: true,
