@@ -139,12 +139,8 @@
                         { "data": "communicationMethods", "defaultContent": "","render":function(data, type, full, meta){
                                 data = parseInt(data);
                                 switch(data){
-                                    case 1 : return 'NB-IoT';break;
-                                    case 2 : return '4G';break;
-                                    case 3 : return 'Zigbee';break;
-                                    case 4 : return 'PLC';break;
-                                    case 5 : return 'RS485';break;
-                                    case 6 : return 'GPRS';break;
+                                    case 0: return 'RS485';break;
+                                    case 1: return 'Zigbee';break;
                                 }
                             }},
                         { "data": "maxElectric", "defaultContent": "" },
