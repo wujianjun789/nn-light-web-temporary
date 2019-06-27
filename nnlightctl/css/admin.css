@@ -409,3 +409,10 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* 字体默认大小 */
 .Hui-iconfont{font-size: 14px}
+
+/* 设置表格超出部分出现省略号 */
+.table td{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}

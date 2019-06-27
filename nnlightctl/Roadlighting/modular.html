@@ -33,7 +33,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加灯杆型号" onclick="add('添加开关模块', 'addModular.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加开关模块</a>
+                <a class="btn btn-primary radius" data-title="开关模块" onclick="add('开关模块', 'addModular.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>开关模块</a>
             </span>
     </div>
     <div class="mt-20">
@@ -125,7 +125,7 @@
                 }, {
                     targets: 10,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯杆型号" onclick="edit(\'编辑灯杆型号\', \'addModular.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑开关模块" onclick="edit(\'编辑开关模块\', \'addModular.html\', \'' + row.id + '\', \'800\', \'500\')"><i class="Hui-iconfont">&#xe6df;</i></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><i class="Hui-iconfont">&#xe6e2;</i></a></td>';
                     }
                 }
@@ -139,12 +139,8 @@
                         { "data": "communicationMethods", "defaultContent": "","render":function(data, type, full, meta){
                                 data = parseInt(data);
                                 switch(data){
-                                    case 1 : return 'NB-IoT';break;
-                                    case 2 : return '4G';break;
-                                    case 3 : return 'Zigbee';break;
-                                    case 4 : return 'PLC';break;
-                                    case 5 : return 'RS485';break;
-                                    case 6 : return 'GPRS';break;
+                                    case 0: return 'RS485';break;
+                                    case 1: return 'Zigbee';break;
                                 }
                             }},
                         { "data": "maxElectric", "defaultContent": "" },

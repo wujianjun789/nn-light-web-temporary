@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <title>添加灯具型号</title>
+    <title>添加灯杆</title>
 
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
@@ -19,9 +19,9 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯杆编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="灯杆型号" id="equipmentNumber" name="equipmentNumber">
+                    <input type="text" class="input-text" value="" placeholder="灯杆编码" id="equipmentNumber" name="equipmentNumber">
                 </div>
             </div>
             <div class="row cl">
@@ -37,13 +37,13 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">高度（m）：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>高度（m）：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="高度" id="high" name="high">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">灯头数量（个）：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯头数量（个）：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="灯头数量" id="lampheadNumber" name="lampheadNumber">
                 </div>
@@ -94,7 +94,7 @@
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
-                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                    <p class="textarea-numberbar"><!--<em class="textarea-length"><em class="textarea-length">0</em>/-->100</p>
                 </div>
             </div>
             <div class="row cl">
@@ -125,26 +125,48 @@
                 rules: {
                     equipmentNumber: {
                         required: true,
+                        digits:true,
+                        rangelength:[17,17]
                     },
                     lamppostModel: {
                         required: true,
+                        maxlength:58
                     },
                     lampostName: {
                         required: true,
-                        // isFloat:true
+                        maxlength:58
+                    },
+                    high: {
+                        required: true,
+                        maxlength:10,
+                        number:true
                     },
                     lampheadNumber: {
                         required: true,
-                        isFloat: true
+                        maxlength:2,
+                        digits:true
                     },
                     longitude: {
                         required: true,
-                        // isFloat: true
+                        maxlength:58
                     },
                     latitude: {
                         required: true,
-                        // isNumber:true
+                        maxlength:58
                     },
+                    materima: {
+                        maxlength:58
+                    },
+                    land: {
+                        maxlength:20,
+                        number:true
+                    },
+                    lampheadColor: {
+                        maxlength:58
+                    },
+                    mem: {
+                        maxlength:100
+                    }
                 },
                 onkeyup: false,
                 focusCleanup: true,

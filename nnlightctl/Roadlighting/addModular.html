@@ -19,31 +19,31 @@
         <form class="form form-horizontal" id="form-admin-add">
 
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>设备编码：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开关模块编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="设备编码" id="modelCode" name="modelCode">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>型号：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开关模块型号：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="型号" id="modelType" name="modelType">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>名称：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>开关模块名称：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="名称" id="modelName" name="modelName">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">回路数：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>回路数：</label>
                 <div class="formControls col-xs-7 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="回路数" id="loopCount" name="loopCount">
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">通讯方式：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>通讯方式：</label>
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="communicationMethods" id="communicationMethods" size="1">
@@ -57,7 +57,7 @@
                 <!--</div>-->
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">单回路最大电流(A)：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单回路最大电流(A)：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <input type="text" class="input-text" value="" placeholder="单回路最大电流" id="maxElectric" name="maxElectric">
                 </div>
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="row cl">
-                <label class="form-label col-xs-4 col-sm-3">安装方式：</label>
+                <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>安装方式：</label>
                 <div class="formControls col-xs-7 col-sm-8 text-l">
                     <span class="select-box" style="width:150px;">
                         <select class="select" name="installationMethods" id="installationMethods" size="1">
@@ -77,15 +77,12 @@
                         </select>
                     </span>
                 </div>
-                <!--<div class="formControls col-xs-8 col-sm-8">-->
-                    <!--<input type="text" class="input-text" value="" placeholder="安装方式" id="installationMethods" name="installationMethods">-->
-                <!--</div>-->
             </div>
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3">备注：</label>
                 <div class="formControls col-xs-8 col-sm-8">
                     <textarea cols="" rows="" class="textarea" placeholder="说点什么...100个字符以内" dragonfly="true" id="mem" name="mem"></textarea>
-                    <p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
+                    <p class="textarea-numberbar">100</p>
                 </div>
             </div>
             <div class="row cl">
@@ -110,34 +107,58 @@
     <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
     <script type="text/javascript">
         $(function () {
-
             //数据验证
+            jQuery.validator.addMethod("regex",function(value,element,params){
+                var exp = new RegExp(params);
+                return exp.test(value);
+            },"格式错误");
             $("#form-admin-add").validate({
                 rules: {
                     modelCode: {
                         required: true,
-                        isFloat:true
+                        digits:true,
+                        rangelength:[17,17]
                     },
                     modelType: {
                         required: true,
-                        // isFloat:true
+                        maxlength:7,
+                        regex: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{2,7}/
                     },
                     modelName: {
                         required: true,
-                        // isFloat: true
+                        maxlength:58
                     },
                     loopCount: {
                         required: true,
-                        // isFloat: true
+                        digits:true,
+                        max:12
                     },
-                    // communicationMode: {
-                    //     required: true,
-                    //     isNumber:true
-                    // },
-                    // maxElectric: {
-                    //     required: true,
-                    //     isNumber:true
-                    // },
+                    communicationMethods:{
+                        required: true
+                    },
+                    maxElectric:{
+                        required: true,
+                        digits:true,
+                        max:20
+                    },
+                    loadElectric: {
+                        digits:true,
+                        maxlength:8
+                    },
+                    installationMethods:{
+                        required: true
+                    },
+                    mem:{
+                        maxlength:100
+                    }
+                },
+                messages:{
+                    modelCode:{
+                        rangelength: '编码长度为17位'
+                    },
+                    modelType:{
+                        regex: '由开头字母(大写)+数字组成'
+                    }
                 },
                 onkeyup: false,
                 focusCleanup: true,
