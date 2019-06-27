@@ -278,7 +278,8 @@
           for (var i = 0; i < lightArray.length; ++i) {
             var light = lightArray[i];
             // console.log("添加回路id[" + light.nnlightctlEleboxModelLoopId + "]下的灯具id[" + light.id + "]到地图");
-            addMarker(new BMap.Point(light.longitude, light.latitude), true, light.id, light.faultTag);
+            // addMarker(new BMap.Point(light.longitude, light.latitude), true, light.id, light.faultTag);
+            translateCallback(new BMap.Point(light.longitude, light.latitude),{"isLight": true, "id": light.id, "lightFaultTag": light.faultTag})
           }
 
           //构造灯具连线数据
@@ -296,19 +297,15 @@
             var elebox = getEleboxFromArray(eleboxId);
             if (elebox) {
               var startPoint = new BMap.Point(elebox.longitude, elebox.latitude);
-              var bmapPointArray = [];
-              bmapPointArray.push(startPoint);
-
+              // var bmapPointArray = [];
+              // bmapPointArray.push(startPoint);
+              map.addOverlay(startPoint);
               for (var i = 0; i < sortLightArray.length; ++i) {
                 var lights = sortLightArray[i];
                 for (var k = 0; k < lights.length; ++k) {
-                  bmapPointArray.push(new BMap.Point(lights[k].longitude, lights[k].latitude));
-                }
-              }
-
-              new BMap.Convertor().translate(bmapPointArray, 1, 5, function (data) {
-                if (data.status === 0) {
-                  var polyline = new BMap.Polyline(data.points, {
+                  var p=new BMap.Point(lights[k].longitude, lights[k].latitude)
+                  // bmapPointArray.push(new BMap.Point(lights[k].longitude, lights[k].latitude));
+                  var polyline = new BMap.Polyline(p, {
                     strokeColor: "blue",
                     strokeWeight: 2,
                     strokeOpacity: 0.5
@@ -317,7 +314,20 @@
                     map.addOverlay(polyline);
                   }
                 }
-              });
+              }
+
+              // new BMap.Convertor().translate(bmapPointArray, 1, 5, function (data) {
+              //   if (data.status === 0) {
+              //     var polyline = new BMap.Polyline(data.points, {
+              //       strokeColor: "blue",
+              //       strokeWeight: 2,
+              //       strokeOpacity: 0.5
+              //     });
+              //     if (map) {
+              //       map.addOverlay(polyline);
+              //     }
+              //   }
+              // });
             }
           }
 
@@ -381,7 +391,8 @@
 
           for (var i = 0; i < eleboxArray.length; ++i) {
             var point = new BMap.Point(eleboxArray[i].longitude, eleboxArray[i].latitude);
-            addMarker(point, false, eleboxArray[i].id);
+            // addMarker(point, false, eleboxArray[i].id)
+            translateCallback(point,{"isLight": false, "id": eleboxArray[i].id})
 
             if (i == 0 && isInit) {
               map.centerAndZoom(point, 16);
