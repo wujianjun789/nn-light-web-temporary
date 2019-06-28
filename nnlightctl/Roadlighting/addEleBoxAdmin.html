@@ -279,8 +279,8 @@
         var body = layer.getChildFrame('body', index);
         var lng = body.find('#lng').val();
         var lat = body.find('#lat').val();
-        $('#longitude').val(lng);
-        $('#latitude').val(lat);
+        $('#longitude').val(lng - 0.01185);
+        $('#latitude').val(lat - 0.00328);
         //最后关闭弹出层
         layer.close(index);
       },

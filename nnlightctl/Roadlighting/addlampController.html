@@ -221,7 +221,6 @@
             var id = editModel(window.location.href);
             if (id) {
                 ajaxRequest("post", "api/roadlighting/selectbyidlampcontroller", {"id" : id}, function (data) {
-                    debugger;
                     if (data) {
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
@@ -261,8 +260,8 @@
               var body = layer.getChildFrame('body', index);
               var lng = body.find('#lng').val();
               var lat = body.find('#lat').val();
-              $('#longitude').val(lng);
-              $('#latitude').val(lat);
+              $('#longitude').val(lng - 0.0065);
+              $('#latitude').val(lat - 0.0060);
               //最后关闭弹出层
               layer.close(index);
             },
