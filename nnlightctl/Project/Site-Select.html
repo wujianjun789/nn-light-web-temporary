@@ -41,10 +41,10 @@
   var map = null;
   var newMarker = null
   var oldMarker = null
-
+  var cityName = editModel(window.location.href) || '北京';
   function init () {
     map = new BMap.Map("map", {enableMapClick: false});//new BMap.Point(116.404, 39.915)
-    map.centerAndZoom('北京', 13);
+    map.centerAndZoom(cityName, 12);
     map.setDefaultCursor("crosshair")
     map.enableScrollWheelZoom(true);
 
@@ -72,7 +72,6 @@
     var Vh = document.documentElement.clientHeight;
     $("#map").height(Vh);
     $("#map").width(Vw);
-
     loadJScript();
   })
 </script>

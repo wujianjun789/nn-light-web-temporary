@@ -43,11 +43,11 @@
             </div>
         </div>
         <!--<div class="row cl">-->
-            <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属区域：</label>-->
-            <!--<div class="formControls col-xs-7 col-sm-8">-->
-                <!--<select class="input-text" placeholder="所属区域" id="nnlightctlRegionId" name="nnlightctlRegionId">-->
-                <!--</select>-->
-            <!--</div>-->
+        <!--<label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属区域：</label>-->
+        <!--<div class="formControls col-xs-7 col-sm-8">-->
+        <!--<select class="input-text" placeholder="所属区域" id="nnlightctlRegionId" name="nnlightctlRegionId">-->
+        <!--</select>-->
+        <!--</div>-->
         <!--</div>-->
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>所属项目：</label>
@@ -117,7 +117,19 @@
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/validate-methods.js"></script>
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
+  var currentProjectArr = []
+  var currentCity = '北京'
   $(function () {
+
+    $("#nnlightctlProjectId").change(function () {
+      var id = $("#nnlightctlProjectId").val()
+      currentProjectArr.length && currentProjectArr.forEach(function (d) {
+        if (d.id == id) {
+          currentCity = d.cityName
+        }
+      })
+    })
+
     $.ajax({
       url: BASE_ROOT + "/api/roadlighting/listArea",
       method: 'POST',
@@ -137,6 +149,8 @@
       method: 'POST',
       success: function (data) {
         var project = data.body.data
+        currentProjectArr = data.body.data
+        currentCity = currentProjectArr[0].cityName || '北京'
         for (var i = 0; i < project.length; i++) {
           var projectOption = '<option value="' + project[i].id + '">' + project[i].projectName + '</option>';
           $('#nnlightctlProjectId').append(projectOption)
@@ -164,43 +178,43 @@
       rules: {
         codeNumber: {
           required: true,
-          digits:true,
-          rangelength:[17,17]
+          digits: true,
+          rangelength: [17, 17]
         },
         eleboxModel: {
-          maxlength:58,
+          maxlength: 58,
           required: true
         },
         eleboxName: {
-          maxlength:58,
+          maxlength: 58,
           required: true
         },
         networkAddr: {
           required: true,
-          maxlength:58
+          maxlength: 58
         },
         nnlightctlProjectId: {
           required: true
         },
         longitude: {
           required: true,
-          isNumber:true
+          isNumber: true
         },
         latitude: {
           required: true,
-          isNumber:true
+          isNumber: true
         },
         materialQuality: {
-          maxlength:20
+          maxlength: 20
         },
         eleboxColors: {
-          maxlength:20
+          maxlength: 20
         },
         eleboxSize: {
-          maxlength:20
+          maxlength: 20
         },
         mem: {
-          maxlength:100
+          maxlength: 100
         }
       },
       onkeyup: false,
@@ -272,7 +286,7 @@
       shade: 0.4,
       title: title,
       moveOut: true,
-      content: url,
+      content: url + "?cityName=" + currentCity,
       btn: ['确定', '关闭'],
       yes: function (index) {
         console.log(index);
