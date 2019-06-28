@@ -172,6 +172,7 @@
     var isLight = param["isLight"];
     var id = param["id"];
     var lightFalutTag = param["lightFaultTag"];
+    var lampName = param["lampName"];
 
     var marker = new BMap.Marker(point);  // 创建标注
     marker.setTitle(id);
@@ -198,7 +199,19 @@
       }
       marker.addEventListener("click", function (event) {
         // var clickMarker = event.target;
-        layer_show('灯光设置', 'LightSet.html?id=' + id, 650, 550);
+        // layer_show('灯光设置', 'LightSet.html?id=' + id, 650, 550);
+        layer.open({
+          type: 2,
+          area: ['500px', '600px'],
+          fix: false, //不固定
+          maxmin: true,
+          shadeClose: false,
+          shade: [0.8, '#393D49'],
+          moveOut: true,
+          title: '灯杆名称：' + lampName,
+          content: 'LightSet.html?id=' + id,
+          offset: ['140px', '1000px']
+        });
         // LightAdjustInit(clickMarker.getTitle());
         // var StrHtmlNew = $("#lightpage").html();
         // var infoWindow = new BMap.InfoWindow(StrHtmlNew, opts);  // 创建信息窗口对象
@@ -297,6 +310,7 @@
             translateCallback(new BMap.Point(light.longitude, light.latitude), {
               "isLight": true,
               "id": light.id,
+              'lampName': light.lampName,
               "lightFaultTag": light.faultTag
             })
           }

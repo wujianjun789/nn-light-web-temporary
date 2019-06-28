@@ -53,11 +53,11 @@
             <label class="form-label col-xs-3 col-sm-3 text-r"><span class="c-red">*</span>定时设置：</label>
             <div class="formControls col-xs-9 col-sm-9">
                 <input type="text" class="input-text" style="width:150px;"
-                       onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'00:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})"
+                       onfocus="WdatePicker({dateFmt:'HH:mm:ss',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})"
                        id="startTime" placeholder="开始时间">
                 -
                 <input type="text" class="input-text" style="width:150px;"
-                       onfocus="WdatePicker({dateFmt:'HH:mm:ss',minDate:'00:00:00',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})"
+                       onfocus="WdatePicker({dateFmt:'HH:mm:ss',quickSel:['%H-00-00','%H-15-00','%H-30-00','%H-45-00']})"
                        id="endTime" placeholder="结束时间">
             </div>
         </div>
@@ -217,7 +217,7 @@
       $('.time-select').hide()
       $('.percent').hide()
       $('#addRules').show()
-    })   
+    })
     //数据验证
     $("#form-admin-add").validate({
       rules: {
