@@ -21,7 +21,7 @@
             <div class="row cl">
                 <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>电表编码：</label>
                 <div class="formControls col-xs-7 col-sm-8">
-                    <input type="text" class="input-text" value="" placeholder="设备编码" disabled id="equipmentNumber" name="equipmentNumber">
+                    <input type="text" class="input-text" value="" placeholder="设备编码" id="equipmentNumber" name="equipmentNumber">
                 </div>
             </div>
             <div class="row cl">
@@ -243,7 +243,7 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber).attr({"readonly":true});
                             $("#electricityModel").val(lightModel.electricityModel);
                             $("#electricityName").val(lightModel.electricityName);
                             $("#electricStandards").val(lightModel.electricStandards);

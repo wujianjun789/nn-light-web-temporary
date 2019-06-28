@@ -42,15 +42,15 @@ function Hui_admin_tab (obj) {
   iframe_box = topWindow.find("#iframe_box");
   //console.log(topWindow);
   if (!href || href == "") {
-    alert("data-href不存在，请改为data-href属性");
+    //alert("data-href不存在，请改为data-href属性");
     return false;
   }
   if (!title) {
-    alert("使用data-title属性");
+    //alert("使用data-title属性");
     return false;
   }
   if (title == "") {
-    alert("data-title属性不能为空");
+    //alert("data-title属性不能为空");
     return false;
   }
   show_navLi.each(function () {

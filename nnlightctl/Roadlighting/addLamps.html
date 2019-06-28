@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="row cl" id="uuidDiv">
-            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>灯具IMEI：</label>
+            <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器编码：</label>
             <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:170px;">
                     <select class="select" name="lightingImei" id="lightingImei" size="1">
@@ -78,12 +78,12 @@
                     </span>
             </div>
         </div>
-        <div class="row cl">
-            <label class="form-label col-xs-4 col-sm-3">灯具功率：</label>
-            <div class="formControls col-xs-8 col-sm-9">
-                <input type="text" class="input-text" value="" disabled placeholder="灯具功率" id="staticPower" name="staticPower">
-            </div>
-        </div>
+        <!--<div class="row cl">-->
+            <!--<label class="form-label col-xs-4 col-sm-3">灯具功率：</label>-->
+            <!--<div class="formControls col-xs-8 col-sm-9">-->
+                <!--<input type="text" class="input-text" value="" disabled placeholder="灯具功率" id="staticPower" name="staticPower">-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3">&nbsp;备注：</label>
             <div class="formControls col-xs-8 col-sm-9">
@@ -151,7 +151,7 @@
             });
             $("#lightingImei").change(function(){
                 $("#mem").text($(this).children('option:checked').attr('mem'));
-                $("#staticPower").val($(this).children('option:checked').attr("staticPower"))
+//                $("#staticPower").val($(this).children('option:checked').attr("staticPower"))
             });
 
 
@@ -222,10 +222,10 @@
                 projectViewList : {
                     required : true
                 },
-                staticPower: {
-                    required : true,
-                    isFloat: true
-                }
+//                staticPower: {
+//                    required : true,
+//                    isFloat: true
+//                }
             },
             onkeyup: false,
             focusCleanup: true,
@@ -333,7 +333,7 @@
                         $("#projectViewList option").each(function(){//所属项目
                             if($(this).val() == light.nnlightctlProjectId) $(this).attr('selected',true) ;
                         });
-                        $("#staticPower").val(light.staticPower);//灯具功率
+//                        $("#staticPower").val(light.staticPower);//灯具功率
                         $("#mem").val(light.mem);//备注
                     } else {
                         layer.msg(data.header.msg, {icon : 2});

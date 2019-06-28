@@ -1060,6 +1060,8 @@ table.dataTable thead .sorting_desc {background-image:url(../bg/sort_desc.png)}
 	.textarea-length{ font-style:normal}
 .input-text:hover,
 .textarea:hover{border: solid 1px #3bb4f2}
+/* 禁用input框样式 */
+input[readonly]{color: #999999;background-color: rgb(235, 235, 228);}
 /*得到焦点后*/
 .input-text.focus,
 .textarea.focus{border:solid 1px #0f9ae0 \9;border-color:rgba(82,168,236,0.8);box-shadow:0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6)}

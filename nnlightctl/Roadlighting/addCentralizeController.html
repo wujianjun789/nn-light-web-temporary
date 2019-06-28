@@ -214,6 +214,7 @@
                     //构造上传数据
                     var param = {};
                     var paramArray = $(form).serializeArray();
+                    var equipmentNumber = $("#equipmentNumber").val();
                     for (var i = 0; i < paramArray.length; ++i) {
                         var o = paramArray[i];
                         param[o["name"]] = o["value"];
@@ -247,7 +248,7 @@
                         if (data.header.code == 1000) {
                             var lightModel = data.body.data[0];
                             //刷新表单
-                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber).attr({"readonly":true});
                             $("#centralizeModel").val(lightModel.centralizeModel);
                             $("#centralizeName").val(lightModel.centralizeName);
                             $("#longitude").val(lightModel.longitude);

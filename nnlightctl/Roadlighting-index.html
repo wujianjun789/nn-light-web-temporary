@@ -92,6 +92,7 @@
       return;
     }
     if (menu.name == '道路照明系统') {
+//      debugger;
       var $menu = $("#menuContain");
       var menuHtml = '<dl>\n' +
         '<dt><i class="Hui-iconfont">' + getIconByMenuName(menu.name) + '</i><span class="pl10">' + '路灯管理系统' + '</span><i\n' +
@@ -105,7 +106,8 @@
           var subMenu = subMenuList[i];
           var Smenu = subMenuList[i].subMenuViewList;
           if (Smenu.length) {
-            menuHtml += '<li><a data-href="' + Smenu[0].url + '" data-title="' + Smenu[0].name + '" href="javascript:void(0)" disabled>' + subMenu.name + '<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>';
+//            menuHtml += '<li><a data-href="' + Smenu[0].url + '" data-title="' + Smenu[0].name + '" href="javascript:void(0)" disabled>' + subMenu.name + '<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>';
+            menuHtml += '<li><a data-href="' + subMenu.url + '" data-title="' + subMenu.name + '" href="javascript:void(0)" disabled>' + subMenu.name + '<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i>';
           } else {
             menuHtml += '<li><a data-href="' + subMenu.url + '" data-title="' + subMenu.name + '" href="javascript:void(0)">' + subMenu.name;
           }
@@ -160,6 +162,12 @@
           "name": "设备管理",
           "subMenuViewList": [
             {
+              "id": 35,
+              "name": "控制柜",
+              "subMenuViewList": [],
+              "url": "Roadlighting/EleBoxAdmin.html"
+            },
+            {
               "id": 29,
               "name": "电表",
               "subMenuViewList": [],
@@ -178,22 +186,16 @@
               "url": "Roadlighting/modular.html"
             },
             {
-              "id": 32,
-              "name": "单灯控制器",
-              "subMenuViewList": [],
-              "url": "Roadlighting/lampController.html"
-            },
-            {
               "id": 34,
               "name": "光照计",
               "subMenuViewList": [],
               "url": "Roadlighting/photoperiod.html"
             },
             {
-              "id": 35,
-              "name": "控制柜",
+              "id": 32,
+              "name": "单灯控制器",
               "subMenuViewList": [],
-              "url": "Roadlighting/EleBoxAdmin.html"
+              "url": "Roadlighting/lampController.html"
             },
             {
               "id": 36,
@@ -220,7 +222,7 @@
               "url": "Roadlighting/LampPostType.html"
             }
           ],
-          "url": "Roadlighting/DeviceManagement.html"
+          "url": ""
         },
         {
           "id": 17,
