@@ -133,8 +133,22 @@
                 { "data": "voltageChannel", "defaultContent": "" },
                 { "data": "electricChannel", "defaultContent": "" },
                 { "data": "testChannel", "defaultContent": "" },
-                { "data": "upChannel", "defaultContent": "" },
-                { "data": "downChannel", "defaultContent": "" },
+                { "data": "upChannel", "defaultContent": "" , "render":function(data, type, full, meta){
+                    data = parseInt(data);
+                    switch(data){
+                        case 0 : return '4G';break;
+                        case 1 : return 'TCP';break;
+                        case 2 : return 'GPRS';break;
+                    }
+                }},
+                { "data": "downChannel", "defaultContent": "" , "render":function(data, type, full, meta){
+                    data = parseInt(data);
+                    switch(data){
+                        case 0 : return 'RS485';break;
+                        case 1 : return 'PLC';break;
+                        case 2 : return 'Zigbee';break;
+                    }
+                }},
                 { "data": "mem", "defaultContent": "" }
             ]
         });

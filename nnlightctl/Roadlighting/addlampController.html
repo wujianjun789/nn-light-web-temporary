@@ -180,10 +180,10 @@
                     }
                 },
                 messages:{
-                    modelCode:{
+                    equipmentNumber:{
                         rangelength: '编码长度为17位'
                     },
-                    modelType:{
+                    lampModel:{
                         regex: '由开头字母(大写)+数字组成'
                     }
                 },
@@ -226,7 +226,7 @@
                             var lightModel = data.body.data[0];
                             //刷新表单
                             $("#lampName").val(lightModel.lampName);
-                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber).attr({"readonly":true});
                             $("#lampModel").val(lightModel.lampModel);
                             $("#ratedVoltage").val(lightModel.ratedVoltage);
                             $("#ratedCurrent").val(lightModel.ratedCurrent);

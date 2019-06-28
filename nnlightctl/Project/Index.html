@@ -27,22 +27,22 @@
         <div id="globalProjectPanel" class="projectview" style="height:250px;">
             <div class="pr1">
                 <span class="Hui-iconfont bigfont">&#xe643;</span><span class="pl-10 f-18">国家</span>
-                <p class="pronum" id="countryStatistic"></p>
+                <span id="countryStatistic" class="equipmentLength">国家: <i></i></span>
             </div>
         </div>
         <h4 class="f-18 tit" style="margin-top:40px;"><span class="Hui-iconfont">&#xe667;</span><span class="pl-10">全球统计数据</span></h4>
         <div class="projectview">
             <div class="pr1">
                 <span class="Hui-iconfont bigfont">&#xe643;</span><span class="pl-10 f-18">项目</span>
-                <p id="projectStatistic" class="pronum">12452222222224</p>
+                <span id="projectStatistic" class="equipmentLength">项目: <i></i></span>
             </div>
             <div class="pr2">
                 <span class="Hui-iconfont bigfont">&#xe72b;</span><span class="pl-10 f-18">控制柜</span>
-                <p id="eleboxStatistic" class="pronum">12452222222224</p>
+                <span id="eleboxStatistic" class="equipmentLength">控制柜: <i></i></span>
             </div>
             <div class="pr3">
                 <span class="Hui-iconfont bigfont">&#xe6c1;</span><span class="pl-10 f-18">灯具</span>
-                <p id="lightStatistic" class="pronum">12452222222224</p>
+                <span id="lightStatistic" class="equipmentLength">灯具: <i></i></span>
             </div>
         </div>
     </div>
@@ -77,21 +77,11 @@
 
                     // console.log("国家统计：");
                     var $countryProjectPanel = $("#globalProjectPanel");
-                    // $countryProjectPanel.empty();
-                    // for (var key in countryStatistic) {
-                    //     // console.log(key + ":" + countryStatistic[key]);
-                    //     $('<div class="pr1">' +
-                    //         '<span class="Hui-iconfont bigfont">&#xe643;</span><span class="pl-10 f-18">'+key+'</span>' +
-                    //         '<p class="pronum" >'+countryStatistic[key]+'</p>'</p>' +
-                    //         '</div>').appendTo($countryProjectPanel);
-                    //     projectTotal += countryStatistic[key];
-                    //     console.log(countryStatistic)
-                    // }
-                    $("#projectStatistic").text(projectTotal);
+                    $("#projectStatistic").children('i').text(projectTotal);
                     // console.log("控制柜统计：" + eleboxTotal);
-                    $("#eleboxStatistic").text(eleboxTotal);
+                    $("#eleboxStatistic").children('i').text(eleboxTotal);
                     // console.log("灯具统计：" + lightingTotal);
-                    $("#lightStatistic").text(lightingTotal);
+                    $("#lightStatistic").children('i').text(lightingTotal);
                 } else {
                     layer.msg(data.header.msg,{icon:2,time:3000});
                 }
@@ -102,12 +92,10 @@
             if (data) {
                 if (data.header.code == 1000) {
                     var countryArray = data.body.data;
-
                     console.log(countryArray);
                 }
             }
-            $("#countryStatistic").text(countryArray.length);
-
+            $("#countryStatistic").children('i').text(countryArray.length);
         })
     </script>
 

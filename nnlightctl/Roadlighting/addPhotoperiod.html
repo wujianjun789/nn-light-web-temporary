@@ -138,6 +138,11 @@
                         maxlength:100
                     }
                 },
+                messages:{
+                    equipmentNumber:{
+                        rangelength: '编码长度为17位'
+                    }
+                },
                 onkeyup: false,
                 focusCleanup: true,
                 success: "valid",
@@ -195,7 +200,7 @@
                             // $("#ratedPower").val(lightModel.ratedPower);
                             // $("#ledCount").val(lightModel.ledCount);
                             // $("#mem").val(lightModel.mem);
-                            $("#equipmentNumber").val(lightModel.equipmentNumber);
+                            $("#equipmentNumber").val(lightModel.equipmentNumber).attr({"readonly":true});
                             $("#photoperiodModel").val(lightModel.photoperiodModel);
                             $("#photoperiodName").val(lightModel.photoperiodName);
                             $("#communicationMode").val(lightModel.communicationMode);

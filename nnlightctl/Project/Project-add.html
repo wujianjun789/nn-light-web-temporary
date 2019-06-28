@@ -209,7 +209,6 @@
           param[o["name"]] = o["value"];
         }
         param["id"] = editModel(window.location.href);
-        debugger;
         var url = "/api/project/addproject";
         if (editModel(window.location.href)) {
           param["nnlightctlProjectCountryId"] = $("#nnlightctlProjectCountryId1").val();
@@ -245,7 +244,7 @@
 
             for (var i = 0; i < countryArray.length; ++i) {
               var country = countryArray[i];
-              $('<option value="' + country.id + '">' + country.countryName + '</option>').appendTo($countrySelect);
+              $('<option value="' + country.codeNumber + '">' + country.countryName + '</option>').appendTo($countrySelect);
             }
           }
         }
@@ -265,7 +264,7 @@
 
             for (var i = 0; i < provinceArray.length; ++i) {
               var province = provinceArray[i];
-              $('<option value="' + province.id + '">' + province.provinceName + '</option>').appendTo($provinceSelect);
+              $('<option value="' + province.codeNumber + '">' + province.provinceName + '</option>').appendTo($provinceSelect);
             }
           }
         }
@@ -285,7 +284,7 @@
             currentCity = cityArray[0].cityName
             for (var i = 0; i < cityArray.length; ++i) {
               var city = cityArray[i];
-              $('<option value="' + city.id + '">' + city.cityName + '</option>').appendTo($citySelect);
+              $('<option value="' + city.codeNumber + '">' + city.cityName + '</option>').appendTo($citySelect);
             }
             $("#nnlightctlProjectCityId").change(function () {
               var id = $("#nnlightctlProjectCityId").val()
