@@ -414,7 +414,7 @@
   }
 
   function init () {
-    map = new BMap.Map("map");
+    map = new BMap.Map("map", {enableMapClick: false});
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 20);
     var mapType1 = new BMap.MapTypeControl(
     {
