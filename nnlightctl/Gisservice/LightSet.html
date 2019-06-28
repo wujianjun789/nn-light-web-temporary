@@ -17,6 +17,27 @@
 </head>
 <body>
 <div class="page-container" id="light-set" style="max-height: 460px;padding-bottom: 20px;">
+    <div class="linghtbox clearfix">
+        <div class="imgbox"><img src="../bg//lightsbg_0.png" class="imgboximg"/><h4>光亮：<span>0%</span></h4></div>
+        <div id="powerange">
+
+            <a onclick="addlights(100)" href="javascript:void(0);" rel="100" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>100%</span></a>
+            <a onclick="addlights(80)" href="javascript:void(0);" rel="80" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>80%</span></a>
+            <a onclick="addlights(60)" href="javascript:void(0);" rel="60" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>60%</span></a>
+            <a onclick="addlights(40)" href="javascript:void(0);" rel="40" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>40%</span></a>
+            <a onclick="addlights(20)" href="javascript:void(0);" rel="20" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>20%</span></a>
+            <a onclick="addlights(0)" href="javascript:void(0);" rel="0" class="btn btn-danger radius mt-20"
+               style="width:60px;"><span>关灯</span></a>
+
+            <input type="range" min="1" max="100" value="0" step="1" name="range" onchange="changerange(this)">
+            <p name="rangeval" style='font-size:16px;color:#FFB300;font-weight: bold;margin-top:14px;'>0</p>
+        </div>
+    </div>
     <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标1：</span><span id="longitude">经度：116.306681 </span><span
             id="latitude">纬度：39.830931</span></p>
     <p class="f-14" style="margin-bottom: 4px"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
@@ -36,36 +57,6 @@
     <!--</p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>-->
-    <div class="linghtbox clearfix mt-20">
-        <img src="../bg//lightsbg_0.png" class="imgbox"/>
-        <div id="powerange">
-            <div style="font-size: 14px;">
-                <span class="p1-10">调光模式：</span>
-                <select id="powerTypeSelect" onchange="powerTypeChangeEvent()">
-                    <option value="0">0~10V</option>
-                    <option value="1">PWM</option>
-                    <option value="2">UART</option>
-                    <option value="3">DALI</option>
-                </select>
-            </div>
-
-            <a onclick="addlights(100)" href="javascript:void(0);" rel="100" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>100%</span></a>
-            <a onclick="addlights(80)" href="javascript:void(0);" rel="80" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>80%</span></a>
-            <a onclick="addlights(60)" href="javascript:void(0);" rel="60" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>60%</span></a>
-            <a onclick="addlights(40)" href="javascript:void(0);" rel="40" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>40%</span></a>
-            <a onclick="addlights(20)" href="javascript:void(0);" rel="20" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>20%</span></a>
-            <a onclick="addlights(0)" href="javascript:void(0);" rel="0" class="btn btn-danger radius mt-20"
-               style="width:90px;"><span>关灯</span></a>
-
-            <input type="range" min="1" max="100" value="0" step="1" name="range" onchange="changerange(this)">
-            <p name="rangeval" style='font-size:16px;color:#0a79d8;font-weight: bold;margin-top:10px;'></p>
-        </div>
-    </div>
     <!--<div class="row cl mt-30">
         <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
             <input id="btnSubmit" class="btn btn-primary radius ml-20" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
@@ -115,10 +106,11 @@
       x = 100;
     }
     LightsUrl = "../bg//lightsbg_" + x + ".png";
-    $(".imgbox").attr("src", LightsUrl);
+    $(".imgboximg").attr("src", LightsUrl);
   }
 
   function addlights (value) {
+    $('.imgbox span').html(value+'%')
     $("input[name='range']").val(value);
     $("p[name='rangeval']").html(value);
     lightschange(value);
@@ -126,6 +118,7 @@
   }
 
   function changerange (obj) {
+    $('.imgbox span').html(obj.value+'%')
     $("p[name='rangeval']").html(obj.value);
     lightschange(obj.value);
     doLightAdjust(obj.value);
