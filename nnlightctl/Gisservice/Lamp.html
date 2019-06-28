@@ -241,7 +241,7 @@
     for (var i = 0; i < lightArray.length; ++i) {
       var light = lightArray[i];
       // if (light.loopPriority == priority) {
-        searchLightArray.push(light);
+      searchLightArray.push(light);
       // }
     }
     return searchLightArray;
@@ -279,7 +279,11 @@
             var light = lightArray[i];
             // console.log("添加回路id[" + light.nnlightctlEleboxModelLoopId + "]下的灯具id[" + light.id + "]到地图");
             // addMarker(new BMap.Point(light.longitude, light.latitude), true, light.id, light.faultTag);
-            translateCallback(new BMap.Point(light.longitude, light.latitude),{"isLight": true, "id": light.id, "lightFaultTag": light.faultTag})
+            translateCallback(new BMap.Point(light.longitude, light.latitude), {
+              "isLight": true,
+              "id": light.id,
+              "lightFaultTag": light.faultTag
+            })
           }
 
           //构造灯具连线数据
@@ -303,7 +307,7 @@
               for (var i = 0; i < sortLightArray.length; ++i) {
                 var lights = sortLightArray[i];
                 for (var k = 0; k < lights.length; ++k) {
-                  var p=new BMap.Point(lights[k].longitude, lights[k].latitude)
+                  var p = new BMap.Point(lights[k].longitude, lights[k].latitude)
                   // bmapPointArray.push(new BMap.Point(lights[k].longitude, lights[k].latitude));
                   var polyline = new BMap.Polyline(p, {
                     strokeColor: "blue",
@@ -380,9 +384,12 @@
     if (map) {
       map.clearOverlays();
     }
-
     var projectId = editModel(window.location.href);
-
+    var p = null
+    ajaxRequest("post", "/api/project/getproject", {"id": projectId}, function (data) {
+      p = new BMap.Point(data.body.data[0].longitude, data.body.data[0].latitude)
+      map.centerAndZoom(p, 15);
+    })
     ajaxRequest("post", "/api/gis/listElebox", {"projectId": projectId}, function (data) {
       if (data) {
         if (data.header.code == 1000) {
@@ -392,7 +399,7 @@
           for (var i = 0; i < eleboxArray.length; ++i) {
             var point = new BMap.Point(eleboxArray[i].longitude, eleboxArray[i].latitude);
             // addMarker(point, false, eleboxArray[i].id)
-            translateCallback(point,{"isLight": false, "id": eleboxArray[i].id})
+            translateCallback(point, {"isLight": false, "id": eleboxArray[i].id})
 
             if (i == 0 && isInit) {
               map.centerAndZoom(point, 16);
@@ -407,7 +414,7 @@
   }
 
   function init () {
-    map = new BMap.Map("map");
+    map = new BMap.Map("map", {enableMapClick: false});
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 20);
     var mapType1 = new BMap.MapTypeControl(
     {
