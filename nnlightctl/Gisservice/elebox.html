@@ -12,76 +12,226 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
-
+    <style>
+        #equipmentLeng i{}
+        .lampPostTypeIcon{ background: url("../bg/gisEleBox/lampPostTypeIcon.png");background-size: 14px 14px}
+        .lightTypeIcon{ background: url("../bg/gisEleBox/lightTypeIcon.png");background-size: 14px 14px}
+        .lightingIcon{ background: url("../bg/gisEleBox/lightingIcon.png");background-size: 14px 14px}
+        .lightsOutIcon{ background: url("../bg/gisEleBox/lightsOutIcon.png");background-size: 14px 14px}
+        .loopLengthIcon{ background: url("../bg/gisEleBox/loopLengthIcon.png");background-size: 14px 14px}
+        .electricityMeterIcon{ background: url("../bg/gisEleBox/electricityMeterIcon.png");background-size: 14px 14px}
+        /*#equipmentLeng p span:first-child{margin-right: 38px;}*/
+        #equipmentLeng p>span{color: #666666;font-size: 14px;width: 116px;line-height: 22px;display: inline-block}
+        #equipmentLeng p i{margin-right: 16px;display: inline-block;width: 14px;height: 14px}
+        #refreshLoop{position:absolute;top:10px;right:12px;display:inline-block;width: 14px;height:14px;background: url("../bg/gisEleBox/refreshLoop.png");background-size: contain}
+    </style>
 </head>
 <body>
-    <div class="page-container">
+    <div class="page-container" style="height: 100%;box-sizing: border-box;padding: 24px 12px;background-color: rgba(246,246,246,1)">
+        <div class="eleBoxTop" style="display: flex">
+            <div id="eleBoxNameBox" style="padding: 20px 23px 8px;border-radius: 6px;background: #fff;border: 1px solid rgba(192,192,192,1);">
+                <img src="../bg/gisEleBox/elebox.png" alt="" style="width: 120px;height: 120px">
+                <p id="eleBoxName" style="font-size: 12px;color: rgba(153,153,153,1);text-align: center;margin-bottom: 0;line-height: 12px;padding-top: 12px;">配电柜名称</p>
+            </div>
+            <div id="equipmentLeng" style="flex: 1;padding-left: 20px;padding-top: 30px;position: relative;">
+                <button style="color: #333;width:43px;height:24px;background:rgba(192,192,192,1);border-radius:4px;border: none;position: absolute;top: -12px;right: 0;">刷新</button>
+                <p>
+                    <span><i class="lampPostTypeIcon"></i>灯杆：<span id="lampPostType"></span></span>
+                    <span><i class="lightTypeIcon"></i>灯具：<span id="lightType"></span></span>
+                </p>
+                <p>
+                    <span><i class="lightingIcon"></i>亮灯：<span id="lighting">0</span></span>
+                    <span><i class="lightsOutIcon"></i>灭灯：<span id="lightsOut">0</span></span>
+                </p>
+                <p>
+                    <span><i class="loopLengthIcon"></i>回路：<span id="loopLength"></span></span>
+                    <span><i class="electricityMeterIcon"></i>电表：<span id="electricityMeter"></span></span>
+                </p>
+            </div>
+        </div>
+        <div id="tab-system" class="HuiTab mt-30" style="height: 270px;overflow-y: auto;">
+            <div class="tabBar cl">
+                <span>回路监控</span>
+                <span>电能数据</span>
+                <span>设备信息</span>
+            </div>
+            <div class="tabCon mt-30">
+                <table class="table table-border table-bordered table-bg table-hover table-sort">
+                    <thead>
+                    <tr class="text-l">
+                        <th>开关模块</th>
+                        <th>回路</th>
+                        <th>状态</th>
+                        <th colspan="2" style="position: relative">开关<span id="refreshLoop"></span></th>
+                    </tr>
+                    </thead>
+                    <tbody id="tb">
+                    <tr class="text-l"></tbody>
+                </table>
+            </div>
+            <div class="tabCon mt-30">
+                <div id="electricEnergyWrap" style="overflow: auto">
+                    <table id="electricEnergy" style="width: 600px" class="table table-border table-bordered table-bg table-hover">
+                        <thead>
+                        <tr class="text-l">
+                            <th>参数</th>
+                            <th>电流(A)</th>
+                            <th>电压(V)</th>
+                            <th>功率(w)</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tabCon mt-30">
+                <div id="eleBoxInfoWrap" style="overflow: auto">
+                    <table id="eleBoxInfo" style="width: 600px" class="table table-border table-bordered table-bg table-hover">
+                        <thead>
+                        <tr class="text-l">
+                            <th>编码</th>
+                            <th>型号</th>
+                            <th>名称</th>
+                            <th>外观颜色</th>
+                            <th>尺寸</th>
+                            <th>备注</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
 
-        <table class="table table-border table-bordered table-bg table-hover table-sort">
-            <thead>
-                <tr class="text-l">
-                    <th>模块编码</th>
-                    <th>模块名称</th>
-                    <th>回路数量</th>
-                    <th>回路</th>
-                </tr>
-            </thead>
-            <tbody id="tb">
-                <tr class="text-l">
-                    <td>modelCode</td>
-                    <td>modelName</td>
-                    <td>loopCount</td>
-                    <td>
-                        <a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="loop('回路操作', 'loop.html', '1', '600', '400')" title="回路操作"><i class="Hui-iconfont">&#xe6df;</i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+            </div><!--tab切换end -->
+        </div>
     </div>
-    <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <script type="text/javascript" src="../js/api/requestRoot.js"></script>
-    <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/admin.js"></script>
-    <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
-    <script type="text/javascript">
-      function bmapEleboxInit(eleboxId) {
-        //获取该控制柜下全部模块
-        ajaxRequest("post", "/api/roadlighting/listmodel", {"eleboxId" : eleboxId}, function (data) {
-          if (data) {
-            if (data.header.code == 1000) {
-              var modelArray = data.body.data;
-
-              var $tbody = $("#tb");
-              $tbody.empty();
-
-              for (var i = 0; i < modelArray.length; ++i) {
-                var model = modelArray[i];
-
-                $('<tr class="text-l">\n' +
-                '                    <td>'+model.modelCode+'</td>\n' +
-                '                    <td>'+model.modelName+'</td>\n' +
-                '                    <td>'+model.loopCount+'</td>\n' +
-                '                    <td>\n' +
-                '                        <a href="javascript:void(0);" style="text-decoration:none" class="ml-5" onclick="loop(\'回路操作\', \'loop.html\', \''+model.id+'\', \'600\', \'400\')" title="回路操作"><i class="Hui-iconfont">&#xe6df;</i></a>\n' +
-                '                    </td>\n' +
-                '                </tr>').appendTo($tbody);
-              }
-            }
-          }
-        });
-      }
-
-      $(function () {
-        globalLightId = editModel(window.location.href)
-        bmapEleboxInit(globalLightId);
-      })
-        //控制柜初始化
-
-        //管理灯具
-        function loop(title, url, id, w, h) {
-            layer_show(title, url + "?id=" + id, w, h);
-        }
-    </script>
 </body>
 </html>
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
+<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
+<script type="text/javascript">
+    //初始化tab切换
+    $("#tab-system").Huitab({
+        index: 0//默认第一个；
+    });
+
+    function getEleBoxInfo(eleboxId){
+        $('#eleBoxInfo').DataTable({
+            "bStateSave": true,
+            "lengthChange": false,
+            "destroy": true,
+            "searching": false,
+            "autoWidth": false,
+            "paging":false,
+            "bLengthChange": false,
+            "info":false,
+            "ordering": false, //设置所有布排序
+            "ajax": function (data, callback, settings) {
+                ajaxRequest("post", "api/roadlighting/getElebox", {id:eleboxId}, function (data) {
+                    //封装返回数据
+                    var returnData = {};
+                    if (data) {
+                        if (data.header.code == 1000) {
+                            returnData.data = data.body.data;
+                        }
+                    }
+                    callback(returnData);
+                });
+            },
+            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+//                { "data": "id" },
+                { "data": "codeNumber", "defaultContent": ""},
+                { "data": "eleboxModel", "defaultContent": ""},
+                { "data": "eleboxName", "defaultContent": "" },
+                { "data": "eleboxColors", "defaultContent": ""},
+                { "data": "eleboxSize", "defaultContent": "" },
+                { "data": "mem", "defaultContent": "" }
+            ]
+        });
+    }
+
+    function flushModelLoop (modelId) {
+        ajaxRequest("post", "/api/roadlighting/listmodelloop", {"modelId": modelId}, function (data) {
+            if (data) {
+                if (data.header.code == 1000) {
+                    var loopArray = data.body.data;
+
+                    var $tbody = $("#tb");
+                    $tbody.empty();
+
+                    for (var i = 0; i < loopArray.length; ++i) {
+                        var loop = loopArray[i];
+                        $('<tr class="text-l">\n' +
+                            '<td>' + loop.nnlightctlEleboxModelId + '</td>\n' +
+                            '<td>' + loop.loopCode + '</td>\n' +
+                            '<td>' + MODELLOOP_STATE[loop.state] + '</td>\n' +
+                            '<td colspan="2">\n' +
+                                '<label class="switch-btn" style="display: block;margin: 0 auto">\n' +
+                                '<input onclick="switchEvent(this, ' + loop.id + ')" class="checked-switch" type="checkbox">\n' +
+                                '<span class="text-switch" data-yes="yes" data-no="no"></span>\n' +
+                                '<span class="toggle-btn"></span>\n' +
+                                '</label>\n' +
+                            '</td>\n' +
+                            '</tr>').appendTo($tbody);
+                    }
+
+                    flushModelLoopState(modelId);
+                }
+            }
+        });
+    }
+
+    //获取模块继电器状态
+    function flushModelLoopState (modelId) {
+        ajaxRequest("post", "/api/command/commandGetModelStateInfoId", {"modelId": modelId}, function (data) {
+            if (data) {
+                if (data.header.code == 1000) {
+                    var modelState = data.body.data[0];
+                    var modelStateNumber = parseInt(modelState.modelStateDesc, 16);
+                    //刷新表格回路状态
+                    $("#tb").find("tr").each(function (index, value) {
+                        var loopCode = $(this).find("td").eq(0).text();
+                        if (getNumberBitValue(modelStateNumber, Number(loopCode)) == 1) {
+                            $(this).find("input[type='checkbox']").eq(0).prop("checked", true);
+                            $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    //开关事件
+    function switchEvent (obj, loopId) {
+        var switchState = $(obj).prop("checked");
+        console.log("the switch state is " + switchState + " , the loop id is : " + loopId);
+        if (switchState) {  //回路通电
+            $(this).find("td").eq(2).text(MODELLOOP_STATE[0]);
+        } else {    //回路断电
+            $(this).find("td").eq(2).text(MODELLOOP_STATE[1]);
+        }
+
+        //发送指令
+        var modelLoopBit = $(obj).parents("tr").find("td").eq(0).text().trim();
+        var modelLoopState = switchState ? 1 : 0;
+        ajaxRequest("post", "/api/command/configModelStateId",
+            {
+                "loopId": loopId,
+                "modelLoop": (1 << (Number(modelLoopBit) - 1)),
+                "modelLoopState": (modelLoopState << (Number(modelLoopBit) - 1))
+            }, function () {
+            });
+    }
+
+    $(function () {
+        globalLightId = editModel(window.location.href);
+        getEleBoxInfo(globalLightId);//获取控制柜信息
+        //刷新回路
+        var modelId = editModel(location.href);
+        flushModelLoop(54);
+    });
+</script>
