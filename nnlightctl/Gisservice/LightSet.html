@@ -35,21 +35,24 @@
                style="width:60px;"><span>关灯</span></a>
 
             <input type="range" min="1" max="100" value="0" step="1" name="range" onchange="changerange(this)">
-            <p name="rangeval" style='font-size:16px;color:#FFB300;font-weight: bold;margin-top:14px;'>0</p>
+            <p name="rangeval" style='font-size:16px;color:#FFB300;font-weight: bold;padding-top: 10px;'>0</p>
         </div>
     </div>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标1：</span><span id="longitude">经度：116.306681 </span><span
+    <div class="lampInfo">
+        <h4 style="color: #FEB916;">灯具信息：</h4>
+    </div>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span
             id="latitude">纬度：39.830931</span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>IMEI：</span><span id="UUID">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 4px"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>IMEI：</span><span id="UUID">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 0"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>-->
@@ -68,7 +71,6 @@
 <script type="text/javascript" src="../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
 <script type="text/javascript">
-
   var globalLightId = null;
 
   function doLightAdjust (precent) {
@@ -127,7 +129,6 @@
   function powerTypeChangeEvent () {
     ajaxRequest("post", "/api/command/batchCommandConfigTerminalPowerType",
     {"lightUUIDs[0]": $("#uuid").text().trim(), "powerType": $("#powerTypeSelect").val()}, function () {
-
     });
   }
 
