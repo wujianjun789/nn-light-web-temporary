@@ -138,6 +138,9 @@
 <script type="text/javascript" src="../lib/jquery.validation/1.14.0/messages_zh.js"></script>
 <script type="text/javascript">
   /*国家增加*/
+  var currentCitysArr = []
+  var currentCity = '北京'
+
   function country_add (title, url, w, h) {
     layer_show(title, url, w, h);
   }
@@ -162,7 +165,7 @@
       shade: 0.4,
       title: title,
       moveOut: true,
-      content: url,
+      content:  url + "?cityName=" + currentCity,
       btn: ['确定', '关闭'],
       yes: function (index) {
         var body = layer.getChildFrame('body', index);
@@ -269,19 +272,29 @@
       });
     }
 
+
     //按省份刷新城市信息
     function flushCityByProvince (provinceId) {
       ajaxRequest("post", "/api/project/listcity", {"nnlightctlProjectProvinceId": provinceId}, function (data) {
         if (data) {
           if (data.body.data) {
+            currentCitysArr = data.body.data
             var cityArray = data.body.data;
-
             var $citySelect = $("#nnlightctlProjectCityId");
             $citySelect.empty();
+            currentCity = cityArray[0].cityName
             for (var i = 0; i < cityArray.length; ++i) {
               var city = cityArray[i];
               $('<option value="' + city.id + '">' + city.cityName + '</option>').appendTo($citySelect);
             }
+            $("#nnlightctlProjectCityId").change(function () {
+              var id = $("#nnlightctlProjectCityId").val()
+              currentCitysArr.length && currentCitysArr.forEach(function (d) {
+                if (d.id == id) {
+                  currentCity = d.cityName
+                }
+              })
+            })
           }
         }
       });

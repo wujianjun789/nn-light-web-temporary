@@ -544,7 +544,7 @@ p{margin-bottom:10px}	/*段落*/
 small{font-size:85%}	/*小型文本*/
 b,strong {font-weight: bold}	/*重要的文本，加粗*/
 em{font-style:italic}	/*被强调的文本*/
-i{}	/*斜体*/
+i{font-style:normal}	/*斜体*/
 u{}	/*加下划线*/
 cite{font-style:normal}	/*引用*/
 mark{color:#000;background:#ff0}/*突出显示文本*/
@@ -912,11 +912,11 @@ pre ol.linenums li{padding-left:12px;color:#bbb;line-height:18px;text-shadow:0 1
 */
 /*默认table*/
 table{width:100%;empty-cells:show;background-color:transparent;border-collapse:collapse;border-spacing:0}
-table th{text-align:left; font-weight:400}
+table th{text-align:center; font-weight:400}
 /*带水平线*/
 .table th{font-weight:bold}
 .table th,.table td{padding:8px;line-height:20px;word-break:break-all}
-.table td{text-align:left}
+.table td{text-align:center}
 .table tbody tr.success > td{background-color:#dff0d8}
 .table tbody tr.error > td{background-color:#f2dede}
 .table tbody tr.warning > td{background-color:#fcf8e3}

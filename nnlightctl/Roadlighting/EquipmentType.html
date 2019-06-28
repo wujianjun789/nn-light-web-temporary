@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
-
 </head>
 <body>
     <nav class="breadcrumb">
@@ -66,44 +65,62 @@
                 <!--<span class="Hui-iconfont bigfont">&#xe72d;</span><span class="pl-10 f-18">光照计型号</span>-->
             <!--</div>-->
             <div class="pr1" id="device1">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/kongzihgui.png"></span><span class="pl-10 f-18">控制柜</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/kongzihgui.png"></span><span class="pl-10 f-18">控制柜</span>
+                <span id="elebox" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr2">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/dianbiao.png"></span><span class="pl-10 f-18">电表</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/dianbiao.png"></span><span class="pl-10 f-18">电表</span>
+                <span id="electricity" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr3">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/jizhong.png"></span><span class="pl-10 f-18">集中控制器</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/jizhong.png"></span><span class="pl-10 f-18">集中控制器</span>
+                <span id="centralizeController" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr4">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/kaiguan.png"></span><span class="pl-10 f-18">开关模块</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/kaiguan.png"></span><span class="pl-10 f-18">开关模块</span>
+                <span id="modular" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr5">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/dandeng.png"></span><span class="pl-10 f-18">单灯控制器</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/dandeng.png"></span><span class="pl-10 f-18">单灯控制器</span>
+                <span id="lampController" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr6">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/denggan.png"></span><span class="pl-10 f-18">灯杆</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/denggan.png"></span><span class="pl-10 f-18">灯杆</span>
+                <span id="lamppost" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr7">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/dengju.png"></span><span class="pl-10 f-18">灯具</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/dengju.png"></span><span class="pl-10 f-18">灯具</span>
+                <span id="lightModel" class="equipmentLength">设备: <i></i></span>
             </div>
             <div class="pr8">
-                <span class="Hui-iconfont bigfont"><img src="../bg/icon/guangzhaoji.png"></span><span class="pl-10 f-18">光照计</span>
+                <span class="Hui-iconfont bigfont"><img style="width: 30px;height: 30px;margin-top: 12px" src="../bg/icon/guangzhaoji.png"></span><span class="pl-10 f-18">光照计</span>
+                <span id="photoriod" class="equipmentLength">设备: <i></i></span>
             </div>
 
         </div>
     </div>
 
     <script type="text/javascript" src="../js/jquery.min.js"></script>
-    <!--<script type="text/javascript" src="../js/api/jquery-3.3.1.min.js"></script>-->
+    <script type="text/javascript" src="../js/admin.js"></script>
+    <script type="text/javascript" src="../js/api/requestRoot.js"></script>
+    <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
     <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/admin.js"></script>
+
     <script type="text/javascript">
         $(function () {
-            $("#device1").click(function () {
-                window.location.replace("LightType.html");
+            ajaxRequest("post", "api/overviewer/totalequipment", {}, function (data) {
+                console.log(data);
+                var equipmentLeng = data.body.data[0];
+                $("#elebox").children('i').text(equipmentLeng.elebox);
+                $("#electricity").children('i').text(equipmentLeng.electricity);
+                $("#centralizeController").children('i').text(equipmentLeng.centralizeController);
+                $("#modular").children('i').text(equipmentLeng.modular);
+                $("#lampController").children('i').text(equipmentLeng.lampController);
+                $("#lamppost").children('i').text(equipmentLeng.lamppost);
+                $("#lightModel").children('i').text(equipmentLeng.lightModel);
+                $("#photoriod").children('i').text(equipmentLeng.photoriod);
             });
-
             $("#deviceAdjust1").click(function () {
                 layer_show("上传固件", "firmware.html", 600, 400);
             });

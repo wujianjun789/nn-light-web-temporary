@@ -416,3 +416,14 @@ input[type="range"]::-webkit-slider-thumb {
     text-overflow:ellipsis;
     white-space: nowrap;
 }
+
+/* 总览显示数量样式 */
+.equipmentLength{
+    position: absolute;
+    bottom: 10px;
+    height: 30px;
+    line-height: 30px;
+    right: 20px;
+    font-size: 14px;
+    color: #333;
+}
