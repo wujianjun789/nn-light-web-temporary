@@ -9,14 +9,31 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
     <title>灯具地理信息--灯光设置</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css?v=1"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
     <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
     <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <style type="text/css">
+        .tabBar span.current {
+            border-color: #FFB300;
+        }
 
+        .tabBar span {
+            margin-right: 20px;
+            padding: 0;
+            font-size: 15px;
+        }
+        .table th{
+            line-height: 18px;
+        }
+        .table td{
+            line-height: 16px;
+        }
+    </style>
 </head>
 <body>
-<div class="page-container" id="light-set" style="max-height: 460px;padding-bottom: 20px;">
+<div class="page-container" id="light-set"
+     style="max-height: 540px;padding: 20px  15px 0;background-color:rgba(246,246,246,1);">
     <div class="linghtbox clearfix">
         <div class="imgbox"><img src="../bg//lightsbg_0.png" class="imgboximg"/><h4>光亮：<span>0%</span></h4></div>
         <div id="powerange">
@@ -38,21 +55,84 @@
             <p name="rangeval" style='font-size:16px;color:#FFB300;font-weight: bold;padding-top: 10px;'>0</p>
         </div>
     </div>
-    <div class="lampInfo">
-        <h4 style="color: #FEB916;">灯具信息：</h4>
+    <div id="tab-system" class="HuiTab mt-10" style="height: 300px;overflow-y: auto;">
+        <div class="tabBar cl">
+            <span>灯具数据</span>
+            <span>灯杆信息</span>
+            <span>灯具信息</span>
+        </div>
+        <div class="tabCon mt-15">
+            <!--<table class="table table-border table-bordered table-bg table-hover table-sort">-->
+            <!--<thead>-->
+            <!--<tr class="text-l">-->
+            <!--<th>开关模块</th>-->
+            <!--<th>回路</th>-->
+            <!--<th>状态</th>-->
+            <!--<th colspan="2" style="position: relative">开关<span id="refreshLoop"></span></th>-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody id="tb">-->
+            <!--<tr class="text-l"></tbody>-->
+            <!--</table>-->
+            <div id="flushLightPowerWrap" style="overflow: auto">
+                <table id="flushLightPower" style="width: 435px"
+                       class="table table-border table-bordered table-bg table-hover">
+                    <thead>
+                    <tr class="text-l">
+                        <th>参数</th>
+                        <th>值</th>
+                        <th>单位</th>
+                        <th>时间</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tabCon mt-15">
+            <div id="electricEnergyWrap" style="overflow: auto">
+                <table id="electricEnergy" style="width: 435px"
+                       class="table table-border table-bordered table-bg table-hover">
+                    <thead>
+                    <tr class="text-l">
+                        <th>参数名称</th>
+                        <th>对应数据信息</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tabCon mt-15">
+            <div id="eleBoxInfoWrap" style="overflow: auto">
+                <table id="eleBoxInfo" style="width: 435px"
+                       class="table table-border table-bordered table-bg table-hover">
+                    <thead>
+                    <tr class="text-l">
+                        <th>参数名称</th>
+                        <th>对应数据信息</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div><!--tab切换end -->
     </div>
-    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span
-            id="latitude">纬度：39.830931</span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>IMEI：</span><span id="UUID">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>
-    <p class="f-14" style="margin-bottom: 0"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>
+    <!--<div class="lampInfo">-->
+    <!--<h4 style="color: #FEB916;">灯具信息：</h4>-->
+    <!--</div>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具坐标：</span><span id="longitude">经度：116.306681 </span><span-->
+    <!--id="latitude">纬度：39.830931</span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>IMEI：</span><span id="UUID">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 0"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>-->
     <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>-->
@@ -68,10 +148,38 @@
     </div>-->
 
 </div><!--地图弹出内容-->
+<script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../js/common.js"></script>
+<script type="text/javascript" src="../js/admin.js"></script>
+<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
+<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
 <script type="text/javascript">
   var globalLightId = null;
+  var infoMatch = {
+    longitude: '经度',
+    latitude: '纬度',
+    alarmMessage: '报警信息',
+    communicationMode: '通讯方式',
+    dimmingMode: '调光方式',
+    equipmentNumber: '灯具编号',
+    IMEI: 'UUID',
+    lampModel: '单灯控制器型号',
+    lampName: '单灯控制器名称',
+    ratedCurrent: '额定电流',
+    ratedVoltage: '额定电压',
+    staticPower: '静态功耗',
+    lightingCode: 'lightingCode',
+    mem: '备注'
+  }
+  var infoLMatch = {
+    equipmentNumber: '灯具编号',
+    IMEI: 'UUID',
+    lampModel: '单灯控制器型号',
+    lampName: '单灯控制器名称',
+    mem: '备注'
+  }
 
   function doLightAdjust (precent) {
     var lightIdArray = [];
@@ -112,7 +220,7 @@
   }
 
   function addlights (value) {
-    $('.imgbox span').html(value+'%')
+    $('.imgbox span').html(value + '%')
     $("input[name='range']").val(value);
     $("p[name='rangeval']").html(value);
     lightschange(value);
@@ -120,7 +228,7 @@
   }
 
   function changerange (obj) {
-    $('.imgbox span').html(obj.value+'%')
+    $('.imgbox span').html(obj.value + '%')
     $("p[name='rangeval']").html(obj.value);
     lightschange(obj.value);
     doLightAdjust(obj.value);
@@ -132,91 +240,321 @@
     });
   }
 
-  //获取灯具信息
-  function flushLightInfo () {
-    ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
-      console.log(data);
-      if (data) {
-        if (data.header.code == 1000) {
-          var light = data.body.data[0];
-          //刷新灯具信息
-          $("#longitude").text("经度：" + light.longitude);
-          $("#latitude").text("  纬度：" + light.latitude);
-            $("#alarmMessage").text(light.alarmMessage);
-            $("#communicationMode").text(light.communicationMode);
-            $("#dimmingMode").text(light.dimmingMode);
-            $("#equipmentNumber").text(light.equipmentNumber);
-            $("#UUID").text(light.UUID);
-            $("#lampModel").text(light.lampModel);
-            $("#lampName").text(light.lampName);
-            $("#ratedCurrent").text(light.ratedCurrent);
-            $("#ratedVoltage").text(light.ratedVoltage);
-            $("#staticPower").text(light.staticPower);
-            //注释接口getLightSignalByUUID
-          //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
-          //   if (data) {
-          //     console.log(data);
-          //     if (data.header.code == 1000) {
-          //       $("#signalIntensity").text(data.body.data);
-          //     }
+  function flushLightInfo (eleboxId) {
+    $('#eleBoxInfo').DataTable({
+      "bStateSave": true,
+      "lengthChange": false,
+      "destroy": true,
+      "searching": false,
+      "autoWidth": false,
+      "paging": false,
+      "bLengthChange": false,
+      "info": false,
+      "ordering": false, //设置所有布排序
+      "ajax": function (data, callback, settings) {
+        // ajaxRequest("post", "api/roadlighting/getElebox", {id: eleboxId}, function (data) {
+        //   //封装返回数据
+        //   var returnData = {};
+        //   if (data) {
+        //     if (data.header.code == 1000) {
+        //       returnData.data = data.body.data;
+        //     }
+        //   }
+        //   callback(returnData);
+        // });
+        ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+          var d = data.body.data[0]
+          var returnData = {}
+          returnData.data = []
+          Object.keys(data.body.data[0]).forEach(function (e) {
+            if (d[e] != null && infoMatch[e]) {
+              returnData.data.push({key: infoMatch[e], value: d[e]})
+            }
+          })
+          callback(returnData);
+          // if (data) {
+          //   if (data.header.code == 1000) {
+          //     var light = data.body.data[0];
+          //     //刷新灯具信息
+          //     $("#longitude").text("经度：" + light.longitude);
+          //     $("#latitude").text("  纬度：" + light.latitude);
+          //     $("#alarmMessage").text(light.alarmMessage);
+          //     $("#communicationMode").text(light.communicationMode);
+          //     $("#dimmingMode").text(light.dimmingMode);
+          //     $("#equipmentNumber").text(light.equipmentNumber);
+          //     $("#UUID").text(light.UUID);
+          //     $("#lampModel").text(light.lampModel);
+          //     $("#lampName").text(light.lampName);
+          //     $("#ratedCurrent").text(light.ratedCurrent);
+          //     $("#ratedVoltage").text(light.ratedVoltage);
+          //     $("#staticPower").text(light.staticPower);
+          //     //注释接口getLightSignalByUUID
+          //     //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+          //     //   if (data) {
+          //     //     console.log(data);
+          //     //     if (data.header.code == 1000) {
+          //     //       $("#signalIntensity").text(data.body.data);
+          //     //     }
+          //     //   }
+          //     // })
           //   }
-          // })
-        }
-      }
+          // }
+        });
+      },
+      "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+//                { "data": "id" },
+        {"data": "key", "defaultContent": ""},
+        {"data": "value", "defaultContent": ""}
+      ]
     });
   }
 
-  $(function () {
+  function flushLightPower (eleboxId) {
+    $('#flushLightPower').DataTable({
+      "bStateSave": true,
+      "lengthChange": false,
+      "destroy": true,
+      "searching": false,
+      "autoWidth": false,
+      "paging": false,
+      "bLengthChange": false,
+      "info": false,
+      "ordering": false, //设置所有布排序
+      "ajax": function (data, callback, settings) {
+        // ajaxRequest("post", "api/roadlighting/getElebox", {id: eleboxId}, function (data) {
+        //   //封装返回数据
+        //   var returnData = {};
+        //   if (data) {
+        //     if (data.header.code == 1000) {
+        //       returnData.data = data.body.data;
+        //     }
+        //   }
+        //   callback(returnData);
+        // });
+        var returnData = {}
+        var powerData = [];
+        var currentDate = new Date();
+        var currentHours = currentDate.getHours();
+        for (var i = 0; i < 6; i++) {
+          powerData.push({
+            'c': '功率',
+            'v': parseInt(Math.random() * (3000 - 1000) + 1000),
+            'd': 'W',
+            't': currentHours - i + ':00'
+          })
+        }
+        returnData.data = powerData;
+        callback(returnData);
+        // ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+        //   var d = data.body.data[0]
+        //   var returnData = {}
+        //   returnData.data = []
+        //   Object.keys(data.body.data[0]).forEach(function (e) {
+        //     if (d[e] != null && infoMatch[e]) {
+        //       returnData.data.push({key: infoMatch[e], value: d[e]})
+        //     }
+        //   })
+        //   callback(returnData);
+        //   // if (data) {
+        //   //   if (data.header.code == 1000) {
+        //   //     var light = data.body.data[0];
+        //   //     //刷新灯具信息
+        //   //     $("#longitude").text("经度：" + light.longitude);
+        //   //     $("#latitude").text("  纬度：" + light.latitude);
+        //   //     $("#alarmMessage").text(light.alarmMessage);
+        //   //     $("#communicationMode").text(light.communicationMode);
+        //   //     $("#dimmingMode").text(light.dimmingMode);
+        //   //     $("#equipmentNumber").text(light.equipmentNumber);
+        //   //     $("#UUID").text(light.UUID);
+        //   //     $("#lampModel").text(light.lampModel);
+        //   //     $("#lampName").text(light.lampName);
+        //   //     $("#ratedCurrent").text(light.ratedCurrent);
+        //   //     $("#ratedVoltage").text(light.ratedVoltage);
+        //   //     $("#staticPower").text(light.staticPower);
+        //   //     //注释接口getLightSignalByUUID
+        //   //     //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+        //   //     //   if (data) {
+        //   //     //     console.log(data);
+        //   //     //     if (data.header.code == 1000) {
+        //   //     //       $("#signalIntensity").text(data.body.data);
+        //   //     //     }
+        //   //     //   }
+        //   //     // })
+        //   //   }
+        //   // }
+        // });
+      },
+      "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+//                { "data": "id" },
+        {"data": "c", "defaultContent": ""},
+        {"data": "v", "defaultContent": ""},
+        {"data": "d", "defaultContent": ""},
+        {"data": "t", "defaultContent": ""}
+      ]
+    });
+  }
 
+  function flushLampPost (eleboxId) {
+    $('#electricEnergy').DataTable({
+      "bStateSave": true,
+      "lengthChange": false,
+      "destroy": true,
+      "searching": false,
+      "autoWidth": false,
+      "paging": false,
+      "bLengthChange": false,
+      "info": false,
+      "ordering": false, //设置所有布排序
+      "ajax": function (data, callback, settings) {
+        // ajaxRequest("post", "api/roadlighting/getElebox", {id: eleboxId}, function (data) {
+        //   //封装返回数据
+        //   var returnData = {};
+        //   if (data) {
+        //     if (data.header.code == 1000) {
+        //       returnData.data = data.body.data;
+        //     }
+        //   }
+        //   callback(returnData);
+        // });
+        ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+          var d = data.body.data[0]
+          var returnData = {}
+          returnData.data = []
+          Object.keys(data.body.data[0]).forEach(function (e) {
+            if (d[e] != null && infoLMatch[e]) {
+              returnData.data.push({key: infoLMatch[e], value: d[e]})
+            }
+          })
+          callback(returnData);
+          // if (data) {
+          //   if (data.header.code == 1000) {
+          //     var light = data.body.data[0];
+          //     //刷新灯具信息
+          //     $("#longitude").text("经度：" + light.longitude);
+          //     $("#latitude").text("  纬度：" + light.latitude);
+          //     $("#alarmMessage").text(light.alarmMessage);
+          //     $("#communicationMode").text(light.communicationMode);
+          //     $("#dimmingMode").text(light.dimmingMode);
+          //     $("#equipmentNumber").text(light.equipmentNumber);
+          //     $("#UUID").text(light.UUID);
+          //     $("#lampModel").text(light.lampModel);
+          //     $("#lampName").text(light.lampName);
+          //     $("#ratedCurrent").text(light.ratedCurrent);
+          //     $("#ratedVoltage").text(light.ratedVoltage);
+          //     $("#staticPower").text(light.staticPower);
+          //     //注释接口getLightSignalByUUID
+          //     //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+          //     //   if (data) {
+          //     //     console.log(data);
+          //     //     if (data.header.code == 1000) {
+          //     //       $("#signalIntensity").text(data.body.data);
+          //     //     }
+          //     //   }
+          //     // })
+          //   }
+          // }
+        });
+      },
+      "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+//                { "data": "id" },
+        {"data": "key", "defaultContent": ""},
+        {"data": "value", "defaultContent": ""}
+      ]
+    });
+  }
+
+  // //获取灯具信息
+  // function flushLightInfo () {
+  //   ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+  //
+  //     if (data) {
+  //       if (data.header.code == 1000) {
+  //         var light = data.body.data[0];
+  //         //刷新灯具信息
+  //         $("#longitude").text("经度：" + light.longitude);
+  //         $("#latitude").text("  纬度：" + light.latitude);
+  //         $("#alarmMessage").text(light.alarmMessage);
+  //         $("#communicationMode").text(light.communicationMode);
+  //         $("#dimmingMode").text(light.dimmingMode);
+  //         $("#equipmentNumber").text(light.equipmentNumber);
+  //         $("#UUID").text(light.UUID);
+  //         $("#lampModel").text(light.lampModel);
+  //         $("#lampName").text(light.lampName);
+  //         $("#ratedCurrent").text(light.ratedCurrent);
+  //         $("#ratedVoltage").text(light.ratedVoltage);
+  //         $("#staticPower").text(light.staticPower);
+  //         //注释接口getLightSignalByUUID
+  //         //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+  //         //   if (data) {
+  //         //     console.log(data);
+  //         //     if (data.header.code == 1000) {
+  //         //       $("#signalIntensity").text(data.body.data);
+  //         //     }
+  //         //   }
+  //         // })
+  //       }
+  //     }
+  //   });
+  // }
+
+  $(function () {
+    $("#tab-system").Huitab({
+      index: 0//默认第一个；
+    });
     globalLightId = editModel(window.location.href)
     flushLightInfo();
+    flushLampPost();
+    setInterval(function () {
+      flushLightPower();
+    }, 300000)
+    flushLightPower();
     //通讯方式
-      var str1='';
-      // var str = $('#communicationMode').text();
-      var str = parseInt($('#communicationMode').text());
-      switch (str) {
-          case 1 :
-              str1='NB-IoT';
-              break;
-          case 2 :
-              str1='4G';
-              break;
-          case 3 :
-              str1='Zigbee';
-              break;
-          case 4 :
-              str1='PLC';
-              break;
-          case 5 :
-              str1='RS485';
-              break;
-          case 6 :
-              str1='GPRS';
-              break;
-      }
-      $('#communicationMode').html(str1);
+    var str1 = '';
+    // var str = $('#communicationMode').text();
+    var str = parseInt($('#communicationMode').text());
+    switch (str) {
+      case 1 :
+        str1 = 'NB-IoT';
+        break;
+      case 2 :
+        str1 = '4G';
+        break;
+      case 3 :
+        str1 = 'Zigbee';
+        break;
+      case 4 :
+        str1 = 'PLC';
+        break;
+      case 5 :
+        str1 = 'RS485';
+        break;
+      case 6 :
+        str1 = 'GPRS';
+        break;
+    }
+    $('#communicationMode').html(str1);
 
-      //展示调光方式
+    //展示调光方式
 
-      var d2='';
-      // var d1 = $('#dimmingMode').text();
-      var d1 = parseInt($('#dimmingMode').text());
-      switch (d1) {
-          case 1 :
-              d2='PWM';
-              break;
-          case 2 :
-              d2='0-10V';
-              break;
-          case 3 :
-              d2='YUART';
-              break;
-          case 4 :
-              d2='DALI';
-              break;
-      }
-      $('#dimmingMode').html(d2);
-        })
+    var d2 = '';
+    // var d1 = $('#dimmingMode').text();
+    var d1 = parseInt($('#dimmingMode').text());
+    switch (d1) {
+      case 1 :
+        d2 = 'PWM';
+        break;
+      case 2 :
+        d2 = '0-10V';
+        break;
+      case 3 :
+        d2 = 'YUART';
+        break;
+      case 4 :
+        d2 = 'DALI';
+        break;
+    }
+    $('#dimmingMode').html(d2);
+  })
 
   // function LightAdjustInit (lightId) {
   //   globalLightId = lightId;

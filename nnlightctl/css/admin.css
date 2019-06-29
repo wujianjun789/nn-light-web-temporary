@@ -265,7 +265,7 @@
 
 #lightpage,#eleboxpage{display:none;}
 .linghtbox{width:460px;position:relative;border-bottom: 1px solid #ccc;padding-bottom: 10px;}
-.linghtbox .imgbox{width:260px;height:260px;border:1px solid #dedede;text-align: center;color:#FFB300;font-size: 14px; }
+.linghtbox .imgbox{width:260px;height:260px;border:1px solid #dedede;text-align: center;color:rgba(153,153,153,1);font-size: 14px; }
 .linghtbox .imgbox h4{
     font-size: 14px;
 }
