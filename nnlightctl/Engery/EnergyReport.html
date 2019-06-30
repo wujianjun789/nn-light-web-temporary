@@ -11,6 +11,14 @@
     <link rel="stylesheet" type="text/css" href="../css/common.css?v=1" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
+    <style>
+    .conutmonth{
+        display:flex;
+    }
+    #monthconut,#monthconut1{
+        margin-left: -150px;
+    }
+    </style>
 
 </head>
 <body>
@@ -37,7 +45,7 @@
         <div id="tab-system" class="HuiTab mt-30">
 
             <div class="tabCon mt-30">
-                <div class="monthengery f-l">
+                <div class="monthengery ">
                     <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
                         <thead>
                             <tr class="text-c">
@@ -55,9 +63,12 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="monthconut f-l ml-40">
-                    <div id="monthconut" class="mt-30"></div>
-                    <div id="monthconut1" class="mt-30"></div>
+                <div class="monthconut  ml-40">
+                    <div class="conutmonth">
+                            <div id="monthconut" class="mt-30"></div>
+                            <div id="monthconut1" class="mt-30"></div>
+                    </div>
+                    
                 </div>
                 <div id="container"></div><!--绑定线图end-->
             </div>
