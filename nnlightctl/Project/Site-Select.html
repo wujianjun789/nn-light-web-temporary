@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<article class="page-container" style="padding: 0;">
+<article class="page-container" style="padding: 0; overflow: hidden">
     <div id="map" style="position:relative;"></div>
     <input type="hidden" id="lng">
     <input type="hidden" id="lat">
@@ -68,8 +68,11 @@
   }
 
   $(function () {
-    var Vw = document.body.clientWidth;
-    var Vh = document.documentElement.clientHeight;
+      // var Vw = document.body.clientWidth;
+      // var Vh = document.documentElement.clientHeight;
+      var Vw = window.screen.width - document.body.scrollTop;
+      var Vh = document.documentElement.clientHeight;
+      // var Vh = window.screen.height - document.body.scrollTop;
     $("#map").height(Vh);
     $("#map").width(Vw);
     loadJScript();
