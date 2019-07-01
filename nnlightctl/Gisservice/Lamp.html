@@ -197,6 +197,7 @@
         height: 590,     // 信息窗口高度
         title: "<span style='font-size:22px;'>灯光调节</span>", // 信息窗口标题
       }
+      var right = $(window).width()  - 560
       marker.addEventListener("click", function (event) {
         // var clickMarker = event.target;
         // layer_show('灯光设置', 'LightSet.html?id=' + id, 650, 550);
@@ -210,7 +211,7 @@
           moveOut: true,
           title: '灯杆名称：' + lampName,
           content: 'LightSet.html?id=' + id,
-          offset: ['140px', '1000px']
+          offset: [100, right]
         });
         // LightAdjustInit(clickMarker.getTitle());
         // var StrHtmlNew = $("#lightpage").html();
