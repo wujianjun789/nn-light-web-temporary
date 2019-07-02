@@ -122,7 +122,7 @@
                     modelType: {
                         required: true,
                         maxlength:7,
-                        regex: /(?!^\d+$)(?!^[a-zA-Z]+$)[0-9a-zA-Z]{2,7}/
+                        regex: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,7}$/
                     },
                     modelName: {
                         required: true,
@@ -157,7 +157,7 @@
                         rangelength: '编码长度为17位'
                     },
                     modelType:{
-                        regex: '由开头字母(大写)+数字组成'
+                        regex: '必须由字母(大写)+数字组成'
                     }
                 },
                 onkeyup: false,

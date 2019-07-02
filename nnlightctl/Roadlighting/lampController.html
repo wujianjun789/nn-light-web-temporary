@@ -33,7 +33,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="单灯控制器" onclick="add('单灯控制器', 'addLampController.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>单灯控制器</a>
+                <a class="btn btn-primary radius" data-title="单灯控制器" onclick="add('添加', 'addLampController.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>单灯控制器</a>
             </span>
     </div>
     <div class="mt-20">
@@ -115,7 +115,7 @@
                 }, {
                     targets: 13,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑灯具型号" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'900\', \'710\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/edit.png" alt=""></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addLampController.html\', \'' + row.id + '\', \'900\', \'710\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/edit.png" alt=""></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/delected.png" alt=""></a></td>';
                     }
                 }

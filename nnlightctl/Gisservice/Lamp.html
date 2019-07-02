@@ -232,19 +232,23 @@
         // }
 
 //        layer_show('控制柜操作', , 750, 500);
+        debugger;
+        var top = ($(window).width() - 600) * 0.5;
         var right = $(window).width()  - 560;
         index = layer.open({
           type: 2,
           area: ['500px', '600px'],
-          fix: false, //不固定
-          maxmin: true,
+          shade: false,
+          fix: true, //不固定
+          maxmin: false,
           shadeClose: false,
-          shade: [0.8, '#393D49'],
+          resize: false,
+          move: false,
           moveOut: false,
           title: '控制柜操作',
           content: 'elebox.html?id=' + id
           ,offset: [ //为了演示，随机坐标
-            30, right
+            60, right
           ]
         });
         // var clickMarker = event.target;

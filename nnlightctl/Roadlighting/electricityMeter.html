@@ -33,7 +33,7 @@
     <div class="cl pd-5 bg-1 bk-gray mt-20">
             <span class="l">
                 <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="添加电表" onclick="add('添加电表', 'addElectricityMeter.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加电表</a>
+                <a class="btn btn-primary radius" data-title="添加电表" onclick="add('添加', 'addElectricityMeter.html', '800', '550')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>添加电表</a>
             </span>
     </div>
     <div class="mt-20">
@@ -41,9 +41,9 @@
             <thead>
             <tr class="text-l">
                 <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>设备编码</th>
-                <th>电表型号</th>
-                <th>电表名称</th>
+                <th>编码</th>
+                <th>型号</th>
+                <th>名称</th>
                 <th>电流规格</th>
                 <th>电流测量</th>
                 <th>有功电能</th>
@@ -127,7 +127,7 @@
                 }, {
                     targets: 13,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑电表型号" onclick="edit(\'编辑电表\', \'addElectricityMeter.html\', \'' + row.id + '\', \'800\', \'500\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/edit.png" alt=""></a>' +
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addElectricityMeter.html\', \'' + row.id + '\', \'800\', \'500\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/edit.png" alt=""></a>' +
                                '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/delected.png" alt=""></a></td>';
                     }
                 }

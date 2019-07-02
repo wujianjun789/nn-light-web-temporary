@@ -13,7 +13,6 @@
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
     <style>
-        #equipmentLeng i{}
         .lampPostTypeIcon{ background: url("../bg/gisEleBox/lampPostTypeIcon.png");background-size: 14px 14px}
         .lightTypeIcon{ background: url("../bg/gisEleBox/lightTypeIcon.png");background-size: 14px 14px}
         .lightingIcon{ background: url("../bg/gisEleBox/lightingIcon.png");background-size: 14px 14px}
@@ -24,6 +23,9 @@
         #equipmentLeng p>span{color: #666666;font-size: 14px;width: 116px;line-height: 22px;display: inline-block}
         #equipmentLeng p i{margin-right: 16px;display: inline-block;width: 14px;height: 14px}
         #refreshLoop{position:absolute;top:10px;right:12px;display:inline-block;width: 14px;height:14px;background: url("../bg/gisEleBox/refreshLoop.png");background-size: contain}
+        #eleBoxInfo li{border:1px solid #ccc;border-top: none;line-height:35px;overflow:hidden;}
+        #eleBoxInfo li span{border-right:1px solid #ccc;font-size:14px;padding:0 14px;width: 58px;text-align:right;}
+        #eleBoxInfo li p{box-sizing:border-box;padding-left:12px;margin:0;}
     </style>
 </head>
 <body>
@@ -34,28 +36,28 @@
                 <p id="eleBoxName" style="font-size: 12px;color: rgba(153,153,153,1);text-align: center;margin-bottom: 0;line-height: 12px;padding-top: 12px;">配电柜名称</p>
             </div>
             <div id="equipmentLeng" style="flex: 1;padding-left: 20px;padding-top: 30px;position: relative;">
-                <button style="color: #333;width:43px;height:24px;background:rgba(192,192,192,1);border-radius:4px;border: none;position: absolute;top: -12px;right: 0;">刷新</button>
+                <button id="refresh" style="color: #333;width:43px;height:24px;background:rgba(192,192,192,1);border-radius:4px;border: none;position: absolute;top: -12px;right: 0;">刷新</button>
                 <p>
-                    <span><i class="lampPostTypeIcon"></i>灯杆：<span id="lampPostType"></span></span>
-                    <span><i class="lightTypeIcon"></i>灯具：<span id="lightType"></span></span>
+                    <span><i class="lampPostTypeIcon"></i>灯杆：<span id="lampPostType">0</span></span>
+                    <span><i class="lightTypeIcon"></i>灯具：<span id="lightType">0</span></span>
                 </p>
                 <p>
                     <span><i class="lightingIcon"></i>亮灯：<span id="lighting">0</span></span>
                     <span><i class="lightsOutIcon"></i>灭灯：<span id="lightsOut">0</span></span>
                 </p>
                 <p>
-                    <span><i class="loopLengthIcon"></i>回路：<span id="loopLength"></span></span>
-                    <span><i class="electricityMeterIcon"></i>电表：<span id="electricityMeter"></span></span>
+                    <span><i class="loopLengthIcon"></i>回路：<span id="loopLength">0</span></span>
+                    <span><i class="electricityMeterIcon"></i>电表：<span id="electricityMeter">0</span></span>
                 </p>
             </div>
         </div>
-        <div id="tab-system" class="HuiTab mt-30" style="height: 270px;overflow-y: auto;">
+        <div id="tab-system" class="HuiTab mt-30">
             <div class="tabBar cl">
                 <span>回路监控</span>
                 <span>电能数据</span>
                 <span>设备信息</span>
             </div>
-            <div class="tabCon mt-30">
+            <div class="tabCon mt-30" style="height: 240px;overflow-y: auto">
                 <table class="table table-border table-bordered table-bg table-hover table-sort">
                     <thead>
                     <tr class="text-l">
@@ -69,38 +71,59 @@
                     <tr class="text-l"></tbody>
                 </table>
             </div>
-            <div class="tabCon mt-30">
-                <div id="electricEnergyWrap" style="overflow: auto">
-                    <table id="electricEnergy" style="width: 600px" class="table table-border table-bordered table-bg table-hover">
-                        <thead>
-                        <tr class="text-l">
-                            <th>参数</th>
-                            <th>电流(A)</th>
-                            <th>电压(V)</th>
-                            <th>功率(w)</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
+            <div class="tabCon mt-30" style="height: 240px;overflow-y: auto">
+                <table id="electricEnergy" style="width: 600px" class="table table-border table-bordered table-bg table-hover">
+                    <thead>
+                    <tr class="text-l">
+                        <th>参数</th>
+                        <th>电流(A)</th>
+                        <th>电压(V)</th>
+                        <th>功率(w)</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
-            <div class="tabCon mt-30">
-                <div id="eleBoxInfoWrap" style="overflow: auto">
-                    <table id="eleBoxInfo" style="width: 600px" class="table table-border table-bordered table-bg table-hover">
-                        <thead>
-                        <tr class="text-l">
-                            <th>编码</th>
-                            <th>型号</th>
-                            <th>名称</th>
-                            <th>外观颜色</th>
-                            <th>尺寸</th>
-                            <th>备注</th>
-                        </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
-                </div>
-
+            <div class="tabCon mt-30" style="height: 240px;overflow-y: auto;overflow-x: hidden">
+                <ul id="eleBoxInfo">
+                    <li style="border-top: 1px solid #ccc">
+                        <span class="l">编码</span>
+                        <p class="l" id="eleBoxCode">0000000000000</p>
+                    </li>
+                    <li>
+                        <span class="l">型号</span>
+                        <p class="l" id="eleBoxModel">0000000000000</p>
+                    </li>
+                    <li>
+                        <span class="l">名称</span>
+                        <p class="l" id="eleBoxNames">0000000000000</p>
+                    </li>
+                    <li>
+                        <span class="l">外观颜色</span>
+                        <p class="l" id="eleBoxColors">0000000000000</p>
+                    </li>
+                    <li>
+                        <span class="l">尺寸</span>
+                        <p class="l" id="eleBoxSize">0000000000000</p>
+                    </li>
+                    <li>
+                        <span class="l">备注</span>
+                        <p class="l" id="eleBoxMem">0000000000000</p>
+                    </li>
+                </ul>
+                <!--<table id="eleBoxInfo" style="width: 600px" class="table table-border table-bordered table-bg table-hover">-->
+                    <!--<thead>-->
+                    <!--<tr class="text-l">-->
+                        <!--<th>编码</th>-->
+                        <!--<th>型号</th>-->
+                        <!--<th>名称</th>-->
+                        <!--<th>外观颜色</th>-->
+                        <!--<th>尺寸</th>-->
+                        <!--<th>备注</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody></tbody>-->
+                <!--</table>-->
             </div><!--tab切换end -->
         </div>
     </div>
@@ -120,38 +143,53 @@
     });
 
     function getEleBoxInfo(eleboxId){
-        $('#eleBoxInfo').DataTable({
-            "bStateSave": true,
-            "lengthChange": false,
-            "destroy": true,
-            "searching": false,
-            "autoWidth": false,
-            "paging":false,
-            "bLengthChange": false,
-            "info":false,
-            "ordering": false, //设置所有布排序
-            "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "api/roadlighting/getElebox", {id:eleboxId}, function (data) {
-                    //封装返回数据
-                    var returnData = {};
-                    if (data) {
-                        if (data.header.code == 1000) {
-                            returnData.data = data.body.data;
-                        }
-                    }
-                    callback(returnData);
-                });
-            },
-            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
-//                { "data": "id" },
-                { "data": "codeNumber", "defaultContent": ""},
-                { "data": "eleboxModel", "defaultContent": ""},
-                { "data": "eleboxName", "defaultContent": "" },
-                { "data": "eleboxColors", "defaultContent": ""},
-                { "data": "eleboxSize", "defaultContent": "" },
-                { "data": "mem", "defaultContent": "" }
-            ]
+        ajaxRequest("post", "api/roadlighting/getElebox", {id:eleboxId}, function (data) {
+            if (data) {
+                if (data.header.code == 1000) {
+                    var list = data.body.data[0];
+                    $("#eleBoxName").text(list.eleboxName);
+                    $("#eleBoxCode").text(list.codeNumber);
+                    $("#eleBoxModel").text(list.eleboxModel);
+                    $("#eleBoxNames").text(list.eleboxName);
+                    $("#eleBoxColors").text(list.eleboxColors);
+                    $("#eleBoxSize").text(list.eleboxSize);
+                    $("#eleBoxMem").text(list.mem);
+                }
+            }
+//            callback(returnData);
         });
+//        $('#eleBoxInfo').DataTable({
+//            "bStateSave": true,
+//            "lengthChange": false,
+//            "destroy": true,
+//            "searching": false,
+//            "autoWidth": false,
+//            "paging":false,
+//            "bLengthChange": false,
+//            "info":false,
+//            "ordering": false, //设置所有布排序
+//            "ajax": function (data, callback, settings) {
+//                ajaxRequest("post", "api/roadlighting/getElebox", {id:eleboxId}, function (data) {
+//                    //封装返回数据
+//                    var returnData = {};
+//                    if (data) {
+//                        if (data.header.code == 1000) {
+//                            returnData.data = data.body.data;
+//                        }
+//                    }
+//                    callback(returnData);
+//                });
+//            },
+//            "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+////                { "data": "id" },
+//                { "data": "codeNumber", "defaultContent": ""},
+//                { "data": "eleboxModel", "defaultContent": ""},
+//                { "data": "eleboxName", "defaultContent": "" },
+//                { "data": "eleboxColors", "defaultContent": ""},
+//                { "data": "eleboxSize", "defaultContent": "" },
+//                { "data": "mem", "defaultContent": "" }
+//            ]
+//        });
     }
 
     function flushModelLoop (modelId) {
@@ -228,10 +266,20 @@
     }
 
     $(function () {
-        globalLightId = editModel(window.location.href);
+        var modelIds = [];
+        globalLightId = editModel(window.location.href);//获取点击的控制柜ID
         getEleBoxInfo(globalLightId);//获取控制柜信息
+        ajaxRequest("post", "/deployElebox/modifyByView", {"exleboxId": globalLightId}, function (data) {//获取模块ID
+            var list = data.body.data;
+            for(var i=0;i<list.length;i++){
+                if(list[i].equType == 1){
+                    modelIds.push(list[i].id);
+                }
+            }
+        });
         //刷新回路
-        var modelId = editModel(location.href);
-        flushModelLoop(54);
+        for(var i=0;i<modelIds.length;i++){
+            flushModelLoop(modelIds[i]);
+        }
     });
 </script>
