@@ -141,124 +141,108 @@
   //刷新菜单
   function flushMenu () {
     $("#menuContain").empty();
-    var menu = {
-      "id": 13,
-      "name": "道路照明系统",
-      "subMenuViewList": [
-        {
-          "id": 15,
-          "name": "总览",
-          "subMenuViewList": [],
-          "url": "Roadlighting/EquipmentType.html"
-        },
-        // {
-        //   "id": 19,
-        //   "name": "区域管理",
-        //   "subMenuViewList": [],
-        //   "url": "Roadlighting/AreaAdmin.html"
-        // },
-        {
-          "id": 16,
-          "name": "设备管理",
-          "subMenuViewList": [
-            {
-              "id": 35,
-              "name": "控制柜",
-              "subMenuViewList": [],
-              "url": "Roadlighting/EleBoxAdmin.html"
-            },
-            {
-              "id": 29,
-              "name": "电表",
-              "subMenuViewList": [],
-              "url": "Roadlighting/electricityMeter.html"
-            },
-            {
-              "id": 30,
-              "name": "集中控制器",
-              "subMenuViewList": [],
-              "url": "Roadlighting/centralizeController.html"
-            },
-            {
-              "id": 31,
-              "name": "开关模块",
-              "subMenuViewList": [],
-              "url": "Roadlighting/modular.html"
-            },
-            {
-              "id": 34,
-              "name": "光照计",
-              "subMenuViewList": [],
-              "url": "Roadlighting/photoperiod.html"
-            },
-            {
-              "id": 32,
-              "name": "单灯控制器",
-              "subMenuViewList": [],
-              "url": "Roadlighting/lampController.html"
-            },
-            {
-              "id": 36,
-              "name": "灯具",
-              "subMenuViewList": [],
-              "url": "Roadlighting/LightType.html"
-            },
-            // {
-            //   "id": 39,
-            //   "name": "控制柜",
-            //   "subMenuViewList": [],
-            //   "url": "Roadlighting/EleBoxDebug.html"
-            // },
-            // {
-            //   "id": 40,
-            //   "name": "单灯控制器",
-            //   "subMenuViewList": [],
-            //   "url": "Roadlighting/SingleLampController.html"
-            // },
-            {
-              "id": 41,
-              "name": "灯杆",
-              "subMenuViewList": [],
-              "url": "Roadlighting/LampPostType.html"
-            }
-          ],
-          "url": ""
-        },
-        {
-          "id": 17,
-          "name": "设备部署",
-          "subMenuViewList": [
-            {
-              "id": 37,
-              "name": "控制柜部署",
-              "subMenuViewList": [],
-              "url": "Roadlighting/EleBox.html"
-            },
-            {
-              "id": 38,
-              "name": "灯具部署",
-              "subMenuViewList": [],
-              "url": "Roadlighting/Lamps.html"
-            }
-          ],
-          "url": ""
-        },
-        // {
-        //   "id": 27,
-        //   "name": "设备调试",
-        //   "subMenuViewList": [],
-        //   "url": "Roadlighting/EquipmentCommission.html"
-        // },
-        {
-          "id": 28,
-          "name": "设备维护升级",
-          "subMenuViewList": [],
-          "url": "Roadlighting/Upgrade.html"
-        }
-      ],
-      "url": ""
-    };
-    addMenu(menu);
+    var menuList = JSON.parse(editModelParam(window.location.href));
+    console.log(menuList);
+//    var menu = {
+//      "id": 13,
+//      "name": "道路照明系统",
+//      "subMenuViewList": [
+//        {
+//          "id": 15,
+//          "name": "总览",
+//          "subMenuViewList": [],
+//          "url": "Roadlighting/EquipmentType.html"
+//        },
+//        {
+//          "id": 16,
+//          "name": "设备管理",
+//          "subMenuViewList": [
+//            {
+//              "id": 35,
+//              "name": "控制柜",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/EleBoxAdmin.html"
+//            },
+//            {
+//              "id": 29,
+//              "name": "电表",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/electricityMeter.html"
+//            },
+//            {
+//              "id": 30,
+//              "name": "集中控制器",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/centralizeController.html"
+//            },
+//            {
+//              "id": 31,
+//              "name": "开关模块",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/modular.html"
+//            },
+//            {
+//              "id": 34,
+//              "name": "光照计",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/photoperiod.html"
+//            },
+//            {
+//              "id": 32,
+//              "name": "单灯控制器",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/lampController.html"
+//            },
+//            {
+//              "id": 36,
+//              "name": "灯具",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/LightType.html"
+//            },
+//            {
+//              "id": 41,
+//              "name": "灯杆",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/LampPostType.html"
+//            }
+//          ],
+//          "url": ""
+//        },
+//        {
+//          "id": 17,
+//          "name": "设备部署",
+//          "subMenuViewList": [
+//            {
+//              "id": 37,
+//              "name": "控制柜部署",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/EleBox.html"
+//            },
+//            {
+//              "id": 38,
+//              "name": "灯具部署",
+//              "subMenuViewList": [],
+//              "url": "Roadlighting/Lamps.html"
+//            }
+//          ],
+//          "url": ""
+//        },
+//        // {
+//        //   "id": 27,
+//        //   "name": "设备调试",
+//        //   "subMenuViewList": [],
+//        //   "url": "Roadlighting/EquipmentCommission.html"
+//        // },
+//        {
+//          "id": 28,
+//          "name": "设备维护升级",
+//          "subMenuViewList": [],
+//          "url": "Roadlighting/Upgrade.html"
+//        }
+//      ],
+//      "url": ""
+//    };
+    addMenu(menuList);
     $(".nav-toggle").click(function () {
       $(".Hui-aside").slideToggle();
     });
@@ -277,37 +261,6 @@
     $(".Hui-aside").on("click", ".menu_dropdown a", function () {
       Hui_admin_tab(this);
     });
-    // ajaxRequest("post", "/api/login/getMenu", {}, function (data) {
-    //   console.log(data)
-    //   if (data) {
-    //     if (data.header.code == 1000) {
-    //       var menuArray = data.body.data;
-    //       for (var i = 0; i < menuArray.length; ++i) {
-    //         var menu = menuArray[i];
-    //         addMenu(menu);
-    //       }
-    //       //注册菜单事件
-    //       $(".nav-toggle").click(function () {
-    //         $(".Hui-aside").slideToggle();
-    //       });
-    //       $(".Hui-aside").on("click", ".menu_dropdown dd li a", function () {
-    //         if ($(window).width() < 768) {
-    //           $(".Hui-aside").slideToggle();
-    //         }
-    //       });
-    //       /*左侧菜单*/
-    //       $(".Hui-aside").Huifold({
-    //         titCell: '.menu_dropdown dl dt',
-    //         mainCell: '.menu_dropdown dl dd',
-    //       });
-    //
-    //       /*选项卡导航*/
-    //       $(".Hui-aside").on("click", ".menu_dropdown a", function () {
-    //         Hui_admin_tab(this);
-    //       });
-    //     }
-    //   }
-    // });
   }
 
   $("#changepassword").click(function () {
