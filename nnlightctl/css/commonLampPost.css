@@ -987,12 +987,12 @@ table.dataTable thead .sorting_desc {background-image:url(../bg/sort_desc.png)}
 .dataTables_wrapper .dataTables_length .select{ width:50px}
 .dataTables_wrapper .dataTables_filter {float: right;text-align: right}
 .dataTables_wrapper .dataTables_filter .input-text { width:auto}
-.dataTables_wrapper .dataTables_info {clear: both;float: left;padding-top:10px;font-size:14px; color:#666}
+.dataTables_wrapper .dataTables_info {clear: both;float: left;padding-top:10px;font-size:14px; color:#d6dfeb}
 .dataTables_wrapper .dataTables_paginate {float: right;padding-top:10px;text-align: right}
-.dataTables_wrapper .dataTables_paginate .paginate_button {border: 1px solid #ccc;cursor: pointer;display: inline-block;margin-left: 2px;text-align: center;text-decoration: none;color: #666;height: 26px;line-height: 26px;text-decoration: none;margin: 0 0px 6px 6px;padding: 0 10px;font-size:14px}
+.dataTables_wrapper .dataTables_paginate .paginate_button {border: 1px solid #d6dfeb;cursor: pointer;display: inline-block;margin-left: 2px;text-align: center;text-decoration: none;color: #d6dfeb;height: 26px;line-height: 26px;text-decoration: none;margin: 0 0px 6px 6px;padding: 0 10px;font-size:14px}
 .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
 .dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {background:#5a98de;color:#fff}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {background:#8193BC;color:#fff}
 
 /*表格尺寸*/
 .table.size-MINI{}/*迷你*/
@@ -1702,7 +1702,7 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-default.active{color:#333;background-color:#c7c7c7;border-color:#c7c7c7}
 
 /*主要——主色	通常用于确定、提交、购买、支付等*/
-.btn-primary{color:#fff;background-color:#5a98de; border-color:#5a98de}
+.btn-primary{color:#fff;background-color:#8193BC; border-color:#8193BC}
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -1730,7 +1730,7 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-warning.active{color:#fff;background-color:#c85e0b;border-color:#c85e0b}
 
 /*危险*/
-.btn-danger{color:#fff;background-color:#dd514c; border-color:#dd514c}
+.btn-danger{color:#fff;background-color:#0EBF9C; border-color:#0EBF9C}
 .btn-danger:hover,
 .btn-danger:focus,
 .btn-danger:active,
