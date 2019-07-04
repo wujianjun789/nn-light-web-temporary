@@ -20,7 +20,7 @@
     <form class="form form-horizontal" id="form-admin-add">
         <div class="row cl">
             <label class="form-label col-xs-4 col-sm-3"><span class="c-red">*</span>单灯控制器型号：</label>
-            <div class="formControls col-xs-8 col-sm-9" style="width:200px;">
+            <div class="formControls col-xs-8 col-sm-9">
                 <span class="select-box" style="width:170px;">
                     <select class="select" name="lampModel" id="lampModel" size="1">
                         <option class="select-option" value="">请选择</option>
@@ -211,10 +211,9 @@
                 projectViewList : {
                     required : true
                 },
-//                staticPower: {
-//                    required : true,
-//                    isFloat: true
-//                }
+                lamppostCode: {
+                    required : true
+                }
             },
             onkeyup: false,
             focusCleanup: true,
@@ -229,7 +228,7 @@
 
                 var param = {
                     nnlightctlLampModelId: $("#modelType").children('option:checked').val(),
-                    nnlightctlLamppostId: $("#lamppostModel").children('option:checked').val(),
+                    nnlightctlLamppostId: $("#lamppostCode").children('option:checked').val(),
                     id: $("#lampModel").children('option:checked').val(),
                     nnlightctlProjectId: $("#projectViewList").children('option:checked').val()
                 };

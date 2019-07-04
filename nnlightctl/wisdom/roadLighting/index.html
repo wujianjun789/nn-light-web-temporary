@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>道路照明</title>
+    <link rel="stylesheet" href="../../lib/TabStylesInspiration/css/tabs.css">
+    <link rel="stylesheet" href="../../lib/TabStylesInspiration/css/tabstyles.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/admin.css">
+    <link rel="stylesheet" href="../../css/wisdomStyle/admin.css">
+    <style>
+        html,body,#tabWrap,.tabs,.content-wrap,.content-current{height: 100%}
+    </style>
+</head>
+<body>
+<section id="tabWrap">
+    <div class="tabs tabs-style-bar">
+        <nav>
+            <ul>
+                <li><a href="#section-bar-1" class="icon icon-home"><span>总览</span></a></li>
+                <li><a href="#section-bar-2" class="icon icon-box"><span>区域管理</span></a></li>
+                <li><a href="#section-bar-3" class="icon icon-display"><span>设备管理</span></a></li>
+                <li><a href="#section-bar-4" class="icon icon-upload"><span>设备部署</span></a></li>
+                <li><a href="#section-bar-5" class="icon icon-tools"><span>设备维护升级</span></a></li>
+            </ul>
+        </nav>
+        <div class="content-wrap">
+            <section id="section-bar-1">
+                <div style="display:none" class="loading"></div><!--预加载-->
+                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="overview.html"></iframe>
+            </section>
+            <section id="section-bar-2"><p>2</p></section>
+            <section id="section-bar-3">
+                <div style="display:none" class="loading"></div><!--预加载-->
+                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="equipmentManage/index.html"></iframe>
+            </section>
+            <section id="section-bar-4"><p>4</p></section>
+            <section id="section-bar-5"><p>5</p></section>
+        </div><!-- /content -->
+    </div><!-- /tabs -->
+</section>
+</body>
+</html>
+<script type="text/javascript" src="../../lib/TabStylesInspiration/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="../../lib/TabStylesInspiration/js/cbpFWTabs.js"></script>
+<script type="text/javascript" src="../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../../js/api/ajaxScript.js"></script>
+<script>
+    (function() {
+        //初始化tab却换
+        [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+            new CBPFWTabs( el );
+        });
+    })();
+</script>

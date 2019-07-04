@@ -89,12 +89,8 @@
             searchElebox(param);
         });
         $("#btnEleboxSearch").click(function () {
-            //获取搜索条件
-            var searchID = $("#uid").val().trim();
-            var searchCodeNumber = $("#codeNumber").val().trim();
             //搜索
-            param["uid"] = searchID;
-            param["codeNumber"] = searchCodeNumber;
+            param["codeNumber"] = $("#codeNumber").val().trim();
             searchElebox(param);
         });
         
