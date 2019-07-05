@@ -264,3 +264,27 @@ table a {
 .dataTables_info {
     display: none;
 }
+#btnSearch{
+    width:64px;
+    height:34px;
+    background:rgba(228,152,49,1);
+    border: none;
+    border-radius:2px;
+}
+
+#btnSearch:hover,  #btnSearch:active {
+    background-color:#c47e20 !important;
+    border-color:#c47e20 !important;
+}
+.buttonAdd{
+    width:70px ;
+    height:34px ;
+    background-color:rgba(129,147,188,1) ;
+    border:none;
+    color: #fff;
+    border-radius:2px;
+    margin-top: 20px;
+}
+.buttonAdd:active,.buttonAdd:hover{
+    background-color:#556997;
+}
