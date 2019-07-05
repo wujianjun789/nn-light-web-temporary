@@ -19,45 +19,37 @@
 </style>
 </head>
 <body>
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>
-    首页<span class="c-gray en">&gt;</span>能耗分析
-    <span class="c-gray en">&gt;</span>能耗报表
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新">
-        <i class="Hui-iconfont">&#xe68f;</i>
-    </a>
-</nav>
-<div class="page-container">
+<div class="">
     <!--<div class="text-l">-->
-        <!--<span  class="col-xs-2 col-sm-1">充电站：</span>-->
-        <!--<div class="formControls col-xs-3 col-sm-1">-->
-            <!--<span class="select-box" style="width:150px;">-->
-            <!--<select class="select" name="senceParent1">-->
-            <!--<option value="0">请选择充电站</option>-->
-            <!--</select>-->
-            <!--</span>-->
-        <!--</div>-->
-        <!--<span class="col-xs-8 col-sm-1">日期范围：</span>-->
-        <!--<input type="text" name="codeNumber" id="codeNumber" placeholder="项目编码" style="width:250px" class="input-text">-->
-        <!--<button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont"></i> 搜项目</button>-->
+        <!--<span>日期范围：</span>-->
+        <!--<input type="text" class="input-text" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin">-->
+          <!-- - -->
+        <!--<input type="text" class="input-text" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmax">-->
+        <!--<span class="row">-->
+            <!--<label class="form-label col-xs-4 col-sm-4 text-r" id="cutkey1">充电站：</label>-->
+            <!--<div class="formControls col-xs-3 col-sm-1">-->
+						<!--<span class="select-box" style="width:150px;">-->
+							<!--<select class="select" name="senceParent1">-->
+								<!--<option value="0">请选择充电站</option>-->
+							<!--</select>-->
+						<!--</span>-->
+            <!--</div>-->
+        <!--</span>-->
+        <!--<button name="" id="Button1" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>-->
     <!--</div>-->
-    <div class="text-l">
-        <span>日期范围：</span>
-        <input type="text" class="input-text" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin">
-         -
-        <input type="text" class="input-text" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmax">
-        <span class="row">
-            <label class="form-label col-xs-4 col-sm-4 text-r" id="cutkey1">充电站：</label>
-            <div class="formControls col-xs-3 col-sm-1">
-						<span class="select-box" style="width:150px;">
-							<select class="select" name="senceParent1">
-								<option value="0">请选择充电站</option>
-							</select>
-						</span>
-            </div>
-        </span>
-        <button name="" id="Button1" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
-    </div><!--搜索end-->
+    <div class="text-l" style="margin: 40px 0">
+        充电站名称：
+        <input type="text" name="modelName" id="modelName" placeholder="充电站名称"  class="input-text">
+        <sapn>
+            日期范围：
+            <input type="text" placeholder="请选择日期" class="input-text input-date" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin">
+             -
+            <input type="text" placeholder="请选择日期" class="input-text input-date" style="width:120px;" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmax">
+
+        </sapn>
+        <button id="btnSearch" class="btn btn-success" type="submit">搜索</button>
+    </div>
+    <!--&lt;!&ndash;搜索end&ndash;&gt;-->
     <div class="con">
     <div id="tab-system">
         <div class="tabCon">

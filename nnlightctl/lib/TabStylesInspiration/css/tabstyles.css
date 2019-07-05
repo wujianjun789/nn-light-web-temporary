@@ -19,6 +19,7 @@
 	background-color: #272b36;
 	color: #8193bc;
 	transition: background-color 0.2s, color 0.2s;
+	border-radius: 2px;
 }
 
 .tabs-style-bar nav ul li a:hover,

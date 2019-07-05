@@ -1706,7 +1706,7 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
-.btn-primary.active{color:#fff;background-color:#0a6999;border-color:#085192}
+.btn-primary.active{color:#fff;background-color:#556997;border-color:#556997}
 
 /*次要按钮*/
 .btn-secondary{color:#fff;background-color:#3bb4f2; border-color:#3bb4f2}
@@ -1735,6 +1735,13 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-danger:focus,
 .btn-danger:active,
 .btn-danger.active{color:#fff;background-color:#089176;border-color:#089579}
+
+/*重置*/
+.btn-reset{color:#fff;background-color:#272B36; border-color:#272B36; border-radius: 2px}
+.btn-reset:hover,
+.btn-reset:focus,
+.btn-reset:active,
+.btn-reset.active{color:#fff;background-color:#272B36;border-color:#272B36}
 
 /*链接*/
 .btn-link{color:#0e90d2;cursor:pointer;border-color:transparent;background-color:transparent}
@@ -1773,6 +1780,11 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-warning-outline:hover{color:#fff;background-color:#0EBF9C;border-color:#0EBF9C}
 .btn-warning-outline.disabled.focus,.btn-warning-outline.disabled:focus,.btn-success-outline:disabled.focus,.btn-warning-outline:disabled:focus,fieldset[disabled] .btn-warning-outline.focus,fieldset[disabled] .btn-warning-outline:focus{border-color:#c85e0b}
 
+.btn-reset-outline{color:#dd514c;background-color:transparent;background-image:none;border-color:#dd514c}
+.btn-reset-outline.active,.btn-reset-outline.focus,.btn-reset-outline:active,.btn-reset-outline:focus,.open>.btn-reset-outline.dropdown-toggle{color:#fff;background-color:#dd514c;border-color:#dd514c}
+.btn-reset-outline:hover{color:#fff;background-color:#dd514c;border-color:#dd514c}
+.btn-reset-outline.disabled.focus,.btn-reset-outline.disabled:focus,.btn-success-outline:disabled.focus,.btn-reset-outline:disabled:focus,fieldset[disabled] .btn-reset-outline.focus,fieldset[disabled] .btn-danger-outline:focus{border-color:#c62b26}
+
 .btn-danger-outline{color:#dd514c;background-color:transparent;background-image:none;border-color:#dd514c}
 .btn-danger-outline.active,.btn-danger-outline.focus,.btn-danger-outline:active,.btn-danger-outline:focus,.open>.btn-danger-outline.dropdown-toggle{color:#fff;background-color:#dd514c;border-color:#dd514c}
 .btn-danger-outline:hover{color:#fff;background-color:#dd514c;border-color:#dd514c}
@@ -1797,6 +1809,17 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 	height: 31px;
 	line-height: 31px;
 	min-width: 150px;
+	margin-right: 30px;
+}
+input[type="text"]{
+	width:200px;
+	background:none;
+	border:1px solid #282c35;
+	margin-right: 30px;
+	color: #d6dfeb;
+}
+.input-date{
+	background: url("../bg/iconDate.png") no-repeat 100px center !important;
 }
 /*3.6 图片*/
 /*3.6.1 图片效果

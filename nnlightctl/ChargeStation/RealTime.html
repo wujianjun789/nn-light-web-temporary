@@ -21,33 +21,47 @@
     <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" >
     <i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
-<div class="page-container">
+<div class="">
 
-		<div class="text-l top">
-			<div class="row">
-				充电站名称：
-				<input type="text" name="searchInstitutionName" id="searchInstitutionName" placeholder="充电站名称" style="width:195px" class="input-text">
-			</div>
-			<div class="row">
-				<label class="form-label col-xs-4 col-sm-4 text-r" id="cutkey1">通讯状态：</label>
-				<div class="formControls col-xs-3 col-sm-1">
-						<span class="select-box" style="width:150px;">
-							<select class="select" name="senceParent1">
-								<option value="0">请选择通讯状态</option>
-							</select>
-						</span>
-				</div>
-			</div>
+		<!--<div class="text-l top">-->
+			<!--<div class="row">-->
+				<!--充电站名称：-->
+				<!--<input type="text" name="searchInstitutionName" id="searchInstitutionName" placeholder="充电站名称" style="width:195px" class="input-text">-->
+			<!--</div>-->
+			<!--<div class="row">-->
+				<!--<label class="form-label col-xs-4 col-sm-4 text-r" id="cutkey1">通讯状态：</label>-->
+				<!--<div class="formControls col-xs-3 col-sm-1">-->
+						<!--<span class="select-box" style="width:150px;">-->
+							<!--<select class="select" name="senceParent1">-->
+								<!--<option value="0">请选择通讯状态</option>-->
+							<!--</select>-->
+						<!--</span>-->
+				<!--</div>-->
+			<!--</div>-->
 
-			<div class="row">
-				<button id="btnSearch" class="btn btn-success radius" type="button"><i class="Hui-iconfont">&#xe665;</i> 查询</button>
-				<button  class="btn btn-primary radius" type="reset">重置</button>
-			</div>
-			<div class="clear"></div>
-
-
+			<!--<div class="row">-->
+				<!--<button id="btnSearch" class="btn btn-success radius" type="button"><i class="Hui-iconfont">&#xe665;</i> 查询</button>-->
+				<!--<button  class="btn btn-primary radius" type="reset">重置</button>-->
+			<!--</div>-->
+			<!--<div class="clear"></div>-->
 
 
+
+
+	<!--</div>-->
+	<div class="text-l" style="margin: 40px 0">
+		充电站名称：
+		<input type="text" name="modelName" id="modelName" placeholder="充电站名称"  class="input-text">
+		<sapn>
+			<label class="">通讯状态：</label>
+			<span class="form-select">
+				<select>
+					<option>请选择通讯状态</option>
+				</select>
+			</span>
+		</sapn>
+		<button id="btnSearch" class="btn btn-success" type="submit">搜索</button>
+		<button class="btn btn-reset" type="reset">重置</button>
 	</div>
 	<div class="f-l pc-left">
 		<div class="">
