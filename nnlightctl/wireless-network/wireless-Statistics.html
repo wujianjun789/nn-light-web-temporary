@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="applicable-device" content="pc">
+    <meta name="viewport" content="width=device-width, initial-scale=1" maximum-scale=1.0, minimum-scale=1.0;>
+
+    <link rel="shortcut icon" href="../bg/login_title.png" type="image/x-icon">
+    <link href="../css/iconfont/iconfont.css" rel="stylesheet" />
+    <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    <link href="./metering-css/wireless-network.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./metering-css/layui.css" media="all">
+    <link href="../css/base.css" rel="stylesheet" type="text/css" />
+    <link href="../SmartLight/public.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="smart-light">
+        <div class="logo fl">
+            <a href="index.html"><img src="../bg/new/logo.png" class="fl">
+                <p class="fl">智慧灯杆管理系统</p>
+            </a>
+        </div>
+        <div class="nav fl">
+            <ul>
+                <li class="fl active"><a href="">首页</a></li>
+                <li class="fl"><a href="">地图监控</a></li>
+                <li class="fl"><a href="">大数据中心</a></li>
+                <li class="fl"><a href="">城市大脑</a></li>
+                <li class="fl"><a href="">道路照明</a></li>
+                <li class="fl"><a href="">智慧气象</a></li>
+                <li class="fl"><a href="">充电管理</a></li>
+                <li class="fl"><a href="">无线网路</a></li>
+            </ul>
+        </div>
+        <div class="user fr">
+            <div class="user-info fl">用户名</div>
+            <div class="logout fl">安全退出</div>
+        </div>
+    </header>
+    <div class="WIFI">
+
+        <div class="button-all">
+            <a href="./Metering-switch.html">
+                <span>
+                    <img src="./metering-png/Metering-open.png" alt="">
+                </span> 计量开关
+            </a>
+            <a href="#" class="active-wifi">
+                <span>
+                    <img src="./metering-png/Metering-count.png" alt="">
+                </span> 计量统计
+            </a>
+            <a href="./wireless-search.html">
+                <span>
+                    <img src="./metering-png/Metering-search.png" alt="">
+                </span> 计量查询
+            </a>
+            <a href="./wireless-strategy.html">
+                <span>
+                    <img src="./metering-png/strategy-pay.png" alt="">
+                </span> 缴费策略
+            </a>
+            <a href="./wireless-detail.html">
+                <span>
+                    <img src="./metering-png/strategy-pay.png" alt="">
+                </span> 收费明细
+            </a>
+
+        </div>
+        <div class="count">
+            <div class="count-all">
+                <div class="all-time">
+                    <img src="./metering-png/time.png" alt="">
+                    <p class="time-hours">本月总时长</p>
+                    <span class="time-num">519</span>
+                    <span class="time-hour">小时</span>
+                </div>
+                <div class="line"></div>
+                <div class="times">
+                    <!-- <form class="layui-form" action="">
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label">开启计时长</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked name="close" lay-skin="switch" lay-filter="switchTest"
+                                    title="开关">
+                            </div>
+                        </div>
+                    </form> -->
+                    <div class="button-time">上月时长总数：<span class="button-time-num">799小时</span></div>
+                    <!-- <div  class="button-time">关闭：<span>0</span></div> -->
+                </div>
+
+            </div>
+            <div class="count-all">
+                <div class="all-time">
+                    <img src="./metering-png/flow.png" alt="">
+                    <p class="time-hours">本月流量总数</p>
+                    <span class="time-num">643</span>
+                    <span class="time-hour">B</span>
+                </div>
+                <div class="line"></div>
+                <div class="times">
+                    <!-- <form class="layui-form" action="">
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label">开启计时长</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked name="close" lay-skin="switch" lay-filter="switchTest"
+                                    title="开关">
+                            </div>
+                        </div>
+                    </form> -->
+                    <div class="button-time">上月流量总数：<span class="button-time-num">618B</span></div>
+                    <!-- <div  class="button-time">关闭：<span>0</span></div> -->
+                </div>
+
+            </div>
+            <div class="count-all">
+                <div class="all-time">
+                    <img src="./metering-png/pay.png" alt="">
+                    <p class="time-hours">本月缴费总数</p>
+                    <span class="time-num">510</span>
+                    <span class="time-hour">元</span>
+                </div>
+                <div class="line"></div>
+                <div class="times">
+                    <!-- <form class="layui-form" action="">
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label">开启计时长</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked name="close" lay-skin="switch" lay-filter="switchTest"
+                                    title="开关">
+                            </div>
+                        </div>
+                    </form> -->
+                    <div class="button-time">上月缴费总数：<span class="button-time-num">432元</span></div>
+                    <!-- <div  class="button-time">关闭：<span>0</span></div> -->
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="page-container">
+            <div id="container-times" style="min-width:400px;height:400px"></div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/admin.js"></script>
+    <!--/_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="./metering-js/layui.all.js"></script>
+    <script type="text/javascript" src="../js/api/requestRoot.js"></script>
+    <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+    <script type="text/javascript" src="../js/highcharts.js"></script>
+    <!--表单插件-->
+    <script type="text/javascript">
+        ;
+        ! function () {
+            //无需再执行layui.use()方法加载模块，直接使用即可
+            var form = layui.form,
+                layer = layui.layer;
+
+            //…
+        }();
+        var chart = null;
+        $.getJSON('https://data.jianshukeji.com/jsonp?filename=json/usdeur.json&callback=?', function (data) {
+            chart = Highcharts.chart('container-times', {
+                chart: {
+                    type: 'line',
+                    zoomType: '',
+                    backgroundColor: '#1A1E29',
+                },
+                title: {
+                    text: '时长按月曲线图',
+                    align: 'left',
+                    style: {
+                        color: '#fff',
+                        fontSize: '14px'
+                    }
+
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'datetime',
+                    dateTimeLabelFormats: {
+                        millisecond: '%H:%M:%S.%L',
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%m-%d',
+                        week: '%m-%d',
+                        month: '%Y-%m',
+                        year: '%Y'
+                    },
+                    lineWidth: 1,
+                    minorGridLineWidth: 0,
+                    lineColor: 'transparent',
+                    tickWidth: 0
+                },
+                tooltip: {
+                    dateTimeLabelFormats: {
+                        millisecond: '%H:%M:%S.%L',
+                        second: '%H:%M:%S',
+                        minute: '%H:%M',
+                        hour: '%H:%M',
+                        day: '%Y-%m-%d',
+                        week: '%m-%d',
+                        month: '%Y-%m',
+                        year: '%Y'
+                    },
+                    crosshairs: {
+                        width: 2,
+                        color: '#E49831',
+                        dashStyle: 'shortdot'
+                    },
+                    backgroundColor: '#E49831',
+                    borderColor: 'none',
+                    style: {
+                        color: '#fff',
+                    },
+                    legend: {
+                        enabled: true
+                    },
+                },
+                yAxis: {
+                    title: {
+                        text: '时长（小时）'
+                    },
+                    lineWidth: 1,
+                    gridLineColor: '#3A4252',
+                    gridLineWidth: 1,
+                    minorGridLineWidth: 0,
+                    lineColor: '#3A4252',
+                    color: '#fff',
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(14, 191, 156, 1)'
+                            }
+                        }
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: {
+                                x1: 0,
+                                y1: 1,
+                                x2: 0,
+                                y2: 0
+                            },
+                            stops: [
+                                [0, 'rgba(13, 191, 157, 0)'],
+                                [1, 'rgba(14, 191, 156, 0.47)']
+                            ]
+                        },
+
+                        marker: {
+                            enabled: false,
+                            radius: 2,
+                            lineColor: 'rgba(14, 191, 156, 0.47)'
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1,
+                                enabled: false
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                series: [{
+                    type: 'area',
+                    name: '日期',
+                    data: data,
+                    color: 'rgba(14, 191, 156, 1)'
+                }]
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>
