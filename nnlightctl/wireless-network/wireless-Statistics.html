@@ -6,7 +6,7 @@
 
     <meta name="applicable-device" content="pc">
     <meta name="viewport" content="width=device-width, initial-scale=1" maximum-scale=1.0, minimum-scale=1.0;>
-
+    <title>无线网络</title>
     <link rel="shortcut icon" href="../bg/login_title.png" type="image/x-icon">
     <link href="../css/iconfont/iconfont.css" rel="stylesheet" />
     <link href="../css/common.css" rel="stylesheet" type="text/css" />
@@ -75,7 +75,7 @@
                 <div class="all-time">
                     <img src="./metering-png/time.png" alt="">
                     <p class="time-hours">本月总时长</p>
-                    <span class="time-num">519</span>
+                    <span class="time-num">51</span>
                     <span class="time-hour">小时</span>
                 </div>
                 <div class="line"></div>
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                     </form> -->
-                    <div class="button-time">上月时长总数：<span class="button-time-num">799小时</span></div>
+                    <div class="button-time">上月时长总数：<span class="button-time-num">79小时</span></div>
                     <!-- <div  class="button-time">关闭：<span>0</span></div> -->
                 </div>
 
@@ -98,8 +98,8 @@
                 <div class="all-time">
                     <img src="./metering-png/flow.png" alt="">
                     <p class="time-hours">本月流量总数</p>
-                    <span class="time-num">643</span>
-                    <span class="time-hour">B</span>
+                    <span class="time-num">14</span>
+                    <span class="time-hour">G</span>
                 </div>
                 <div class="line"></div>
                 <div class="times">
@@ -112,7 +112,7 @@
                             </div>
                         </div>
                     </form> -->
-                    <div class="button-time">上月流量总数：<span class="button-time-num">618B</span></div>
+                    <div class="button-time">上月流量总数：<span class="button-time-num">6G</span></div>
                     <!-- <div  class="button-time">关闭：<span>0</span></div> -->
                 </div>
 
@@ -177,6 +177,116 @@
             //…
         }();
         var chart = null;
+        var dataTimes = [
+            [
+                1433030400000,
+                0.9126
+            ],
+            [
+                1433116800000,
+                0.9151
+            ],
+            [
+                1433203200000,
+                0.8965
+            ],
+            [
+                1433289600000,
+                0.8871
+            ],
+            [
+                1433376000000,
+                0.8898
+            ],
+            [
+                1433462400000,
+                0.8999
+            ],
+            [
+                1433635200000,
+                0.9004
+            ],
+            [
+                1433721600000,
+                0.8857
+            ],
+            [
+                1433808000000,
+                0.8862
+            ],
+            [
+                1433894400000,
+                0.8829
+            ],
+            [
+                1433980800000,
+                0.8882
+            ],
+            [
+                1434067200000,
+                0.8873
+            ],
+            [
+                1434240000000,
+                0.8913
+            ],
+            [
+                1434326400000,
+                0.8862
+            ],
+            [
+                1434412800000,
+                0.8891
+            ],
+            [
+                1434499200000,
+                0.8821
+            ],
+            [
+                1434585600000,
+                0.8802
+            ],
+            [
+                1434672000000,
+                0.8808
+            ],
+            [
+                1434844800000,
+                0.8794
+            ],
+            [
+                1434931200000,
+                0.8818
+            ],
+            [
+                1435017600000,
+                0.8952
+            ],
+            [
+                1435104000000,
+                0.8924
+            ],
+            [
+                1435190400000,
+                0.8925
+            ],
+            [
+                1435276800000,
+                0.8955
+            ],
+            [
+                1435449600000,
+                0.9113
+            ],
+            [
+                1435536000000,
+                0.89
+            ],
+            [
+                1435622400000,
+                0.895
+            ]
+        ]
         $.getJSON('https://data.jianshukeji.com/jsonp?filename=json/usdeur.json&callback=?', function (data) {
             chart = Highcharts.chart('container-times', {
                 chart: {
@@ -289,12 +399,15 @@
                         threshold: null
                     }
                 },
+
+               
                 series: [{
                     type: 'area',
                     name: '日期',
-                    data: data,
+                    data: dataTimes,
                     color: 'rgba(14, 191, 156, 1)'
                 }]
+
             });
         });
     </script>

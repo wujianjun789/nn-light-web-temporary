@@ -215,8 +215,12 @@ header .nav li {
 .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
     background-color: #1c2c49!important;
 }
+
 .chart-times div {
     width: 100%;
+}
+.pay-alert{
+    color: red;
 }
 .table-container {
     background: #191F28;
@@ -256,6 +260,7 @@ table a {
     background: #8193BC;
     border: none;
 }
+
 .dataTables_info {
     display: none;
 }
