@@ -46,18 +46,26 @@ body{font-size:14px}
     padding: 0px 20px;
 }
 .state-count{
-    width: 23%;
+    width: 25%;
     float: right;
+    background: #1a1e29;
+    min-height: 400px;
+    padding: 1.04%;
 }
 
 .pc-left{
-    width: 75%;
+    width: 70%;
+    background: #1a1e29;
+    min-height: 400px;
+    padding: 1.04%;
+    color: #8193BC;
+
 }
 .sc-title{
     /*background: #F5FAFE;*/
     background: #221;
     line-height: 28px;
     text-indent: 10px;
-    color: #fff;
+    color: #8193BC;
 }
 .sc-con{}

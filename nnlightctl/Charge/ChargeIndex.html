@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../css/charge.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <title>充电站</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div class="charge-nav">
+        <ul>
+            <li>
+                <a class="btn btn-primary radius" data-title="添加" onclick="Archive_add('添加', 'Archive-add.html', '600', '400')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
+
+                <a onclick="Archive_add('添加', '../ChargeStation/Archive.html', '600', '400')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 地图</a>
+            </li>
+            <li>
+                <a href="#">充电站</a>
+            </li>
+            <li>
+                <a href="#">充电桩</a>
+            </li>
+            <li>
+                <a href="#">充电记录</a>
+            </li>
+        </ul>
+        <div class="c"></div>
+    </div>
+</body>
+<script>
+    function Archive_add(title, url, w, h) {
+        layer_show(title, url, w, h);
+    }
+
+    $(function () {
+        $('#charge-nav li').click(function () {
+            $this.addClass('.on').siblings().removeClass('.on');
+        })
+    })
+</script>
+</html>

@@ -8,7 +8,7 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 
     <title>实时状态</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css" />
+    <link rel="stylesheet" type="text/css" href="../css/commonLampPost.css" />
     <link rel="stylesheet" type="text/css" href="../css/admin.css" />
     <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css" />
 	<link rel="stylesheet" type="text/css" href="../css/charge.css" />
@@ -22,7 +22,7 @@
     <i class="Hui-iconfont">&#xe68f;</i></a>
     </nav>
 <div class="page-container">
-	<div class="f-l pc-left">
+
 		<div class="text-l top">
 			<div class="row">
 				充电站名称：
@@ -44,48 +44,50 @@
 				<button  class="btn btn-primary radius" type="reset">重置</button>
 			</div>
 			<div class="clear"></div>
-		</div>
 
-		<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
-			<a href="javascript:void(0);" onclick="Archive_del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a>
-			<a class="btn btn-primary radius" data-title="添加" onclick="Archive_add('添加', 'Archive-add.html', '600', '400')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i> 添加</a></span>
-		</div>
-		<div class="mt-20">
+
+
+
+	</div>
+	<div class="f-l pc-left">
+		<div class="">
+			<p class="text-l">实时状态列表-列表</p>
 			<table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
 				<thead>
-					<tr>
-						<th scope="col" colspan="8">实时状态列表-列表</th>
-					</tr>
-					<tr class="text-c">
-						<th><input type="checkbox" name="" value=""></th>
-						<th>序号</th>
-						<th>充电站编号</th>
-						<th>充电站名称</th>
-						<th>通讯状态</th>
-						<th>在线桩数量</th>
-						<th>离线桩数量</th>
-						<th>操作</th>
-					</tr>
+				<tr class="text-c">
+					<th><input type="checkbox" name="" value=""></th>
+					<th>序号</th>
+					<th>充电站编号</th>
+					<th>充电站名称</th>
+					<th>通讯状态</th>
+					<th>在线桩数量</th>
+					<th>离线桩数量</th>
+					<th>操作</th>
+				</tr>
 				</thead>
 				<tbody>
-					<tr class="text-c">
-						<td><input type="checkbox" value="" name=""></td>
-						<td>1</td>
-						<td >001</td>
-						<td>充电桩名称1</td>
-						<td>良</td>
-						<td>11</td>
-						<td>22</td>
-						<!--<td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onclick="Institution_edit('实时状态编辑', 'RealTime-add.html', '1', '800', '500')" href="javascript:void(0);" title="实时状态编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="Institution_del(this, '10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
-						<td>详情</td>
-					</tr>
+				<tr class="text-c">
+					<td><input type="checkbox" value="" name=""></td>
+					<td>1</td>
+					<td >001</td>
+					<td>充电桩名称1</td>
+					<td>良</td>
+					<td>11</td>
+					<td>22</td>
+					<!--<td class="f-14 td-manage"><a style="text-decoration:none" class="ml-5" onclick="Institution_edit('实时状态编辑', 'RealTime-add.html', '1', '800', '500')" href="javascript:void(0);" title="实时状态编辑"><i class="Hui-iconfont">&#xe6df;</i></a> <a style="text-decoration:none" class="ml-5" onClick="Institution_del(this, '10001')" href="javascript:;" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a></td>-->
+					<td>详情</td>
+				</tr>
 
 				</tbody>
 			</table>
+			<div class="mt-20"> <span class="l">
+			<a href="javascript:void(0);" onclick="Archive_del_more()" class="btn btn-danger radius">批量删除</a>
+			<a class="btn btn-primary radius" data-title="添加" onclick="Archive_add('添加', 'Archive-add.html', '600', '400')" href="javascript:void(0);">添加</a></span>
+			</div>
 		</div>
 	</div>
 	<div class="state-count f-r">
-		<div class="sc-title">站实时状态-通讯统计</div>
+		<div class="sc-title">充电站实时状态统计</div>
 		<div class="sc-con">
 			<div id="container" style="min-width:300px;height:300px"></div>
 		</div>
@@ -106,65 +108,6 @@
     <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../lib/laypage/1.2/laypage.js"></script>
 <script type="text/javascript">
-
-    // var param = {};
-    // $(function () { searchInstitution(param); });
-    // $("#btnSearch").click(function () {
-    //     //搜索条件
-    //     var searchInstitutionName = $("#searchInstitutionName").val().trim();
-    //     var searchInstitutionAddr = $("#searchInstitutionAddr").val().trim();
-    //     //搜索
-    //     param["institutionName"] = searchInstitutionName;
-    //     param["addr"] = searchInstitutionAddr;
-    //     //初始化，然后绑定
-    //     $('.table-sort').DataTable().destroy();
-    //     searchInstitution(param);
-    // });
-
-    // function searchInstitution(param) {
-    //     $('.table-sort').dataTable({
-    //         "bStateSave": true,
-    //         "destroy": true,
-    //         "searching": false,
-    //         "autoWidth": true,
-    //         "ordering": false, //设置所有布排序
-    //         "ajax": function (data, callback, settings) {
-    //             ajaxRequest("post", "/api/institution/listInsitution", param, function (result) {
-    //                 //封装返回数据
-    //                 var returnData = {};
-    //                 if (result) {
-    //                     if (result.header.code == 1000) {
-    //                         returnData.data = result.body.data;
-    //                     }
-    //                 }
-    //                 callback(returnData);
-    //             });
-    //         },
-    //         "columnDefs": [//对table格式的定义（表格的列从0开始）
-    //             {
-    //             targets: 0,
-    //             render: function (data, type,row) {
-    //                 return '<input type="checkbox" value="' + row.id + '" >';
-    //                  }
-		//            },{
-    //                 targets: 6,//把第九列的样式改为超链接
-    //                 render: function (data, type,row) {
-    //                     return '<a style="text-decoration:none" class="ml-10" onclick="Institution_edit(\'机构编辑\', \'Institution-add.html\', \'' + row.id + '\', \'800\', \'500\')" href="javascript:void(0);" title="机构编辑"><i class="Hui-iconfont">&#xe6df;</i></a>' +
-    //                         '<a style="text-decoration:none" class="ml-10" onClick="Institution_del(this,\'' + row.id + '\')" href="javascript:void(0);" title="删除"><i class="Hui-iconfont">&#xe6e2;</i></a>';
-    //                 }
-    //             }
-    //         ],
-    //         "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
-    //                     { "data": "id" },
-    //                     { "data": "institutionName" },
-    //                     {"data": "parentName", "defaultContent": ""},
-    //                     {"data": "createTime", "render": function (data) {
-    //                             return formatDateTime(data); }},
-    //                     { "data": "addr" },
-    //                     { "data": "mem" }
-    //         ]
-    //     });
-    // }
     function Archive_add(title, url, w, h) {
         layer_show(title, url, w, h);
     }
@@ -215,17 +158,34 @@
             layer.close(index);
         });
     }
-    //图标开始
+    //图表开始
     var chart = Highcharts.chart('container', {
         chart: {
-            spacing : [40, 0 , 40, 0]
+            spacing : [50, 0 , 50, 0],
+            backgroundColor:'#1a1e29',
+            // borderColor:'#f00',
+
         },
-        title: {
-            floating:true,
-            text: '站实时状态'
+        lang:{
+            contextButtonTitle:"图表导出菜单",
+            downloadJPEG:"下载JPEG图片",
+            downloadPDF:"下载PDF文件",
+            downloadPNG:"下载PNG文件",
+            downloadSVG:"下载SVG文件",
+            printChart:"打印图表",
+        },
+        colors: ['#0EBF9C', '#E85655', '#ED561B', '#DDDF00',
+            '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'],
+        title:{
+            text:'',
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        legend: {
+            itemStyle:{
+                color:'#d6dfeb',
+            },
         },
         plotOptions: {
             pie: {
@@ -235,50 +195,31 @@
                     enabled: true,
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                     style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || '#d6dfeb'
+                    },
                 },
-                point: {
-                    events: {
-                        mouseOver: function(e) {  // 鼠标滑过时动态更新标题
-                            // 标题更新函数，API 地址：https://api.hcharts.cn/highcharts#Chart.setTitle
-                            chart.setTitle({
-                                text: e.target.name+ '\t'+ e.target.y + ' %'
-                            });
-                        }
-                        //,
-                        // click: function(e) { // 同样的可以在点击事件里处理
-                        //     chart.setTitle({
-                        //         text: e.point.name+ '\t'+ e.point.y + ' %'
-                        //     });
-                        // }
-                    }
-                },
-            }
+                title: {  style: { fontWeight: "blod",color:'#f00'}},
+                color:'#f00',
+                showInLegend: true
+            },
         },
         series: [{
             type: 'pie',
-            innerSize: '80%',
-            name: '市场份额',
+            innerSize: '60%',
+            name: '',
+            color:'#f00',
+            borderColor:'none',
             data: [
-                {name:'正常',   y: 90.0,},
-                {
-                    name: '断开',
-                    y: 10,
-                    sliced: true,
-                    selected: true,
-                }
-            ]
+                ['在线', 80,'#f00'],
+                ['离线', 20],
+            ],
+
         }]
     }, function(c) { // 图表初始化完毕后的会掉函数
         // 环形图圆心
-        var centerY = c.series[0].center[1],
-            titleHeight = parseInt(c.title.styles.fontSize);
         // 动态设置标题位置
-        c.setTitle({
-            y:centerY + titleHeight/2
-        });
     });
+    //图表结束
 
 </script>
 </body>

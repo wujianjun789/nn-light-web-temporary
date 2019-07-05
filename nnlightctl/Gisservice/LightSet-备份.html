@@ -1,0 +1,281 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <title>灯具地理信息--灯光设置</title>
+    <link rel="stylesheet" type="text/css" href="../css/common.css?v=1"/>
+    <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+
+</head>
+<body>
+<div class="page-container" id="light-set" style="max-height: 460px;padding-bottom: 20px;">
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具坐标1：</span><span id="longitude">经度：116.306681 </span><span
+            id="latitude">纬度：39.830931</span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>报警信息：</span><span id="alarmMessage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>通讯方式：</span><span id="communicationMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>调光方式：</span><span id="dimmingMode">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="equipmentNumber">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>IMEI：</span><span id="UUID">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器型号：</span><span id="lampModel">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>单灯控制器名称：</span><span id="lampName">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>额定电流：</span><span id="ratedCurrent">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>额定电压：</span><span id="ratedVoltage">2012555 </span></p>
+    <p class="f-14" style="margin-bottom: 4px"><span>静态功耗：</span><span id="staticPower">2012555 </span></p>
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具编号：</span><span id="lightingCode">2012555 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具UUID：</span><span id="uuid">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯具IMEI：</span><span id="imei">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯杆号：</span><span id="lamppost">21.56 </span>-->
+    <!--</p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>灯头号：</span><span id="lamphead">1234567890 </span></p>-->
+    <!--<p class="f-14" style="margin-bottom: 4px"><span>信号强度：</span><span id="signalIntensity">1234567890 </span></p>-->
+    <div class="linghtbox clearfix mt-20">
+        <img src="../bg//lightsbg_0.png" class="imgbox"/>
+        <div id="powerange">
+            <div style="font-size: 14px;">
+                <span class="p1-10">调光模式：</span>
+                <select id="powerTypeSelect" onchange="powerTypeChangeEvent()">
+                    <option value="0">0~10V</option>
+                    <option value="1">PWM</option>
+                    <option value="2">UART</option>
+                    <option value="3">DALI</option>
+                </select>
+            </div>
+
+            <a onclick="addlights(100)" href="javascript:void(0);" rel="100" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>100%</span></a>
+            <a onclick="addlights(80)" href="javascript:void(0);" rel="80" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>80%</span></a>
+            <a onclick="addlights(60)" href="javascript:void(0);" rel="60" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>60%</span></a>
+            <a onclick="addlights(40)" href="javascript:void(0);" rel="40" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>40%</span></a>
+            <a onclick="addlights(20)" href="javascript:void(0);" rel="20" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>20%</span></a>
+            <a onclick="addlights(0)" href="javascript:void(0);" rel="0" class="btn btn-danger radius mt-20"
+               style="width:90px;"><span>0%</span></a>
+
+            <input type="range" min="1" max="100" value="0" step="1" name="range" onchange="changerange(this)">
+            <p name="rangeval" style='font-size:16px;color:#0a79d8;font-weight: bold;margin-top:10px;'></p>
+        </div>
+    </div>
+    <!--<div class="row cl mt-30">
+        <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-3">
+            <input id="btnSubmit" class="btn btn-primary radius ml-20" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+            <input id="btnCancel" class="btn radius ml-20" type="button" value="&nbsp;&nbsp;关闭&nbsp;&nbsp;">
+        </div>
+    </div>-->
+
+</div><!--地图弹出内容-->
+<script type="text/javascript" src="../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<script type="text/javascript">
+
+  var globalLightId = null;
+
+  function doLightAdjust (precent) {
+    var lightIdArray = [];
+    lightIdArray.push(globalLightId);
+
+    ajaxRequest("post", "/api/command/sendLightAdjustCommandBatch", transArray({
+      "lightPercent": precent,
+      "lightIds": lightIdArray
+    }), function (data) {
+      if (data) {
+        if (data.header.code != 1000) {
+          layer.msg(data.header.msg, {icon: 2, time: 3000});
+        }
+      }
+    });
+  }
+
+  function lightschange (num) {
+    var x = 0;
+    var LightsUrl = "";
+    if (num > 0 && num <= 20) {
+      x = 20;
+    }
+    if (num > 20 && num <= 40) {
+      x = 40;
+    }
+    if (num > 40 && num <= 60) {
+      x = 60;
+    }
+    if (num > 60 && num <= 80) {
+      x = 80;
+    }
+    if (num > 80 && num <= 100) {
+      x = 100;
+    }
+    LightsUrl = "../bg//lightsbg_" + x + ".png";
+    $(".imgbox").attr("src", LightsUrl);
+  }
+
+  function addlights (value) {
+    $("input[name='range']").val(value);
+    $("p[name='rangeval']").html(value);
+    lightschange(value);
+    doLightAdjust(value);
+  }
+
+  function changerange (obj) {
+    $("p[name='rangeval']").html(obj.value);
+    lightschange(obj.value);
+    doLightAdjust(obj.value);
+  }
+
+  function powerTypeChangeEvent () {
+    ajaxRequest("post", "/api/command/batchCommandConfigTerminalPowerType",
+    {"lightUUIDs[0]": $("#uuid").text().trim(), "powerType": $("#powerTypeSelect").val()}, function () {
+
+    });
+  }
+
+  //获取灯具信息
+  function flushLightInfo () {
+    ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+      console.log(data);
+      if (data) {
+        if (data.header.code == 1000) {
+          var light = data.body.data[0];
+          //刷新灯具信息
+          $("#longitude").text("经度：" + light.longitude);
+          $("#latitude").text("  纬度：" + light.latitude);
+            $("#alarmMessage").text(light.alarmMessage);
+            $("#communicationMode").text(light.communicationMode);
+            $("#dimmingMode").text(light.dimmingMode);
+            $("#equipmentNumber").text(light.equipmentNumber);
+            $("#UUID").text(light.UUID);
+            $("#lampModel").text(light.lampModel);
+            $("#lampName").text(light.lampName);
+            $("#ratedCurrent").text(light.ratedCurrent);
+            $("#ratedVoltage").text(light.ratedVoltage);
+            $("#staticPower").text(light.staticPower);
+            ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
+            if (data) {
+              console.log(data);
+              if (data.header.code == 1000) {
+                $("#signalIntensity").text(data.body.data);
+              }
+            }
+          })
+        }
+      }
+    });
+  }
+
+  $(function () {
+
+    globalLightId = editModel(window.location.href)
+    flushLightInfo();
+      var str1='';
+      var str = $('#communicationMode').text();
+      // var str = parseInt($('#communicationMode').text());
+      switch (str) {
+          case '1' :
+              str1='NB-IoT';
+              break;
+          case 2 :
+              str1='4G';
+              break;
+          case 3 :
+              str1='Zigbee';
+              break;
+          case 4 :
+              str1='PLC';
+              break;
+          case 5 :
+              str1='RS485';
+              break;
+          case 6 :
+              str1='GPRS';
+              break;
+      }
+      $('#communicationMode').html(str1);
+
+      //展示调光方式
+
+      var d2='';
+      var d1 = $('#dimmingMode').text();
+      // var d1 = parseInt($('#dimmingMode').text());
+      switch (d1) {
+          case 1 :
+              d2='NB-IoT';
+              break;
+          case '2' :
+              d2='4G';
+              break;
+          case 3 :
+              d2='Zigbee';
+              break;
+          case 4 :
+              d2='PLC';
+              break;
+      }
+      $('#dimmingMode').html(d2);
+
+      //展示通讯方式
+      // if(str == 1){
+      //     var str1 = str.replace('1','NB-IoT');
+      // };
+      // if(str == 2){
+      //     var str1 = str.replace('2','4G');
+      // };
+      // if(str == 3){
+      //     var str1 = str.replace('3','Zigbee');
+      // };
+      // if(str == 4){
+      //     var str1 = str.replace('4','PLC');
+      // };
+      // if(str == 5){
+      //     var str1 = str.replace('5','RS485');
+      // };
+      // if(str == 6){
+      //     var str1 = str.replace('6','GPRS');
+      // };
+      // // var str1 = str.replace('2','4G');
+      // // alert(str1);
+
+      // $('#communicationMode').html(str1);
+      //展示调光方式
+      // var d2='';
+      // var d1 = $('#dimmingMode').text();
+      // if(d1 == 1){
+      //     var d2 = d1.replace('1','PWM');
+      // };
+      // if(d1 == 2){
+      //     var d2 = d1.replace('2','0-10V');
+      // };
+      // if(d1 == 3){
+      //     var d2 = d1.replace('3','YUART');
+      // };
+      // if(d1 == 4){
+      //     var d2 = d1.replace('4','DALI');
+      // };
+      // $('#dimmingMode').html(d2);
+
+
+
+  })
+
+  // function LightAdjustInit (lightId) {
+  //   globalLightId = lightId;
+  //   flushLightInfo();
+  // }
+
+  /*  function checkLeave(){
+         return '确定要离开吗？'
+     }
+     window.onbeforeunload=function(){return '确定要离开吗？'}*/
+
+</script>
+
+</body>
+</html>
