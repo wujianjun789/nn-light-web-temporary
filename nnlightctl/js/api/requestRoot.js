@@ -8,7 +8,6 @@ const SEX = {
     0 : "女",
     1 : "男"
 };
-
 const USER_STATE = {
     0 : "删除",
     1 : "正常",

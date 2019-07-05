@@ -157,7 +157,7 @@
 <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
 <script type="text/javascript">
   var globalLightId = null;
-  var infoMatch = {
+  var lampInfoMatch = {
     longitude: '经度',
     latitude: '纬度',
     alarmMessage: '报警信息',
@@ -173,12 +173,15 @@
     lightingCode: 'lightingCode',
     mem: '备注'
   }
-  var infoLMatch = {
+  var lamppostInfoMatch = {
     equipmentNumber: '灯具编号',
-    IMEI: 'UUID',
-    lampModel: '单灯控制器型号',
-    lampName: '单灯控制器名称',
-    mem: '备注'
+    materima: '材料',
+    lampostName: '灯杆名称',
+    lamppostModel: '灯杆型号',
+    lampheadNumber: '灯头数',
+    mem: '备注',
+    lampheadColor: '灯杆颜色',
+    land: '壁厚'
   }
 
   function doLightAdjust (precent) {
@@ -267,8 +270,8 @@
           var returnData = {}
           returnData.data = []
           Object.keys(data.body.data[0]).forEach(function (e) {
-            if (d[e] != null && infoMatch[e]) {
-              returnData.data.push({key: infoMatch[e], value: d[e]})
+            if (d[e] != null && lampInfoMatch[e]) {
+              returnData.data.push({key: lampInfoMatch[e], value: d[e]})
             }
           })
           callback(returnData);
@@ -321,16 +324,6 @@
       "info": false,
       "ordering": false, //设置所有布排序
       "ajax": function (data, callback, settings) {
-        // ajaxRequest("post", "api/roadlighting/getElebox", {id: eleboxId}, function (data) {
-        //   //封装返回数据
-        //   var returnData = {};
-        //   if (data) {
-        //     if (data.header.code == 1000) {
-        //       returnData.data = data.body.data;
-        //     }
-        //   }
-        //   callback(returnData);
-        // });
         var returnData = {}
         var powerData = [];
         var currentDate = new Date();
@@ -345,44 +338,6 @@
         }
         returnData.data = powerData;
         callback(returnData);
-        // ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
-        //   var d = data.body.data[0]
-        //   var returnData = {}
-        //   returnData.data = []
-        //   Object.keys(data.body.data[0]).forEach(function (e) {
-        //     if (d[e] != null && infoMatch[e]) {
-        //       returnData.data.push({key: infoMatch[e], value: d[e]})
-        //     }
-        //   })
-        //   callback(returnData);
-        //   // if (data) {
-        //   //   if (data.header.code == 1000) {
-        //   //     var light = data.body.data[0];
-        //   //     //刷新灯具信息
-        //   //     $("#longitude").text("经度：" + light.longitude);
-        //   //     $("#latitude").text("  纬度：" + light.latitude);
-        //   //     $("#alarmMessage").text(light.alarmMessage);
-        //   //     $("#communicationMode").text(light.communicationMode);
-        //   //     $("#dimmingMode").text(light.dimmingMode);
-        //   //     $("#equipmentNumber").text(light.equipmentNumber);
-        //   //     $("#UUID").text(light.UUID);
-        //   //     $("#lampModel").text(light.lampModel);
-        //   //     $("#lampName").text(light.lampName);
-        //   //     $("#ratedCurrent").text(light.ratedCurrent);
-        //   //     $("#ratedVoltage").text(light.ratedVoltage);
-        //   //     $("#staticPower").text(light.staticPower);
-        //   //     //注释接口getLightSignalByUUID
-        //   //     //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
-        //   //     //   if (data) {
-        //   //     //     console.log(data);
-        //   //     //     if (data.header.code == 1000) {
-        //   //     //       $("#signalIntensity").text(data.body.data);
-        //   //     //     }
-        //   //     //   }
-        //   //     // })
-        //   //   }
-        //   // }
-        // });
       },
       "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
 //                { "data": "id" },
@@ -406,53 +361,16 @@
       "info": false,
       "ordering": false, //设置所有布排序
       "ajax": function (data, callback, settings) {
-        // ajaxRequest("post", "api/roadlighting/getElebox", {id: eleboxId}, function (data) {
-        //   //封装返回数据
-        //   var returnData = {};
-        //   if (data) {
-        //     if (data.header.code == 1000) {
-        //       returnData.data = data.body.data;
-        //     }
-        //   }
-        //   callback(returnData);
-        // });
-        ajaxRequest("post", "/api/roadlighting/getLighting", {"id": globalLightId}, function (data) {
+        ajaxRequest("post", "/api/deploy/lamppostbylampcontrollerid", {"id": globalLightId}, function (data) {
           var d = data.body.data[0]
           var returnData = {}
           returnData.data = []
           Object.keys(data.body.data[0]).forEach(function (e) {
-            if (d[e] != null && infoLMatch[e]) {
-              returnData.data.push({key: infoLMatch[e], value: d[e]})
+            if (d[e] != null && lamppostInfoMatch[e]) {
+              returnData.data.push({key: lamppostInfoMatch[e], value: d[e]})
             }
           })
           callback(returnData);
-          // if (data) {
-          //   if (data.header.code == 1000) {
-          //     var light = data.body.data[0];
-          //     //刷新灯具信息
-          //     $("#longitude").text("经度：" + light.longitude);
-          //     $("#latitude").text("  纬度：" + light.latitude);
-          //     $("#alarmMessage").text(light.alarmMessage);
-          //     $("#communicationMode").text(light.communicationMode);
-          //     $("#dimmingMode").text(light.dimmingMode);
-          //     $("#equipmentNumber").text(light.equipmentNumber);
-          //     $("#UUID").text(light.UUID);
-          //     $("#lampModel").text(light.lampModel);
-          //     $("#lampName").text(light.lampName);
-          //     $("#ratedCurrent").text(light.ratedCurrent);
-          //     $("#ratedVoltage").text(light.ratedVoltage);
-          //     $("#staticPower").text(light.staticPower);
-          //     //注释接口getLightSignalByUUID
-          //     //   ajaxRequest("post", "/api/gis/getLightSignalByUUID", {"uuid": light.uid}, function (data) {
-          //     //   if (data) {
-          //     //     console.log(data);
-          //     //     if (data.header.code == 1000) {
-          //     //       $("#signalIntensity").text(data.body.data);
-          //     //     }
-          //     //   }
-          //     // })
-          //   }
-          // }
         });
       },
       "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
