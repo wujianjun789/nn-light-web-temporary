@@ -50,6 +50,30 @@ header .nav li.active {
 header .nav li.active a {
     color: #0EBF9C;
 }
+header .Newnav {
+     line-height: calc(10vh - 6px);
+     margin-left: 1.6vw;
+ }
+
+header .Newnav li a {
+    color: #8193BC;
+}
+
+header .Newnav li {
+    padding: 0 1.5vw;
+    font-size: 15px;
+    margin: 0 0.2vw;
+    letter-spacing: 1px;
+    padding-bottom: 3px;
+}
+
+header .Newnav li.active {
+    border-bottom: 3px solid #0EBF9C;
+}
+
+header .Newnav li.active a {
+    color: #0EBF9C;
+}
 
 header .user {
     padding: 2vh 1.5vw 0 0;
