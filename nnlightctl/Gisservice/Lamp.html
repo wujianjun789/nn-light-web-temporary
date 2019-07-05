@@ -47,7 +47,7 @@
            onclick="ShortcutKey('快捷键', 'ShortcutKey.html', '700', '320')"><span><img
                 src="../bg/new/fast-key.png"></span><span>快捷键</span></a>
         <a href="javascript:void(0);" class="btn btn-warning"
-           onclick="AlertInfo('警报信息', 'AlertInfo.html', '800', '550')"><span><img
+           onclick="AlertInfo('警报信息', 'AlertInfo.html', '700', '530')"><span><img
                 src="../bg/new/alarm.png"></span><span>警报信息</span></a>
     </div>
 </div>
@@ -115,17 +115,6 @@
     layer_show(title, url, w, h);
   }
 
-  //警报信息
-  function AlertInfo (title, url, w, h) {
-    var index = layer.open({
-      type: 2,
-      title: title,
-      content: url
-    });
-    layer.full(index);
-    //layer_show(title, url, w, h);
-  }
-
   var eleboxArray = null;
 
   var map = null;
@@ -164,7 +153,20 @@
 
   //警报信息
   function AlertInfo (title, url, w, h) {
-    layer_show(title, url, w, h);
+    // layer_show(title, url, w, h);
+    var right = $(window).width() - 720
+    layer.open({
+      type: 2,
+      area: ['700px', '530px'],
+      fix: false, //不固定
+      maxmin: true,
+      shadeClose: false,
+      shade: [0.8, '#393D49'],
+      moveOut: true,
+      title: '警报信息',
+      content: url,
+      offset: [120, right]
+    });
   }
 
   function translateCallback (point, param) {
@@ -197,7 +199,10 @@
         height: 590,     // 信息窗口高度
         title: "<span style='font-size:22px;'>灯光调节</span>", // 信息窗口标题
       }
-      var right = $(window).width()  - 560
+      console.log(point)
+      marker.enableDragging();
+      //标注拖拽后的位置
+      var right = $(window).width() - 560
       marker.addEventListener("click", function (event) {
         // var clickMarker = event.target;
         // layer_show('灯光设置', 'LightSet.html?id=' + id, 650, 550);
@@ -218,6 +223,18 @@
         // var infoWindow = new BMap.InfoWindow(StrHtmlNew, opts);  // 创建信息窗口对象
         // map.openInfoWindow(infoWindow, point); //开启信息窗口
       });
+      marker.addEventListener("dragend", function (e) { // 0.000050为精度差别
+        if (Math.abs(e.point.lng - point.lng) > 0.000050 || Math.abs(e.point.lat - point.lat) > 0.000050) {
+          layer.open({
+            title: '温馨提示',
+            content: '确定要更改设备位置么',
+            yes: function (index, layero) {
+              //do something
+              layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+          });
+        }
+      });
     } else {
       var icon = new BMap.Icon('../bg/elebox.png', new BMap.Size(60, 60), {anchor: new BMap.Size(15, 15)});
       marker.setIcon(icon);
@@ -226,15 +243,15 @@
         height: 450,     // 信息窗口高度
         title: "<span style='font-size:22px;'>控制柜操作</span>", // 信息窗口标题
       }
+      marker.enableDragging();
       marker.addEventListener("click", function (event) {
         // function city_add (title, url, w, h) {
         //   layer_show(title, url, w, h);
         // }
 
 //        layer_show('控制柜操作', , 750, 500);
-        debugger;
         var top = ($(window).width() - 600) * 0.5;
-        var right = $(window).width()  - 560;
+        var right = $(window).width() - 560;
         index = layer.open({
           type: 2,
           area: ['500px', '600px'],
@@ -247,7 +264,7 @@
           moveOut: false,
           title: '控制柜操作',
           content: 'elebox.html?id=' + id
-          ,offset: [ //为了演示，随机坐标
+          , offset: [ //为了演示，随机坐标
             60, right
           ]
         });
@@ -256,6 +273,18 @@
         // var StrHtml = $("#eleboxpage").html();
         // var infoWindow = new BMap.InfoWindow(StrHtml, opts);  // 创建信息窗口对象
         // map.openInfoWindow(infoWindow, point); //开启信息窗口
+      });
+      marker.addEventListener("dragend", function (e) { // 0.000050为精度差别
+        if (Math.abs(e.point.lng - point.lng) > 0.000050 || Math.abs(e.point.lat - point.lat) > 0.000050) {
+          layer.open({
+            title: '温馨提示',
+            content: '确定要更改设备位置么',
+            yes: function (index, layero) {
+              //do something
+              layer.close(index); //如果设定了yes回调，需进行手工关闭
+            }
+          });
+        }
       });
     }
 
@@ -459,9 +488,9 @@
     map.addControl(mapType1);
     map.enableScrollWheelZoom(true);
 
-    var timer = setInterval(function () {
-      flushElebox(false);
-    }, 1000 * 60);
+    // var timer = setInterval(function () {
+    //   flushElebox(false);
+    // }, 1000 * 60);
 
     flushElebox(true);
   }
