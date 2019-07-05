@@ -23,9 +23,9 @@
     <div class="tabs tabs-style-bar">
         <nav>
             <ul>
-                <li><a href="#section-bar-1" class="icon icon-home"><span>总览</span></a></li>
+                <li><a href="overview.html" class="icon icon-home"><span>总览</span></a></li>
                 <li><a href="#section-bar-2" class="icon icon-box"><span>区域管理</span></a></li>
-                <li><a href="#section-bar-3" class="icon icon-display"><span>设备管理</span></a></li>
+                <li onclick="showEquipmentManage('#section-bar-3')"><a href="#section-bar-3" class="icon icon-display"><span>设备管理</span></a></li>
                 <li><a href="#section-bar-4" class="icon icon-upload"><span>设备部署</span></a></li>
                 <li><a href="#section-bar-5" class="icon icon-tools"><span>设备维护升级</span></a></li>
             </ul>
@@ -38,7 +38,9 @@
             <section id="section-bar-2"><p>2</p></section>
             <section id="section-bar-3">
                 <div style="display:none" class="loading"></div><!--预加载-->
-                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="equipmentManage/index.html"></iframe>
+                <script type="text/x-template" id="suc_subscription">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="equipmentManage/index.html"></iframe>
+                </script>
             </section>
             <section id="section-bar-4"><p>4</p></section>
             <section id="section-bar-5"><p>5</p></section>
@@ -59,4 +61,7 @@
             new CBPFWTabs( el );
         });
     })();
+    function showEquipmentManage(){
+        $("#section-bar-3").append($("#suc_subscription").html())
+    }
 </script>
