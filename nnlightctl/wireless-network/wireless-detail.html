@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <meta name="applicable-device" content="pc">
+    <meta name="viewport" content="width=device-width, initial-scale=1" maximum-scale=1.0, minimum-scale=1.0;>
+
+    <link rel="shortcut icon" href="../bg/login_title.png" type="image/x-icon">
+    <link href="../css/iconfont/iconfont.css" rel="stylesheet" />
+    <link href="../css/common.css" rel="stylesheet" type="text/css" />
+    <link href="./metering-css/wireless-network.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="./metering-css/layui.css" media="all">
+    <link href="../css/base.css" rel="stylesheet" type="text/css" />
+    <link href="../SmartLight/public.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <header class="smart-light">
+        <div class="logo fl">
+            <a href="index.html"><img src="../bg/new/logo.png" class="fl">
+                <p class="fl">智慧灯杆管理系统</p>
+            </a>
+        </div>
+        <div class="nav fl">
+            <ul>
+                <li class="fl active"><a href="">首页</a></li>
+                <li class="fl"><a href="">地图监控</a></li>
+                <li class="fl"><a href="">大数据中心</a></li>
+                <li class="fl"><a href="">城市大脑</a></li>
+                <li class="fl"><a href="">道路照明</a></li>
+                <li class="fl"><a href="">智慧气象</a></li>
+                <li class="fl"><a href="">充电管理</a></li>
+                <li class="fl"><a href="">无线网路</a></li>
+            </ul>
+        </div>
+        <div class="user fr">
+            <div class="user-info fl">用户名</div>
+            <div class="logout fl">安全退出</div>
+        </div>
+    </header>
+    <div class="WIFI">
+
+        <div class="button-all">
+            <a href="./Metering-switch.html">
+                <span>
+                    <img src="./metering-png/Metering-open.png" alt="">
+                </span> 计量开关
+            </a>
+            <a href="./wireless-Statistics.html">
+                <span>
+                    <img src="./metering-png/Metering-count.png" alt="">
+                </span> 计量统计
+            </a>
+            <a href="./wireless-search.html">
+                <span>
+                    <img src="./metering-png/Metering-search.png" alt="">
+                </span> 计量查询
+            </a>
+            <a href="./wireless-strategy.html">
+                <span>
+                    <img src="./metering-png/strategy-pay.png" alt="">
+                </span> 缴费策略
+            </a>
+            <a href="#" class="active-wifi">
+                <span>
+                    <img src="./metering-png/strategy-pay.png" alt="">
+                </span> 收费明细
+            </a>
+
+        </div>
+        <div class="page-container">
+            <div class="text-l">
+                日期：
+                <select>
+                    <option value="2019">2019</option>
+                    <option value="2018">2018</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                </select>
+                <select>
+                    <option value="7">7</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                </select>
+                账号：
+                <input type="text" name="projectName" id="projectName" placeholder="账号" style="width:250px"
+                    class="input-text">
+                <button id="btnSearch" class="btn btn-success f-r" type="submit">搜索</button>
+                <div class="currents">
+                    <div>当前余额：<span>0元</span></div>
+                    <div class="current-bill">累计收款：<span>700元</span></div>
+                </div>
+
+            </div>
+            <div class="table-container">
+                <p class="table-container-title">收费明细</p>
+                <div class="mt-20">
+
+                    <table class="table table-border table-bordered table-bg table-hover table-sort">
+                        <thead>
+                            <tr class="text-l">
+                                <th width="25"><input type="checkbox" name="" value=""></th>
+                                <th>行列</th>
+                                <th>账号</th>
+                                <th>购买时间</th>
+                                <th>金额(元)</th>
+                                <th>套餐名称</th>
+                                <th>时长</th>
+                                <th>订单编号</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <!-- <div class="cl pd-5 bg-1 bk-gray mt-20">
+                            <span class="l">
+                                <!-- <a href="javascript:void(0);" onclick="project_del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> -->
+                    <!-- <a href="javascript:void(0);" class="btn btn-primary radius" data-title="添加项目" onclick="project_add('添加项目', '../Project/Project-add.html', '1000', '700')"><i class="Hui-iconfont">&#xe600;</i> 添加项目</a> -->
+                    <!-- </span> -->
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript" src="../js/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/admin.js"></script>
+    <!--/_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="../lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="./metering-js/layui.all.js"></script>
+    <script type="text/javascript" src="../js/api/requestRoot.js"></script>
+    <script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+    <script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script>
+    <!--表单插件-->
+
+    <script type="text/javascript">
+        ;
+        ! function () {
+            //无需再执行layui.use()方法加载模块，直接使用即可
+            var form = layui.form,
+                layer = layui.layer;
+
+            //…
+        }();
+    </script>
+    <script type="text/javascript">
+        var param = {};
+        var mockData = [
+            {
+                "cityId": null,
+                "cityName": "765小时",
+                "codeNumber": "1",
+                "contryName": "2019-05-23 12:04:41",
+                "eleboxs": 2,
+                "gmtCreated": null,
+                "gmtUpdated": null,
+                "id": 53,
+                "latitude": "39.886015",
+                "lights": 0,
+                "longitude": "--",
+                "mem": "测试项目",
+                "projectName": "D0:4F:7E:9E:78:46",
+                "provinceName": "1000",
+                "state": 1,
+                "type": 0
+            },
+            {
+                "cityId": null,
+                "cityName": "765小时",
+                "codeNumber": "2",
+                "contryName": "2019-05-23 12:04:41",
+                "eleboxs": 2,
+                "gmtCreated": null,
+                "gmtUpdated": null,
+                "id": 53,
+                "latitude": "39.886015",
+                "lights": 0,
+                "longitude": "--",
+                "mem": "测试项目",
+                "projectName": "D0:4F:7E:9E:78:46",
+                "provinceName": "100",
+                "state": 1,
+                "type": 0
+            },
+            {
+                "cityId": null,
+                "cityName": "70小时",
+                "codeNumber": "3",
+                "contryName": "2019-05-23 12:04:41",
+                "eleboxs": 2,
+                "gmtCreated": null,
+                "gmtUpdated": null,
+                "id": 53,
+                "latitude": "39.886015",
+                "lights": 0,
+                "longitude": "--",
+                "mem": "测试项目",
+                "projectName": "D0:4F:7E:9E:78:46",
+                "provinceName": "500",
+                "state": 1,
+                "type": 0
+            },
+            {
+                "cityId": null,
+                "cityName": "65小时",
+                "codeNumber": "4",
+                "contryName": "2019-05-23 12:04:41",
+                "eleboxs": 2,
+                "gmtCreated": null,
+                "gmtUpdated": null,
+                "id": 53,
+                "latitude": "39.886015",
+                "lights": 0,
+                "longitude": "--",
+                "mem": "测试项目",
+                "projectName": "D0:4F:7E:9E:78:46",
+                "provinceName": "300",
+                "state": 1,
+                "type": 0
+            },
+            {
+                "cityId": null,
+                "cityName": "765小时",
+                "codeNumber": "5",
+                "contryName": "2019-05-23 12:04:41",
+                "eleboxs": 2,
+                "gmtCreated": null,
+                "gmtUpdated": null,
+                "id": 53,
+                "latitude": "39.886015",
+                "lights": 0,
+                "longitude": "--",
+                "mem": "测试项目",
+                "projectName": "D0:4F:7E:9E:78:46",
+                "provinceName": "300",
+                "state": 1,
+                "type": 0
+            },
+        ]
+        searchProject(param);
+        $("#btnSearch").click(function () {
+
+            //搜索条件
+            var searchProjectName = $("#projectName").val().trim();
+            var searchCodeNumber = $("#codeNumber").val().trim();
+
+            param["projectName"] = searchProjectName;
+            param["projectCode"] = searchCodeNumber;
+            //初始化，然后绑定
+            $('.table-sort').DataTable().destroy();
+            searchProject(param);
+        });
+
+        function searchProject(param) {
+            $('.table-sort').dataTable({
+                "destroy": true,
+                "autoWidth": true,
+                "ordering": false, //设置所有布排序
+                "bStateSave": true,
+                "data": mockData,
+                // "ajax": function(data, callback, settings) {
+                //     ajaxRequest("post", "/api/project/listproject", param, function(data) {
+                //         //封装返回数据
+                //         var returnData = {};
+                //         if (data) {
+                //             if (data.header.code == 1000) {
+                //                 returnData.data = data.body.data;
+                //             }
+                //         }
+                //         callback(returnData);
+                //     });
+                // },
+                "columnDefs": [ //对table格式的定义（表格的列从0开始）
+                    {
+                        targets: 0,
+                        render: function (data, type, row) {
+                            return '<input type="checkbox" value="' + row.id + '" >';
+                        }
+                    },
+                ],
+                "columns": [ //返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
+                    {
+                        "data": "id"
+                    }, {
+                        "data": "codeNumber",
+                        "defaultContent": ""
+                    }, {
+                        "data": "projectName",
+                        "defaultContent": ""
+                    }, {
+                        "data": "contryName",
+                        "defaultContent": ""
+                    }, {
+                        "data": "provinceName",
+                        "defaultContent": ""
+                    }, {
+                        "data": "longitude",
+                        "defaultContent": ""
+                    }, {
+                        "data": "cityName",
+                        "defaultContent": ""
+                    },
+                    {
+                        "data": "id",
+                        "defaultContent": ""
+                    },
+
+                ]
+            });
+        }
+
+        function project_add(title, url, w, h) {
+            layer_show(title, url, w, h);
+        }
+
+        //批量删除
+        function project_del_more() {
+            //获取全部批量删除的id
+            var idArray = [];
+            $("table.table").find("input[type='checkbox']:checked").each(function () {
+                idArray.push($(this).val());
+            });
+
+            if (idArray.length <= 0) {
+                return;
+            }
+
+            layer.confirm('确认批量删除？', function (index) {
+                batchDeleteProject(idArray);
+                layer.close(index);
+            })
+        }
+
+        /*编辑*/
+        function project_edit(title, url, id, w, h) {
+            layer_show(title, url + "?id=" + id, w, h);
+        }
+
+        /*删除*/
+        function batchDeleteProject(idArray) {
+            if (!idArray) {
+                return;
+            }
+
+            ajaxRequest("post", "/api/project/deleteproject", transArray({
+                idList: idArray
+            }), function (data) {
+                if (data) {
+                    if (data.header.code == 1000) {
+                        searchProject(1);
+                    } else {
+                        layer.msg(data.header.msg, {
+                            icon: 2,
+                            time: 3000
+                        });
+                    }
+                }
+            });
+            $('.table-sort').DataTable().destroy(); //表单局部刷新
+        }
+
+        /*删除*/
+        function project_del(obj, id) {
+            layer.confirm('确认要删除吗？', function (index) {
+                // var id = $(obj).parents("tr").find("input[type='checkbox']").eq(0).val();
+                var idArray = [];
+                idArray.push(id);
+                batchDeleteProject(idArray);
+                layer.close(index);
+            });
+        }
+    </script>
+</body>
+
+</html>
