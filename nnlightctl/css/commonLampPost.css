@@ -1720,7 +1720,7 @@ a.btn:hover,a.btn:focus,a.btn:active,a.btn.active,a.btn.disabled,a.btn[disabled]
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
-.btn-success.active{color:#fff;background-color:#429842;border-color:#429842}
+.btn-success.active{color:#fff;background-color:#ff9c15;border-color:#ff9c15}
 
 /*警告*/
 .btn-warning{color:#fff;background-color:#f37b1d; border-color:#f37b1d}
