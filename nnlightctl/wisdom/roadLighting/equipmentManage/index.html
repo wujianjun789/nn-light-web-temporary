@@ -24,27 +24,54 @@
         <nav>
             <ul style="margin-top: 20px;">
                 <li><a href="#section-fillup-1"><span>控制柜</span></a></li>
-                <li><a href="#section-fillup-2"><span>集中控制器</span></a></li>
-                <li><a href="#section-fillup-3"><span>开关模块</span></a></li>
-                <li><a href="#section-fillup-4"><span>电表</span></a></li>
-                <li><a href="#section-fillup-5"><span>光照计</span></a></li>
-                <li><a href="#section-fillup-6"><span>单灯控制器</span></a></li>
-                <li><a href="#section-fillup-7"><span>灯具</span></a></li>
-                <li><a href="#section-fillup-8"><span>灯杆</span></a></li>
+                <li onclick="showTabContent('#section-fillup-2')"><a href="#section-fillup-2"><span>集中控制器</span></a></li>
+                <li onclick="showTabContent('#section-fillup-3')"><a href="#section-fillup-3"><span>开关模块</span></a></li>
+                <li onclick="showTabContent('#section-fillup-4')"><a href="#section-fillup-4"><span>电表</span></a></li>
+                <li onclick="showTabContent('#section-fillup-5')"><a href="#section-fillup-5"><span>光照计</span></a></li>
+                <li onclick="showTabContent('#section-fillup-6')"><a href="#section-fillup-6"><span>单灯控制器</span></a></li>
+                <li onclick="showTabContent('#section-fillup-7')"><a href="#section-fillup-7"><span>灯具</span></a></li>
+                <li onclick="showTabContent('#section-fillup-8')"><a href="#section-fillup-8"><span>灯杆</span></a></li>
             </ul>
         </nav>
         <div class="content-wrap">
             <section id="section-fillup-1">
-                <div style="display:none" class="loading"></div><!--预加载-->
-                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="eleBox/index.html"></iframe>
+                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="eleBox.html"></iframe>
             </section>
-            <section id="section-fillup-2"><p>2</p></section>
-            <section id="section-fillup-3"><p>3</p></section>
-            <section id="section-fillup-4"><p>4</p></section>
-            <section id="section-fillup-5"><p>5</p></section>
-            <section id="section-fillup-6"><p>6</p></section>
-            <section id="section-fillup-7"><p>7</p></section>
-            <section id="section-fillup-8"><p>8</p></section>
+            <section id="section-fillup-2">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="centralizeController.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-3">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="modular.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-4">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="electricityMeter.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-5">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="photoperiod.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-6">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="lampController.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-7">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="lightType.html"></iframe>
+                </script>
+            </section>
+            <section id="section-fillup-8">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="lampPostType.html"></iframe>
+                </script>
+            </section>
         </div><!-- /content -->
     </div><!-- /tabs -->
 </section>
@@ -55,6 +82,7 @@
 <script type="text/javascript" src="../../../js/jquery.min.js"></script>
 <script type="text/javascript" src="../../../js/api/requestRoot.js"></script>
 <script type="text/javascript" src="../../../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../../../js/admin.js"></script>
 <script>
     (function() {
         //初始化tab却换

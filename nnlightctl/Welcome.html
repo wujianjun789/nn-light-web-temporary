@@ -142,7 +142,8 @@
                                 break;
 
                             case "道路照明系统":
-                                html = '<a href="Roadlighting-index.html" target="_blank">\n' +
+                                var menuList = encodeURIComponent(JSON.stringify(menu),'utf-8');
+                                html = '<a href="Roadlighting-index.html?'+menuList+'" target="_blank">\n' +
                                     '            <div class="road">\n' +
                                     '                <img src="bg/index/road.png" />\n' +
                                     '                <p>道路照明系统</p>\n' +

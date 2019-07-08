@@ -4,10 +4,10 @@ var num = 0, oUl = $("#min_title_list"), hide_nav = $("#Hui-tabNav");
 /*获取顶部选项卡总长度*/
 function tabNavallwidth () {
   var taballwidth = 0,
-  $tabNav = hide_nav.find(".acrossTab"),
-  $tabNavWp = hide_nav.find(".Hui-tabNav-wp"),
-  $tabNavitem = hide_nav.find(".acrossTab li"),
-  $tabNavmore = hide_nav.find(".Hui-tabNav-more");
+      $tabNav = hide_nav.find(".acrossTab"),
+      $tabNavWp = hide_nav.find(".Hui-tabNav-wp"),
+      $tabNavitem = hide_nav.find(".acrossTab li"),
+      $tabNavmore = hide_nav.find(".Hui-tabNav-more");
   if (!$tabNav[0]) {
     return
   }
@@ -34,12 +34,12 @@ function Huiasidedisplay () {
 /*菜单导航*/
 function Hui_admin_tab (obj) {
   var bStop = false,
-  bStopIndex = 0,
-  href = $(obj).attr('data-href'),
-  title = $(obj).attr("data-title"),
-  topWindow = $(window.parent.document),
-  show_navLi = topWindow.find("#min_title_list li"),
-  iframe_box = topWindow.find("#iframe_box");
+      bStopIndex = 0,
+      href = $(obj).attr('data-href'),
+      title = $(obj).attr("data-title"),
+      topWindow = $(window.parent.document),
+      show_navLi = topWindow.find("#min_title_list li"),
+      iframe_box = topWindow.find("#iframe_box");
   //console.log(topWindow);
   if (!href || href == "") {
     //alert("data-href不存在，请改为data-href属性");
@@ -72,19 +72,19 @@ function Hui_admin_tab (obj) {
 /*最新tab标题栏列表*/
 function min_titleList () {
   var topWindow = $(window.parent.document),
-  show_nav = topWindow.find("#min_title_list"),
-  aLi = show_nav.find("li");
+      show_nav = topWindow.find("#min_title_list"),
+      aLi = show_nav.find("li");
 }
 
 /*创建iframe*/
 function creatIframe (href, titleName) {
   var topWindow = $(window.parent.document),
-  show_nav = topWindow.find('#min_title_list'),
-  iframe_box = topWindow.find('#iframe_box'),
-  iframeBox = iframe_box.find('.show_iframe'),
-  $tabNav = topWindow.find(".acrossTab"),
-  $tabNavWp = topWindow.find(".Hui-tabNav-wp"),
-  $tabNavmore = topWindow.find(".Hui-tabNav-more");
+      show_nav = topWindow.find('#min_title_list'),
+      iframe_box = topWindow.find('#iframe_box'),
+      iframeBox = iframe_box.find('.show_iframe'),
+      $tabNav = topWindow.find(".acrossTab"),
+      $tabNavWp = topWindow.find(".Hui-tabNav-wp"),
+      $tabNavmore = topWindow.find(".Hui-tabNav-more");
   var taballwidth = 0;
 
   show_nav.find('li').removeClass("active");
@@ -133,11 +133,11 @@ function creatIframe (href, titleName) {
 /*关闭iframe*/
 function removeIframe () {
   var topWindow = $(window.parent.document),
-  iframe = topWindow.find('#iframe_box .show_iframe'),
-  tab = topWindow.find(".acrossTab li"),
-  showTab = topWindow.find(".acrossTab li.active"),
-  showBox = topWindow.find('.show_iframe:visible'),
-  i = showTab.index();
+      iframe = topWindow.find('#iframe_box .show_iframe'),
+      tab = topWindow.find(".acrossTab li"),
+      showTab = topWindow.find(".acrossTab li.active"),
+      showBox = topWindow.find('.show_iframe:visible'),
+      i = showTab.index();
   tab.eq(i - 1).addClass("active");
   tab.eq(i).remove();
   iframe.eq(i - 1).show();
@@ -147,8 +147,8 @@ function removeIframe () {
 /*关闭所有iframe*/
 function removeIframeAll () {
   var topWindow = $(window.parent.document),
-  iframe = topWindow.find('#iframe_box .show_iframe'),
-  tab = topWindow.find(".acrossTab li");
+      iframe = topWindow.find('#iframe_box .show_iframe'),
+      tab = topWindow.find(".acrossTab li");
   for (var i = 0; i < tab.length; i++) {
     if (tab.eq(i).find("i").length > 0) {
       tab.eq(i).remove();
@@ -261,13 +261,13 @@ function layer_show () {
 }
 
 /*
-	参数解释：
-	title	标题
-	url		请求的url
-	id		需要操作的数据id
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-*/
+ 参数解释：
+ title	标题
+ url		请求的url
+ id		需要操作的数据id
+ w		弹出层宽度（缺省调默认值）
+ h		弹出层高度（缺省调默认值）
+ */
 // function layer_show(title,url,w,h){
 // 	if (title == null || title == '') {
 // 		title=false;
@@ -293,14 +293,14 @@ function layer_show () {
 // }
 
 /*
-	参数解释：
-	title	标题
-	url		请求的url
-	id		需要操作的数据id
-	w		弹出层宽度（缺省调默认值）
-	h		弹出层高度（缺省调默认值）
-	callbackfun 回调函数
-*/
+ 参数解释：
+ title	标题
+ url		请求的url
+ id		需要操作的数据id
+ w		弹出层宽度（缺省调默认值）
+ h		弹出层高度（缺省调默认值）
+ callbackfun 回调函数
+ */
 // function layer_show(title,url,w,h,callbackfun){
 //     if (title == null || title == '') {
 //         title=false;
@@ -445,4 +445,12 @@ function ResetWindow () {
   setTimeout(function () {
     window.parent.location.reload();
   }, 500);//0.5秒后强制刷新
+}
+
+function showTabContent(id){
+  if($(id).children('.dom')){
+    $(id).children('.dom').remove();
+  }
+  $(id).append('<div class="dom" style="height: 100%"></div>');
+  $(id).children('.dom').html('').append($(id).children('script').html())
 }

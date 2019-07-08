@@ -1,5 +1,5 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
@@ -7,91 +7,73 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-
-    <title>设备管理-集中控制器</title>
-    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/admin.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/iconfont/iconfont.css"/>
-
+    <title>Title</title>
+    <!--<link rel="stylesheet" type="text/css" href="../css/common.css"/>-->
+    <link rel="stylesheet" type="text/css" href="../../../css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/iconfont/iconfont.css"/>
+    <link rel="stylesheet" href="../../../css/commonLampPost.css">
 </head>
 <body>
-<nav class="breadcrumb">
-    <i class="Hui-iconfont">&#xe67f;</i>
-    首页 <span class="c-gray en">&gt;</span>道路照明系统
-    <span class="c-gray en">&gt;</span>集中控制器
-    <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px"
-       href="javascript:location.replace(location.href);" title="刷新">
-        <i class="Hui-iconfont">&#xe68f;</i>
-    </a>
-</nav>
-<div class="page-container">
-    <div class="text-l">
-        集中控制器型号：
-        <input type="text" name="modelName" id="modelName" placeholder="集中控制器型号" style="width:250px" class="input-text">
-        <button id="btnSearch" class="btn btn-success f-r" type="submit"><i class="Hui-iconfont">&#xe665;</i>搜索</button>
-    </div>
-    <div class="cl pd-5 bg-1 bk-gray mt-20">
-            <span class="l">
-                <a href="javascript:void(0);" onclick="del_more()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i>批量删除</a>
-                <a class="btn btn-primary radius" data-title="集中控制器" onclick="add('添加', 'addCentralizeController.html', '900', '700')" href="javascript:void(0);"><i class="Hui-iconfont">&#xe600;</i>集中控制器</a>
-            </span>
-    </div>
-    <div class="mt-20">
-        <table id="controllerTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
-            <thead>
-            <tr class="text-l">
-                <th width="25"><input type="checkbox" name="" value=""></th>
-                <th>编码</th>
-                <th>型号</th>
-                <th>名称</th>
-                <th>经度</th>
-                <th>纬度</th>
-                <th>DO通道</th>
-                <th>交流DI通道</th>
-                <th>开关量ID通道</th>
-                <th>电压检测通道</th>
-                <th>电流检测通道</th>
-                <th>漏电检测通道</th>
-                <th>上行通讯接口</th>
-                <th>下行通讯接口</th>
-                <th>备注</th>
-                <th width="120">操作</th>
-            </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
-    </div>
+<div class="text-l" style="margin: 40px 0">
+    集中控制器型号：
+    <input type="text" name="modelName" id="modelName" placeholder="集中控制器型号" style="width:200px;background:none;border:1px solid #282c35;margin-right:10px" class="input-text">
+    <button id="btnSearch" class="btn btn-success" type="submit">搜索</button>
 </div>
+<div id="tableWrap" class="mt-20" style="background: #1a1e29;padding: 0 20px 50px;">
+    <p style="line-height:54px;font-size:14px;color: #8193bc;">集中控制器实时状态列表</p>
+    <table id="lightTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
+        <thead>
+        <tr class="text-l">
+            <th width="25px"><input type="checkbox" name="" value=""></th>
+            <th>行列</th>
+            <th>设备编码</th>
+            <th>型号</th>
+            <th>名称</th>
+            <th>经度</th>
+            <th>纬度</th>
+            <th>DO通道</th>
+            <th>交流DI通道</th>
+            <th>开关量ID通道</th>
+            <th>电压检测通道</th>
+            <th>电流检测通道</th>
+            <th>漏电检测通道</th>
+            <th>上行通讯接口</th>
+            <th>下行通讯接口</th>
+            <th>备注</th>
+            <th width="120">操作</th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+</body>
+</html>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../js/admin.js"></script>
 
-<script type="text/javascript" src="../js/jquery.min.js"></script>
-<script type="text/javascript" src="../js/common.js"></script>
-<script type="text/javascript" src="../js/admin.js"></script>
-
-<script type="text/javascript" src="../js/api/requestRoot.js"></script>
-<script type="text/javascript" src="../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../../../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../../../js/api/ajaxScript.js"></script>
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="../lib/layer/2.4/layer.js"></script><!--弹出插件-->
-<script type="text/javascript" src="../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表单插件-->
+<script type="text/javascript" src="../../../lib/layer/2.4/layer.js"></script><!--弹出插件-->
+<script type="text/javascript" src="../../../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表格插件-->
 <script type="text/javascript">
-    var param = {
-        pageNumber: 1, //当期页数
-        pageSize: 10 //默认每页展示条数
-    };
-    //加载DOM完成
+    var param = {};
     $(function () { searchLightModel(param); });
     $("#btnSearch").click(function () {
         //搜索条件
-        param["centralizeName"] = $("#modelName").val().trim();
+        param["eleboxName"] = $("#eleboxName").val().trim();
         //初始化，然后绑定
         $('.table-sort').DataTable().destroy();
         searchLightModel(param);
     });
     function searchLightModel(param) {
-        $('.table-sort').dataTable({
+        $('#lightTable').dataTable({
             "bStateSave": true,
             "destroy": true,
             "searching": false,
-            "autoWidth": true,
+            "autoWidth": false,
+            "lengthChange": false,
             "ordering": false, //设置所有布排序
             "ajax": function (data, callback, settings) {
                 ajaxRequest("post", "api/roadlighting/listCentralizeController", param, function (data) {
@@ -99,6 +81,9 @@
                     var returnData = {};
                     if (data) {
                         if (data.header.code == 1000) {
+                            for(var i=0;i<data.body.data.length;i++){
+                                data.body.data[i]["index"] = i+1;
+                            }
                             returnData.data = data.body.data;
                         }
                     }
@@ -107,21 +92,26 @@
             },
             "columnDefs": [//对table格式的定义（表格的列从0开始）
                 {
-                    sClass:'tr-select',
+                    sClass: 'tr-select',
                     targets: 0,
                     render: function (data, type, row) {
+                        console.log(data);
+                        console.log(type);
+                        console.log(row);
                         return '<input type="checkbox" name="tr-select" value="' + row.id + '" >';
                     }
-                }, {
-                    targets: 15,
+                },{
+                    targets: 16,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addCentralizeController.html\', \'' + row.id + '\', \'900\', \'700\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/edit.png" alt=""></a>' +
-                               '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../bg/icon/delected.png" alt=""></a></td>';
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'900\', \'700\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../../../bg/icon/edit.png" alt=""></a>'+
+                            '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../../../bg/icon/delected.png" alt=""></a></td>';
+
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                 { "data": "id" },
+                { "data": "index" },
                 { "data": "equipmentNumber", "defaultContent": "" },
                 { "data": "centralizeModel", "defaultContent": "" },
                 { "data": "centralizeName", "defaultContent": "" },
@@ -168,11 +158,11 @@
         if (!idArray) {
             return;
         }
-        ajaxRequest("post", "api/roadlighting/deleteCentralizeController", transArray({centralizeControllerIds : idArray}), function (data) {
+        ajaxRequest("post", "/api/roadlighting/deleteelebox", transArray({eleboxIdList : idArray}), function (data) {
             if (data) {
                 if (data.header.code == 1000) {
                     searchLightModel(1);
-                    layer.msg('成功！！一去不复返', { icon: 1, time: 3000 });
+                    layer.msg('成功！！ 一去不复返', { icon: 1, time: 3000 });
                 } else {
                     layer.msg(data.header.msg, { icon: 2, time: 3000 });
                 }
@@ -184,17 +174,17 @@
     function del_more() {
         //获取全部批量删除的id
         var idArray = [];
-        $("#controllerTable").find("input[name='tr-select']:checked").each(function () {
+        $("#eleBoxTable").find("input[name='tr-select']:checked").each(function () {
             idArray.push($(this).val());
         });
-        if(idArray.length<=0){
-            layer.msg("请选择集中控制器", { icon: 2, time: 3000 });
+        if (idArray.length <= 0) {
+            layer.msg("请选择控制柜", { icon: 2, time: 3000 });
         }else{
             layer.confirm('确认删除已选中的信息吗？', function (index) {
                 batchDeleteLightModel(idArray);
-                $("#controllerTable").children('thead').find("input[type='checkbox']").attr("checked",false);
+                $("#eleBoxTable").children('thead').find("input[type='checkbox']").attr("checked",false);
                 layer.close(index);
-            });
+            })
         }
     }
 
@@ -208,5 +198,3 @@
         });
     }
 </script>
-</body>
-</html>

@@ -9,18 +9,18 @@
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <title>Title</title>
     <!--<link rel="stylesheet" type="text/css" href="../css/common.css"/>-->
-    <link rel="stylesheet" type="text/css" href="../../../../css/admin.css"/>
-    <link rel="stylesheet" type="text/css" href="../../../../css/iconfont/iconfont.css"/>
-    <link rel="stylesheet" href="../../../../css/commonLampPost.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/admin.css"/>
+    <link rel="stylesheet" type="text/css" href="../../../css/iconfont/iconfont.css"/>
+    <link rel="stylesheet" href="../../../css/commonLampPost.css">
 </head>
 <body>
 <div class="text-l" style="margin: 40px 0">
-    控制柜名称：
-    <input type="text" name="modelName" id="modelName" placeholder="控制柜名称" style="width:200px;background:none;border:1px solid #282c35;margin-right:10px" class="input-text">
+    开关模块名称：
+    <input type="text" name="modelName" id="modelName" placeholder="开关模块名称" style="width:200px;background:none;border:1px solid #282c35;margin-right:10px" class="input-text">
     <button id="btnSearch" class="btn btn-success" type="submit">搜索</button>
 </div>
 <div id="tableWrap" class="mt-20" style="background: #1a1e29;padding: 0 20px 50px;">
-    <p style="line-height:54px;font-size:14px;color: #8193bc;">控制柜实时状态列表</p>
+    <p style="line-height:54px;font-size:14px;color: #8193bc;">开关模块实时状态列表</p>
     <table id="lightTable" class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
         <thead>
         <tr class="text-l">
@@ -29,13 +29,12 @@
             <th>设备编码</th>
             <th>型号</th>
             <th>名称</th>
-            <th>网卡地址</th>
-            <th>所属项目</th>
-            <th>经度</th>
-            <th>纬度</th>
-            <th>材质</th>
-            <th>外观颜色</th>
-            <th>尺寸</th>
+            <th>回路数</th>
+            <th>通讯方式</th>
+            <th>单回路最大电流</th>
+            <th>最大负载电流</th>
+            <th>安装方式</th>
+            <th>备注</th>
             <th width="120">操作</th>
         </tr>
         </thead>
@@ -44,15 +43,15 @@
 </div>
 </body>
 </html>
-<script type="text/javascript" src="../../../../js/jquery.min.js"></script>
-<script type="text/javascript" src="../../../../js/common.js"></script>
-<script type="text/javascript" src="../../../../js/admin.js"></script>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../js/common.js"></script>
+<script type="text/javascript" src="../../../js/admin.js"></script>
 
-<script type="text/javascript" src="../../../../js/api/requestRoot.js"></script>
-<script type="text/javascript" src="../../../../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../../../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../../../js/api/ajaxScript.js"></script>
 <!--请在下方写此页面业务相关的脚本-->
-<script type="text/javascript" src="../../../../lib/layer/2.4/layer.js"></script><!--弹出插件-->
-<script type="text/javascript" src="../../../../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表格插件-->
+<script type="text/javascript" src="../../../lib/layer/2.4/layer.js"></script><!--弹出插件-->
+<script type="text/javascript" src="../../../lib/datatables/1.10.0/jquery.dataTables.min.js"></script><!--表格插件-->
 <script type="text/javascript">
     var param = {};
     $(function () { searchLightModel(param); });
@@ -72,7 +71,7 @@
             "lengthChange": false,
             "ordering": false, //设置所有布排序
             "ajax": function (data, callback, settings) {
-                ajaxRequest("post", "/api/roadlighting/listelebox", param, function (data) {
+                ajaxRequest("post", "api/roadlighting/listmodel", param, function (data) {
                     //封装返回数据
                     var returnData = {};
                     if (data) {
@@ -97,27 +96,37 @@
                         return '<input type="checkbox" name="tr-select" value="' + row.id + '" >';
                     }
                 },{
-                    targets: 12,
+                    targets: 11,
                     render: function (data, type, row) {
-                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'900\', \'700\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../../../../bg/icon/edit.png" alt=""></a>'+
-                            '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../../../../bg/icon/delected.png" alt=""></a></td>';
+                        return '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="编辑" onclick="edit(\'编辑\', \'addEleBoxAdmin.html\', \'' + row.id + '\', \'900\', \'700\')"><img class="mr-10" style="width: 14px;height: 14px;" src="../../../bg/icon/edit.png" alt=""></a>'+
+                            '<a class="ml-10" href="javascript:void(0);" style="text-decoration:none" title="删除" onclick="del_one(this, \'' + row.id + '\')" ><img class="mr-10" style="width: 14px;height: 14px;" src="../../../bg/icon/delected.png" alt=""></a></td>';
 
                     }
                 }
             ],
             "columns": [//返回的json数据在这里填充，注意一定要与上面的<th>数量对应，否则排版出现扭曲
                 { "data": "id" },
-                { "data": "index","defaultContent": ""},
-                { "data": "codeNumber", "defaultContent": ""},
-                { "data": "eleboxModel", "defaultContent": "" },
-                { "data": "eleboxName", "defaultContent": "" },
-                { "data": "networkAddr", "defaultContent": "" },
-                { "data": "projectName", "defaultContent": "" },
-                { "data": "longitude", "defaultContent": "" },
-                { "data": "latitude", "defaultContent": "" },
-                { "data": "materialQuality", "defaultContent": "" },
-                { "data": "eleboxColors", "defaultContent": "" },
-                { "data": "eleboxSize", "defaultContent": "" }
+                { "data": "index" },
+                { "data": "modelCode", "defaultContent": "" },
+                { "data": "modelType", "defaultContent": "" },
+                { "data": "modelName", "defaultContent": "" },
+                { "data": "loopCount", "defaultContent": "" },
+                { "data": "communicationMethods", "defaultContent": "","render":function(data, type, full, meta){
+                    data = parseInt(data);
+                    switch(data){
+                        case 0: return 'RS485';break;
+                        case 1: return 'Zigbee';break;
+                    }
+                }},
+                { "data": "maxElectric", "defaultContent": "" },
+                { "data": "loadElectric", "defaultContent": "" },
+                { "data": "installationMethods", "defaultContent": "","render":function(data, type, full, meta){
+                    data = parseInt(data);
+                    switch(data){
+                        case 0 : return '导轨式';break;
+                    }
+                }},
+                { "data": "mem", "defaultContent": "" }
             ]
         });
     }

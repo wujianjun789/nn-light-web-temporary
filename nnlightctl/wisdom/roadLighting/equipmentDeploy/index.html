@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="../../../lib/TabStylesInspiration/css/tabs.css">
+    <link rel="stylesheet" href="../../../lib/TabStylesInspiration/css/tabstyles.css">
+    <link rel="stylesheet" href="../../../css/common.css">
+    <link rel="stylesheet" href="../../../css/base.css">
+    <link rel="stylesheet" href="../../../css/admin.css">
+    <style>
+        html,body,.tabs,.content-wrap,section{width: 100%;height: 100%}
+        .tab-current a{background-color: #0d111a}
+    </style>
+</head>
+<body style="background-color: #0d111a">
+<section>
+    <div class="tabs tabs-style-fillup">
+        <nav>
+            <ul style="margin-top: 20px;">
+                <li onclick="showTabContent('#section-fillup-1')"><a href="#section-fillup-1"><span>控制柜部署</span></a></li>
+                <li onclick="showTabContent('#section-fillup-2')"><a href="#section-fillup-2"><span>灯具部署</span></a></li>
+            </ul>
+        </nav>
+        <div class="content-wrap">
+            <section id="section-fillup-1">
+                <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="eleBoxDeploy.html"></iframe>
+            </section>
+            <section id="section-fillup-2">
+                <script type="text/x-template">
+                    <iframe align="left" width="100%" height="100%" scrolling="no" frameborder="0" src="lampsDeploy.html"></iframe>
+                </script>
+            </section>
+        </div><!-- /content -->
+    </div><!-- /tabs -->
+</section>
+</body>
+</html>
+<script type="text/javascript" src="../../../lib/TabStylesInspiration/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="../../../lib/TabStylesInspiration/js/cbpFWTabs.js"></script>
+<script type="text/javascript" src="../../../js/jquery.min.js"></script>
+<script type="text/javascript" src="../../../js/api/requestRoot.js"></script>
+<script type="text/javascript" src="../../../js/api/ajaxScript.js"></script>
+<script type="text/javascript" src="../../../js/admin.js"></script>
+<script>
+    (function() {
+        //初始化tab却换
+        [].slice.call( document.querySelectorAll( '.tabs' ) ).forEach( function( el ) {
+            new CBPFWTabs( el );
+        });
+        //默认第1个选中
+        showTabContent('#section-fillup-1')
+    })();
+
+</script>
