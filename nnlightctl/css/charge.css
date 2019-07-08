@@ -51,6 +51,7 @@ body{font-size:14px}
     background: #1a1e29;
     min-height: 400px;
     padding: 1.04%;
+    min-height: 500px;
 }
 
 .pc-left{
@@ -59,6 +60,7 @@ body{font-size:14px}
     min-height: 400px;
     padding: 1.04%;
     color: #8193BC;
+    min-height: 500px;
 
 }
 .sc-title{
