@@ -199,7 +199,6 @@
         height: 590,     // 信息窗口高度
         title: "<span style='font-size:22px;'>灯光调节</span>", // 信息窗口标题
       }
-      console.log(point)
       marker.enableDragging();
       //标注拖拽后的位置
       var right = $(window).width() - 560
@@ -230,7 +229,17 @@
             content: '确定要更改设备位置么',
             yes: function (index, layero) {
               //do something
+              ajaxRequest("post", "/api/gis/updatePositionById", { // 修改经纬度
+                type: 2,
+                id: id,
+                longitude: e.point.lng,
+                latitude: e.point.lat
+              }, function (data) {
+              })
               layer.close(index); //如果设定了yes回调，需进行手工关闭
+            },
+            cancel: function (index, layero) {
+              marker.setPosition(point) // 如果不确定，移到之前的位置
             }
           });
         }
@@ -245,11 +254,6 @@
       }
       marker.enableDragging();
       marker.addEventListener("click", function (event) {
-        // function city_add (title, url, w, h) {
-        //   layer_show(title, url, w, h);
-        // }
-
-//        layer_show('控制柜操作', , 750, 500);
         var top = ($(window).width() - 600) * 0.5;
         var right = $(window).width() - 560;
         index = layer.open({
@@ -281,7 +285,20 @@
             content: '确定要更改设备位置么',
             yes: function (index, layero) {
               //do something
+              ajaxRequest("post", "/api/gis/updatePositionById", { // 修改经纬度
+                type: 1,
+                id: id,
+                longitude: e.point.lng,
+                latitude: e.point.lat
+              }, function (data) {
+              })
               layer.close(index); //如果设定了yes回调，需进行手工关闭
+            },
+            cancel: function (index, layero) {
+              // if(confirm('确定要关闭么')){ //只有当点击confirm框的确定时，该层才会关闭
+              //   layer.close(index)
+              // }
+              marker.setPosition(point) // 如果不确定，移到之前的位置
             }
           });
         }
@@ -478,7 +495,7 @@
 
   function init () {
     map = new BMap.Map("map", {enableMapClick: false});
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 20);
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 25);
     var mapType1 = new BMap.MapTypeControl(
     {
       mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP],
