@@ -66,39 +66,6 @@
 
 <script type="text/javascript">
 
-  //灯具分组
-  function LampsGroup (title, url) {
-    var index = layer.open({
-      type: 99,
-      title: title,
-      content: url
-    });
-    layer.full(index);
-    //layer_show(title, url, w, h);
-  }
-
-  //任务开关
-  function TaskSwitch (title, url, w, h) {
-    var index = layer.open({
-      type: 2,
-      title: title,
-      content: url
-    });
-    layer.full(index);
-    //layer_show(title, url, w, h);
-  }
-
-  //场景
-  function Scene (title, url, w, h) {
-    var index = layer.open({
-      type: 2,
-      title: title,
-      content: url
-    });
-    layer.full(index);
-    //layer_show(title, url, w, h);
-  }
-
   //控制
   function Control (title, url, w, h) {
     var projectId = editModel(window.location.href);
@@ -107,11 +74,6 @@
 
   //灯具
   function Lights (title, url, w, h) {
-    layer_show(title, url, w, h);
-  }
-
-  //快捷键
-  function ShortcutKey (title, url, w, h) {
     layer_show(title, url, w, h);
   }
 
@@ -155,7 +117,7 @@
   function AlertInfo (title, url, w, h) {
     // layer_show(title, url, w, h);
     var right = $(window).width() - 730
-    var height = ($(window).height() - 530)/2
+    var height = ($(window).height() - 530) / 2
     layer.open({
       type: 2,
       area: ['700px', '530px'],
@@ -170,6 +132,9 @@
     });
   }
 
+  /**
+   * 创建控制柜和灯具标注，并添加事件
+   * */
   function translateCallback (point, param) {
 
     var isLight = param["isLight"];
@@ -195,14 +160,8 @@
           icon = new BMap.Icon('../bg/light.png', new BMap.Size(60, 60), {anchor: new BMap.Size(15, 15)});
       }
       marker.setIcon(icon);
-      var opts = {
-        width: 620,     // 信息窗口宽度
-        height: 590,     // 信息窗口高度
-        title: "<span style='font-size:22px;'>灯光调节</span>", // 信息窗口标题
-      }
       marker.enableDragging();
-      //标注拖拽后的位置
-        var top = ($(window).height() - 600) * 0.5;
+      var top = ($(window).height() - 600) * 0.5;
       var right = $(window).width() - 530
       marker.addEventListener("click", function (event) {
         // var clickMarker = event.target;
@@ -237,6 +196,8 @@
                 longitude: e.point.lng,
                 latitude: e.point.lat
               }, function (data) {
+                point = new BMap.Point(e.point.lng, e.point.lat) // 如果确认，将坐标更新
+                flushElebox(false) // 更新
               })
               layer.close(index); //如果设定了yes回调，需进行手工关闭
             },
@@ -266,7 +227,7 @@
           title: '控制柜操作',
           content: 'elebox.html?id=' + id
           , offset: [ //为了演示，随机坐标
-                top, right
+            top, right
           ]
         });
         // var clickMarker = event.target;
@@ -288,6 +249,8 @@
                 longitude: e.point.lng,
                 latitude: e.point.lat
               }, function (data) {
+                point = new BMap.Point(e.point.lng, e.point.lat) // 如果确认，将坐标更新
+                flushElebox(false) // 更新
               })
               layer.close(index); //如果设定了yes回调，需进行手工关闭
             },
@@ -303,12 +266,6 @@
     }
 
     map.addOverlay(marker);
-  }
-
-  function addMarker (point, _isLight, _id) {
-    if (point.lng && point.lat) {
-      translate(point, 1, translateCallback, {"isLight": _isLight, "id": _id, "lightFaultTag": arguments[3]});
-    }
   }
 
   /*根据序号查询灯具，可多返回*/
@@ -344,7 +301,10 @@
     return null;
   }
 
-  /*根据回路id获取该回路下全部灯具*/
+  /**
+   * 根据回路id获取该回路下全部灯具
+   * */
+
   function flushModelLoopLight (modelLoopId) {
     ajaxRequest("post", "/api/roadlighting/getLoopLight", {"id": modelLoopId}, function (data) {
       if (data) {
@@ -353,8 +313,6 @@
 
           for (var i = 0; i < lightArray.length; ++i) {
             var light = lightArray[i];
-            // console.log("添加回路id[" + light.nnlightctlEleboxModelLoopId + "]下的灯具id[" + light.id + "]到地图");
-            // addMarker(new BMap.Point(light.longitude, light.latitude), true, light.id, light.faultTag);
             translateCallback(new BMap.Point(light.longitude, light.latitude), {
               "isLight": true,
               "id": light.id,
@@ -362,7 +320,6 @@
               "lightFaultTag": light.faultTag
             })
           }
-
           //构造灯具连线数据
           var sortLightArray = sortLight(lightArray);
 
@@ -374,29 +331,28 @@
           }
 
           if (sortLightArray && sortLightArray.length > 0) {
+            var polylineData = []
             var eleboxId = sortLightArray[0][0]["nnlightctlEleboxId"];
             var elebox = getEleboxFromArray(eleboxId);
             if (elebox) {
-              var startPoint = new BMap.Point(elebox.longitude, elebox.latitude);
+              polylineData.push(new BMap.Point(elebox.longitude, elebox.latitude))
               // var bmapPointArray = [];
               // bmapPointArray.push(startPoint);
-              map.addOverlay(startPoint);
               for (var i = 0; i < sortLightArray.length; ++i) {
                 var lights = sortLightArray[i];
                 for (var k = 0; k < lights.length; ++k) {
                   var p = new BMap.Point(lights[k].longitude, lights[k].latitude)
+                  polylineData.push(p)
                   // bmapPointArray.push(new BMap.Point(lights[k].longitude, lights[k].latitude));
-                  var polyline = new BMap.Polyline(p, {
+                  var polyline = new BMap.Polyline(polylineData, {
                     strokeColor: "blue",
                     strokeWeight: 2,
-                    strokeOpacity: 0.5
+                    strokeOpacity: 0.6
                   });
-                  if (map) {
-                    map.addOverlay(polyline);
-                  }
+                  map.addOverlay(polyline);
                 }
               }
-
+              // 百度坐标转化，目前已不用
               // new BMap.Convertor().translate(bmapPointArray, 1, 5, function (data) {
               //   if (data.status === 0) {
               //     var polyline = new BMap.Polyline(data.points, {
@@ -411,22 +367,23 @@
               // });
             }
           }
-
         }
       }
     });
   }
 
-  /*根据模块id获取该模块下全部回路*/
+  /**
+
+   * 根据模块id获取该模块下全部回路
+   * */
+
   function flushEleboxModelLoop (eleboxModelId) {
     ajaxRequest("post", "/api/roadlighting/listmodelloop", {"modelId": eleboxModelId}, function (data) {
       if (data) {
         if (data.header.code == 1000) {
           var modelLoopArray = data.body.data;
-
           for (var i = 0; i < modelLoopArray.length; ++i) {
             var modelLoop = modelLoopArray[i];
-            // console.log("获取模块回路id为[" + modelLoop.id + "]的灯具信息");
             flushModelLoopLight(modelLoop.id);
           }
         }
@@ -463,10 +420,12 @@
     }
     var projectId = editModel(window.location.href);
     var p = null
-    ajaxRequest("post", "/api/project/getproject", {"id": projectId}, function (data) {
-      p = new BMap.Point(data.body.data[0].longitude, data.body.data[0].latitude)
-      map.centerAndZoom(p, 15);
-    })
+    if(isInit){
+      ajaxRequest("post", "/api/project/getproject", {"id": projectId}, function (data) {
+        p = new BMap.Point(data.body.data[0].longitude, data.body.data[0].latitude)
+        map.centerAndZoom(p, 15);
+      })
+    }
     ajaxRequest("post", "/api/gis/listElebox", {"projectId": projectId}, function (data) {
       if (data) {
         if (data.header.code == 1000) {
@@ -475,13 +434,11 @@
 
           for (var i = 0; i < eleboxArray.length; ++i) {
             var point = new BMap.Point(eleboxArray[i].longitude, eleboxArray[i].latitude);
-            // addMarker(point, false, eleboxArray[i].id)
             translateCallback(point, {"isLight": false, "id": eleboxArray[i].id})
 
             if (i == 0 && isInit) {
               map.centerAndZoom(point, 16);
             }
-
             //获取控制柜中全部模块
             flushEleboxModel(eleboxArray[i].id);
           }
@@ -490,6 +447,9 @@
     });
   }
 
+  /**
+   * 初始
+   * */
   function init () {
     map = new BMap.Map("map", {enableMapClick: false});
     map.centerAndZoom(new BMap.Point(116.404, 39.915), 25);
@@ -518,9 +478,6 @@
     $("#map").width(Vw);
 
     loadJScript();
-
-    // $("#eleboxpage").load("elebox.html");//先预加载
-    // $("#lightpage").load("LightSet.html");//先预加载
   });
 
   function keyboard () {
