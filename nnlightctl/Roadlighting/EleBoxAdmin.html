@@ -135,7 +135,19 @@
     }
     //增加
     function add(title, url, w, h) {
-        layer_show(title, url, w, h);
+        // layer_show(title, url, w, h);
+        var top = ($(window).height() - 50);
+        index = layer.open({
+            type: 2,
+            area: ['900px', top + 'px'],
+            shade: false,
+            fix: true, //不固定
+            maxmin: false,
+            shadeClose: false,
+            resize: false,
+            title: title,
+            content: url
+        });
     }
 
     //编辑
