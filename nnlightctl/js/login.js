@@ -20,17 +20,11 @@ $(function () {
     } else {
       window.localStorage.removeItem('user_info')
     }
-    //ajaxRequest("post", "api/login/getsecretkey", {},function (data) {
-    //  console.log(data);
-    //  if(data.header.code == "1000"){
-    //    encryptKey = data.body.data[0].keysecret.encoded
-    //  }
-    //});
     var remember = $('#remember').is(':checked') ? 1 : 0;
     if ($('#loginName').val() == "" || $('#pwd').val() == "") {
       alert("用户名或密码不能为空！");
     } else {
-      //encrypt(pwd.val(),encryptKey) 加密的密码
+      //var hashPwd = md5(pwd.val());
       ajaxRequest("post", "/api/login/Login", {
         'loginName': loginName.val(),
         'pwd': pwd.val(),
@@ -40,8 +34,7 @@ $(function () {
         if (data.header.code == "1000") {
           window.location.href = 'Index.html'
         } else {
-          $('#errormsg').show();
-          $("#errormsg").text(data.header.msg);
+          $('#errormsg').show().text(data.header.msg);
         }
       });
     }
