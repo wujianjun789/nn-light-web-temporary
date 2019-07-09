@@ -154,7 +154,8 @@
   //警报信息
   function AlertInfo (title, url, w, h) {
     // layer_show(title, url, w, h);
-    var right = $(window).width() - 720
+    var right = $(window).width() - 730
+    var height = ($(window).height() - 530)/2
     layer.open({
       type: 2,
       area: ['700px', '530px'],
@@ -165,7 +166,7 @@
       moveOut: true,
       title: '警报信息',
       content: url,
-      offset: [120, right]
+      offset: [height, right]
     });
   }
 
@@ -201,7 +202,8 @@
       }
       marker.enableDragging();
       //标注拖拽后的位置
-      var right = $(window).width() - 560
+        var top = ($(window).height() - 600) * 0.5;
+      var right = $(window).width() - 530
       marker.addEventListener("click", function (event) {
         // var clickMarker = event.target;
         // layer_show('灯光设置', 'LightSet.html?id=' + id, 650, 550);
@@ -215,7 +217,7 @@
           moveOut: true,
           title: '灯杆名称：' + lampName,
           content: 'LightSet.html?id=' + id,
-          offset: [100, right]
+          offset: [top, right]
         });
         // LightAdjustInit(clickMarker.getTitle());
         // var StrHtmlNew = $("#lightpage").html();
@@ -247,15 +249,10 @@
     } else {
       var icon = new BMap.Icon('../bg/elebox.png', new BMap.Size(60, 60), {anchor: new BMap.Size(15, 15)});
       marker.setIcon(icon);
-      var opts = {
-        width: 600,     // 信息窗口宽度
-        height: 450,     // 信息窗口高度
-        title: "<span style='font-size:22px;'>控制柜操作</span>", // 信息窗口标题
-      }
       marker.enableDragging();
       marker.addEventListener("click", function (event) {
-        var top = ($(window).width() - 600) * 0.5;
-        var right = $(window).width() - 560;
+        var top = ($(window).height() - 600) * 0.5;
+        var right = $(window).width() - 530;
         index = layer.open({
           type: 2,
           area: ['500px', '600px'],
@@ -269,7 +266,7 @@
           title: '控制柜操作',
           content: 'elebox.html?id=' + id
           , offset: [ //为了演示，随机坐标
-            60, right
+                top, right
           ]
         });
         // var clickMarker = event.target;
