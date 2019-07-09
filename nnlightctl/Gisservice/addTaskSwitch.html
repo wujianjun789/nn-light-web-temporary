@@ -241,7 +241,7 @@
         })
         if (!flag && $('input[name=period]:checked').val() == 4) {
           layer.msg('请选择时间点', {icon: 2, time: 1000});
-          return   
+          return
         }
         var param = {};
         var paramArray = $(form).serializeArray();
@@ -328,8 +328,8 @@
               var startDate = new Date(simpleSwitch.startTime)
               var endDate = new Date(simpleSwitch.endTime)
               if (simpleSwitch.period == 4) {
-                $("#startDate").val(startDate.getFullYear() + '-' + startDate.getMonth() + '-' + startDate.getDate())
-                $("#endDate").val(endDate.getFullYear() + '-' + endDate.getMonth() + '-' + endDate.getDate())
+                $("#startDate").val(startDate.getFullYear() + '-' + (startDate.getMonth() + 1) + '-' + startDate.getDate())
+                $("#endDate").val(endDate.getFullYear() + '-' + (endDate.getMonth() + 1) + '-' + endDate.getDate())
                 simpleSwitch.infos.forEach(function (i) {
                   holidayRules.push({
                     lightPercent: i.lightPercent,
