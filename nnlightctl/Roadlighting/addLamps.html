@@ -225,11 +225,10 @@
 //                nnlightctlLamppostId	是	int	灯杆的外键id
 //                id	是	int	单灯控制器的id
 //                nnlightctlProjectId	是	int	项目外键id
-
                 var param = {
                     nnlightctlLampModelId: $("#modelType").children('option:checked').val(),
                     nnlightctlLamppostId: $("#lamppostCode").children('option:checked').val(),
-                    id: $("#lampModel").children('option:checked').val(),
+                    id: $("#lightingImei").children('option:checked').val(),
                     nnlightctlProjectId: $("#projectViewList").children('option:checked').val()
                 };
                 ajaxRequest("post", "api/deploy/updatedeploylighting", param, function (data) {
